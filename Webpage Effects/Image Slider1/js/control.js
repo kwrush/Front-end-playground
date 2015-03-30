@@ -18,21 +18,20 @@
         init
     */
     for (var i = 0, wrpLen = imageItemWrps.length; i < wrpLen; i++) {
+        
         // mouseover: display "start game" button
-        // NOTE: use closure to keep actual btn object for each event listener
-        imageItemWrps[i].addEventListener('mouseover', function(btn) {
-            return function() {
-                btn.style.display = 'block';
-            };
-        }(startBtns[i]), false);
+        imageItemWrps[i].addEventListener('mouseover', showButton(startBtns[i]), false);
         
         // mouseout: hide "start game" button
-        imageItemWrps[i].addEventListener('mouseout', function(btn) {
-            return function() {
-                btn.style.display = 'none';  
-            };
-        }(startBtns[i]), false);
+        imageItemWrps[i].addEventListener('mouseout', showButton(startBtns[i]), false);
         
+    }
+    
+    // NOTE: use closure to keep actual btn object for each event listener
+    function showButton(btn) {
+        return function() {
+            btn.style.display = btn.style.display === 'block' ? 'none' : 'block';
+        }
     }
     
     // NOTE: use closure!!!
@@ -58,7 +57,6 @@
     
     leftArrow.onclick = function() {
         var marginLeft = getMarginLeft(imageItemList);
-        console.log(marginLeft);
         if (marginLeft <= -780) {
             moveImage(imageItemList, 780);
         }
@@ -71,7 +69,6 @@
     
     rightArrow.onclick = function() {
         var marginLeft = getMarginLeft(imageItemList);
-        console.log(marginLeft);
         if (marginLeft >= -780) {
             moveImage(imageItemList, -780);
         }
