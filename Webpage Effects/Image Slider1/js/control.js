@@ -9,9 +9,9 @@
         rightArrow    = document.getElementById('right-arrow'),
         startBtns     = document.getElementsByClassName('start-btn'),
         
-        timer = null,
-        move = null,
-        now = 0;
+        timer = null, 
+        move  = null,
+        flag  = false; //use to block click event when the images are sliding
 
     
     /*
@@ -56,24 +56,29 @@
     leftArrow.addEventListener('click', leftArrow.onclick, false);
     
     leftArrow.onclick = function() {
+        if (flag) return;
+        
         var marginLeft = getMarginLeft(imageItemList);
         if (marginLeft <= -780) {
-            moveImage(imageItemList, 780);
+            slideImage(imageItemList, 780);
         }
         else {
-            moveImage(imageItemList, -780 * 2);
+            slideImage(imageItemList, -780 * 2);
         }
     };
     
     rightArrow.addEventListener('click', rightArrow.onclick, false);
     
     rightArrow.onclick = function() {
+        if (flag) return;
+        
         var marginLeft = getMarginLeft(imageItemList);
+        
         if (marginLeft >= -780) {
-            moveImage(imageItemList, -780);
+            slideImage(imageItemList, -780);
         }
         else {
-            moveImage(imageItemList, 780 * 2);
+            slideImage(imageItemList, 780 * 2);
         }
             
     };
@@ -82,7 +87,7 @@
         auto play and manually play image banner
     */
     function autoPlay() {
-        timer = setInterval(playImageBanner, 4 * 1000);
+        timer = setInterval(playImageBanner, 1000);
     }
     autoPlay();
     
@@ -90,22 +95,29 @@
         rightArrow.onclick();
     }
     
-    function moveImage(itemObj, val) {
+    function slideImage(itemObj, val) {
+        
         var marginLeft = getMarginLeft(itemObj);
         var offset = 0;
+        
         clearInterval(move);
+        
         move = setInterval(function() {
+            flag = true;
             offset += val / 40;
             imageItemList.style.marginLeft = marginLeft + offset + 'px';
             if (Math.abs(offset) >= Math.abs(val)) {
+                flag = false;
                 clearInterval(move);
             }
         }, 10);
     }
     
     function getMarginLeft(itemObj) {
+        
         var computedStyle = window.getComputedStyle(itemObj);
         var marginLeft = window.parseInt(computedStyle.marginLeft, 10);
+        
         return marginLeft;
     }
     
