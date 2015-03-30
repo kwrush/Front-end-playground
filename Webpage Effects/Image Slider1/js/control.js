@@ -31,7 +31,7 @@
     function showButton(btn) {
         return function() {
             btn.style.display = btn.style.display === 'block' ? 'none' : 'block';
-        }
+        };
     }
     
     // NOTE: use closure!!!
@@ -63,7 +63,7 @@
         else {
             moveImage(imageItemList, -780 * 2);
         }
-    }
+    };
     
     rightArrow.addEventListener('click', rightArrow.onclick, false);
     
@@ -76,7 +76,7 @@
             moveImage(imageItemList, 780 * 2);
         }
             
-    }
+    };
     
     /*
         auto play and manually play image banner
