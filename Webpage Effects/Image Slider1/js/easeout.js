@@ -86,7 +86,7 @@
         auto play and manually play image banner
     */
     function autoPlay() {
-        timer = setInterval(playImageBanner, 4 * 1000);
+        timer = setInterval(playImageBanner, 5 * 1000);
     }
     autoPlay();
     
