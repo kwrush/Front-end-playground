@@ -248,6 +248,6 @@ body {
     height: 65px;
     right: 0;
     cursor: pointer;
-    background: url("../img/banner-arrow.png") 5px -145px;
+    background: url("../img/banner-arrow.png") 4px -145px;
     background-size: cover;
 }
