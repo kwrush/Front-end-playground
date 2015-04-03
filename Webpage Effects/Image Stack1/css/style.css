@@ -28,7 +28,7 @@ body {
 .image-stack-item {
     position: absolute;
     border-radius:  5px;
-    transition: all .4s, z-index .1s ease-out;
+    transition: all .5s, z-index .1s ease-out;
 }
 
 .image-stack0 {

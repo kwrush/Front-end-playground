@@ -5,6 +5,7 @@
         stackItems = imageStack.getElementsByClassName('image-stack-item'),
         spots      = document.getElementsByClassName('spot');
     
+    var timer = null;
     
     var len = spots.length,
         num = Math.floor(len / 2);
@@ -47,7 +48,6 @@
             
             // image in front of top one
             for (var n = idx - 1; n >= 0; n--) {
-                console.log(n);
                 if ( n + change < 0) {
                     countBe--;
                     stackItems[n].className = 'image-stack-item item' + (change + len + n) + ' image-stack' +  countBe;
