@@ -105,12 +105,13 @@
         move = setInterval(function() {
             flag = true;
             offset += val / 40;
+            console.log(offset);
             imageItemList.style.marginLeft = marginLeft + offset + 'px';
             if (Math.abs(offset) >= Math.abs(val)) {
                 flag = false;
                 clearInterval(move);
             }
-        }, 10);
+        }, 13);
     }
     
     function getMarginLeft(itemObj) {

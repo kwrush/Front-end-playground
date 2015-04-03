@@ -24,33 +24,37 @@
             spots[idx].className = spots[idx].className + ' active-spot';
 
             // first put the current image on top
-            stackItems[idx].style.zIndex = 10;
             stackItems[idx].className = 'image-stack-item item' + num + ' image-stack0';
             
-            var countAf = 0,
-                countBe = 0;
+            var change = num - idx;
             
+            var countAf = 0,
+                countBe = len - num;
+            
+            // image behind top one
             for (var m = idx + 1; m < len; m++) {
-                if (m + countAf >= len) {
-                    stackItems[m].className = 'image-stack-item item' + countBe + ' image-stack' + (num - countBe);
-                    countBe++;
+                if (m + change >= len) {
+                    countBe--;
+                    stackItems[m].className = 'image-stack-item item' + (len - m - change) + ' image-stack' +  countBe;
                 }
                 else {
                     countAf++;
-                    stackItems[m].className = 'image-stack-item item' + (num + countAf) + ' image-stack' + countAf;
+                    stackItems[m].className = 'image-stack-item item' + (m + change) + ' image-stack' +  countAf;
                 }
-                
             }
             
-            countAf = countBe = 0;
-
+            countAf = 0, countBe = len - num;
+            
+            // image in front of top one
             for (var n = idx - 1; n >= 0; n--) {
-                if (n - countBe < 0) {
-                    stackItems[n].className = 'image-stack-item item' + (num + countBe) + ' image-stack' + countBe;
-                } 
+                console.log(n);
+                if ( n + change < 0) {
+                    countBe--;
+                    stackItems[m].className = 'image-stack-item item' + (len - n + change) + ' image-stack' +  countBe;
+                }
                 else {
-                    countBe++;
-                    stackItems[n].className = 'image-stack-item item' + (num - countBe) + ' image-stack' + countBe;
+                    countAf++;
+                    stackItems[n].className = 'image-stack-item item' + (n + change) + ' image-stack' +  countAf;
                 }
             }
         };
