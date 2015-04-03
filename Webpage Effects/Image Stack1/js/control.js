@@ -35,7 +35,7 @@
             for (var m = idx + 1; m < len; m++) {
                 if (m + change >= len) {
                     countBe--;
-                    stackItems[m].className = 'image-stack-item item' + (len - m - change) + ' image-stack' +  countBe;
+                    stackItems[m].className = 'image-stack-item item' + (change - len + m) + ' image-stack' +  countBe;
                 }
                 else {
                     countAf++;
@@ -50,7 +50,7 @@
                 console.log(n);
                 if ( n + change < 0) {
                     countBe--;
-                    stackItems[m].className = 'image-stack-item item' + (len - n + change) + ' image-stack' +  countBe;
+                    stackItems[n].className = 'image-stack-item item' + (change + len + n) + ' image-stack' +  countBe;
                 }
                 else {
                     countAf++;
