@@ -18,6 +18,7 @@
     function reorderStack(idx) {
         return function() { 
             
+            // change color of the active navigation spot
             for (var k = 0, len = spots.length; k < len; k++) {
                 spots[k].className = 'spot';    
             }
@@ -32,7 +33,7 @@
             var countAf = 0,
                 countBe = len - num;
             
-            // image behind top one
+            // image behind the top one
             for (var m = idx + 1; m < len; m++) {
                 if (m + change >= len) {
                     countBe--;
@@ -44,6 +45,7 @@
                 }
             }
             
+            // reset
             countAf = 0, countBe = len - num;
             
             // image in front of top one
