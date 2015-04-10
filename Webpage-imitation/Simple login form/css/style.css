@@ -158,3 +158,48 @@ footer {
     margin: 5% auto;
     text-align: center;
 }
+
+/*responsive*/
+@media screen and (max-width: 320px) {
+    body h1 {
+        font-size: 1.7em;
+    }
+    .login {
+        width: 90%;
+    }
+    
+    input[type="text"],
+    input[type="password"] {
+        font-size: 13px;
+    }
+    
+    .submit input[type="submit"] {
+        font-size: 18px;
+        padding: 18px 18px;
+    }
+}
+
+@media screen and (min-width:321px) and (max-width: 480px) {
+    .login {
+        width: 87%;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 640px) {
+    .login {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 641px) and (max-width: 960px) {
+    .login {
+        width: 50%;
+    }
+}
+
+
+@media screen and (min-width: 1281px) {
+    .login {
+       width: 400px; 
+    }
+} 
