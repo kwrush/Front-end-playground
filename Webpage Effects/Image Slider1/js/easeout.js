@@ -37,6 +37,7 @@
         return function() {
             navArrow.style.display = 'block';
             clearInterval(timer);
+            clearInterval(move);
         };
     }(navArrow), false);
     

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Login form, Responsive, blabla">
+    <title>Simple login form</title>
+    <link rel="stylesheet" href="../reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <h1>Simple Login Form</h1>
+    <div class="login">
+        <div class="ribbon-wrapper">
+            
+        </div>
+        <form action="" class="login-form">
+            <ul>
+                <li>
+                    <i class="icon user-icon"></i>
+                    <input type="text" value="Email Address" onfocus="this.value='';" onblur="if (this.value === '') {this.value = 'Email Address';}">
+                </li>
+                <li>
+                    <i class="icon psw-icon"></i>
+                    <input type="password" value="Password" onfocus="this.value='';" onblur="if (this.value === '') {this.value = 'Password';}">
+                </li>
+            </ul>
+        </form>
+        <div class="submit">
+            <input type="submit"  onclick="clickFcn()" value="Log in">
+        </div>
+    </div>
+</body>
+<script>
+    function clickFcn() {
+        alert('The user is trying to log in.');
+    }
+</script>
+</html>

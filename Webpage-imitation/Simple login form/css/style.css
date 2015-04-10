@@ -1,0 +1,104 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+/***----- body style ----***/
+body {
+    background: #035671;
+    font-family: 'Open Sans', sans-serif;
+}
+
+i, 
+.login-form li,
+.submit input[type="submit"] {
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}
+
+/***---- contents style ----***/
+h1 {
+    text-align: center;
+    font-size: 2.7em;
+    color: #fff;
+    padding: 1em;
+}
+
+.login {
+    margin: 2% auto;
+    width: 30%;
+    background: #fcfcfc;
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    -o-border-radius: .5em;
+    border-radius: .5em;
+}
+
+.login-form {
+    padding: 10% 4% 6% 4%;
+}
+
+.login-form ul {
+    list-style-type: none;
+}
+
+.login-form li {
+    width: 100%;
+    font-weigth: 500;
+    border: 1px solid #ccc;
+    background: #fff;
+    margin: 1em 0;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 83%;
+    padding: 1em 0 1em 2.7em;
+    font-size: 15px;
+    font-weight: 500;
+    color: #858282;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: -28px;
+    padding-right: 35px;
+    display: inline-block;
+    border-right: 1px solid #999;
+}
+
+.user-icon {
+    background: url(../image/user.png) no-repeat 8px;
+}
+
+.psw-icon {
+    background: url(../image/lock.png) no-repeat 8px;
+}
+
+.submit input[type="submit"] {
+    width: 100%;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    padding: 21px 20px;
+    /*  ignore -webkit- -o- -moz- for border-radius here "(￣▽￣)"""*/
+    border-bottom-right-radius: .5em;
+    border-bottom-left-radius: .5em; 
+    
+    background: #00bffe;
+}
+
+.submit input[type="submit"]:hover {
+    background: #ffa300;
+}
+
+/***---- ribbon ----***/
