@@ -180,12 +180,20 @@ footer {
 }
 
 @media screen and (min-width:321px) and (max-width: 480px) {
+    body h1 {
+        font-size: 1.7em;
+    }
+    
     .login {
         width: 87%;
     }
 }
 
 @media screen and (min-width: 481px) and (max-width: 640px) {
+    body h1 {
+        font-size: 1.8em;
+    }
+    
     .login {
         width: 75%;
     }
@@ -197,9 +205,14 @@ footer {
     }
 }
 
-
-@media screen and (min-width: 1281px) {
+@media screen and (min-width: 961px) and (max-width: 1280px) {
     .login {
-       width: 400px; 
+        width: 35%;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .login {
+       width: 450px; 
     }
 } 
