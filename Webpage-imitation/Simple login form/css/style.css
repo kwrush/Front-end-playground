@@ -91,8 +91,8 @@ input[type="password"] {
     border: none;
     padding: 21px 20px;
     /*  ignore -webkit- -o- -moz- for border-radius here "(￣▽￣)"""*/
-    border-bottom-right-radius: .5em;
-    border-bottom-left-radius: .5em; 
+    border-bottom-right-radius: .4em;
+    border-bottom-left-radius: .4em; 
     
     background: #00bffe;
 }
@@ -102,3 +102,59 @@ input[type="password"] {
 }
 
 /***---- ribbon ----***/
+.ribbon-wrapper {
+    position: relative;
+}
+
+.ribbon-text-part h2 {
+    color: #fff;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    font-weight: 300;
+    padding: 7px 9px 5px 27px;
+}
+
+.ribbon-text-part {
+    position: relative;
+    width: 145px;
+    height: 44px;
+    left: -10px;
+    top: 22px;
+    background: #ffa300;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .3) 0 3px 5px rgba(0, 0, 0, .1);
+    z-index: 1;
+}
+
+.ribbon-right-part {
+    position: relative;
+    width: 0;
+    height: 0;
+    left: 135px;
+    top: -22px;
+    margin-bottom: -44px;
+    border-width: 22px;
+    border-style: dashed dashed dashed solid;
+    border-color: transparent transparent transparent #ffa300;
+    z-index: 1;
+}
+
+.ribbon-left-part {
+    position: relative;
+    width: 0;
+    height: 0;
+    left: -22px;
+    top: 10px;
+    margin-bottom: -12px;
+    border-width: 12px;
+    border-style: dashed solid dashed dashed;
+    border-color: transparent #e17e02 transparent transparent;
+    z-index: -1;
+}
+
+/***---- footer ----***/
+footer {
+    color: #fcfcfc;
+    width: 100%;
+    margin: 5% auto;
+    text-align: center;
+}
