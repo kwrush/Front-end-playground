@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="keywords" content="Message board">
+    <meta name="author" content="Kai Wang">
+    <title>Simple Message Board</title>
+    <link rel="stylesheet" href="../reset.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div id="msg-board">
+        <form action="" class="msg-form">
+            <h2>Look at what other people say</h2>
+            <input id="username" type="text" value="Your name" onfocus="this.value = '';" onblur="if(this.value === '') {this.value = 'Your name'};">
+            <div class="head-icons">
+                <ul>
+                    <li class="icon-wrapper">
+                        <img src="images/face1.gif" alt="Head icon, a girl">
+                    </li>
+                    <li class="icon-wrapper">
+                        <img src="images/face2.gif" alt="Head icon, a asian girl">
+                    </li>
+                    <li class="icon-wrapper">
+                        <img src="images/face3.gif" alt="Head icon, a comics boy">
+                    </li>
+                    <li class="icon-wrapper">
+                        <img src="images/face4.gif" alt="Head icon, a boy">
+                    </li>
+                    <li class="icon-wrapper">
+                        <img src="images/face5.gif" alt="Head icon, a girl and a boy">
+                    </li>
+                </ul>
+            </div>
+            <div class="msg-text">
+                <textarea name="" id="" cols="30" rows="10" class="text-box"></textarea>
+            </div>
+            <div class="info">
+                <p>
+                    You can input <strong>140</strong> words
+                </p>
+                <button type="button">Send</button>
+            </div>
+        </form>
+        <div class="msg-list">
+            <h3><span>Messages</span></h3>
+            <ul>
+                <li class="msg-wrapper">
+                    <div class="user-icon">
+                        <img src="images/face1.gif" alt="User icon">
+                    </div>
+                    <div class="content">
+                        <span class="user-name">An User</span>
+                        <p class="msg">Leave some message</p>
+                        <span class="time">Display time</span>
+                        <a class="del" href="javascript;">Delete</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
