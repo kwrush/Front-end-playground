@@ -13,8 +13,8 @@
 <body>
     <div id="msg-board">
         <form action="" class="msg-form">
-            <h2>Look at what other people say</h2>
-            <input id="username" type="text" value="Your name" onfocus="this.value = '';" onblur="if(this.value === '') {this.value = 'Your name'};">
+            <h2>Look at what people say</h2>
+            <input class="username" type="text" value="Your name" onfocus="this.value = '';" onblur="if(this.value === '') {this.value = 'Your name'};">
             <div class="head-icons">
                 <ul>
                     <li class="icon-wrapper">
@@ -35,7 +35,7 @@
                 </ul>
             </div>
             <div class="msg-text">
-                <textarea name="" id="" cols="30" rows="10" class="text-box"></textarea>
+                <textarea name="msg-input" class="text-box"></textarea>
             </div>
             <div class="info">
                 <p>
