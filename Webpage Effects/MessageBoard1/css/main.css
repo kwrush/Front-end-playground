@@ -92,6 +92,7 @@ body {
 .info {
     position: relative;
     padding: 10px 5px;
+    height: 30px;
 }
 
 .info>p {
@@ -112,7 +113,15 @@ body {
     right: 0;
     width: 100px;
     height: 30px;
+    background: #0e78e7;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
     cursor: pointer;
+}
+
+.info>button:hover {
+    background: #259;
 }
 
 
@@ -124,4 +133,12 @@ body {
 .msg-list {
     margin: 0 5px 5px 0;
     padding: 5px 15px 10px;
+}
+
+.msg-list>h3 {
+    height: 33px;
+    font-size: 14px;
+    font-weight: 400;
+    background: #e3eaec;
+    border: 1px solid #dee4e7;
 }
