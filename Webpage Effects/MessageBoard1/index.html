@@ -11,55 +11,44 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div id="msg-board">
+    <div class="msg-board">
         <form action="" class="msg-form">
-            <h2>Look at what people say</h2>
-            <input class="username" type="text" value="Your name" onfocus="this.value = '';" onblur="if(this.value === '') {this.value = 'Your name'};">
-            <div class="head-icons">
-                <ul>
-                    <li class="icon-wrapper">
-                        <img src="images/face1.gif" alt="Head icon, a girl">
+            <div class="input-area">
+                <h2>Look at what people say</h2>
+                <input type="text" class="username" value="Your name">
+                <ul class="icon-group">
+                    <li class="icon">
+                        <img src="images/face1.gif" alt="Head icon">
                     </li><!--
-                    --><li class="icon-wrapper">
-                        <img src="images/face2.gif" alt="Head icon, a asian girl">
+                    --><li class="icon">
+                        <img src="images/face2.gif" alt="Head icon">
                     </li><!--
-                    --><li class="icon-wrapper">
-                        <img src="images/face3.gif" alt="Head icon, a comics boy">
+                    --><li class="icon">
+                        <img src="images/face3.gif" alt="Head icon">
                     </li><!--
-                    --><li class="icon-wrapper">
-                        <img src="images/face4.gif" alt="Head icon, a boy">
+                    --><li class="icon">
+                        <img src="images/face4.gif" alt="Head icon">
                     </li><!--
-                    --><li class="icon-wrapper">
-                        <img src="images/face5.gif" alt="Head icon, a girl and a boy">
+                    --><li class="icon">
+                        <img src="images/face5.gif" alt="Head icon">
                     </li>
                 </ul>
             </div>
-            <div class="msg-text">
-                <textarea name="msg-input" class="text-box"></textarea>
-            </div>
-            <div class="info">
-                <p>
-                    You can input <strong>140</strong> words
-                </p>
-                <button type="button">Send</button>
+            <div class="text-area">
+                <textarea name="msg" class="msg-text"></textarea>
+                <p>You can still input <span>140</span> words</p>
+                <button class="send-btn">Send</button>
             </div>
         </form>
-        <div class="msg-list">
-            <h3><span>Messages</span></h3>
-            <ul>
-                <li class="msg-wrapper">
-                    <div class="user-icon">
-                        <img src="images/face1.gif" alt="User icon">
-                    </div>
-                    <div class="content">
-                        <span class="user-name">An User</span>
-                        <p class="msg">Leave some message</p>
-                        <span class="time">Display time</span>
-                        <a class="del" href="javascript;">Delete</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
     </div>
 </body>
+<script>
+    var usinput = document.querySelector('.username');
+    usinput.onfocus = function() {
+        this.value = this.value === 'Your name' ? '' : this.value;
+    }
+    usinput.onblur = function() {
+        this.value = this.value === '' ? 'Your name' : this.value;
+    }
+</script>
 </html>
