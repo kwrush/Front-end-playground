@@ -90,10 +90,6 @@ a {
 .text-area {
     padding-bottom: 10px;
 }
-.msg-text {
-    width: 99.94%;
-    height: 65px;
-}
 
 .msg-text {
     width: 100%;
@@ -104,7 +100,6 @@ a {
 
 .text-area>p {
     padding: 5px 5px 5px 165px;
-    height: 30px;
     display: inline-block;
 }
 
@@ -132,7 +127,7 @@ a {
 
 /**=== message list ===**/
 .msg-group {
-    padding: 5px 15px 10px 15px;
+    padding: 5px 15px 12px 15px;
     background: #fff;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -173,6 +168,7 @@ a {
 
 .user-msg {
     width: 398px;
+    padding-top: 3px;
     display: inline-block;
     font-size: 14px;
     overflow: hidden;
@@ -190,7 +186,7 @@ a {
 
 .msg-content {
     display: inline-block;
-    padding: 5px 0;
+    padding-bottom: 7px;
 }
 
 .msg-item-hover {
@@ -200,7 +196,6 @@ a {
 .time {
     color: #889db6;
     font: 13px/18px arial;
-    line-height: 13px;
     overflow: hidden;
 }
 
