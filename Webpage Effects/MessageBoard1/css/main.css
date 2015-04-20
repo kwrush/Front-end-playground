@@ -8,6 +8,10 @@ body {
     font: 15px/1.2 "Helvetica", arial, nimbussansl, sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
 /**=== most outer wrapper ===**/
 .msg-board {
     margin: 10px auto;
@@ -168,18 +172,44 @@ body {
 }
 
 .user-msg {
-    width: 394px;
+    width: 398px;
     display: inline-block;
     font-size: 14px;
     overflow: hidden;
 }
 
 .user-id {
+    color: #2b4a78;
     display: inline-block;
     padding-right: 6px;
+}
+
+.user-id:hover {
+    text-decoration: underline;
 }
 
 .msg-content {
     display: inline-block;
     padding: 5px 0;
+}
+
+.msg-item-hover {
+    background: #eee;
+}
+
+.time {
+    color: #889db6;
+    font: 13px/18px arial;
+    line-height: 13px;
+    overflow: hidden;
+}
+
+.del {
+    float: right;
+    color: #889db6;
+    opacity: 1;
+}
+
+.del:hover {
+    text-decoration: underline;
 }
