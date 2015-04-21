@@ -1,28 +1,4 @@
 angular.module('weatherApp', [])
-.controller('MainCtrl', function($scope, $timeout) {
-        
-    //build the date object
-    $scope.date = {};
-    
-    //update function
-    var updateTime = function() {
-        $scope.date.raw = new Date();
-        $timeout(updateTime, 1000);
-    }
-    
-    // start update function
-    updateTime();
-    
-    $scope.weather = {};
-    
-    //hardcode Amsterdam just for now
-    Weather.getWeatherForecast('NL/Amsterdam')
-    .then(function(data) {
-        $scope.weather.forecast = data;
-    });
-});
-
-angular.module('weatherApp', [])
 .provider('Weather', function() {
     var apiKey = '';
     
@@ -30,7 +6,7 @@ angular.module('weatherApp', [])
         if (key) this.apiKey = key;
     };
     
-    this.$get = function($http) {
+    this.$get = function($q, $http) {
         var self = this;
         
         return {
@@ -62,3 +38,26 @@ angular.module('weatherApp', [])
 .config(function(WeatherProvider) {
     WeatherProvider.setApiKey('c9914a3fccc20133');
 })
+
+.controller('MainCtrl', function($scope, $timeout, Weather) {
+        
+    //build the date object
+    $scope.date = {};
+    
+    //update function
+    var updateTime = function() {
+        $scope.date.raw = new Date();
+        $timeout(updateTime, 1000);
+    }
+    
+    // start update function
+    updateTime();
+    
+    $scope.weather = {};
+    
+    //hardcode Amsterdam just for now
+    Weather.getWeatherForecast('Netherlands/Amsterdam')
+    .then(function(data) {
+        $scope.weather.forecast = data;
+    });
+});
