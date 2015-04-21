@@ -1,3 +1,3 @@
 ## A weather Chrome extension
 
-Follow the tuturial: http://www.ng-newsletter.com/advent2013/#!/day/1
+Follow the tuturial: http://www.ng-newsletter.com/posts/chrome-apps-on-angular.html
