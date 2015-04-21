@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="weatherApp" data-ng-csp="">
+<head>
+    <meta charset="UTF-8">
+    <title>Presently</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <div ng-controller="MainCtrl">
+           <div id="datetime">
+               <h1>{{ date.raw | date: 'hh mm ss' }}</h1>
+               <h2>{{ date.raw | date: 'EEEE, MMMM yyyy' }}</h2>
+           </div>
+           <div id="forecast">
+               <pre>{{ weather.forecast | json }}</pre>
+           </div>
+        </div>
+    </div>
+    <script src="js/vendor/angular.min.js"></script>
+    <script src="js/vendor/angular-route.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
