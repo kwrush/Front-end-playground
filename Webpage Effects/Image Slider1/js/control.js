@@ -32,7 +32,7 @@
         return function() {
             btn.style.display = btn.style.display === 'block' ? 'none' : 'block';
         };
-    }
+    };
     
     // NOTE: use closure!!!
     imageBanner.addEventListener('mouseover', function(navArrow) {
@@ -67,9 +67,9 @@
         }
     };
     
-    rightArrow.addEventListener('click', rightArrow.onclick, false);
+    rightArrow.addEventListener('click', clickRightArrow, false);
     
-    rightArrow.onclick = function() {
+    function clickRightArrow() {
         if (flag) return;
         
         var marginLeft = getMarginLeft(imageItemList);
@@ -88,12 +88,12 @@
     */
     function autoPlay() {
         timer = setInterval(playImageBanner, 4 * 1000);
-    }
+    };
     autoPlay();
     
     function playImageBanner() {
         rightArrow.onclick();
-    }
+    };
     
     function slideImage(itemObj, val) {
         
@@ -103,16 +103,22 @@
         clearInterval(move);
         
         move = setInterval(function() {
+            
+            //disable auto sliding
             flag = true;
             offset += val / 40;
-            console.log(offset);
+            
             imageItemList.style.marginLeft = marginLeft + offset + 'px';
+            
             if (Math.abs(offset) >= Math.abs(val)) {
+                
+                //enable auto sliding
                 flag = false;
+                
                 clearInterval(move);
             }
         }, 13);
-    }
+    };
     
     function getMarginLeft(itemObj) {
         
@@ -120,6 +126,6 @@
         var marginLeft = window.parseInt(computedStyle.marginLeft, 10);
         
         return marginLeft;
-    }
+    };
     
 }());
