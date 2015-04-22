@@ -1,4 +1,4 @@
-angular.module('weatherApp', [])
+angular.module('weatherApp', ['ngRoute'])
 .provider('Weather', function() {
     var apiKey = '';
     
@@ -35,11 +35,51 @@ angular.module('weatherApp', [])
     };
 })
 
+.factory('UserService', function() {
+    var defaults = {
+        location: 'autoip'
+    };
+         
+    var service = {
+        user: {},
+        
+        save: function() {
+            sessionStorage.presently = angular.toJson(service.user);
+        },
+        
+        restore: function() {
+            service.user = angular.fromJson(sessionStorage.presently) || defaults;
+            
+            return service.user;
+        }
+    };
+    
+    service.restore;
+    
+    return service;
+})
+
 .config(function(WeatherProvider) {
     WeatherProvider.setApiKey('c9914a3fccc20133');
 })
 
-.controller('MainCtrl', function($scope, $timeout, Weather) {
+.config(function($routeProvider) {
+    $routeProvider.when (
+        '/', {
+            templateUrl: 'template/home.html',
+            controller: 'MainCtrl'
+        }
+    )
+    .when (
+        '/settings', {
+            templateUrl: 'template/settings.html',
+            controller: 'SettingsCtrl'
+        }
+    )
+    .otherwise ({redirectTo: '/'});
+})
+
+.controller('MainCtrl', function($scope, $timeout, Weather, UserService) {
         
     //build the date object
     $scope.date = {};
@@ -55,9 +95,19 @@ angular.module('weatherApp', [])
     
     $scope.weather = {};
     
+    $scope.user = UserService.user;
+    
     //hardcode Amsterdam just for now
-    Weather.getWeatherForecast('Netherlands/Amsterdam')
+    Weather.getWeatherForecast($scope.user.location)
     .then(function(data) {
         $scope.weather.forecast = data;
     });
+})
+
+.controller('SettingsCtrl', function($scope, UserService) {
+    $scope.user = UserService.user;
+    
+    $scope.save = function() {
+        UserService.save();
+    };
 });
