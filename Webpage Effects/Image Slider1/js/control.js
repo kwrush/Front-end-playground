@@ -53,9 +53,9 @@
     /*
         click callbacks for left and right arrow
     */
-    leftArrow.addEventListener('click', leftArrow.onclick, false);
+    leftArrow.addEventListener('click', clickLeftArrow, false);
     
-    leftArrow.onclick = function() {
+    function clickLeftArrow() {
         if (flag) return;
         
         var marginLeft = getMarginLeft(imageItemList);
@@ -87,13 +87,9 @@
         auto play and manually play image banner
     */
     function autoPlay() {
-        timer = setInterval(playImageBanner, 4 * 1000);
+        timer = setInterval(clickRightArrow, 4 * 1000);
     };
     autoPlay();
-    
-    function playImageBanner() {
-        rightArrow.onclick();
-    };
     
     function slideImage(itemObj, val) {
         

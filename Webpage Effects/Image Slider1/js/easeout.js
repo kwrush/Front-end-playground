@@ -52,9 +52,9 @@
     /*
         click callbacks for left and right arrow
     */
-    leftArrow.addEventListener('click', leftArrow.onclick, false);
+    leftArrow.addEventListener('click', clickLeftArrow, false);
     
-    leftArrow.onclick = function() {
+    function clickLeftArrow() {
         if (flag) return;
         
         var marginLeft = getMarginLeft(imageItemList);
@@ -67,9 +67,9 @@
         }
     };
     
-    rightArrow.addEventListener('click', rightArrow.onclick, false);
+    rightArrow.addEventListener('click', clickRightArrow, false);
     
-    rightArrow.onclick = function() {
+    function clickRightArrow() {
         if (flag) return;
         
         var marginLeft = getMarginLeft(imageItemList);
@@ -87,13 +87,9 @@
         auto play and manually play image banner
     */
     function autoPlay() {
-        timer = setInterval(playImageBanner, 5 * 1000);
+        timer = setInterval(clickRightArrow, 5 * 1000);
     }
     autoPlay();
-    
-    function playImageBanner() {
-        rightArrow.onclick();
-    }
     
     function getMarginLeft(itemObj) {
         
@@ -121,11 +117,10 @@
             var gap = now - start;
             
             // offset factor
-            var factor = easeOut(gap, total, 5);
+            var factor = easeOut(gap, total, 7);
             
             // compute new marginLeft
             var newPos = Math.round(marginLeft + (destination - marginLeft) * factor);
-            console.log(newPos);
             
             imageItemList.style.marginLeft = newPos + 'px';
 
