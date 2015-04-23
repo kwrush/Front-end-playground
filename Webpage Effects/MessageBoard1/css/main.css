@@ -32,7 +32,7 @@ a {
 }
 
 .input-area {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
 
 .input-area>h2 {
@@ -52,9 +52,12 @@ a {
 
 .icon-group {
     display: inline-block;
+    padding: 0;
     width: 180px;
     height: 25px;
+    margin-left: 10px;
     list-style-type: none;
+    vertical-align: middle;
 }
 
 .icon {
@@ -62,7 +65,6 @@ a {
     width: 25px;
     height: 25px;
     margin-right: 5px;
-    vertical-align: middle;
     cursor: pointer;
 }
 
@@ -162,7 +164,6 @@ a {
     margin-right: 6px;
     width: 50px;
     height: 50px;
-    vertical-align: top;
     display: inline-block;
 }
 
@@ -171,6 +172,7 @@ a {
     padding-top: 3px;
     display: inline-block;
     font-size: 14px;
+    vertical-align: top;
     overflow: hidden;
 }
 
