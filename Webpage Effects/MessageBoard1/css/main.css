@@ -171,6 +171,11 @@ a {
     display: inline-block;
 }
 
+.user-icon>img {
+    border-radius: 5px;
+    border: 1px solid #dee4e7;
+}
+
 .user-msg {
     width: 398px;
     padding-top: 3px;
@@ -208,7 +213,7 @@ a {
 .del {
     float: right;
     color: #889db6;
-    opacity: 1;
+    display: none;
 }
 
 .del:hover {

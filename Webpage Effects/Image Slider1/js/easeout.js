@@ -130,10 +130,10 @@
                 clearInterval(move);
             }
         }, 13);
-    }
+    };
     
     function easeOut(gap, total, power) {
         return 1 - Math.pow(1 - (gap / total), power);
-    }
+    };
 
 }());
