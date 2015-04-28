@@ -17,7 +17,7 @@ var getMan = {
 
 /* manipulate css */
 var cssMan = {
-    
+
 };
 
 /* main */
@@ -52,6 +52,34 @@ var toggleLiBg = function(event) {
 var deleteMsg = function(event) {
     
     var parentUl = this.parentLi.parentElement;
+    var pLi = this.parentLi;
+    
+    timer = setInterval(function() {
+        var step = .1;
+        //change opaciy
+        
+        console.log(pLi.style.opacity);
+        
+        if (pLi.style.opacity <= 0) {
+            clearInterval(timer);
+            
+            timer = setInterval(function() {
+                var stepH = 5;
+                var cHeight = pLi.clientHeight;
+                
+                console.log(pLi.clientHeight);
+                
+                pLi.style.height = cHeight - stepH + 'px';
+                
+                if (pLi.clientHeight <= 0) {
+                    clearInterval(timer);
+                }
+                
+            }, 30)
+        }
+        
+    }, 30);
+            
     parentUl.removeChild(this.parentLi);
     
     var lastCh = parentUl.lastElementChild;
@@ -75,6 +103,7 @@ var sendFcn = function() {
 
 // user's msg
 var msgItems = getMan.byClass('msg-item');
+var timer    = null;
 
 for (var i = 0, len = msgItems.length; i < len; i++) {
     var aLi    = msgItems[i];

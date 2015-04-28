@@ -161,6 +161,7 @@ a {
 
 .msg-item {
     padding: 10px 6px;
+    opacity: 1;
     border-bottom: 1px solid #dee4e7;
 }
 
