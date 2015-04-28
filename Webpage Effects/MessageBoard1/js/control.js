@@ -1,3 +1,5 @@
+'use strict';
+
 /* get DOM elements by id, class or tagname*/
 var getMan = {
     byId: function(id) {
@@ -5,7 +7,7 @@ var getMan = {
     },
     
     byClass: function(className) {
-        return document.getElementsByClassName(className);
+        return typeof className === 'string' ? document.getElementsByClassName(className) : className;
     },
     
     byTagName: function(tagName) {
@@ -18,26 +20,68 @@ var cssMan = {
     
 };
 
-/* attach/remove event to objects */
-var eventMan = {
-    addEvent: function(obj, event, fcn) {
-        obj.addEventListener(event, fcn, false);
-    },
-    
-    removeEvent: function(obj, event, fcn) {
-        obj.removeEventListener(event, fcn, false);
-    }
-}
-
 /* main */
+
+// change li background color
+var toggleLiBg = function(event) {
+    switch (event.type) {
+        case 'mouseover':
+            this.style.backgroundColor = '#dee4ea';
+            
+            // for "no message" LI, this.delBtn is undefined
+            if (this.delBtn) {
+                
+                this.delBtn.style.display = 'inline';
+                this.delBtn.parentLi = this;
+                this.delBtn.addEventListener('click', deleteMsg, false);
+            }
+            
+            break;
+        case 'mouseout':
+            this.style.backgroundColor = '#fff';
+            
+            if (this.delBtn) {
+                this.delBtn.style.display = 'none';
+            }
+            
+            break;
+    }
+};
+
+// delete msg when click on delete button
+var deleteMsg = function(event) {
+    
+    var parentUl = this.parentLi.parentElement;
+    parentUl.removeChild(this.parentLi);
+    
+    var lastCh = parentUl.lastElementChild;
+    
+    // if all message LIs have been deleted
+    if (lastCh.classList.contains('empty')) {
+        // show this "no message block"
+        lastCh.style.display = 'block';
+        
+        // avoid changing background color of this LI block
+        lastCh.removeEventListener('mouseover', toggleLiBg, false);
+        lastCh.removeEventListener('mouseout', toggleLiBg, false);
+    }    
+};
+
+// add a new message
+var sendFcn = function() {
+
+
+};
+
 // user's msg
 var msgItems = getMan.byClass('msg-item');
 
 for (var i = 0, len = msgItems.length; i < len; i++) {
-    eventMan.addEvent(msgItems[i], 'mouseover', function(liObj) {
-        console.log(liObj);
-        liObj.style.backgroundColor = '#dee4ea';
-    }(msgItems[i]));
-}
+    var aLi    = msgItems[i];
+    var delBtn = aLi.getElementsByClassName('del')[0];
+    
+    aLi.addEventListener('mouseover', toggleLiBg, false);
+    aLi.addEventListener('mouseout', toggleLiBg, false);
 
-function sendFcn() {};
+    aLi.delBtn = delBtn;
+}
