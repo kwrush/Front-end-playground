@@ -147,12 +147,14 @@ a {
     background: #fff;
     line-height: 28px;
     display: inline-block;
-    margin: 5px 0 0 6px;
+    margin: 4px 0 0 6px;
     padding: 0 15px;
 }
 
 .empty {
     display: none;
+    padding: 10px 6px;
+    border-bottom: 1px solid #dee4e7;
 }
 
 .msg-list {
@@ -161,7 +163,6 @@ a {
 
 .msg-item {
     padding: 10px 6px;
-    opacity: 1;
     border-bottom: 1px solid #dee4e7;
 }
 

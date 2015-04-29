@@ -82,16 +82,13 @@ var deleteMsg = function(event) {
                 if (cHeight <= 0) {
                     parentUl.removeChild(pLi);
                     
-                    var lastCh = parentUl.lastElementChild;
 
                     // if all message LIs have been deleted
-                    if (lastCh.classList.contains('empty')) {
+                    if (!parentUl.lastElementChild) {
                         // show this "no message block"
-                        lastCh.style.display = 'block';
-
-                        // avoid changing background color of this LI block
-                        lastCh.removeEventListener('mouseover', toggleLiBg, false);
-                        lastCh.removeEventListener('mouseout', toggleLiBg, false);
+                        var empty = document.getElementsByClassName('empty')[0];
+                        
+                        empty.style.display = 'block';
                     }
                     
                     clearInterval(timer);
@@ -110,6 +107,19 @@ var sendFcn = function() {
 
 };
 
+// active the selected icon, disable other icons
+var activeIcon = function() {
+    var group = this.group;
+    
+    for (var i = 0, len = group.length; i < len; i++) {
+        var img = group[i].getElementsByTagName('img')[0];
+        img.className = '';
+    }
+    
+    var activeImg = this.getElementsByTagName('img')[0];
+    activeImg.className = 'active';
+};
+
 // user's msg
 var msgItems = getMan.byClass('msg-item');
 var timer    = null;
@@ -122,4 +132,14 @@ for (var i = 0, len = msgItems.length; i < len; i++) {
     aLi.addEventListener('mouseout', toggleLiBg, false);
 
     aLi.delBtn = delBtn;
+}
+
+// icons
+var headIcons = getMan.byClass('icon');
+
+for (var i = 0, len = headIcons.length; i < len; i++) {
+    var aIcon = headIcons[i];
+    
+    aIcon.group = headIcons;    
+    aIcon.addEventListener('click', activeIcon, false);
 }
