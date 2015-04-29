@@ -101,11 +101,12 @@ a {
 }
 
 .text-area>p {
-    padding: 5px 5px 5px 165px;
+    padding: 5px 4px 5px 165px;
+    width: 366px;
     display: inline-block;
 }
 
-.text-area>p>span {
+.word-counter {
     font: 20px/25px Georgia, Tahoma, Arial;
 }
 

@@ -1,4 +1,8 @@
-/* get DOM elements by id, class or tagname*/
+/*
+    define functions
+*/
+
+// get DOM elements by id, class or tagname
 var getMan = {
     byId: function(id) {
         return typeof id === 'string' ? document.getElementById(id) : id;
@@ -13,12 +17,6 @@ var getMan = {
     }
 };
 
-/* manipulate css */
-var cssMan = {
-
-};
-
-/* main */
 // get real style value
 var styleValue = function(element, prop) {
     var cStyle = window.getComputedStyle(element);
@@ -103,7 +101,7 @@ var deleteMsg = function(event) {
 
 // add a new message
 var sendFcn = function() {
-
+    
 
 };
 
@@ -119,6 +117,25 @@ var activeIcon = function() {
     var activeImg = this.getElementsByTagName('img')[0];
     activeImg.className = 'active';
 };
+
+// listen to the input action of the text area
+var textOnFocus = function() {
+    var values = this.value;
+    
+    // maximal 140 characters
+    var count  = 140 - values.length;
+    
+    // get word count span element
+    var wordCount = getMan.byClass('word-counter')[0];
+    
+    if (count >= 0) {
+        wordCount.innerHTML = count;
+    }
+}
+
+/*
+    implement required features
+*/
 
 // user's msg
 var msgItems = getMan.byClass('msg-item');
@@ -143,3 +160,12 @@ for (var i = 0, len = headIcons.length; i < len; i++) {
     aIcon.group = headIcons;    
     aIcon.addEventListener('click', activeIcon, false);
 }
+
+// text area 
+var textArea  = getMan.byClass('msg-text')[0];
+
+textArea.addEventListener('focus', textOnFocus, false);
+textArea.addEventListener('keydown', textOnFocus, false);
+textArea.addEventListener('keypress', textOnFocus, false);
+textArea.addEventListener('keyup', textOnFocus, false);
+textArea.addEventListener('blur', textOnFocus, false);

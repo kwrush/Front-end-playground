@@ -15,7 +15,7 @@
         <form action="" class="msg-form">
             <div class="input-area">
                 <h2>Look at what people say</h2>
-                <input type="text" class="username" value="Your name"><!--
+                <input type="text" class="username" placeholder="Your name"><!--
                 --><ul class="icon-group"><!--
                     --><li class="icon">
                         <img src="images/face1.gif" alt="Head icon">
@@ -35,8 +35,8 @@
                 </ul>
             </div>
             <div class="text-area">
-                <textarea name="msg" class="msg-text"></textarea>
-                <p>You can still input <span>140</span> words</p>
+                <textarea name="msg" maxlength="140" class="msg-text"></textarea>
+                <p>You can still input <span class='word-counter'>140</span> words</p>
                 <button class="send-btn">Send</button>
             </div>
         </form>
@@ -80,14 +80,5 @@
         </div>
     </div>
 </body>
-<script>
-    var usinput = document.querySelector('.username');
-    usinput.onfocus = function() {
-        this.value = this.value === 'Your name' ? '' : this.value;
-    }
-    usinput.onblur = function() {
-        this.value = this.value === '' ? 'Your name' : this.value;
-    }
-</script>
 <script src="js/control.js"></script>
 </html>
