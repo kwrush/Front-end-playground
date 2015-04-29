@@ -1,2 +1,2 @@
 ### Front-end-Development
-Personal pratice repository.
+Personal practice repository.
