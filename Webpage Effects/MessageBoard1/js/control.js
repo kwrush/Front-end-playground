@@ -1,5 +1,3 @@
-'use strict';
-
 /* get DOM elements by id, class or tagname*/
 var getMan = {
     byId: function(id) {
@@ -21,12 +19,21 @@ var cssMan = {
 };
 
 /* main */
+// get real style value
+var styleValue = function(element, prop) {
+    var cStyle = window.getComputedStyle(element);
+    var propName = typeof prop === 'string' ? prop : '' + prop;
+    
+    return window.parseInt(cStyle[propName], 10);
+}
 
 // change li background color
 var toggleLiBg = function(event) {
     switch (event.type) {
         case 'mouseover':
             this.style.backgroundColor = '#dee4ea';
+            this.numHeight = this.clientHeight;
+            this.elOpacity = styleValue(this, 'opacity');
             
             // for "no message" LI, this.delBtn is undefined
             if (this.delBtn) {
@@ -51,48 +58,50 @@ var toggleLiBg = function(event) {
 // delete msg when click on delete button
 var deleteMsg = function(event) {
     
-    var parentUl = this.parentLi.parentElement;
     var pLi = this.parentLi;
+    var parentUl = pLi.parentElement;
     
     timer = setInterval(function() {
         var step = .1;
         //change opaciy
+        pLi.elOpacity -= step;
         
-        console.log(pLi.style.opacity);
+        pLi.style.opacity = pLi.elOpacity + '';
         
         if (pLi.style.opacity <= 0) {
             clearInterval(timer);
             
+            var cHeight = styleValue(pLi, 'height');
+            
             timer = setInterval(function() {
-                var stepH = 5;
-                var cHeight = pLi.clientHeight;
+                var stepH = 8;
+                cHeight -= stepH;
                 
-                console.log(pLi.clientHeight);
+                pLi.style.height = cHeight + 'px';
                 
-                pLi.style.height = cHeight - stepH + 'px';
-                
-                if (pLi.clientHeight <= 0) {
+                if (cHeight <= 0) {
+                    parentUl.removeChild(pLi);
+                    
+                    var lastCh = parentUl.lastElementChild;
+
+                    // if all message LIs have been deleted
+                    if (lastCh.classList.contains('empty')) {
+                        // show this "no message block"
+                        lastCh.style.display = 'block';
+
+                        // avoid changing background color of this LI block
+                        lastCh.removeEventListener('mouseover', toggleLiBg, false);
+                        lastCh.removeEventListener('mouseout', toggleLiBg, false);
+                    }
+                    
                     clearInterval(timer);
                 }
                 
-            }, 30)
+            }, 30);
         }
         
     }, 30);
-            
-    parentUl.removeChild(this.parentLi);
     
-    var lastCh = parentUl.lastElementChild;
-    
-    // if all message LIs have been deleted
-    if (lastCh.classList.contains('empty')) {
-        // show this "no message block"
-        lastCh.style.display = 'block';
-        
-        // avoid changing background color of this LI block
-        lastCh.removeEventListener('mouseover', toggleLiBg, false);
-        lastCh.removeEventListener('mouseout', toggleLiBg, false);
-    }    
 };
 
 // add a new message
