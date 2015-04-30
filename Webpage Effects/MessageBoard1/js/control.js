@@ -119,18 +119,34 @@ var sendFcn = function() {
     }
     else {
         var oLi = document.createElement("li");
-        var oDate = new Date();
         
         oLi.className = 'msg-item';
         
-        oLi.innerHTML = '<div class="user-icon"><img src="' + img.src +'" alt="User head icon"></div><div class="user-msg"><div class="user-id"><a href="javascript:;">' + usname.value + ':</a></div><p class="msg-content">' + msg.value + '</p><div class="time"><span>' + oDate.getFullYear() + '-' + (oDate.getMonth() + 1) + '-' + oDate.getDate() + '&nbsp' + oDate.getHours() + ':' + oDate.getMinutes() + '</span><a class="del" href="javascrip:;">Delete</a></div></div>';
+        // create a new LI element
+        oLi.innerHTML = '<div class="user-icon"><img src="' + img.src +'" alt="User head icon"></div><div class="user-msg"><div class="user-id"><a href="javascript:;">' + usname.value + ':</a></div><p class="msg-content">' + msg.value + '</p><div class="time"><span>' + formatDate(new Date) + '</span><a class="del" href="javascrip:;">Delete</a></div></div>';
         
+        // insert this LI element at the beginning of UL
         lis.length ? aUl.insertBefore(oLi, lis[0]) : aUl.appendChild(oLi);
         
-        // reset header image
+        // add listener to this LI element
+        assignListener(oLi);
+        
+        // reset contents
+        clearInputs();
         
     }
     
+};
+
+// clear content in input area, reset header image
+var clearInputs = function() {
+    var usname = getMan.byClass('username')[0];
+    var msg    = getMan.byClass('msg-text')[0];
+    var img    = getMan.byClass('active')[0];
+    
+    usname.value  = '';
+    msg.value     = '';
+    img.className = '';
 };
 
 // active the selected icon, disable other icons
@@ -146,6 +162,26 @@ var activeIcon = function() {
     activeImg.className = 'active';
 };
 
+var formatDate = function(oDate) {
+    oDate = oDate ? oDate : new Date();
+    
+    // format date
+    var year   = oDate.getFullYear();
+    var month  = oDate.getMonth() + 1;
+    var date   = oDate.getDate();
+    var hour   = oDate.getHours();
+    var minute = oDate.getMinutes();
+
+    month  = month < 10 ? '0' + month : month;
+    date   = date < 10 ? '0' + date : date;
+    hour   = hour < 10 ? '0' + hour : hour;
+    minute = minute < 10 ? '0' + minute : minute;
+    
+    var strDate = year + '-' + month + '-' + date + '&nbsp' + hour + ':' + minute;
+    
+    return strDate;
+};
+
 // listen to the input action of the text area
 var textOnFocus = function() {
     var values = this.value;
@@ -159,6 +195,15 @@ var textOnFocus = function() {
     if (count >= 0) {
         wordCount.innerHTML = count;
     }
+};
+
+var assignListener = function(aLi) {
+    var delBtn = aLi.getElementsByClassName('del')[0];
+    
+    aLi.delBtn = delBtn;
+    
+    aLi.addEventListener('mouseover', toggleLiBg, false);
+    aLi.addEventListener('mouseout', toggleLiBg, false);
 }
 
 /*
@@ -170,13 +215,9 @@ var msgItems = getMan.byClass('msg-item');
 var timer    = null;
 
 for (var i = 0, len = msgItems.length; i < len; i++) {
-    var aLi    = msgItems[i];
-    var delBtn = aLi.getElementsByClassName('del')[0];
+    var aLi = msgItems[i];
     
-    aLi.addEventListener('mouseover', toggleLiBg, false);
-    aLi.addEventListener('mouseout', toggleLiBg, false);
-
-    aLi.delBtn = delBtn;
+    assignListener(aLi);
 }
 
 // icons
