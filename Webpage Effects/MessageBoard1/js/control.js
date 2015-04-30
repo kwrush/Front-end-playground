@@ -99,10 +99,38 @@ var deleteMsg = function(event) {
     
 };
 
-// add a new message
+// add a new message(add a LI element to UL element)
 var sendFcn = function() {
+    var usname = getMan.byClass('username')[0];
+    var msg    = getMan.byClass('msg-text')[0];
+    var img    = getMan.byClass('active')[0];
     
-
+    var aUl = getMan.byClass('msg-list')[0];
+    var lis = getMan.byClass('msg-item');
+    
+    if (!usname.value.length) {
+        alert('Enter an username!');
+    }
+    else if (!msg.value.length) {
+        alert('Enter some words!');
+    }
+    else if (!img) {
+        alert('Select a header image!');
+    }
+    else {
+        var oLi = document.createElement("li");
+        var oDate = new Date();
+        
+        oLi.className = 'msg-item';
+        
+        oLi.innerHTML = '<div class="user-icon"><img src="' + img.src +'" alt="User head icon"></div><div class="user-msg"><div class="user-id"><a href="javascript:;">' + usname.value + ':</a></div><p class="msg-content">' + msg.value + '</p><div class="time"><span>' + oDate.getFullYear() + '-' + (oDate.getMonth() + 1) + '-' + oDate.getDate() + '&nbsp' + oDate.getHours() + ':' + oDate.getMinutes() + '</span><a class="del" href="javascrip:;">Delete</a></div></div>';
+        
+        lis.length ? aUl.insertBefore(oLi, lis[0]) : aUl.appendChild(oLi);
+        
+        // reset header image
+        
+    }
+    
 };
 
 // active the selected icon, disable other icons
@@ -169,3 +197,7 @@ textArea.addEventListener('keydown', textOnFocus, false);
 textArea.addEventListener('keypress', textOnFocus, false);
 textArea.addEventListener('keyup', textOnFocus, false);
 textArea.addEventListener('blur', textOnFocus, false);
+
+//send button
+var sendBtn = getMan.byClass('send-btn')[0];
+sendBtn.addEventListener('click', sendFcn, false);
