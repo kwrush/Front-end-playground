@@ -79,7 +79,6 @@ var deleteMsg = function(event) {
                 
                 if (cHeight <= 0) {
                     parentUl.removeChild(pLi);
-                    
 
                     // if all message LIs have been deleted
                     if (!parentUl.lastElementChild) {
@@ -170,7 +169,8 @@ var formatDate = function(oDate) {
     var date   = oDate.getDate();
     var hour   = oDate.getHours();
     var minute = oDate.getMinutes();
-
+    
+    // if it's smaller than 10 add 0
     month  = month < 10 ? '0' + month : month;
     date   = date < 10 ? '0' + date : date;
     hour   = hour < 10 ? '0' + hour : hour;
