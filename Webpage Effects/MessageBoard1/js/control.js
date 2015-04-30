@@ -118,7 +118,7 @@ var sendFcn = function() {
         alert('Select a header image!');
     }
     else {
-        var oLi = document.createElement("li");
+        var oLi = document.createElement('li');
         
         oLi.className = 'msg-item';
         
@@ -133,7 +133,6 @@ var sendFcn = function() {
         
         // reset contents
         clearInputs();
-        
     }
     
 };
