@@ -72,7 +72,7 @@ var deleteMsg = function(event) {
             var cHeight = styleValue(pLi, 'height');
             
             timer = setInterval(function() {
-                var stepH = 8;
+                var stepH = 25;
                 cHeight -= stepH;
                 
                 pLi.style.height = cHeight + 'px';
