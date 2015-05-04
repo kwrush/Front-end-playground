@@ -1,3 +1,3 @@
 ### Front-end-Development
-Personal practice repository
+Repository of learning front-end development
 ###############################
