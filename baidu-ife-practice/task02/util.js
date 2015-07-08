@@ -38,3 +38,35 @@ function cloneObject(src) {
 	
 	return to;
 }
+
+// remove repeated elements in an array
+function uniqArray(arr) {
+	var map = {};
+	var out = [];
+	
+	for (var i = 0, len = arr.length; i < len; i++) {
+		if (!map[arr[i]]) {
+			out.push(arr[i]);
+			
+			// distinguish number and string, such as 1 and '1', they are not duplicate literaly
+			if (typeof map[arr[i]] === typeof arr[i]) {
+				map[arr[i]] = true;
+			}
+			else {
+				map[arr[i]] = false;
+			}
+		}
+	}
+	
+	return out;
+}
+
+// remove empty space at the start and the end of a string
+function simpleTrim(str) {
+	
+}
+
+// use regular expression
+function trim(str) {
+
+}

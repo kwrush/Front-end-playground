@@ -41,3 +41,7 @@ var a = [1, 3, 5, 7, 5, 3];
 var b = uniqArray(a);
 console.log(b); // [1, 3, 5, 7]
 
+var c = ['1', 1, '2', '2', 3, 4, 4, 5, '6'];
+var d = uniqArray(c);
+console.log(d);
+
