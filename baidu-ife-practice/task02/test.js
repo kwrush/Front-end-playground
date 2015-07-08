@@ -1,6 +1,6 @@
 // test for task 02
 
-// test 1
+// test 1 : type detection
 /* var str = 'abc';
 var arr = [1, 2, 3];
 var f = function() { return 'I\'m a function' };
@@ -10,8 +10,8 @@ isArray(arr);
 isFunction(f);
 isFunction(arr); */
 
-// test 2
-var srcObj = {
+// test 2: deep copy
+/* var srcObj = {
 	a: 1,
 	b: {
 		b1: ['hello', 'hi'],
@@ -34,5 +34,10 @@ console.log(abObj.c);
 
 console.log(tarObj.a);      // 1
 console.log(tarObj.b.b1[0]);    // "hello"
-console.log(tarObj.c);
+console.log(tarObj.c);  */
+
+// test 3: remove repeated elements in an array
+var a = [1, 3, 5, 7, 5, 3];
+var b = uniqArray(a);
+console.log(b); // [1, 3, 5, 7]
 
