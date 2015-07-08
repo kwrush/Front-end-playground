@@ -63,10 +63,35 @@ function uniqArray(arr) {
 
 // remove empty space at the start and the end of a string
 function simpleTrim(str) {
-	
+    
+    function isEmpty(c) {
+        return /\s/.test(c);
+    }
+    
+    for (var i = 0, len = str.length; i < len; i++) {
+        if (!isEmpty(str.charAt(i))) break;
+    }
+    
+    for (var j = str.length - 1; j >= 0; j--) {
+        if (!isEmpty(str.charAt(j))) break;       
+    }
+            
+    if (i > j) return '';
+            
+    return str.substring(i, j);
+            
 }
 
 // use regular expression
 function trim(str) {
+    var rex = new RegExp('^\s+|\s+$', 'g');
+    //var rex = new RegExp('(^[\\s\\t\\xa0\\u3000]+)|([\\u3000\\xa0\\s\\t]+\x24)', 'g');
+    
+    return str.replace('/^\s+|\s+$/g', '');
+}
 
+function each(arr, fn) {
+    for (var i = 0, l = arr.length; i < l; i++) {
+        fn(arr[i], i);
+    }
 }
