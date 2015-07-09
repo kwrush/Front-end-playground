@@ -53,7 +53,7 @@ str = trim(str);
 console.log(str);*/ // 'hi!'
 
 // test5-1
-var arr = ['java', 'c', 'php', 'html'];
+/* var arr = ['java', 'c', 'php', 'html'];
 function output1(item) {
     console.log(item)
 }
@@ -66,5 +66,15 @@ function output2(item, index) {
     console.log(index + ': ' + item)
 }
 
-each(arr, output2);  // 0:java, 1:c, 2:php, 3:html
+each(arr, output2); */  // 0:java, 1:c, 2:php, 3:html
 
+// test6
+var obj = {
+    a: 1,
+    b: 2,
+    c: {
+        c1: 3,
+        c2: 4
+    }
+};
+console.log(getObjectLength(obj));

@@ -95,3 +95,47 @@ function each(arr, fn) {
         fn(arr[i], i);
     }
 }
+
+// add class name to an element
+function addClass(element, newClassName) {
+    element.className += ' ' + newClassName;
+}
+
+// remove a class name from an element
+function removeClass(element, oldClassName) {
+    var newClassName = '';
+	var arr;
+	var classes = oldClassName.split(' ');
+	
+	for (var i = 0, l = classes.length; i < l; i++) {
+		if (classes[i] !== oldClassName) {
+			mewClassName += classes[i] + ' ';
+		}
+	}
+	
+	element.className = newClassName;
+}
+
+// check element and siblingNode's hierarchy
+function isSiblingNode(element, siblingNode) {
+    return element.parentNode === siblingNode.parentNode;
+}
+
+// get the given element's position relative to the window
+function getPosition(element) {
+    var x = 0;
+	var y = 0;
+	
+	var current = element;
+	var pre = null;
+	
+	while (current !== null) {
+		x += current.offsetLeft;
+		y += current.offsetTop;
+		pre = current;
+		
+		current = current.offsetParent;
+	}
+	
+	return {x: x, y: y};
+}
