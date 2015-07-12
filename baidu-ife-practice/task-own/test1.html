@@ -17,16 +17,23 @@
             div.addEventListener('mousedown', dragDiv, false);
             
             function dragDiv(evt) {
-                this.style.position = 'absolute';
+                var self = this;
                 
-                self.addEventListener('mousemove', function(evt) {
-                evt = evt || event;
-                    this.style.left = evt.pageX - 40 + 'px';
-                    this.style.top = evt.pageY - 40 + 'px';
+                self.style.position = 'absolute';
+                
+                document.addEventListener('mousemove', moveDiv, false);
+                
+                document.addEventListener('mouseup', function(evt) {
+                    this.removeEventListener('mousemove', moveDiv, false);
                 }, false);
-                self.addEventListener('mouseup', function(evt) {
-              self.removeEventListener('mousemove', this, false);
+                
+                function moveDiv(evt) {
+                    evt = evt || event;
+                    self.style.left = evt.pageX - 40 + 'px';
+                    self.style.top = evt.pageY - 40 + 'px';
+                }
             }
+            
         </script>
     </body>
 </html>
