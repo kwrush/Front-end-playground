@@ -16,8 +16,16 @@
             var div = document.getElementsByTagName('div')[0];
             div.addEventListener('mousedown', dragDiv, false);
             
-            function dragDiv(event) {
+            function dragDiv(evt) {
+                this.style.position = 'absolute';
                 
+                self.addEventListener('mousemove', function(evt) {
+                evt = evt || event;
+                    this.style.left = evt.pageX - 40 + 'px';
+                    this.style.top = evt.pageY - 40 + 'px';
+                }, false);
+                self.addEventListener('mouseup', function(evt) {
+              self.removeEventListener('mousemove', this, false);
             }
         </script>
     </body>
