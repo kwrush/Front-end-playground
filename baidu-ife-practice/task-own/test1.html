@@ -1,0 +1,24 @@
+<DOCTYE html>
+<html>
+    <head>
+        <title>Test1</title>
+        <style>
+            div {
+                width: 80px;
+                height: 80px;
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div></div>
+        <script>
+            var div = document.getElementsByTagName('div')[0];
+            div.addEventListener('mousedown', dragDiv, false);
+            
+            function dragDiv(event) {
+                
+            }
+        </script>
+    </body>
+</html>
