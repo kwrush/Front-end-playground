@@ -1,0 +1,39 @@
+<!DOCTYE html>
+<html>
+    <head>
+        <title>Test1</title>
+        <style>
+            div {
+                width: 80px;
+                height: 80px;
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div></div>
+        <script>
+            var div = document.getElementsByTagName('div')[0];
+            div.addEventListener('mousedown', dragDiv, false);
+            
+            function dragDiv(evt) {
+                var self = this;
+                
+                self.style.position = 'absolute';
+                
+                document.addEventListener('mousemove', moveDiv, false);
+                
+                document.addEventListener('mouseup', function(evt) {
+                    this.removeEventListener('mousemove', moveDiv, false);
+                }, false);
+                
+                function moveDiv(evt) {
+                    evt = evt || event;
+                    self.style.left = evt.pageX - 40 + 'px';
+                    self.style.top = evt.pageY - 40 + 'px';
+                }
+            }
+            
+        </script>
+    </body>
+</html>

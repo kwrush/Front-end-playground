@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test 3</title>
+    </head>
+    <body>
+        <form name="my-form">
+            <input name="username" type="text" placeholder="Username">
+            <input name="password" type="password" placeholder="Password">
+        </form>
+        <ul>
+            <li tabindex="1">Item1</li>
+            <li tabindex="2">Item2</li>
+            <li tabindex="3">Item3</li>
+        </ul>
+        <script>
+            var form = document.forms[0];
+            var user = form.elements.username;
+            var psw  = form.elements.password;
+            
+            var ul = document.getElementsByTagName('UL')[0];
+            
+            user.addEventListener('focus', function(event) {
+                alert('Input username!');
+            }, false);
+            
+            user.addEventListener('blur', function(event) {
+                alert('Lose focus!');
+            }, false);
+            
+            ul.addEventListener('click', function(event) {
+                var target = event.target;
+                if (target && target.nodeName === 'LI') {
+                    alert(target.innerHTML + ' is selected');
+                }
+            }, false);
+        </script>
+    </body>
+</html>
