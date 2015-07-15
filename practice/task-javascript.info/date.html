@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Data and time</title>
+		<style>
+			div {
+				width: 200px;
+				background: gray;
+				text-align: center;
+			}
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			table, td, th {
+				border: 1px solid red;
+				text-align: center;
+			}
+			span {
+				position: relative;
+				text-align: center;
+			}
+			
+			#pre {
+				right: 50px;
+			}
+			
+			#pre:hover, #next:hover, #select:hover {
+				cursor: pointer;
+				color: #FFF;
+			}
+			
+			#next {
+				left: 50px;
+			}
+			
+			#select {
+				width: 60px;
+				font-size: .8em;
+			}
+			
+			td.now {
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="cal">
+			<span id="pre"><<</span>
+			<span id="select"></span>
+			<span id="next">>></span>
+		</div>
+		<script>
+			/*var d = new Date(2011, 0, 30);
+			
+			fd = formatDate(d);
+			alert(fd);
+			
+			function formatDate(d) {
+				if (!Object.prototype.toString.call(d) === '[object Date]') return d;
+				
+				var day = d.getDate();
+				var month = d.getMonth() + 1;
+				var year = d.getFullYear();
+				
+				return [day, month, year].join('.');
+			} */
+			
+			/*
+			id: div id
+			*/
+			
+			const MONS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 
+						  'Sep', 'Oct', 'Nov', 'Dec'];
+			
+			function Calendar(div, date) {
+				var show = document.getElementById('select');
+				
+				show.innerHTML = MONS[date.getMonth()] + ' ' + date.getFullYear();
+				
+				var table = ['<table></tr>'];
+			
+				for (var i = 0; i < date.getDay(); i++) {
+					table.push('<td>&nbsp</td>');
+				}
+				
+				var month = date.getMonth();
+				var year = date.getFullYear();
+				var now = new Date();
+				
+				while (date.getMonth() === month) {
+					if (date.toDateString() === now.toDateString()) {
+						table.push('<td class="now">' + date.getDate() + '</td>')
+					}
+					else {
+						table.push('<td>' + date.getDate() +'</td>');
+					}
+					
+					if (date.getDay() % 7 == 6) {
+						table.push('</tr><tr>');
+					}
+					
+					date.setDate(date.getDate() + 1);
+				}
+
+				// fill the trail of the calendar with empty td elements
+				for(var i = date.getDay(); i < 7; i++) {
+					table.push('<td>&nbsp</td>');
+				}
+				
+				table.push('</tr></table>');
+				div.innerHTML = div.innerHTML + table.join('\n');
+				
+				// anyway, reset month and year to the current ones
+				date.setMonth(month);
+				date.setFullYear(year);
+				delete(now);
+			}
+			
+			var y = 2012, m = 1;
+			var date = new Date(y, m - 1);
+
+			div = document.getElementById('cal');
+			div.addEventListener('click', function(event){
+				var t = event.target;
+				var table = document.getElementsByTagName('table')[0];
+				
+				if (t.nodeName === 'SPAN') {
+					if (t.id === 'pre') {
+						date.setMonth(date.getMonth() - 1);
+					}
+					else if (t.id === 'next') {
+						date.setMonth(date.getMonth() + 1);
+					}
+					else if(t.id === 'select') {
+						var now = new Date();
+						date.setDate(1);
+						date.setMonth(now.getMonth());
+						date.setFullYear(now.getFullYear());
+					}
+					this.removeChild(table);
+					Calendar(this, date);
+				}
+			}, true);
+			
+			
+			Calendar(div, date);
+			
+		</script>
+	</body>
+</html>
