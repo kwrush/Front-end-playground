@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Timer</title>
+        <style>
+            span.hour {color: blue;}
+            span.minute {color: green;}
+            span.second {color: red;}
+        </style>
+    </head>
+    <body>
+        <div class="clock">
+            <span class="hour">hh</span>&#58;<span class="minute">mm</span>&#58;<span class="second">ss</span>
+        </div>
+        
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        
+        <script>
+            var startBtn = document.getElementById('start');
+                stopBtn  = document.getElementById('stop');
+            
+            startBtn.addEventListener('click', clockStart, true);
+            stopBtn.addEventListener('click', clockStop, true);
+            
+            function updateTime() { 
+                
+                var h = document.getElementsByClassName('hour')[0],
+                    m = document.getElementsByClassName('minute')[0],
+                    s = document.getElementsByClassName('second')[0]; 
+                
+                var date = new Date();
+                
+                var hour = date.getHours(),
+                    min  = date.getMinutes(),
+                    sec  = date.getSeconds();
+                
+                if (hour < 10) hour = '0' + hour;
+                if (min < 10) min = '0' + min;
+                if (sec < 10) sec = '0' + sec;
+                
+                h.innerHTML = hour;
+                m.innerHTML = min;
+                s.innerHTML = sec;
+            }
+            
+            var timer = null;
+            
+            function clockStart() {
+                if (timer) return;
+
+                timer = setInterval(updateTime, 1000);
+                updateTime();
+            }
+            
+            function clockStop() {
+                clearInterval(timer);
+                timer = null;
+            }
+            
+        </script>
+    </body>
+</html>

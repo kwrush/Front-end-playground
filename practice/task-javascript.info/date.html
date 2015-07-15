@@ -53,9 +53,9 @@
 	</head>
 	<body>
 		<div id="cal">
-			<span id="pre">&#60&#60</span>
+			<span id="pre">&#60;&#60;</span>
 			<span id="select"></span>
-			<span id="next">&#62&#62</span>
+			<span id="next">&#62;&#62;</span>
 		</div>
 		<script>
 			/*var d = new Date(2011, 0, 30);
@@ -88,7 +88,7 @@
 				var table = ['<table></tr>'];
 			
 				for (var i = 0; i < date.getDay(); i++) {
-					table.push('<td>&nbsp</td>');
+					table.push('<td>&nbsp;</td>');
 				}
 				
 				var month = date.getMonth();
@@ -112,7 +112,7 @@
 
 				// fill the trail of the calendar with empty td elements
 				for(var i = date.getDay(); i < 7; i++) {
-					table.push('<td>&nbsp</td>');
+					table.push('<td>&nbsp;</td>');
 				}
 				
 				table.push('</tr></table>');
@@ -121,7 +121,6 @@
 				// anyway, reset month and year to the current ones
 				date.setMonth(month);
 				date.setFullYear(year);
-				delete(now);
 			}
 			
 			var y = 2012, m = 1;
