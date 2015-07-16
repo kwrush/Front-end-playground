@@ -90,6 +90,21 @@ function trim(str) {
     return str.replace('/^\s+|\s+$/g', '');
 }
 
+// check whether it's an email address and mobile phone numbers(CN)
+function isEmail(emailStr) {
+    if (typeof emailStr !== 'string') return false;
+    
+    var rex = /^([\w_\.\-\+])+\@([\w\-]+\.)+([\w]{2,10})+$/;
+    return rex.test(emailStr);
+}
+
+function isMobilePhone(phoneNum) {
+    if (typeof phoneNum !== 'string') return false;
+    
+    var rex = /^(0086)?1\d{10}$/;
+    return rex.test(phoneNum);
+}
+
 function each(arr, fn) {
     for (var i = 0, l = arr.length; i < l; i++) {
         fn(arr[i], i);
@@ -103,9 +118,9 @@ function addClass(element, newClassName) {
 
 // remove a class name from an element
 function removeClass(element, oldClassName) {
-    var newClassName = '';
+/*    var newClassName = '';
 	var arr;
-	var classes = oldClassName.split(' ');
+	var classes = element.className.split(' ');
 	
 	for (var i = 0, l = classes.length; i < l; i++) {
 		if (classes[i] !== oldClassName) {
@@ -113,7 +128,11 @@ function removeClass(element, oldClassName) {
 		}
 	}
 	
-	element.className = newClassName;
+	element.className = newClassName;*/
+    
+    // or use regular expression, much simpler
+    var rex = new RegExp('\\b' + oldClassName + '\\b');
+    element.className = element.className.replace(rex, '');
 }
 
 // check element and siblingNode's hierarchy
@@ -138,4 +157,9 @@ function getPosition(element) {
 	}
 	
 	return {x: x, y: y};
+}
+
+// implement a simple own "JQuery"
+function $(selector) {
+
 }
