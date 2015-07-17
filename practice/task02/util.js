@@ -48,7 +48,7 @@ function uniqArray(arr) {
 		if (!map[arr[i]]) {
 			out.push(arr[i]);
 			
-			// distinguish number and string, such as 1 and '1', they are not duplicate literaly
+			// distinguish number and string, such as 1 and '1', they are not duplicate literally
 			if (typeof map[arr[i]] === typeof arr[i]) {
 				map[arr[i]] = true;
 			}
@@ -159,7 +159,35 @@ function getPosition(element) {
 	return {x: x, y: y};
 }
 
-// implement a simple own "JQuery"
+// implement a simple own "jQuery"
 function $(selector) {
-
+	var idReg = /^#([\w_\-]+)/;    // id regular expression pattern
+	var tagReg = /^\w+$/i;   // tagName pattern
+	var classReg = /^\.([\w_\-]+)/; // class pattern
+	
+	// attributes pattern
+	var attReg = /^\[([\w_\-]+)(=(["|'])?([\w_\-]+)(["|']?))?\]/;
+	
+	//for test
+    /* console.log(idReg.test(selector));
+	console.log(tagReg.test(selector));
+	console.log(classReg.test(selector));
+	console.log(attReg.test(selector)); */
+	
+	var result = {};
+	
+	if (id = selector.match(idReg)) {
+		result = document.getElementById(id[1]);
+	}
+	else if (className = selector.match(classReg)) {
+		result = document.getElementsByClassName(className[1])[0];
+	}
+	else if (tag = selector.match(tagReg)) {
+		result = document.getElementsByTagName(tag[0])[0];
+	}
+	else if (attReg.test(selector)) {
+		result = document.querySelectorAll(selector)[0];
+	}
+	
+	return result;
 }

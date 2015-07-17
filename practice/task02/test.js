@@ -79,11 +79,11 @@ var obj = {
 };
 //console.log(getObjectLength(obj));
 
-var email = 'k.wang0905@hotmail.com';
+/* var email = 'k.wang0905@hotmail.com';
 var e2 = 'jdjdj@jdjd..com';
 var phone = '13820267823';
 var phone2 = '008613942764453';
-var p3 = '+882217733';
+var p3 = '+882217733'; */
 
 
 /* console.log(isEmail(email));
@@ -92,7 +92,26 @@ console.log(isMobilePhone(phone2));
 console.log(isEmail(e2));
 console.log(isMobilePhone(p3)); */
 
-var f = document.getElementsByTagName('div')[0];
+/* var f = document.getElementsByTagName('div')[0];
 removeClass(f, 'foo2');
 
-console.log(f.className);
+console.log(f.className); */
+
+//unit test for fimple jQuery
+/* $('#a-id');
+$('.class');
+$('li');
+$('LI');
+$('[data-log]')
+$('[data-log="test"]');
+$('[data-log=test]');
+$("[data-log='test']"); */
+
+console.log($('.block'));
+console.log($('#submit-btn'));
+console.log($('p'));
+console.log($('P'));
+console.log($('data-type=integer'));
+console.log($('data-type'));
+console.log($("data-type=integer"));
+
