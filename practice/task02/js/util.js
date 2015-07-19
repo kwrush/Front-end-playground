@@ -1,6 +1,60 @@
 var _util = (function() {
     
+    var listeners = [];
+    
     return {
+        // a mini selector engine
+        $: function(selector) {
+            
+        },
+        
+        /**
+         * add event listener to the given element for the given event
+         * @param {DOM Object} element DOM node
+         * @param {String} eventType event name
+         * @param {Object} listenerFcn function that would be excuted once the event is triggered
+         */
+        addEvent: function (element, eventType, listenerFcn) {
+            eventType = eventType.replace(/^on/i, '').toLowerCase();
+            
+            var self = this;
+            
+            var realListenerFcn = function(e) {
+                // NOTE: use 'this.isFunction' here is wrong, 'this' refers to the DOM element
+                // binding with the listener
+                if (self.isFunction(listenerFcn)) {
+                    listenerFcn.call(element, e);
+                }
+            }       
+        
+            if (element.addEventListener) {
+                element.addEventListener(eventType, realListenerFcn, false);
+            }
+            
+            else if (element.attachEvent) {
+                element.attachEvent('on' + eventType, realListenerFcn);
+            }
+
+            listeners[listeners.length] = [element, eventType, listenerFcn, realListenerFcn];
+            
+            return element;
+        },
+        
+        removeEvent: function(element, eventType, listenerFcn) {
+            eventType = eventType.replace(/^on/i, '').toLowerCase();
+            
+            var self = this;
+            
+            
+            
+            if (element.removeEventListener) {
+                element.removeEventListener(eventType, realListenerFcn, false);
+            }
+            else if (element.detachEvent) {
+                element.detachEvent('on' + eventType, realListenerFcn);
+            }
+        },
+        
         call: function(args) {
             return Object.prototype.toString.call(args);
         },
@@ -179,16 +233,39 @@ var _util = (function() {
         // and the same level under the parent
         isSiblingNode: function(element, siblingNode) {
             // your implement
+            for (var node = element.parentNode.firstChild; node; node = node.nextSibling) {
+                if (node === siblingNode) return true;
+            }
+            
+            return false;
         },
         
-        // get the element's position relative to the window frame
-        getPosition: function(element) {
+        // get the element's position relative to the current viewport
+        getPositionViewPort: function(element) {
+            return element.getBoundingClientRect();
+        },
         
+        // get the element's position relative to the entire page
+        getPositionDocument: function(element) {
+            var pos = {};
+            
+            pos.x = myElement.getBoundingClientRect().left + window.scrollX;
+            pos.y = element.getBoundingClientRect().top + window.scrollY;
+            
+            return pos;
         }
-        
     }
 })();
 
+
+/************ test $ function************/
+
+/************ test event binding function************/
+var btn = document.getElementsByTagName('button')[0];
+_util.addEvent(btn, 'click', function(e) {
+    target = e.target || e.srcElement;
+    alert('blabla');
+}, false);
 
 /************ basic tool test ************/
 /*var a = [1, 2, 4, 5];
@@ -254,9 +331,16 @@ console.log(_util.isMobilePhone('008613842179545'));
 console.log(_util.isMobilePhone('(+86)13842179545'));*/
 
 /*********** DOM operation test *************/
+/*
 var div = document.getElementsByTagName('div')[0];
 _util.addClass(div, 'bb2');
 console.log(div.className);
 
 _util.removeClass(div, 'bb2');
 console.log(div.className);
+*/
+/*
+var elem = document.getElementsByTagName('p')[0];
+var sib = document.getElementsByTagName('table')[0];
+
+console.log(_util.isSiblingNode(elem, sib));*/
