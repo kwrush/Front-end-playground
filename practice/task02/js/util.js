@@ -1,18 +1,97 @@
 var _util = (function() {
     
+    // static array stores all listeners
     var listeners = [];
     
     return {
+        /**
+         * DOM operations
+         */
+        
         // a mini selector engine
         $: function(selector) {
             
         },
         
+        hasClass: function(element, className) {
+            var classNames = element.className;
+            
+            if (!classNames) return false;
+            
+            classNames = classNames.split(/\s+/);
+            
+            for (var i = 0, len = classNames.length; i < len; i++) {
+                if (className === classNames[i]) return true;
+                
+                return false;
+            }
+        
+        },
+        
+        // add class name
+        addClass: function(element, newClassName) {
+            if (!_util.hasClass(element, newClassName)) {
+                element.className += ' ' + newClassName;
+            }
+                
+            return element;
+        },
+
+        // remove class name
+        removeClass: function(element, oldClassName) {
+            if (!_util.hasClass(element, oldClassName)) {
+                var classNames = element.className, 
+    
+                classNames = _util.uniqArray(classNames.split(/\s+/));
+                
+                for (var i = 0, len = classNames.length; i < len; i++) {
+                    if (classNames[i] === oldClassName) {
+                        classNames.splice(i, 1);
+                        break;
+                    }
+                }
+                
+                element.className = classNames.join(' ');
+                
+                //reg = new RegExp('(\\s|^)' + oldClassName + '(\\s|$)');
+                //element.className = element.className.replace(reg, ' ');
+            }
+                
+            return element;
+        },
+        
+        // check is siblingNode and element have the same parent 
+        // and the same level under the parent
+        isSiblingNode: function(element, siblingNode) {
+            // your implement
+            for (var node = element.parentNode.firstChild; node; node = node.nextSibling) {
+                if (node === siblingNode) return true;
+            }
+            
+            return false;
+        },
+        
+        // get the element's position relative to the current viewport
+        getPositionViewPort: function(element) {
+            return element.getBoundingClientRect();
+        },
+        
+        // get the element's position relative to the entire page
+        getPositionDocument: function(element) {
+            var pos = {};
+            
+            pos.x = myElement.getBoundingClientRect().left + window.scrollX;
+            pos.y = element.getBoundingClientRect().top + window.scrollY;
+            
+            return pos;
+        },
+        
         /**
-         * add event listener to the given element for the given event
-         * @param {DOM Object} element DOM node
+         * add event listener to the given DOM object for the given event
+         * @param {DOM object} element DOM node
          * @param {String} eventType event name
          * @param {Object} listenerFcn function that would be excuted once the event is triggered
+         * @return {DOM object} given DOM object
          */
         addEvent: function (element, eventType, listenerFcn) {
             eventType = eventType.replace(/^on/i, '').toLowerCase();
@@ -40,6 +119,13 @@ var _util = (function() {
             return element;
         },
         
+        /**
+         * remove event listener to the given DOM object for the given event.
+         * @param {DOM object} element DOM node
+         * @param {String} eventType event name
+         * @param {Object} listenerFcn function that would be excuted once the event is triggered
+         * @return {DOM object} given DOM object
+         */
         removeEvent: function(element, eventType, listenerFcn) {
             eventType = eventType.replace(/^on/i, '').toLowerCase();
             
@@ -54,6 +140,10 @@ var _util = (function() {
                 element.detachEvent('on' + eventType, realListenerFcn);
             }
         },
+        
+        /**
+         * basic methods
+         */
         
         call: function(args) {
             return Object.prototype.toString.call(args);
@@ -176,83 +266,6 @@ var _util = (function() {
         // only for chinese mobile number, such as 13842653321 or 0086/(+86)13923137155
         isMobilePhone: function(phoneNum) {
             return /^((0086|\(\+86\))?)1\d{10}$/.test(phoneNum);
-        },
-        
-        
-        /**
-         * DOM operations
-         */
-        hasClass: function(element, className) {
-            var classNames = element.className;
-            
-            if (!classNames) return false;
-            
-            classNames = classNames.split(/\s+/);
-            
-            for (var i = 0, len = classNames.length; i < len; i++) {
-                if (className === classNames[i]) return true;
-                
-                return false;
-            }
-        
-        },
-        
-        // add class name
-        addClass: function(element, newClassName) {
-            if (!_util.hasClass(element, newClassName)) {
-                element.className += ' ' + newClassName;
-            }
-                
-            return element;
-        },
-
-        // remove class name
-        removeClass: function(element, oldClassName) {
-            if (!_util.hasClass(element, oldClassName)) {
-                var classNames = element.className, 
-    
-                classNames = _util.uniqArray(classNames.split(/\s+/));
-                
-                for (var i = 0, len = classNames.length; i < len; i++) {
-                    if (classNames[i] === oldClassName) {
-                        classNames.splice(i, 1);
-                        break;
-                    }
-                }
-                
-                element.className = classNames.join(' ');
-                
-                //reg = new RegExp('(\\s|^)' + oldClassName + '(\\s|$)');
-                //element.className = element.className.replace(reg, ' ');
-            }
-                
-            return element;
-        },
-        
-        // check is siblingNode and element have the same parent 
-        // and the same level under the parent
-        isSiblingNode: function(element, siblingNode) {
-            // your implement
-            for (var node = element.parentNode.firstChild; node; node = node.nextSibling) {
-                if (node === siblingNode) return true;
-            }
-            
-            return false;
-        },
-        
-        // get the element's position relative to the current viewport
-        getPositionViewPort: function(element) {
-            return element.getBoundingClientRect();
-        },
-        
-        // get the element's position relative to the entire page
-        getPositionDocument: function(element) {
-            var pos = {};
-            
-            pos.x = myElement.getBoundingClientRect().left + window.scrollX;
-            pos.y = element.getBoundingClientRect().top + window.scrollY;
-            
-            return pos;
         }
     }
 })();
