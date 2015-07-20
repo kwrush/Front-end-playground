@@ -90,31 +90,31 @@ var _util = (function() {
          * add event listener to the given DOM object for the given event
          * @param {DOM object} element DOM node
          * @param {String} eventType event name
-         * @param {Object} listenerFcn function that would be excuted once the event is triggered
+         * @param {Object} listener function that would be excuted once the event is triggered
          * @return {DOM object} given DOM object
          */
-        addEvent: function (element, eventType, listenerFcn) {
+        addEvent: function (element, eventType, listener) {
             eventType = eventType.replace(/^on/i, '').toLowerCase();
             
             var self = this;
             
-            var realListenerFcn = function(e) {
+            var realListener = function(e) {
                 // NOTE: use 'this.isFunction' here is wrong, 'this' refers to the DOM element
                 // binding with the listener
-                if (self.isFunction(listenerFcn)) {
-                    listenerFcn.call(element, e);
+                if (self.isFunction(listener)) {
+                    listener.call(element, e);
                 }
             }       
         
             if (element.addEventListener) {
-                element.addEventListener(eventType, realListenerFcn, false);
+                element.addEventListener(eventType, realListener, false);
             }
             
             else if (element.attachEvent) {
-                element.attachEvent('on' + eventType, realListenerFcn);
+                element.attachEvent('on' + eventType, realListener);
             }
 
-            listeners[listeners.length] = [element, eventType, listenerFcn, realListenerFcn];
+            listeners[listeners.length] = [element, eventType, listener, realListener];
             
             return element;
         },
@@ -123,23 +123,80 @@ var _util = (function() {
          * remove event listener to the given DOM object for the given event.
          * @param {DOM object} element DOM node
          * @param {String} eventType event name
-         * @param {Object} listenerFcn function that would be excuted once the event is triggered
+         * @param {Object} listener function that would be excuted once the event is triggered
          * @return {DOM object} given DOM object
          */
-        removeEvent: function(element, eventType, listenerFcn) {
+        removeEvent: function(element, eventType, listener) {
             eventType = eventType.replace(/^on/i, '').toLowerCase();
             
-            var self = this;
+            var len = listeners.length;
             
-            
-            
-            if (element.removeEventListener) {
-                element.removeEventListener(eventType, realListenerFcn, false);
+            while(len--) {
+                var item = listeners[len],
+                    elem = item[0],
+                    type = item[1],
+                    aListener = item[2],
+                    aRealListener = item[3];
+                
+                // if the given listener is valid, then delete it from listeners
+                if (elem === element && type === eventType 
+                    && (!listener && listener === aListener)) {
+                    
+                    if (element.removeEventListener) {
+                        element.removeEventListener(eventType, aRealListener, false);
+                    }
+                    else if (element.detachEvent) {
+                        element.detachEvent('on' + eventType, aRealListener);
+                    }
+                    
+                    listeners.splice(len, 1);
+                }
+                
             }
-            else if (element.detachEvent) {
-                element.detachEvent('on' + eventType, realListenerFcn);
-            }
+            
+            return element;
         },
+        
+        // click
+        addClickEvent: function(element, listener) {
+            if (!listener || !this.isFrozen(listener)) return element;
+            
+            return this.addEvent(element, 'click', listener);
+        },
+        
+        // press 'Enter' key
+        addEnterEvent: function(element, listener) {
+            if (!listener || !this.isFrozen(listener)) return element;
+        
+            return this.addEvent(element, 'keypress', function(e) {
+                var event = e || window.event;
+                var keyCode = event.which || event.keyCode;
+        
+                if (keyCode === 13) {
+                    listener.call(element, event);
+                }
+                
+            });
+        },
+        
+        /**
+         * event delegation
+         * @param {DOM object} element DOM node delegated
+         * @param {String} tag tag name of the DOM object listened
+         * @param {String} eventType event name
+         * @param {Object} listener function that would be excuted once the event is triggered
+         * @return {DOM object} given DOM object
+         */
+        delegateEvent: function(element, tag, event, listener) {
+            this.addEvent(element, event, function(e) {
+                var event = e || window.event;
+                var target = event.target || event.srcElement;
+                
+                if (target && target.tagName === tag.toUpperCase()) {
+                    listener.call(target, event);
+                }
+            });
+        }
         
         /**
          * basic methods
