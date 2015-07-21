@@ -166,7 +166,7 @@ var _util = (function() {
         
         // press 'Enter' key
         addEnterEvent: function(element, listener) {
-            if (!listener || !this.isFrozen(listener)) return element;
+            if (!listener || !this.isFunction(listener)) return element;
         
             return this.addEvent(element, 'keypress', function(e) {
                 var event = e || window.event;
@@ -196,7 +196,7 @@ var _util = (function() {
                     listener.call(target, event);
                 }
             });
-        }
+        },
         
         /**
          * basic methods
@@ -338,11 +338,11 @@ var _util = (function() {
 /************ test $ function************/
 
 /************ test event binding function************/
-var btn = document.getElementsByTagName('button')[0];
+/* var btn = document.getElementsByTagName('button')[0];
 _util.addEvent(btn, 'click', function(e) {
     target = e.target || e.srcElement;
     alert('blabla');
-}, false);
+}, false); */
 
 /************ basic tool test ************/
 /*var a = [1, 2, 4, 5];
