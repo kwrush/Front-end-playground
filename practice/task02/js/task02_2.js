@@ -72,6 +72,7 @@
         else {
             timer = setInterval(function() {
                 var now = new Date();
+
                 content = '<p>' +
                           getDateGap.getDays(date, now) + ' Days ' + 
                           getDateGap.getHours(date, now) + ' hours ' +
@@ -79,6 +80,8 @@
                           getDateGap.getSeconds(date, now) + ' seconds to ' + 
                           date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '.'
                           '</p>';
+                
+                if (now.getTime() === date.getTime()) clearInterval(timer);
                 
                 show.innerHTML = content;
                 
