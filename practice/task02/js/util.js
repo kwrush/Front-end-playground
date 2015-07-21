@@ -244,12 +244,19 @@ var _util = (function() {
 
         // deep copy an object, not including function and regexp objects
         cloneObject: function(src) {
-            var to = null;
+            var to = src;
+  
+            if (src.constructor === Number 
+                || src.constructor === String 
+                || src.constructor === Boolean) {
+				
+              return to;
+            }
 	
-            if (src.constructor !== Object && src.constructor !== Array) return src;
-            if (src.constructor === Date || src.constructor === String || 
-                src.constructor === Number || src.constructor === Boolean || 
-                src.constructor === RegExp || src.constructor === Function) {
+            //if (src.constructor !== Object && src.constructor !== Array) return src;
+            else if (src.constructor === Date 
+			         || src.constructor === RegExp 
+					 || src.constructor === Function) {
 
                 return new src.constructor(src);
             }
