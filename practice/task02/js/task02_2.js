@@ -71,28 +71,28 @@
         
         else {
             timer = setTimeout(function() {
-				var runCountDown;
-				return function runCountDown() {
-					var now = new Date();
+			           var runCountDown;
+				   return function runCountDown() {
+					      var now = new Date();
 
-					content = '<p>' +
-							  getDateGap.getDays(date, now) + ' Days ' + 
-							  getDateGap.getHours(date, now) + ' hours ' +
-							  getDateGap.getMinutes(date, now) + ' minuts ' +
-							  getDateGap.getSeconds(date, now) + ' seconds to ' + 
-							  date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '.'
-							  '</p>';
+					      content = '<p>' +
+							 getDateGap.getDays(date, now) + ' Days ' + 
+							 getDateGap.getHours(date, now) + ' hours ' +
+							 getDateGap.getMinutes(date, now) + ' minuts ' +
+							 getDateGap.getSeconds(date, now) + ' seconds to ' + 
+							 date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '.'
+							 '</p>';
 					
-					if (now.getTime() === date.getTime()) {
-						clearInterval(timer);
-					}
-					else if (now.getTime() < date.getTime()){
-						timer = setTimeout(runCountDown, 1000);
-					}
+				    if (now.getTime() === date.getTime()) {
+			                clearTimeout(timer);
+				    }
+				    else if (now.getTime() < date.getTime()){
+				        timer = setTimeout(runCountDown, 1000);
+				    }
 					
-					show.innerHTML = content;
+				    show.innerHTML = content;
 				}
-            }(), 1000);
+             }(), 1000);
         }
     }
     
