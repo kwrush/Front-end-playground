@@ -50,7 +50,7 @@
             show = document.getElementsByClassName('show')[0],
             content = '';
         
-        clearInterval(timer);
+        clearTimeout(timer);
         
         // reset current date to midnight(00:00:00)
         curr.setHours(0, 0, 0, 0);
@@ -70,22 +70,29 @@
         }
         
         else {
-            timer = setInterval(function() {
-                var now = new Date();
+            timer = setTimeout(function() {
+				var runCountDown;
+				return function runCountDown() {
+					var now = new Date();
 
-                content = '<p>' +
-                          getDateGap.getDays(date, now) + ' Days ' + 
-                          getDateGap.getHours(date, now) + ' hours ' +
-                          getDateGap.getMinutes(date, now) + ' minuts ' +
-                          getDateGap.getSeconds(date, now) + ' seconds to ' + 
-                          date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '.'
-                          '</p>';
-                
-                if (now.getTime() === date.getTime()) clearInterval(timer);
-                
-                show.innerHTML = content;
-                
-            }, 1000);
+					content = '<p>' +
+							  getDateGap.getDays(date, now) + ' Days ' + 
+							  getDateGap.getHours(date, now) + ' hours ' +
+							  getDateGap.getMinutes(date, now) + ' minuts ' +
+							  getDateGap.getSeconds(date, now) + ' seconds to ' + 
+							  date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '.'
+							  '</p>';
+					
+					if (now.getTime() === date.getTime()) {
+						clearInterval(timer);
+					}
+					else if (now.getTime() < date.getTime()){
+						timer = setTimeout(runCountDown, 1000);
+					}
+					
+					show.innerHTML = content;
+				}
+            }(), 1000);
         }
     }
     
