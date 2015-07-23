@@ -21,15 +21,19 @@ var slider = (function(util, ease) {
             end = opts.end,
             delay = opts.delay || defConfig.delay,
             dur = opts.duration || defConfig.duration;
-            
+
         var gap = end - start,
             timeStart = new Date();
 
         var timer = setInterval(function() {
-            var timePassed = new Date() - timeStart;
-            var factor = ease.easeInOutCubic(timePassed, start, end-start, dur);
-            imgGroup.style.left = parseInt(imgGroup.style.left, 10) + gap * factor;
+            var timePassed = new Date - timeStart;
             
+            if (timePassed > 1000) timePassed = 1000;
+
+            var newPos = ease.easeInOutCubic(timePassed, start, end - start, dur);
+            
+            imgGroup.style.left = newPos + 'px';
+
             if (parseInt(imgGroup.style.left, 10) === end) {
                 clearInterval(timer);
             }
