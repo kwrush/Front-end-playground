@@ -20,7 +20,7 @@
             }
 
             var form = document.forms['form']
-
+			var input = form.getElementsByTagName('input')[0];
             /*if (navigator.userAgent.indexOf('Firefox')>=0) { // Firefox
                 form.addEventListener('focus', outline, true) 
             } else if (form.addEventListener) {  // Opera, Safari/Chrome
@@ -31,12 +31,17 @@
             
             if (form.addEventListener) {
                 // for Firefox, Chrome, Safari and Opera
-                form.addEventListener('focusin', outline, false);
+                form.addEventListener('click', outline, false);
             }
             else {
                 //for IE
                 form.onfocusin = outline;
             }
+			
+			input.addEventListener('click', function(event) {
+				this.background = 'red';
+			}, false);
+			
         </script>
     </body>
 </html>
