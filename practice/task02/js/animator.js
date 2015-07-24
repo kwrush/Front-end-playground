@@ -38,9 +38,9 @@ Animator.prototype.requestAnimateFrame =
      
 // terminate animation
 Animator.prototype.cancelAnimateFrame = 
-    (window.cancelAnimationFrame && window.cancelAnimationFrame.bind(window))               ||    
+    (window.cancelAnimationFrame && window.cancelAnimationFrame.bind(window))             ||    
     (window.webkitCancelAnimationFrame && window.webkitCancelAnimationFrame.bind(window)) ||
-    (window.mozCancelnimationFrame && window.mozCancelAnimationFrame.bind(window))       ||
+    (window.mozCancelnimationFrame && window.mozCancelAnimationFrame.bind(window))        ||
     function( id ){
         window.clearTimeout(id);
     };
@@ -100,8 +100,7 @@ Animator.prototype.stop = function() {
 
 
 Animator.prototype.moveOneFrame = function(timePassed) {
-    this.process(timePassed, this.target.fromVal, 
-                 this.target.toVal - this.target.fromVal);
+    this.process(timePassed, this.target.fromVal, this.target.toVal);
 };
 
 // process animation frame

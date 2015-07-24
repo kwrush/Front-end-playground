@@ -185,9 +185,9 @@ Slider.prototype.goTo = function(index) {
 };
 
 // slide from lastIndex image to nextIndex image 
-Slider.prototype.slide = function(nextIndex, lastIndex) {
+Slider.prototype.slide = function(lastIndex, nextIndex) {
     
-    var steps = nextIndex - lastIndex;
+    var steps = lastIndex - nextIndex;
     
     this.fromVal = parseInt(this.imgGroup.style.left, 10),
     this.toVal = this.fromVal + steps * this.imgItems[0].clientWidth;
