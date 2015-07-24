@@ -36,6 +36,10 @@
     opacity: 0.9;
 }
 
+.slider-indicator i[image-ind]:hover {
+    cursor:pointer;
+}
+
 .show {
     background-color: #FFF;
 }
