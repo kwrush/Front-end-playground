@@ -19,14 +19,14 @@
     margin: 0;
 }
 
-.indicator {
+.slider-indicator {
     position: absolute;
     bottom: 10px;
     left: 50%;
     margin-left: -42px;
 }
 
-.ind-item{
+.slider-indicator i[image-ind]{
     width: 10px;
     height: 10px;
     border: 1px solid #FFF;
