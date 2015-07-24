@@ -1,4 +1,4 @@
-.img-gallery {
+#slider-wrap {
     margin: 20px auto;
     width: 500px;
     height: 300px;
@@ -6,31 +6,31 @@
     overflow: hidden;
 }
 
-.img-group {
+.slider {
     width: 2500px;
     height: 300px;
     position: absolute;
 }
 
-.img {
+.slider-item {
     width: 500px;
     height: 300px;
     float: left;
     margin: 0;
 }
 
-.img-spot {
+.indicator {
     position: absolute;
     bottom: 10px;
     left: 50%;
     margin-left: -42px;
 }
 
-.img-spot li {
+.ind-item{
     width: 10px;
     height: 10px;
     border: 1px solid #FFF;
-    border-radius: 5px;
+    border-radius: 10px;
     float: left;
     margin-right: 5px;
     opacity: 0.9;

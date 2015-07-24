@@ -1,145 +1,57 @@
-var slider = (function(util, ease) {
-    // default configuration
-    var defConfig = {
-            dir: 'normal',
-            move: 'easeInOutCubic',
-            loop: false,
-            delay: 30,      // millisecond, time between frames
-            duration: 1000, // millisecond, animation duration
-            interval: 2000  // millisecond, time between two slidings
-        };
+/**
+ * Slider 
+ * @constructor
+ * @param {Object} options for setting up slider
+ */
+var Slider = function(option) {
+    this.wrapId = option.wrapId || this.defOption.wrapId;
+    this.sliderClass = option.sliderClass || this.defOption.sliderClass;
+    this.itemClass = option.itemClass || this.defOption.itemClass;
+    this.indClass = option.indClass || this.defOption.indClass;
+    this.indItemClass = option.indItemClass || this.defOption.indItemClass;
+    this.dir = option.dir || this.defOption.dir;
+    this.animate = option.animate || this.defOption.animate;
+    this.loop = option.loop || this.defOption.loop;
+    this.delay = option.delay || this.defOption.delay;
+    this.duration = option.duration || this.defOption.duration;
     
-    var defName = 'slider';
+    // outer wrap of all slider components
+    this.wrap = document.getElementById(this.wrapId);
     
-    /**
-     * function for moving an image based on the given options
-     * @param {DOM object} 
-     * @param {Object} options    
-     */
-    var slideImage = function(imgGroup, opts) {
-        var start = opts.start,
-            end = opts.end,
-            delay = opts.delay || defConfig.delay,
-            dur = opts.duration || defConfig.duration;
-
-        var gap = end - start,
-            timeStart = new Date();
-
-        var timer = setInterval(function() {
-            var timePassed = new Date - timeStart;
-            
-            if (timePassed > 1000) timePassed = 1000;
-
-            var newPos = ease.easeInOutCubic(timePassed, start, end - start, dur);
-            
-            imgGroup.style.left = newPos + 'px';
-
-            if (parseInt(imgGroup.style.left, 10) === end) {
-                clearInterval(timer);
-            }
-        }, delay);
-            
-        /*var timer = setInterval(funtion() {
-            var timePassed = new Date() - timeStart;
-            var factor = ease.easeInOutCubic(timePassed, start, end-start, dur);
-            imgGroup.style.left = parseInt(imgGroup.style.left, 10) + gap * factor;
-            
-            if (parseInt(imgGroup.style.left, 10) === end) {
-                clearInterval(timer);
-            }
-        }, delay); */
-    }
+    if (!this.wrap) {
+        throw 'Cannot find such element.';
+        return;
+    }        
     
-    var play = function() {
-        
-    }
+    // slider, normally a <UL>
+    this.imgGroup = this.wrap.getElementsByClassName(this.sliderClass)[0];
+    // image items, normally a <LI>
+    this.imgItems = this.imgGroup.getElementsByClassName(this.itemClass);
     
-    return {
-        /**
-         * init an image slider based on given config, 
-         * if user didn't define a config, the default one would be used.
-         * @param {String} class name of the most outter wrapper for the slider
-         * @param {Object} config
-         */
-        initSlide: function(name, config) {
-            var name = name || defName,
-                config = config || defConfig;
-            
-            var wrap = document.getElementsByClassName(name)[0];
-            
-            if (!util.isPlainObject(config) || !wrap) {
-                throw 'Invalid config';
-                return;
-            }
-            
-            var imgGroup = wrap.getElementsByClassName('img-group')[0],
-                imgLis = imgGroup.getElementsByTagName('li'),
-                imgSpots = wrap.getElementsByClassName('img-spot')[0],
-                spots = imgSpots.getElementsByTagName('li');
-            
-            // remove 'show' style on all spots
-            util.each(spots, function(item) {
-                util.removeClass(item, 'show');
-            });
-            
-            // if sliding direction is normal, 
-            // show the first image and highlight the first spot,
-            // otherwise, show last image and spot.
-            if (config.dir === 'normal') {
-                imgGroup.style.left = '0';
-                resetShow(spots, 0);
-            }
-            else {
-                imgGroup.style.right = '0';
-                resetShow(spots, spots.length - 1);
-            }
-            
-            // give index to each spot and image
-            util.eachAlt(imgLis, assignIndex);
-            util.eachAlt(spots, assignIndex);
-            
-            util.addEvent(imgGroup, 'mouseenter', function(e){
-                console.log('mousein');
-            });
-            util.addEvent(imgGroup, 'mouseleave', function(e){
-                console.log('mouseout');
-            });
+    // image count
+    this.count = this.imgItems.length;
+    // width of one image
+    this.imgWidth = this.imgItems[0].clientWidth;
+    
+    //indicator wrapper under the images
+    this.indGroup = this.wrap.getElementsByClassName(this.indClass)[0];
+    this.indItems = this.indGroup.getElementsByClassName(this.indItemClass);
+};
 
-            util.delegateEvent(imgSpots, 'li', 'click', function(e) {
-                var show = wrap.getElementsByClassName('show')[0];
-                var steps = show.index - this.index;
-                
-                var startPos = parseInt(imgGroup.style.left);
-                
-                steps = config.loop ? step - 1 : steps;
-                
-                var endPos = parseInt(imgGroup.style.left) + steps * imgLis[0].clientWidth;
-                
-                var opts = {
-                    start: startPos,
-                    end: endPos,
-                    duration: config.duration,
-                    delay: config.delay
-                }
-                slideImage(imgGroup, opts);
-                
-                resetShow(spots, this.index);
-            });
-            
-            function assignIndex(item, index) {
-                item.index = index;
-            }
-            
-            function resetShow(spots, index) {
-                util.each(spots, function(item) {
-                    util.removeClass(item, 'show');
-                });
-                util.addClass(spots[index], 'show');
-            }
-
-        }
+Slider.prototype.defOption = (function() {
+    var def = {
+        wrapId: 'slider-wrap',
+        sliderClass: 'slider',
+        itemClass: 'slider-item',
+        indClass: 'indicator',
+        indItemClass: 'ind-item',
+        dir: 'normal',
+        animate: 'easeInOutCubic',
+        loop: false,
+        delay: 30,      // millisecond, time between animation frames
+        duration: 1000, // millisecond, animation duration
+        interval: 2000  // millisecond, time between two slidings
     };
-     
-}(_util, EasingFunctions));
-
-slider.initSlide('img-gallery');
+    
+    return _util.cloneObject(def);
+}());
