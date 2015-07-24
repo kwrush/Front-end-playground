@@ -270,6 +270,24 @@ var _util = (function() {
             return to;
 
         },
+        
+        // inherita
+        inherit: function(subClass, parentClass) {
+            if (this.isFunction(parentClass.constructor)) { 
+                //Normal Inheritance 
+                subClass.prototype = new parentClass;
+                subClass.prototype.constructor = subClass;
+                subClass.prototype.parent = parentClass.prototype;
+            } 
+            else { 
+                //Pure Virtual Inheritance 
+                subClass.prototype = parentClass;
+                subClass.prototype.constructor = subClass;
+                subClass.prototype.parent = parentClass;
+            } 
+            
+            return subClass;
+        },
 
         // remove duplicate elements in the given array
         uniqArray: function(arr) {
