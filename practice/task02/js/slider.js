@@ -6,7 +6,7 @@
  */
 var Slider = function (option) {
     this.applyOption(option);
-    
+
     this.animator = new SlideEffect({
         animate: this.animate,
         delay: this.delay,
@@ -65,6 +65,7 @@ Slider.prototype.initInidcator = function() {
     
     // click
     _util.delegateEvent(div, 'i', 'click', function() {
+        self.clearPlayTimer();
         var index = parseInt(this.getAttribute('image-ind'), 10);
         self.goTo(index);
     });
@@ -84,14 +85,16 @@ Slider.prototype.initInidcator = function() {
 
 Slider.prototype.initMouseEnterBehavior = function(fcn) {
     _util.delegateEvent(this.imgGroup, this.imgItems[0].tagName, 'mouseenter', function(evt) {
-        self.clearPlayTimer();
+        this.clearPlayTimer();
+        console.log('mousein');
     });
 };
 
 
 Slider.prototype.initMouseLeaveBehavior = function(fcn) {
     _util.delegateEvent(this.imgGroup, this.imgItems[0].tagName, 'mouseleave', function(evt) {
-        self.autoPlay();
+        this.autoPlay();
+        console.log('mouseout');
     });
 };
 
@@ -104,7 +107,7 @@ Slider.prototype.applyOption = function(option) {
     this.showInd = option.indClass || this.defOption.showInd;
     this.indShape = option.indShape || this.defOption.indShape;
     this.animate = option.animate || this.defOption.animate;
-    this.efftec = option.effect || this.defOption.effect;
+    this.effect = option.effect || this.defOption.effect;
     this.loop = option.loop || this.defOption.loop;
     this.delay = option.delay || this.defOption.delay;
     this.duration = option.duration || this.defOption.duration,
@@ -123,7 +126,7 @@ Slider.prototype.defOption = (function() {
         indShape: 'circle',         // indicator shape
         animate: 'easeInOut',       // sliding animation
         effect: 'horizontalSlide',  // slider effect
-        loop: true,                // loop sliding
+        loop: false,                // loop sliding
         delay: 1000/60,             // millisecond, time between animation frames
         duration: 1000,             // millisecond, animation duration
         interval: 4000              // millisecond, time between two slidings
@@ -202,13 +205,10 @@ Slider.prototype.goTo = function(index) {
 Slider.prototype.slide = function(lastIndex, nextIndex) {
     
     var steps = lastIndex - nextIndex;
-    
-    this.fromVal = parseInt(this.imgGroup.style.left, 10),
-    this.toVal = this.fromVal + steps * this.imgItems[0].clientWidth;
-    
+
     this.animator.startWithTarget(this);
     this.animator.setFinalClb(this.currentHightlightIndicator);
-    this.animator.start();
+    this.animator.switchTo(nextIndex, lastIndex);
 };
 
 // start auto slide image
@@ -234,6 +234,7 @@ Slider.prototype.currentHightlightIndicator = function() {
     });
     
     _util.addClass(indItems[this.index], 'show');
+    this.autoPlay();
 };
 
 /**
@@ -247,6 +248,47 @@ var SlideEffect = function(option) {
 };
 
 SlideEffect.prototype = Object.create(Animator.prototype);
+
+SlideEffect.prototype.switchTo = function(nextIndex, lastIndex) {
+    var steps = lastIndex - nextIndex;
+    
+    this.startVal = parseInt(this.target.imgGroup.style.left, 10);
+    
+    var offset = this.target.imgItems[0].clientWidth * lastIndex - Math.abs(this.startVal);
+    
+    this.changeVal = steps * this.target.imgItems[0].clientWidth - offset;
+    
+    this.start();
+}
+
+// perform sliding 
+SlideEffect.prototype.drawFrame = function(newVal) {
+    this.target.imgGroup.style.left = newVal + 'px';
+};
+
+/**
+ * SlideEffect
+ * inherit from Animator
+ * @constructor
+ * @param {Object} options for setting up slider
+ */
+var SlideEffect = function(option) {
+    Animator.call(this, option);
+};
+
+SlideEffect.prototype = Object.create(Animator.prototype);
+
+SlideEffect.prototype.switchTo = function(nextIndex, lastIndex) {
+    var steps = lastIndex - nextIndex;
+    
+    this.startVal = parseInt(this.target.imgGroup.style.left, 10);
+    
+    var offset = this.target.imgItems[0].clientWidth * lastIndex - Math.abs(this.startVal);
+    
+    this.changeVal = steps * this.target.imgItems[0].clientWidth - offset;
+    
+    this.start();
+}
 
 // perform sliding 
 SlideEffect.prototype.drawFrame = function(newVal) {

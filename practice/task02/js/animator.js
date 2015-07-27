@@ -105,18 +105,20 @@ Animator.prototype.stop = function() {
     this.finalClb && this.finalClb.call(this.target);
 };
 
-
 Animator.prototype.moveOneFrame = function(timePassed) {
-    this.process(timePassed, this.target.fromVal, this.target.toVal);
+    this.process(timePassed);
 };
 
 // process animation frame
-Animator.prototype.process = function(timePassed, fromVal, toVal) {
+Animator.prototype.process = function(timePassed) {
     if (!this.animationFcn) this.animationFcn = this.getAnimationFcn();
     
-    var newVal = this.animationFcn(timePassed, fromVal, toVal - fromVal, this.duration);
+    var newVal = this.animationFcn(timePassed, this.startVal, this.changeVal, this.duration);
     this.drawFrame(newVal);
 };
 
 // draw each frame based on given value and the implementation of subclass
 Animator.prototype.drawFrame = function(newVal) {};
+
+// calculate valuess for switching from lastIndex to nextIndex, speciftied in sub class
+Animator.prototype.switchTo = function(nextIndex, lastIndex) {}
