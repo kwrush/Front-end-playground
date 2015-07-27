@@ -66,6 +66,11 @@ Animator.prototype.startWithTarget = function(target) {
     this.target = target;
 };
 
+// set the callback function that would be executed after the animation
+Animator.prototype.setFinalClb = function(clb) {
+    this.finalClb = clb;
+} 
+
 Animator.prototype.start = function() {
     var self = this;
     self.timeStart = new Date();
@@ -96,6 +101,8 @@ Animator.prototype.stop = function() {
         this.cancelAnimateFrame(this.rafId);
         this.rafId = null;
     }
+    
+    this.finalClb && this.finalClb.call(this.target);
 };
 
 

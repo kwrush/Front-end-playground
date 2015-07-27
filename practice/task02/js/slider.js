@@ -4,13 +4,13 @@
  * @constructor
  * @param {Object} options for setting up slider
  */
-var Slider = function(option) {
+var Slider = function (option) {
     this.applyOption(option);
     
     this.animator = new SlideEffect({
         animate: this.animate,
         delay: this.delay,
-        duration: this.duration,
+        duration: this.duration
     });
     
     // outer wrap of all slider components
@@ -18,7 +18,6 @@ var Slider = function(option) {
     
     if (!this.wrap) {
         throw 'Cannot find such element.';
-        return;
     }        
     
     // slider, normally a <UL>
@@ -34,7 +33,7 @@ var Slider = function(option) {
     this.imgGroup.style.left = '0';
     
     // init currently displayed image index
-    this.index = this.dir === 'normal' ? 0 : imgItems.length - 1; 
+    this.index = 0; 
     
     // create indicator at the bottom of the slider
     if (this.showInd) this.initInidcator();
@@ -42,6 +41,8 @@ var Slider = function(option) {
     // mousein, pause sliding, mouseout, restart sliding
     this.initMouseEnterBehavior();
     this.initMouseLeaveBehavior();
+    
+    this.autoPlay();
 };
 
 // init indicator
@@ -66,18 +67,16 @@ Slider.prototype.initInidcator = function() {
     _util.delegateEvent(div, 'i', 'click', function() {
         var index = parseInt(this.getAttribute('image-ind'), 10);
         self.goTo(index);
-
-        self.currentHightlightIndicator(div);
     });
 
     // mouse in, stop auto play
     _util.delegateEvent(div, 'i', 'mouseeneter', function() {
-
+        self.clearPlayTimer();
     });
     
     // mosue leave, restart auto play
     _util.delegateEvent(div, 'i', 'mouseleave', function() {
-    
+        self.autoPlay();
     });
     
 };
@@ -85,14 +84,14 @@ Slider.prototype.initInidcator = function() {
 
 Slider.prototype.initMouseEnterBehavior = function(fcn) {
     _util.delegateEvent(this.imgGroup, this.imgItems[0].tagName, 'mouseenter', function(evt) {
-        
+        self.clearPlayTimer();
     });
 };
 
 
 Slider.prototype.initMouseLeaveBehavior = function(fcn) {
     _util.delegateEvent(this.imgGroup, this.imgItems[0].tagName, 'mouseleave', function(evt) {
-        
+        self.autoPlay();
     });
 };
 
@@ -104,7 +103,6 @@ Slider.prototype.applyOption = function(option) {
     this.itemClass = option.itemClass || this.defOption.itemClass;
     this.showInd = option.indClass || this.defOption.showInd;
     this.indShape = option.indShape || this.defOption.indShape;
-    this.dir = option.dir || this.defOption.dir;
     this.animate = option.animate || this.defOption.animate;
     this.efftec = option.effect || this.defOption.effect;
     this.loop = option.loop || this.defOption.loop;
@@ -123,13 +121,12 @@ Slider.prototype.defOption = (function() {
         itemClass: 'slider-item',   // image wrapper, <LI>
         showInd: true,              // display indicator
         indShape: 'circle',         // indicator shape
-        dir: 'normal',              // sliding directoion
-        animate: 'easeInOut',  // sliding animation
+        animate: 'easeInOut',       // sliding animation
         effect: 'horizontalSlide',  // slider effect
-        loop: false,                // loop sliding
-        delay: 1000/60,                  // millisecond, time between animation frames
+        loop: true,                // loop sliding
+        delay: 1000/60,             // millisecond, time between animation frames
         duration: 1000,             // millisecond, animation duration
-        interval: 3000              // millisecond, time between two slidings
+        interval: 4000              // millisecond, time between two slidings
     };
     
     return _util.cloneObject(def);
@@ -146,13 +143,18 @@ Slider.prototype.getIndicatorClass = function() {
 
 // get the index that would be reached
 Slider.prototype.getIndex = function(index) {
-    if (this.index === index) return -1;
-    
-    if (index >= this.count) {
+    if (this.index === index) {
+        return -1;
+    }
+    else if (index >= this.count) {
         index = this.loop ? 0 : this.count - 2;
+        this.goPre = this.loop ? false : true;
+        this.goNext = false;
     }
     else if (index < 0) {
         index = this.loop ? this.count - 1 : 1;
+        this.goNext = this.loop ? true : false;
+        this.goPre = false;
     }
     
     return index;
@@ -170,16 +172,28 @@ Slider.prototype.next = function() {
     return this;
 };
 
+Slider.prototype.switch = function() {
+    if (!(this.goNext || this.goPre)) {
+        this.next();
+    }
+    else if (this.goNext) {
+        this.next();
+    }
+    else if (this.goPre) {
+        this.pre();
+    }
+}
+
 // go to the image with the given index
 Slider.prototype.goTo = function(index) {
     var index = this.getIndex(index);
+    
+    if (index === -1) return;
     
     this.lastIndex = this.index;
     this.index = index;
     
     this.slide(this.lastIndex, this.index);
-    
-    if(this.showInd) this.currentHightlightIndicator();
     
     return this;
 };
@@ -193,12 +207,20 @@ Slider.prototype.slide = function(lastIndex, nextIndex) {
     this.toVal = this.fromVal + steps * this.imgItems[0].clientWidth;
     
     this.animator.startWithTarget(this);
+    this.animator.setFinalClb(this.currentHightlightIndicator);
     this.animator.start();
 };
 
 // start auto slide image
 Slider.prototype.autoPlay = function() {
+    this.clearPlayTimer();
+    this.playTimer = window.setInterval(this.switch.bind(this), this.interval + this.duration);
+};
 
+// pause auto play
+Slider.prototype.clearPlayTimer = function() {
+    window.clearTimeout(this.playTimer);
+    this.playTimer = null;
 };
 
 
