@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Task02_5</title>
+        <link rel="stylesheet" href="style/reset.css">
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            
+            #wrap {
+                margin: 10px auto;
+                position: relative;
+                width: 400px;
+                height: 450px;
+                background-color: #EEE;
+                user-select: none;
+            }
+            
+            #wrap ul {
+                position: absolute;
+                width: 120px;
+                height: 400px;
+                background-color: #FFF;
+                top: 50%;
+                margin-top: -200px;
+                border: 1px solid #000;
+            }
+            
+            .left {
+                left: 20px;    
+            }
+            
+            .right {
+                right: 20px;
+            }
+            
+            .item {
+                height: 40px;
+                width: 118px;
+                border-bottom: 1px solid #000;
+                background-color: #FF4719;
+            }
+            
+            .item:hover {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+            <ul class="left">
+                <li class="item"></li>
+                <li class="item"></li>
+                <li class="item"></li>
+            </ul>
+            <ul class="right">
+                <li class="item"></li>
+                <li class="item"></li>
+                <li class="item"></li>
+                <li class="item"></li>
+            </ul>
+        </div>
+        <script src="js/task02_5.js"></script>
+    </body>
+</html>

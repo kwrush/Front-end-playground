@@ -25,14 +25,14 @@ var suggestData = ['Apple', 'Asian', 'Baby', 'Back', 'Banna', 'Cat',
     
     function getContent(evt) {
         var event = evt || window.event,
-            val = this.value;
+            val = _util.trim(this.value);
             
         if(!val || val.length === 0) {
             resetRmd();
             return;
         }
             
-        var reg = new RegExp('^' + val, i);
+        var reg = new RegExp('^' + val, i),
         rmd.innerHTML = '';
         
         for(var i = 0, len = suggestData.length; i < len; i++) {
