@@ -14,7 +14,6 @@
                 width: 400px;
                 height: 450px;
                 background-color: #EEE;
-                user-select: none;
             }
             
             #wrap ul {
@@ -25,6 +24,8 @@
                 top: 50%;
                 margin-top: -200px;
                 border: 1px solid #000;
+                -webkit-user-select: none;
+                user-select: none;
             }
             
             .left {
@@ -40,10 +41,25 @@
                 width: 118px;
                 border-bottom: 1px solid #000;
                 background-color: #FF4719;
+                position: relative;
+                -webkit-transition: opacity .1s, height .2s ease-in;
+                transition: opacity .1s, height .2s ease-in;
             }
             
             .item:hover {
                 cursor: pointer;
+            }
+            
+            .dragged-item {
+                cursor: move;
+                box-shadow: rgba(0, 0, 0, .9) 0 0 6px;
+                border: 1px solid #000;
+                opacity: 0.8;
+                z-index: 999;
+            }
+
+            .dragover {
+                border-color: bisque;
             }
         </style>
     </head>
@@ -54,13 +70,14 @@
                 <li class="item"></li>
                 <li class="item"></li>
             </ul>
-            <ul class="right">
+            <ul class="right dragover">
                 <li class="item"></li>
                 <li class="item"></li>
                 <li class="item"></li>
                 <li class="item"></li>
             </ul>
         </div>
+        <script src="js/util.js"></script>
         <script src="js/task02_5.js"></script>
     </body>
 </html>
