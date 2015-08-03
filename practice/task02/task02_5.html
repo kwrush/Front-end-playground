@@ -42,8 +42,10 @@
                 border-bottom: 1px solid #000;
                 background-color: #FF4719;
                 position: relative;
-                -webkit-transition: opacity .1s, height .2s ease-in;
-                transition: opacity .1s, height .2s ease-in;
+                user-select:none;
+                list-style-type: none;
+                -webkit-transition: height .1s ease-in;
+                transition: height .1s ease-in;
             }
             
             .item:hover {
@@ -56,6 +58,20 @@
                 border: 1px solid #000;
                 opacity: 0.8;
                 z-index: 999;
+                position: absolute;
+            }
+            
+            .release-item {
+                -webkit-transition: left .1s, top .1s ease;
+                transition: left .1s, top .1s ease;
+            }
+            
+            .hidden-item {
+                height: 0;
+                opacity: 0;
+                border: none;
+                -webkit-transition: height .1s ease-in;
+                transition: height .1s ease-in;
             }
 
             .dragover {

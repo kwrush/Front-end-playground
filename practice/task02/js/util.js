@@ -140,7 +140,7 @@ var _util = (function() {
                 
                 // if the given listener is valid, then delete it from listeners
                 if (elem === element && type === eventType 
-                    && (!listener && listener === aListener)) {
+                    && (listener && listener === aListener)) {
                     
                     if (element.removeEventListener) {
                         element.removeEventListener(eventType, aRealListener, false);
