@@ -16,16 +16,15 @@
                 background-color: #EEE;
             }
             
-            #wrap ul {
+            .container {
                 position: absolute;
                 width: 120px;
                 height: 400px;
-                background-color: #FFF;
                 top: 50%;
                 margin-top: -200px;
                 border: 1px solid #000;
+                background-color: #FFF;
                 -webkit-user-select: none;
-                user-select: none;
             }
             
             .left {
@@ -75,18 +74,19 @@
             }
 
             .dragover {
-                border-color: bisque;
+                background-color: rgba(0, 0, 0, .1);
+                border-style: dashed;
             }
         </style>
     </head>
     <body>
         <div id="wrap">
-            <ul class="left">
+            <ul class="container left">
                 <li class="item"></li>
                 <li class="item"></li>
                 <li class="item"></li>
             </ul>
-            <ul class="right dragover">
+            <ul class="container right">
                 <li class="item"></li>
                 <li class="item"></li>
                 <li class="item"></li>
