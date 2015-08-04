@@ -71,7 +71,7 @@ var dragDrop = (function(util) {
                 curElPos = {x: evt.pageX + dd.offset.x, 
                             y: evt.pageY + dd.offset.y};
             
-            if (dd.cloneEl) {
+            if (dd.cloneEl && dd.target) {
                 dd.dragTarget = dd.cloneEl;
                 
                 // hide the clicked original item by assigning a style to it
@@ -85,7 +85,8 @@ var dragDrop = (function(util) {
                 dd.self.updateDragOver(dd.containers, curElPos);
             }
             else {
-                
+                // clear listener after mouse release
+                dd.self.clearListener();
             }
         },
         
@@ -95,8 +96,7 @@ var dragDrop = (function(util) {
         */
         dragRelease: function(evt) {
             // clear listener after mouse release
-            util.removeEvent(document, 'mousemove', dd.self.dragging);
-            util.removeEvent(document, 'mouseup', dd.self.dragRelease);
+            dd.self.clearListener();
             
             var evt = evt || window.event,
                 
@@ -301,6 +301,12 @@ var dragDrop = (function(util) {
             if (className) util.addClass(copyEl, className);
             
             return copyEl;
+        },
+        
+        clearListener: function() {
+            // clear listener after mouse release
+            util.removeEvent(document, 'mousemove', dd.self.dragging);
+            util.removeEvent(document, 'mouseup', dd.self.dragRelease);
         }
     }
 }(_util));
