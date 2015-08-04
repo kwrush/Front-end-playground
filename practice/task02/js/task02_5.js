@@ -71,55 +71,80 @@ var dragDrop = (function(util) {
                 itemPos = {x: evt.pageX + dd.offset.x, 
                            y: evt.pageY + dd.offset.y};
             
-            // check if dragged item is over upper or lower side of one static item
-            for (var i = 0, iLen = dd.items.length; i < iLen; i++) {
-                if (dd.self.intersect(itemPos.x, itemPos.y, dd.items[i], 'upper')) {
-                    if (dd.dragOverCont) {
-                        var inEl = document.createElement(dd.dragTarget.tagName);
-                        util.addClass(inEl, 'item hidden-item');
-                        
+            // if dragged target is hanging over one container
+            if (dd.dragOverCont) {
+                
+                var inEl = document.createElement(dd.dragTarget.tagName);
+                util.addEvent(inEl, 'mousedown', dd.self.handleMouseDown);
+                util.addClass(inEl, 'item hidden-item');
+                
+                // check if dragged item is over upper or lower side of one static item
+                var onTail = true;
+                for (var i = 0, iLen = dd.items.length; i < iLen; i++) {
+                    if (dd.self.intersect(itemPos.x, itemPos.y, dd.items[i], 'upper')) {
                         dd.dragOverCont.insertBefore(inEl, dd.items[i]);
-                        
                         util.removeClass(inEl, 'hidden-item');
+                        
+                        onTail = false;
+                        break;
                     }
                     
-                    break;
-                }
-                
-                else if (dd.self.intersect(itemPos.x, itemPos.y, dd.items[i], 'lower')) {
-                    /*if (dd.dragOverCont) {
-                        var inEl = document.createElement(dd.dragTarget.tagName);
-                        util.addClass(inEl, 'item hidden-item');
-                        
-                        dd.dragOverCont.insertAfter(inEl, dd.items[i]);
-                        
+                    else if (dd.self.intersect(itemPos.x, itemPos.y, dd.items[i], 'lower')) {
+                        dd.dragOverCont.insertBefore(inEl, dd.items[i].nextSibling);
                         util.removeClass(inEl, 'hidden-item');
-                    }*/
+                        
+                        onTail = false;
+                        break;
+                    }
                 }
                 
-                else {
-                    // move dragged block to the start position,
-                    // and then remove it from document.body, eventually
-                    // display the original block
-                    if (dd.dragTarget) {
-                        util.addClass(dd.dragTarget, 'release-item');
-                        dd.dragTarget.style.left = dd.elStartPos.x + 'px';
-                        dd.dragTarget.style.top = dd.elStartPos.y + 'px';
+                // if dragged target is in the container but not over any static item,
+                // then we append it to the tail of the container
+                if (onTail) {
+                    dd.dragOverCont.appendChild(inEl);
+                    util.removeClass(inEl, 'hidden-item');
+                }
+                
+                // clear 
+                if (dd.dragTarget) {
+                    document.body.removeChild(dd.dragTarget);
+                }
+                
+                var hItem = document.getElementsByClassName('hidden-item');
+                if (hItem.length > 0) {
+                    for (var i = 0, len = hItem.length; i < len; i++) {
+                        hItem[i].parentNode.removeChild(hItem[i]);
+                    }
+                }
+                
+                dd.dragOverCont = null;
+                dd.dragTarget = null;
+                dd.target = null;
+                
+            }
+            // otherwise move the dragged target to the initial position
+            else {
+                // move dragged block to the initial position,
+                // and then remove it from document.body, eventually
+                // display the original block
+                if (dd.dragTarget) {
+                    util.addClass(dd.dragTarget, 'release-item');
+                    dd.dragTarget.style.left = dd.elStartPos.x + 'px';
+                    dd.dragTarget.style.top = dd.elStartPos.y + 'px';
+                    dd.dragTarget.style.height = '0';
+                }
+
+                // remove dragged block and show the hidden original block after 100ms
+                // as the css transition lasts 100ms, aiming to give better user experience
+                setTimeout(function() {
+                    if (document.getElementsByClassName('dragged-item').length > 0) {
+                        document.body.removeChild(dd.dragTarget);
                     }
 
-                    // remove dragged block and show the hidden original block after 100ms
-                    // as the css transition lasts 100ms, aiming to give better user experience
-                    setTimeout(function() {
-                        if (document.getElementsByClassName('dragged-item').length > 0) {
-                            document.body.removeChild(dd.dragTarget);
-                        }
-
-                        dd.target ? util.removeClass(dd.target, 'hidden-item') : dd.target;
-                    }, 100);
-                }
+                    dd.target ? util.removeClass(dd.target, 'hidden-item') : dd.target;
+                }, 100);
             }
-            
-            
+
             for (var i = 0, len = dd.containers.length; i < len; i++) {
                 util.removeClass(dd.containers[i], 'dragover');
             }
@@ -138,6 +163,8 @@ var dragDrop = (function(util) {
                 util.removeClass(conts[i], 'dragover');
             }
             
+            dd.dragOverCont = null;
+            
             // check if dragged item is over one container
             for (var i = 0; i < len; i++) {
                 if (dd.self.intersect(itemPos.x, itemPos.y, conts[i])) {
@@ -155,20 +182,22 @@ var dragDrop = (function(util) {
             
             switch(opt) {
                 case 'upper':
-                    return ((clientX > elPos.x && clientX < elPos.x + elWidth/2) || 
-                            (clientX < elPos.x && clientX > elPos.x - elWidth/2)) &&
-                           (clientY + dd.dragTarget.offsetHeight/2 > elPos.y);
+                    return ((clientX >= elPos.x && clientX <= elPos.x + elWidth/2) || 
+                            (clientX <= elPos.x && clientX >= elPos.x - elWidth/2)) &&
+                           (clientY + dd.dragTarget.offsetHeight/2 >= elPos.y && 
+                            clientY <= elPos.y);
                     
                 case 'lower':
-                    return ((clientX > elPos.x && clientX < elPos.x + elWidth/2) || 
-                            (clientX < elPos.x && clientX > elPos.x - elWidth/2)) && 
-                           (clientY + dd.dragTarget.offsetHeight/2 < elPos.y + elHeight);
+                    return ((clientX >= elPos.x && clientX <= elPos.x + elWidth/2) || 
+                            (clientX <= elPos.x && clientX >= elPos.x - elWidth/2)) && 
+                           (clientY + dd.dragTarget.offsetHeight/2 <= elPos.y + elHeight &&
+                            clientY >= elPos.y);
                     
                 default:
-                    return ((clientX > elPos.x && clientX < elPos.x + elWidth/2) || 
-                            (clientX < elPos.x && clientX > elPos.x - elWidth/2)) && 
-                           ((clientY + dd.dragTarget.offsetHeight/2 > elPos.y) ||
-                            (clientY + dd.dragTarget.offsetHeight/2 < elPos.y + elHeight));
+                    return ((clientX >= elPos.x && clientX <= elPos.x + elWidth/2) || 
+                            (clientX <= elPos.x && clientX >= elPos.x - elWidth/2)) && 
+                           ((clientY + dd.dragTarget.offsetHeight/2 >= elPos.y && clientY <= elPos.y) ||
+                            (clientY + dd.dragTarget.offsetHeight/2 <= elPos.y + elHeight && clientY >= elPos.y));
             }
         },
         
