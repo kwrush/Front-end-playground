@@ -38,6 +38,7 @@ var dragDrop = (function(util) {
                          y: dd.elStartPos.y - dd.mouseStartPos.pageY};
                          
             dd.cloneEl = document.createElement(dd.target.tagName);
+            dd.cloneEl.innerHTML = dd.target.innerHTML;
             util.addClass(dd.cloneEl, 'item dragged-item');
             
             // assign mouse move/up listener to global document object
@@ -75,6 +76,7 @@ var dragDrop = (function(util) {
             if (dd.dragOverCont) {
                 
                 var inEl = document.createElement(dd.dragTarget.tagName);
+                inEl.innerHTML = dd.dragTarget.innerHTML;
                 util.addEvent(inEl, 'mousedown', dd.self.handleMouseDown);
                 util.addClass(inEl, 'item hidden-item');
                 
