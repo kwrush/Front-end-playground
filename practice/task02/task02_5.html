@@ -48,8 +48,8 @@
                 text-shadow: 1px 1px 0 #000;
                 font-size: 1.5em;
                 line-height: 40px;
-                -webkit-transition: height .1s ease-in;
-                transition: height .1s ease-in;
+                -webkit-transition: font-size .1s, opacity .1s, height .1s ease-out;
+                transition: font-size .1s, opacity .1s, height .1s ease-out;
             }
             
             .item:hover {
@@ -66,16 +66,15 @@
             }
             
             .release-item {
-                -webkit-transition: left .1s, top .1s, height .1s ease;
-                transition: left .1s, top .1s, height .1s ease;
+                -webkit-transition: left .1s, top .1s, height .1s ease-out;
+                transition: left .1s, top .1s, height .1s ease-out;
             }
             
             .hidden-item {
                 height: 0;
                 opacity: 0;
                 border: none;
-                -webkit-transition: height .1s ease-in;
-                transition: height .1s ease-in;
+                font-size: 0;
             }
 
             .dragover {

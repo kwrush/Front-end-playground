@@ -76,7 +76,7 @@ var dragDrop = (function(util) {
             if (dd.dragOverCont) {
                 
                 var inEl = document.createElement(dd.dragTarget.tagName);
-                inEl.innerHTML = dd.dragTarget.innerHTML;
+                inEl.innerText = dd.dragTarget.innerText;
                 util.addEvent(inEl, 'mousedown', dd.self.handleMouseDown);
                 util.addClass(inEl, 'item hidden-item');
                 
@@ -85,16 +85,13 @@ var dragDrop = (function(util) {
                 for (var i = 0, iLen = dd.items.length; i < iLen; i++) {
                     if (dd.self.intersect(itemPos.x, itemPos.y, dd.items[i], 'upper')) {
                         dd.dragOverCont.insertBefore(inEl, dd.items[i]);
-                        util.removeClass(inEl, 'hidden-item');
-                        
+
                         onTail = false;
                         break;
                     }
                     
                     else if (dd.self.intersect(itemPos.x, itemPos.y, dd.items[i], 'lower')) {
                         dd.dragOverCont.insertBefore(inEl, dd.items[i].nextSibling);
-                        util.removeClass(inEl, 'hidden-item');
-                        
                         onTail = false;
                         break;
                     }
@@ -104,23 +101,30 @@ var dragDrop = (function(util) {
                 // then we append it to the tail of the container
                 if (onTail) {
                     dd.dragOverCont.appendChild(inEl);
-                    util.removeClass(inEl, 'hidden-item');
                 }
                 
                 // clear 
                 if (dd.dragTarget) {
+                    util.addClass(dd.dragTarget, 'release-item');
+                    
+                    var newPos = dd.self.getPosition(inEl)
+                    
+                    dd.dragTarget.style.left = newPos.x + 'px';
+                    dd.dragTarget.style.top = newPos.y + 'px';
+                    dd.dragTarget.style.height = '0';
+                }
+
+                // remove dragged block and show the hidden original block after 100ms
+                // as the css transition lasts 100ms, aiming to give better user experience
+                setTimeout(function() {
                     document.body.removeChild(dd.dragTarget);
-                }
+                    dd.dragTarget = null;
+                    util.removeClass(inEl, 'hidden-item');
+                }, 100);
                 
-                var hItem = document.getElementsByClassName('hidden-item');
-                if (hItem.length > 0) {
-                    for (var i = 0, len = hItem.length; i < len; i++) {
-                        hItem[i].parentNode.removeChild(hItem[i]);
-                    }
-                }
+                dd.target.parentNode.removeChild(dd.target);
                 
                 dd.dragOverCont = null;
-                dd.dragTarget = null;
                 dd.target = null;
                 
             }
