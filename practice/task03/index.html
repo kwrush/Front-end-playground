@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=9" />
+        <title>Your personal ToDo tool</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maxmium-scale=1">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <!-- Most outer wrapper -->
+        <div id="holder">
+            <!-- Header -->
+            <div id="app-header">
+                <h2>GTD Tools</h2>
+            </div>
+            <!-- App body -->
+            <div id="app-body">
+                <!-- Left menu, containing task category tree menu -->
+                <div class="app-menu app-task-category">
+                    <!-- Tree menu -->
+                    <ul id="app-category">
+                        <li class="app-category-list">
+                            <ul id="app-category-all-task">All tasks</ul>
+                        </li>
+                        <li class="app-category-list">
+                            <ul id="app-category-item">
+                                <li class="app-category-item">Default category</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- Control pane, add new category button -->
+                    <div class="app-add-pane">
+                        <button id="app-new-category-btn">New category</button>
+                    </div>
+                </div>
+                <!-- Task list -->
+                <div class="app-menu app-task-list">
+                    <nav id="app-task-status-nav">
+                        <ul>
+                            <li class="app-task-status-tab">All</li>
+                            <li class="app-task-status-tab">To do</li>
+                            <li class="app-task-status-tab">Finished</li>
+                        </ul>
+                    </nav>
+                    <ul id="app-task-list-item">
+                        
+                    </ul>
+                    <!-- Control pane, add new task button -->
+                    <div class="app-add-pane">
+                        <button id="app-new-task-btn">New task</button>
+                    </div>
+                </div>
+                <div id="app-task-content">
+                    <div id="app-task-info">
+                    
+                    </div>
+                    <div id="app-task-date">
+                    
+                    </div>
+                    <div id="app-task-display-pane">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
