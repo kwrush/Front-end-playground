@@ -1,94 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=9" />
-        <title>Your personal ToDo tool</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maxmium-scale=1">
-        <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-        <link href="css/reset.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel=stylesheet>
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-        <!-- Most outer wrapper -->
-        <div id="holder">
-            <!-- App header -->
-            <div id="app-header">
-                <h1>
-                    <i class="fa fa-calendar-check-o"></i>
-                    ToDo
-                </h1>
-            </div>
-            <!-- App body -->
-            <div id="app-body">
-                <div class="app-col-1-5 app-category-list">
-                    <ol></ol>
-                    <button class="app-new-category-btn">
-                        <i class="fa fa-plus-square"></i>
-                        New category
-                    </button>
-                </div>
-                <div class="app-col-1-5 app-task-list">
-                    <ol></ol>
-                    <button class="app-new-task-btn">
-                        <i class="fa fa-plus-square"></i>
-                        New task
-                    </button>
-                </div>
-                <div class="app-col-3-5"></div>
-            </div>
-<!--             Header
-            <div id="app-header">
-                <h2>GTD Tools</h2>
-            </div>
-            App body
-            <div id="app-body">
-                Left menu, containing task category tree menu
-                <div class="app-menu app-task-category">
-                    Treeview menu
-                    <ol id="app-category-tree">
-                        <li class="app-category-list">
-                            <ol></ol>
-                        </li>
-                        <li class="app-category-list"></li>
-                    </ol>
-                    Control pane, add new category button
-                    <div class="app-add-btn-pane">
-                        <button class="app-add-new-btn app-add-new-category-btn">
-                            <span class="app-icon-add-new"></span>New category
-                        </button>
-                    </div>
-                </div>
-                Task list
-                <div class="app-menu app-task-list">
-                    <nav id="app-task-status-nav">
-                        <ul>
-                            <li class="app-task-status-tab">All</li>
-                            <li class="app-task-status-tab">To do</li>
-                            <li class="app-task-status-tab">Finished</li>
-                        </ul>
-                    </nav>
-                    <ol id="app-task-list-item"></ol>
-                    Control pane, add new task button
-                    <div class="app-add-btn-pane">
-                        <button class="app-add-new-btn app-add-new-task-btn">
-                            <span class="app-icon-add-new"></span>New task
-                        </button>
-                    </div>
-                </div>
-                <div id="app-task-content">
-                    <div id="app-task-info">
-                    
-                    </div>
-                    <div id="app-task-date">
-                    
-                    </div>
-                    <div id="app-task-display-pane">
-                        
-                    </div>
-                </div>
-            </div> -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <title>Your personal ToDo tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maxmium-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel=stylesheet>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/util.js"></script>
+</head>
+<body>
+    <!-- Most outer wrapper -->
+    <div id="holder">
+        <!-- App header -->
+        <div id="app-header">
+            <h1>
+                <i class="fa fa-calendar-check-o"></i>ToDo
+            </h1>
         </div>
-    </body>
+        <!-- App body -->
+        <div id="app-body">
+            <div class="app-body-col-1-5 app-body-task-category">
+                <ul id="app-category-treeview">
+                    <li>
+                        <h3 class="app-categor-title">All tasks</h3>
+                        <ul class="app-category-all-task"></ul>
+                    </li>
+                    <li>
+                        <h3 class="app-category-title">Task category</h3>
+                        <ul class="app-category-list"></ul>
+                    </li>
+                </ul>
+                <button class="app-new-category-btn">
+                    <i class="fa fa-plus-square"></i>
+                    New category
+                </button>
+            </div>
+            <div class="app-body-col-1-5 app-body-task-list">
+                <button class="app-new-task-btn">
+                    <i class="fa fa-plus-square"></i>
+                    New task
+                </button>
+            </div>
+            <div class="app-body-col-3-5"></div>
+        </div>
+    </div>
+    <script src="js/controller.js"></script>
+</body>
 </html> 

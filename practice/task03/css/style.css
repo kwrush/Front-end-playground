@@ -1,3 +1,4 @@
+/* ---------------- overall common style ---------------- */
 html {
     box-sizing: border-box;
     min-height: 100%; /* make sure it is at least as tall as the viewport */
@@ -12,24 +13,8 @@ body {
   box-sizing: inherit;
 }
 
-/* common style */
-.app-col-1-5 {
-    height: 100%;
-    width: 20%;
-    min-width: 20%;
-    float: left;
-    position: relative;
-}
 
-.app-col-3-5 {
-    height: 100%;
-    width: 60%;
-    min-width: 60%;
-    float: left;
-    position: relative;
-}
-
-/* Most outer wrapper */
+/* ---------------- Most outer wrapper ----------------  */
 #holder {
     position: absolute;
     top: 0;
@@ -43,60 +28,78 @@ body {
     font-family: 'Droid Sans', sans-serif;
 }
 
+/* ---------------- App header and body common style ---------------- */
 #app-header, #app-body {
     position: absolute;
     width: 100%;
     left: 0;
 }
 
-/* App header */
+/* ---------------- App header ---------------- */
 #app-header {
     top: 0;
-    background-color:#DDD;
+    background-color: #5DAC81;
     height: 55px;
     min-height: 55px;
     padding-left: 1em;
+    color: #fcfcfc;
     -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
 	-moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+    z-index: 10;
 }
 
 #app-header h1 {
     height: 55px;
-    color: #fff;
     line-height: 55px;
     font-size: 1.7em;
-    text-shadow: 0 0 1px #666;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 #app-header .fa {
-    color: #333;
     line-height: 55px;
-    text-shadow: none;
+    padding-right: .5em;
 }
 
-/* App main body */
+/* ---------------- App main body ---------------- */
 #app-body {
     top: 55px;
     bottom: 0;
+    z-index: -1;
 }
-/* Most left, category menu */
-.app-category-list, .app-task-list {
+
+/* split main body into 3 columns, 1/5 and 1/5 for two menus, 3/5 for content pane*/
+.app-body-col-1-5 {
+    position: relative;
+    height: 100%;
+    width: 20%;
+    min-width: 20%;
+    float: left;
     -webkit-box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, .3); 
     -moz-box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, .3); 
     box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, .3); 
 }
 
-/* Category list */
-.app-category-list {
-    z-index: 2;
-}
-
-/* Task list */
-.app-task-list {
+.app-body-col-3-5 {
+    position: relative;
+    height: 100%;
+    width: 60%;
+    min-width: 60%;
+    float: left;
     z-index: 1;
 }
 
+.app-body-task-category {
+    z-index: 3;
+}
+
+.app-body-task-list {
+    z-index: 2;
+}
+
+/* bottom buttons */
 .app-new-category-btn, .app-new-task-btn {
     position: absolute;
     bottom: 0;
@@ -104,23 +107,110 @@ body {
     height: 50px;
     border: none;
     box-sizing: border-box;
-    color: #333;
+    color: #fcfcfc;
     font-size: 1em;
+    background-color: #5DAC81;
     -webkit-transition: background-color .2s, color .2s ease;
     transition: background-color .2s, color .2s ease;
 }
 
 .app-new-category-btn:hover, .app-new-task-btn:hover {
     cursor: pointer;
-    background-color: #5DAC81;
-    color: #fcfcfc;
+    background-color: #24936E;
 }
 
-.app-new-category-btn {
-    
+*/
+/* ----------------- Most left category treeview menu --------------- */
+/*first layer*/
+#app-category-treeview {
+
 }
 
-.app-new-task-btn {
-    z-index: 0;
+.app-category-list {
+    position: relative;
+    z-index: 2;
+}
+
+.app-menu {
+    color: #333;
+    font-size: 1.1em;
+    width: 100%;
+    line-height: 50px;
+}
+ 
+/* common style of category menu title*/
+.app-menu h3 {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-transition: background-color .2s, color .1s ease;
+    transition: background-color .2s, color .1s ease;
+}
+
+.app-menu h3:hover {
+    background-color: #A8D8B9;
+    color: #fff;
+    cursor: pointer;
+}
+
+.app-menu > h3 {
+    padding: 0 1em;
+}
+
+.app-category-menu {
+
+}
+
+.app-category-sub-menu {
+
+}
+
+.app-category-sub-menu > h3 {
+    padding: 0 2em;
+}
+
+.app-task-list {
+
+}
+
+.app-task-list-item {
+    padding: 0 3em;
+    -webkit-transition: padding .2s, background-color .2s, color .1s ease;
+    transition: padding .2s, background-color .2s, color .1s ease;
+}
+
+.app-task-list-item:hover {
+    padding-left: 3.3em;
+    background-color: #A8D8B9;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Category menu icon */
+.fa-folder, .fa-tasks {
+    padding: 0.3em;
+}
+
+.app-menu-collapse {
+    height: 50px;
+}
+
+.app-category-menu-collapse {
+    height: 0;
+    display: none;
+    overflow: hidden;
+}
+
+.app-task-list-collapse {
+    height: 0;
+    display: none;
+    overflow: hidden;
+}
+
+/* Right category menu */
+
+/* Task list */
+.app-task-descr-list {
+    z-index: 1;
 }
 
