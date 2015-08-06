@@ -7,33 +7,60 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maxmium-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
         <link href="css/reset.css" rel="stylesheet">
-        <link href="css/font.css" rel=stylesheet>
+        <link href="css/font-awesome.min.css" rel=stylesheet>
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
         <!-- Most outer wrapper -->
         <div id="holder">
-            <!-- Header -->
+            <!-- App header -->
             <div id="app-header">
-                <h2>GTD Tools</h2>
+                <h1>
+                    <i class="fa fa-calendar-check-o"></i>
+                    ToDo
+                </h1>
             </div>
             <!-- App body -->
             <div id="app-body">
-                <!-- Left menu, containing task category tree menu -->
+                <div class="app-col-1-5 app-category-list">
+                    <ol></ol>
+                    <button class="app-new-category-btn">
+                        <i class="fa fa-plus-square"></i>
+                        New category
+                    </button>
+                </div>
+                <div class="app-col-1-5 app-task-list">
+                    <ol></ol>
+                    <button class="app-new-task-btn">
+                        <i class="fa fa-plus-square"></i>
+                        New task
+                    </button>
+                </div>
+                <div class="app-col-3-5"></div>
+            </div>
+<!--             Header
+            <div id="app-header">
+                <h2>GTD Tools</h2>
+            </div>
+            App body
+            <div id="app-body">
+                Left menu, containing task category tree menu
                 <div class="app-menu app-task-category">
-                    <!-- Treeview menu -->
+                    Treeview menu
                     <ol id="app-category-tree">
-                        <li></li>
-                        <li></li>
+                        <li class="app-category-list">
+                            <ol></ol>
+                        </li>
+                        <li class="app-category-list"></li>
                     </ol>
-                    <!-- Control pane, add new category button -->
-                    <div class="app-add-pane">
+                    Control pane, add new category button
+                    <div class="app-add-btn-pane">
                         <button class="app-add-new-btn app-add-new-category-btn">
                             <span class="app-icon-add-new"></span>New category
                         </button>
                     </div>
                 </div>
-                <!-- Task list -->
+                Task list
                 <div class="app-menu app-task-list">
                     <nav id="app-task-status-nav">
                         <ul>
@@ -42,11 +69,9 @@
                             <li class="app-task-status-tab">Finished</li>
                         </ul>
                     </nav>
-                    <ul id="app-task-list-item">
-                        
-                    </ul>
-                    <!-- Control pane, add new task button -->
-                    <div class="app-add-pane">
+                    <ol id="app-task-list-item"></ol>
+                    Control pane, add new task button
+                    <div class="app-add-btn-pane">
                         <button class="app-add-new-btn app-add-new-task-btn">
                             <span class="app-icon-add-new"></span>New task
                         </button>
@@ -63,7 +88,7 @@
                         
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </body>
-</html>
+</html> 

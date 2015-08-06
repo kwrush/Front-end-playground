@@ -1,7 +1,7 @@
 html {
-  box-sizing: border-box;
-  min-height: 100%; /* make sure it is at least as tall as the viewport */
-  position: relative;
+    box-sizing: border-box;
+    min-height: 100%; /* make sure it is at least as tall as the viewport */
+    position: relative;
 }
 
 body {
@@ -10,6 +10,23 @@ body {
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+/* common style */
+.app-col-1-5 {
+    height: 100%;
+    width: 20%;
+    min-width: 20%;
+    float: left;
+    position: relative;
+}
+
+.app-col-3-5 {
+    height: 100%;
+    width: 60%;
+    min-width: 60%;
+    float: left;
+    position: relative;
 }
 
 /* Most outer wrapper */
@@ -22,94 +39,88 @@ body {
     min-width: 20%;
     overflow: hidden;
     z-index: -1;
-    background-color: #FFF;
+    background-color: #fcfcfc;
     font-family: 'Droid Sans', sans-serif;
+}
+
+#app-header, #app-body {
+    position: absolute;
+    width: 100%;
+    left: 0;
 }
 
 /* App header */
 #app-header {
+    top: 0;
     background-color:#DDD;
-    width: 100%;
-    height: 10%;
-    min-height: 10%;
-    display: table;
-    vertical-align: middle;
-    border: 2px solid rgba(0, 0, 0, .2);
+    height: 55px;
+    min-height: 55px;
+    padding-left: 1em;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+	-moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
 }
 
-#app-header h2 {
-    display: table-cell;
-    vertical-align: middle;
-    color: #fcfcfc;
+#app-header h1 {
+    height: 55px;
+    color: #fff;
+    line-height: 55px;
     font-size: 1.7em;
-    text-indent: .5em;
     text-shadow: 0 0 1px #666;
+}
+
+#app-header .fa {
+    color: #333;
+    line-height: 55px;
+    text-shadow: none;
 }
 
 /* App main body */
 #app-body {
-    height: 90%;
-    min-height: 90%;
-    border-bottom: 2px solid rgba(0, 0, 0, .2);
+    top: 55px;
+    bottom: 0;
+}
+/* Most left, category menu */
+.app-category-list, .app-task-list {
+    -webkit-box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, .3); 
+    -moz-box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, .3); 
+    box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, .3); 
 }
 
-/* menu, common style */
-.app-menu {
-    float: left;
-    height: 100%;
-    width: 16.667%;
-    border-left: 2px solid rgba(0, 0, 0, .2);
-    overflow: hidden;
-}
-
-.app-task-category {
-    background-color: #f2f2f2;
-}
-
-/* most left, task category menu */
-#app-category {
-    height: 93%;
-    padding: 1em;
-}
-
+/* Category list */
 .app-category-list {
-    width: 100%;
-    height: 5%;
+    z-index: 2;
 }
 
-/* content */
-#app-task-content {
-    float: left;
-    height: 100%;
-    width: 66.667%;
-    border-left: 2px solid rgba(0, 0, 0, .2);
+/* Task list */
+.app-task-list {
+    z-index: 1;
 }
 
-/* add new button */
-.app-add-pane {
+.app-new-category-btn, .app-new-task-btn {
     position: absolute;
     bottom: 0;
-    width: 16.667%;
-    height: 6%;
-    background-color: #f2f2f2;
-    border-top: 2px solid rgba(0, 0, 0, .2);
-    border-right: 2px solid rgba(0, 0, 0, .2);
-    display: table;
-    vertical-align: middle;
+    width: 100%;
+    height: 50px;
+    border: none;
+    box-sizing: border-box;
+    color: #333;
+    font-size: 1em;
+    -webkit-transition: background-color .2s, color .2s ease;
+    transition: background-color .2s, color .2s ease;
 }
 
-.app-add-new-btn {
-    background: none;
-    border: none;
-    font-size: 1.1em;
-    height: 100%;
-    line-height: 1.5;
-    color: #666;
-    text-align: left;
+.app-new-category-btn:hover, .app-new-task-btn:hover {
+    cursor: pointer;
+    background-color: #5DAC81;
+    color: #fcfcfc;
+}
+
+.app-new-category-btn {
     
 }
 
-.app-add-new-btn:hover {
-    color: #333;
-    cursor: pointer;
+.app-new-task-btn {
+    z-index: 0;
 }
+
