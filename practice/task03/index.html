@@ -79,19 +79,61 @@
             </div>
             <div class="app-body-col-1-5 app-body-task-list">
                 <nav class="app-task-status-nav">
-                    <button class="app-task-status-btn app-active-btn">All</button>
-                    <button class="app-task-status-btn">Unfinished</button>
-                    <button class="app-task-status-btn">Finished</button>
+                    <button class="app-active-btn">All</button>
+                    <button class="app-task-status-btn">Undone</button>
+                    <button class="app-task-status-btn">Done</button>
                 </nav>
-                <div id="app-task-list">
-                
-                </div>
+                <ul id="app-task-list">
+                    <li class="app-task-list-item">
+                        <h4 class="app-task-item-date">
+                            <i class="fa fa-calender"></i>Aug-7-2015
+                        </h4>
+                        <ul class="app-task-spec-list">
+                            <li>To do1</li>
+                            <li class="app-task-done">To do2</li>
+                        </ul>
+                    </li>
+                    <li class="app-task-list-item">
+                        <h4 class="app-task-item-date">
+                            <i class="fa fa-calender"></i>Aug-5-2015
+                        </h4>
+                        <ul class="app-task-spec-list">
+                            <li>To do1</li>
+                            <li class="app-task-done">To do2</li>
+                        </ul>
+                    </li>
+                    <li class="app-task-list-item">
+                        <h4 class="app-task-item-date">
+                            <i class="fa fa-calender"></i>Aug-2-2015
+                        </h4>
+                        <ul class="app-task-spec-list">
+                            <li>To do1</li>
+                            <li class="app-task-done">To do2</li>
+                        </ul>
+                    </li>
+                </ul>
                 <button class="app-new-task-btn">
                     <i class="fa fa-plus-square"></i>
                     New task
                 </button>
             </div>
-            <div class="app-body-col-3-5"></div>
+            <div class="app-body-col-3-5">
+                <ul id="app-task-spec-title">
+                    <li>
+                        <h3>To do1</h3>
+                        <span>
+                            <a><i class="fa fa-check-square-o"></i></a>
+                            <a><i class="fa fa-pencil-square-o"></i></a>
+                        </span>
+                    </li>
+                    <li>
+                        <p>Task date: <span id="app-task-date"></span></p>
+                    </li>
+                </ul>
+                <div id="app-task-content">
+                    <textarea id="app-task-spec-content"></textarea>
+                </div>
+            </div>
         </div>
     </div>
     <script src="js/controller.js"></script>
