@@ -13,6 +13,20 @@ body {
   box-sizing: inherit;
 }
 
+h1, h2, h3, h4 {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+h1 { font-size: 1.7em; }
+
+h2 { font-size: 1.2em; }
+
+h3 { font-size: 1em; }
+
+h4 { font-size: .95em; }
+
 
 /* ---------------- Most outer wrapper ----------------  */
 #holder {
@@ -49,13 +63,9 @@ body {
     z-index: 10;
 }
 
-#app-header h1 {
+#app-header > h1 {
     height: 55px;
     line-height: 55px;
-    font-size: 1.7em;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
 }
 
 #app-header .fa {
@@ -99,6 +109,98 @@ body {
     z-index: 2;
 }
 
+/* category treeview */
+#app-category-treeview-holder {
+    position: absolute;
+    top: 0;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.app-category-treeview-title-1 {
+    height: 48px;
+    line-height: 48px;
+    padding-left: .5em;
+}
+
+.app-category-treeview-title-2 {
+    height: 48px;
+    padding-left: 1em;
+}
+
+.app-category-treeview-title-3 {
+    height: 38px;
+    padding-left: 2em;
+}
+
+.app-category-title {
+    width: 100%;
+    display: table;
+    vertical-align: middle;
+    -webkit-transition: background-color .2s, color .1s ease;
+    transition: background-color .2s, color .1s ease;
+}
+
+.app-category-title > span {
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.app-category-title:hover {
+    background-color: #A8D8B9;
+    color: #fff;
+    cursor: pointer; 
+}
+
+/* menu collapse style */
+.app-menu-collapse {
+    height: 0;
+    overflow: hidden;
+}
+
+/* font icon style */
+.fa-folder, .fa-tasks, .fa-folder-open {
+    padding-right: .3em;
+}
+
+/* Right category menu */
+/* Task list */
+.app-task-descr-list {
+    z-index: 1;
+}
+
+.app-task-status-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 45px;
+    width: 100%;
+}
+
+.app-task-status-btn {
+    float: left;
+    height: 45px;
+    width: 33.333%;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.app-task-status-btn:hover {
+    background-color: #A8D8B9;
+    color: #fff;
+    cursor: pointer;
+}
+
+.app-active-btn {
+    background-color: #A8D8B9;
+    color: #fff;
+    cursor: pointer;
+}
+
 /* bottom buttons */
 .app-new-category-btn, .app-new-task-btn {
     position: absolute;
@@ -117,100 +219,5 @@ body {
 .app-new-category-btn:hover, .app-new-task-btn:hover {
     cursor: pointer;
     background-color: #24936E;
-}
-
-*/
-/* ----------------- Most left category treeview menu --------------- */
-/*first layer*/
-#app-category-treeview {
-
-}
-
-.app-category-list {
-    position: relative;
-    z-index: 2;
-}
-
-.app-menu {
-    color: #333;
-    font-size: 1.1em;
-    width: 100%;
-    line-height: 50px;
-}
- 
-/* common style of category menu title*/
-.app-menu h3 {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-transition: background-color .2s, color .1s ease;
-    transition: background-color .2s, color .1s ease;
-}
-
-.app-menu h3:hover {
-    background-color: #A8D8B9;
-    color: #fff;
-    cursor: pointer;
-}
-
-.app-menu > h3 {
-    padding: 0 1em;
-}
-
-.app-category-menu {
-
-}
-
-.app-category-sub-menu {
-
-}
-
-.app-category-sub-menu > h3 {
-    padding: 0 2em;
-}
-
-.app-task-list {
-
-}
-
-.app-task-list-item {
-    padding: 0 3em;
-    -webkit-transition: padding .2s, background-color .2s, color .1s ease;
-    transition: padding .2s, background-color .2s, color .1s ease;
-}
-
-.app-task-list-item:hover {
-    padding-left: 3.3em;
-    background-color: #A8D8B9;
-    color: #fff;
-    cursor: pointer;
-}
-
-/* Category menu icon */
-.fa-folder, .fa-tasks {
-    padding: 0.3em;
-}
-
-.app-menu-collapse {
-    height: 50px;
-}
-
-.app-category-menu-collapse {
-    height: 0;
-    display: none;
-    overflow: hidden;
-}
-
-.app-task-list-collapse {
-    height: 0;
-    display: none;
-    overflow: hidden;
-}
-
-/* Right category menu */
-
-/* Task list */
-.app-task-descr-list {
-    z-index: 1;
 }
 

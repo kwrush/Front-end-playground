@@ -23,14 +23,53 @@
         <!-- App body -->
         <div id="app-body">
             <div class="app-body-col-1-5 app-body-task-category">
-                <ul id="app-category-treeview">
+                <ul id="app-category-treeview-holder">
                     <li>
-                        <h3 class="app-categor-title">All tasks</h3>
-                        <ul class="app-category-all-task"></ul>
+                        <h3 class="app-category-treeview-title-1 app-category-title">All tasks</h3>
                     </li>
                     <li>
-                        <h3 class="app-category-title">Task category</h3>
-                        <ul class="app-category-list"></ul>
+                        <h3 class="app-category-treeview-title-1 app-category-title">Task category</h3>
+                        <ul class="app-category-treeview-1">
+                            <li>
+                                <h3 class="app-category-treeview-title-2 app-category-title">
+                                    <span><i class="fa fa-folder-open"></i>Sub category 1</span>
+                                </h3>
+                                <ul class="app-category-treeview-2">
+                                    <li>
+                                        <h4 class="app-category-treeview-title-3 app-category-title">
+                                            <span><i class="fa fa-tasks"></i>Task1</span>
+                                        </h4>
+                                    </li>
+                                    <li>
+                                        <h4 class="app-category-treeview-title-3 app-category-title">
+                                            <span><i class="fa fa-tasks"></i>Task2</span>
+                                        </h4>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3 class="app-category-treeview-title-2 app-category-title">
+                                    <span><i class="fa fa-folder"></i>Sub category 2</span>
+                                </h3>
+                                <ul class="app-category-treeview-2 app-menu-collapse">
+                                    <li>
+                                        <h4 class="app-category-treeview-title-3 app-category-title">
+                                            <span><i class="fa fa-tasks"></i>Task3</span>
+                                        </h4>
+                                    </li>
+                                    <li>
+                                        <h4 class="app-category-treeview-title-3 app-category-title">
+                                            <span><i class="fa fa-tasks"></i>Task4</span>
+                                        </h4>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3 class="app-category-treeview-title-2 app-category-title">
+                                    <span><i class="fa fa-folder"></i>Default category</span>
+                                </h3>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
                 <button class="app-new-category-btn">
@@ -39,6 +78,14 @@
                 </button>
             </div>
             <div class="app-body-col-1-5 app-body-task-list">
+                <nav class="app-task-status-nav">
+                    <button class="app-task-status-btn app-active-btn">All</button>
+                    <button class="app-task-status-btn">Unfinished</button>
+                    <button class="app-task-status-btn">Finished</button>
+                </nav>
+                <div id="app-task-list">
+                
+                </div>
                 <button class="app-new-task-btn">
                     <i class="fa fa-plus-square"></i>
                     New task
