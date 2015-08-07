@@ -27,6 +27,8 @@ h3 { font-size: 1em; }
 
 h4 { font-size: .95em; }
 
+button { outline: none; }
+
 
 /* ---------------- Most outer wrapper ----------------  */
 #holder {
@@ -39,7 +41,7 @@ h4 { font-size: .95em; }
     overflow: hidden;
     z-index: -1;
     background-color: #FCFAF2;
-    font-family: 'Droid Sans', sans-serif;
+    font-family: 'Oxygen', sans-serif;
     color: #4A593D;
 }
 
@@ -320,6 +322,27 @@ fa-check-square-o, fa-pencil-square-o {
 
 .fa-pencil-square-o {
     margin-right: 25px;
+}
+
+/* textarea, task content editor */
+#app-task-content {
+    position: absolute;
+    top: 100px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1em;
+}
+
+#app-task-content > textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 1.3em;
+    color: #4A593D;
+    resize: none;
 }
 
 
