@@ -8,9 +8,16 @@ var _util = (function() {
          * DOM operations
          */
         
-        // a mini selector engine
+        /**
+         * A simple selector engine
+         * @param {String} selector css selector string
+         * @return {Array} DOM element array
+        */
         $: function(selector) {
-            
+            var idReg = /^#([\w_\-]+)/,
+                classReg = /^\.([\w_\-]+)/,
+                tagReg = /^\w+$/i,
+                attrReg = /(\w+)?\[\]/;
         },
         
         hasClass: function(element, className) {
@@ -22,9 +29,9 @@ var _util = (function() {
             
             for (var i = 0, len = classNames.length; i < len; i++) {
                 if (className === classNames[i]) return true;
-                
-                return false;
             }
+
+            return false;
         
         },
         
@@ -39,7 +46,7 @@ var _util = (function() {
 
         // remove class name
         removeClass: function(element, oldClassName) {
-            if (!_util.hasClass(element, oldClassName)) {
+            if (_util.hasClass(element, oldClassName)) {
                 var classNames = element.className, 
     
                 classNames = _util.uniqArray(classNames.split(/\s+/));

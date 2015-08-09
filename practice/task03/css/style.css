@@ -123,34 +123,38 @@ button {
     overflow-y: auto;
 }
 
-.app-category-treeview-title-1 {
+.app-category-title {
+    width: 100%;
+    display: table;
+    vertical-align: middle;
+    -webkit-transition: background-color .2s, color .1s ease-in;
+    transition: background-color .2s, color .1s ease-in;
+}
+
+.app-category-title[data-menu-level="1"] {
     height: 48px;
     line-height: 48px;
     padding-left: .5em;
 }
 
-.app-category-treeview-title-2 {
+.app-category-title[data-menu-level="2"] {
     height: 48px;
+    line-height: 48px;
     padding-left: 1em;
 }
 
-.app-category-treeview-title-3 {
+.app-category-title[data-menu-level="3"] {
     height: 38px;
+    line-height: 38px;
     padding-left: 2em;
 }
 
-.app-category-title {
-    width: 100%;
-    display: table;
-    vertical-align: middle;
-    -webkit-transition: background-color .2s, color .1s ease;
-    transition: background-color .2s, color .1s ease;
-}
-
-.app-category-title > span {
-    width: 100%;
-    display: table-cell;
-    vertical-align: middle;
+.app-category-title-active[data-menu-level="3"] {
+    height: 38px;
+    line-height: 38px;
+    padding-left: 2em;
+    background-color: #5DAC81;
+    color: #FCFAF2;
 }
 
 .app-category-title:hover {
@@ -159,10 +163,14 @@ button {
     cursor: pointer; 
 }
 
+.app-category-title-active:hover {
+    cursor: pointer; 
+}
+
 /* menu collapse style */
 .app-menu-collapse {
-    height: 0;
     overflow: hidden;
+    height: 0;
 }
 
 /* font icon style */
@@ -193,8 +201,8 @@ button {
     padding: 0;
     background: none;
     border: none;
-    -webkit-transition: background-color .2s, color .1s ease;
-    transition: background-color .2s, color .1s ease;
+    -webkit-transition: background-color .2s, color .1s ease-in;
+    transition: background-color .2s, color .1s ease-in;
 }
 
 .app-task-status-btn:hover {
@@ -271,6 +279,10 @@ button {
 .app-new-category-btn:hover, .app-new-task-btn:hover {
     cursor: pointer;
     background-color: #24936E;
+}
+
+.fa-plus-square {
+    padding-right: .3em;
 }
 
 /* most right input area */

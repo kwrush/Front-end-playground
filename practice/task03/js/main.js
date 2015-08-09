@@ -1,0 +1,1 @@
+treeView.initTreeView('app-menu-treeview-holder');

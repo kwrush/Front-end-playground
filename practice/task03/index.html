@@ -9,6 +9,9 @@
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel=stylesheet>
     <link href="css/style.css" rel="stylesheet">
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="gif_favicon.gif" type="image/gif" > -->
+    <script src="js/sizzle.min.js"></script>
     <script src="js/util.js"></script>
 </head>
 <body>
@@ -23,51 +26,80 @@
         <!-- App body -->
         <div id="app-body">
             <div class="app-body-col-1-5 app-body-task-category">
-                <ul id="app-category-treeview-holder">
+                <ul id="app-menu-treeview-holder">
                     <li>
-                        <h3 class="app-category-treeview-title-1 app-category-title">All tasks</h3>
+                        <h3 class="app-category-title" data-menu-level="1">All tasks</h3>
                     </li>
                     <li>
-                        <h3 class="app-category-treeview-title-1 app-category-title">Task category</h3>
-                        <ul class="app-category-treeview-1">
+                        <h3 class="app-category-title" data-menu-level="1">Task category</h3>
+                        <ul class="app-menu-treeview">
                             <li>
-                                <h3 class="app-category-treeview-title-2 app-category-title">
-                                    <span><i class="fa fa-folder-open"></i>Sub category 1</span>
+                                <h3 class="app-category-title" data-menu-level="2">
+                                    <span class="fa fa-folder-open"></span>Sub category 1
                                 </h3>
-                                <ul class="app-category-treeview-2">
+                                <ul class="app-menu-treeview">
                                     <li>
-                                        <h4 class="app-category-treeview-title-3 app-category-title">
-                                            <span><i class="fa fa-tasks"></i>Task1</span>
+                                        <h4 class="app-category-title" data-menu-level="3" data-task-index="1">
+                                            <i class="fa fa-tasks"></i>Task1
                                         </h4>
                                     </li>
                                     <li>
-                                        <h4 class="app-category-treeview-title-3 app-category-title">
-                                            <span><i class="fa fa-tasks"></i>Task2</span>
+                                        <h4 class="app-category-title" data-menu-level="3" data-task-index="2">
+                                            <i class="fa fa-tasks"></i>Task2
                                         </h4>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <h3 class="app-category-treeview-title-2 app-category-title">
-                                    <span><i class="fa fa-folder"></i>Sub category 2</span>
+                                <h3 class="app-category-title" data-menu-level="2">
+                                    <span class="fa fa-folder"></span>Sub category 2
                                 </h3>
-                                <ul class="app-category-treeview-2 app-menu-collapse">
+                                <ul class="app-menu-treeview app-menu-collapse">
                                     <li>
-                                        <h4 class="app-category-treeview-title-3 app-category-title">
-                                            <span><i class="fa fa-tasks"></i>Task3</span>
+                                        <h4 class="app-category-title" data-menu-level="3" data-task-index="3">
+                                            <i class="fa fa-tasks"></i>Task3
                                         </h4>
                                     </li>
                                     <li>
-                                        <h4 class="app-category-treeview-title-3 app-category-title">
-                                            <span><i class="fa fa-tasks"></i>Task4</span>
+                                        <h4 class="app-category-title" data-menu-level="3" data-task-index="4">
+                                            <i class="fa fa-tasks"></i>Task4
                                         </h4>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <h3 class="app-category-treeview-title-2 app-category-title">
-                                    <span><i class="fa fa-folder"></i>Default category</span>
+                                <h3 class="app-category-title" data-menu-level="2">
+                                    <span class="fa fa-folder-open"></span>Sub category 3
                                 </h3>
+                                <ul class="app-menu-treeview">
+                                    <li>
+                                        <h4 class="app-category-title" data-menu-level="3" data-task-index="5">
+                                            <i class="fa fa-tasks"></i>Task5
+                                        </h4>
+                                    </li>
+                                    <li>
+                                        <h4 class="app-category-title" data-menu-level="3" data-task-index="6">
+                                            <i class="fa fa-tasks"></i>Task6
+                                        </h4>
+                                    </li>
+                                    <li>
+                                        <h4 class="app-category-title" data-menu-level="3" data-task-index="7">
+                                            <i class="fa fa-tasks"></i>Task7
+                                        </h4>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3 class="app-category-title" data-menu-level="2">
+                                    <span class="fa fa-folder"></span>Default category
+                                </h3>
+                                <ul class="app-menu-treeview">
+                                    <li>
+                                        <h4 class="app-category-title" data-menu-level="3" data-task-index="8">
+                                            <i class="fa fa-tasks"></i>Default task
+                                        </h4>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
@@ -137,5 +169,6 @@
         </div>
     </div>
     <script src="js/controller.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html> 
