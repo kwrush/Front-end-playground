@@ -60,7 +60,7 @@ var
 				ut.delegateEvent(treeViewHolder, 'i', 'click', showTaskDescription);
 			},
 
-			/*
+			/**
 			 * Set style according to the given style map, 
 			 * e.g. selector = '.classname', styleMap = {backgroundColor: red}.
 			 * @param {String} or {HTML DOM} selector selector string or a DOM element
