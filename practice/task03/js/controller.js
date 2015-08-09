@@ -64,7 +64,7 @@ var
 			 * Set style according to the given style map, 
 			 * e.g. selector = '.classname', styleMap = {backgroundColor: red}.
 			 * @param {String} or {HTML DOM} selector selector string or a DOM element
-			 * @oaram {Object} styleMap style map defines the style you want to set 
+			 * @param {Object} styleMap style map defines the style you want to set 
 			 */
 			resetStyle: function(selector, styleMap) {
 
