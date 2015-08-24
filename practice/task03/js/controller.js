@@ -19,17 +19,17 @@ var
 
 							// in case user click on icon (<span> tag) instead of the actual menu item
 							parentNode = this.tagName === 'SPAN' ? this.parentNode.parentNode : this.parentNode,
-							folderIcon = this.tagName === 'SPAN' ? this.parentNode.querySelectorAll(iconSelector)[0] : this.querySelectorAll(iconSelector),
+							folderIcon = this.tagName === 'SPAN' ? this.parentNode.querySelectorAll(iconSelector)[0] : this.querySelectorAll(iconSelector)[0],
 
 							treemenu = parentNode.querySelectorAll('.app-menu-treeview')[0];
 
 						if (ut.hasClass(treemenu, 'app-menu-collapse')) {
 							ut.removeClass(treemenu, 'app-menu-collapse');
-							folderIcon.className = 'fa fa-folder-open';
+							folderIcon ? folderIcon.className = 'fa fa-folder-open' : null;
 						}
 						else {
 							ut.addClass(treemenu, 'app-menu-collapse');
-							folderIcon.className = 'fa fa-folder';
+							folderIcon ? folderIcon.className = 'fa fa-folder' : null;
 						}
 					},
 
@@ -51,6 +51,17 @@ var
 
 						// more...
 					};
+                    
+                    // listener to mouse enter/out event on menu item
+                    toggleDeleteIcon = function(evt) {
+                        var evt = evt || window.event;
+                        if (evt.type === 'mouseenter') {
+                            console.log('enter.............');
+                        }
+                        else if(evt.type === 'mouseleave') {
+                            console.log('leave.............');
+                        }
+                    }
 
 
 				// event delegation, add <span> and <i> in case use click on the icon overlayed
@@ -58,6 +69,8 @@ var
 				ut.delegateEvent(treeViewHolder, 'span', 'click', toggleTreeviewMenu);
 				ut.delegateEvent(treeViewHolder, 'h4', 'click', showTaskDescription);
 				ut.delegateEvent(treeViewHolder, 'i', 'click', showTaskDescription);
+                ut.delegateEvent(treeViewHolder, 'h3', 'mouseenter', toggleDeleteIcon);
+				ut.delegateEvent(treeViewHolder, 'span', 'mouseover', toggleDeleteIcon);
 			},
 
 			/**
