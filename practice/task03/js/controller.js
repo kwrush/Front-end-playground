@@ -112,6 +112,16 @@ var
 			}
 		}
 
+	})(_util),
+
+	addCategory = (function(ut) {
+						
+
+	})(_util), 
+
+	addTask = (function(ut) {
+
+
 	})(_util);
 
 
