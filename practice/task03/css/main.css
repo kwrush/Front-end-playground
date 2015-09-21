@@ -1,0 +1,145 @@
+/* common style */
+html {
+	box-sizing: border-box;
+	min-height: 100%;
+	position: relative;
+}
+
+body {
+	font-family: 'Oxygen', Helvetica, sans-serif;
+	height: 100%;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+h1, h2, h3, h4, .fa {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+h1 { font-size: 1.9em; }
+
+h2 { font-size: 1.4em; }
+
+h3 { font-size: 1.1em; }
+
+h4 { font-size: 1em; }
+
+.shadow-top {
+	-webkit-box-shadow: ;
+	-moz-box-shadow: ;
+	-box-shadow: ;
+}
+
+.shadow-left {
+	-webkit-box-shadow: ;
+	-moz-box-shadow: ;
+	-box-shadow: ;
+}
+
+.shadow-right {
+	-webkit-box-shadow: 2px 0 5px 0 rgba(0, 0, 0, .3), 
+						4px 0 10px 0 rgba(0, 0, 0, .1);
+	-moz-box-shadow: 2px 0 5px 0 rgba(0, 0, 0, .3), 
+					 4px 0 10px 0 rgba(0, 0, 0, .1);
+	box-shadow: 2px 0 5px 0 rgba(0, 0, 0, .3), 
+				 4px 0 10px 0 rgba(0, 0, 0, .1);
+}
+
+.shadow-bottom {
+	-webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .5), 
+						0 4px 10px 0 rgba(0, 0, 0, .2);
+	-moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .5), 
+					 0 4px 10px 0 rgba(0, 0, 0, .2);
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .5), 
+				 0 4px 10px 0 rgba(0, 0, 0, .2);
+}
+
+/* outer wrapper style */
+#app-holder {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	min-width: 20%;
+	overflow: hidden;
+	background-color: #FCFAF2;
+	color: #4A593D;
+}
+
+/* header style */
+.app-header {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	width: 100%;
+	height: 4em;
+	background-color: #5DAC81;
+	z-index: 4;
+}
+
+.app-header > h1 {
+	padding-left: .8em;
+	line-height: 1.9em;
+	color: #FCFAF2;
+}
+
+.app-header .fa-calendar-check-o {
+	padding-right: .2em;
+}
+
+/* App main body style */
+.app-body {
+	position: absolute;
+	bottom: 0;
+	top: 4em;
+	width: 100%;
+}
+
+/* Split body into 3 columns, 1/4 and 1/4 for two menus, rest for todo content */
+.app-body-col-1-4 {
+	position: relative;
+	height: 100%;
+	width: 25%;
+	min-width: 25%;
+	float: left;
+}
+
+.app-body-col-1-2 {
+	position: relative;
+	height: 100%;
+	width: 50%;
+	min-width: 50%;
+	float: left;
+}
+
+
+/* Bottom button for adding category and tasks */
+.app-btn {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 3em;
+	border: none;
+    color: #FCFAF2;
+    font-size: 1em;
+    background-color: #5DAC81;
+    z-index: 1;
+    -webkit-transition: background-color .2s, color .2s ease;
+    transition: background-color .2s, color .2s ease;
+}
+
+.app-btn:hover {
+	cursor: pointer;
+	background-color: #24936E;
+}
+
+.app-btn .fa-plus-square {
+	padding-right: .4em;
+}
