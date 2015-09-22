@@ -28,9 +28,9 @@
     function CategorListTemplate() {
         this.defaultTemplate
         = '<li>'
-        +     '<h3>'
+        +     '<h2>'
         +         '<i class="fa fa-folder"></i>{{title}}'
-        +     '</h3>'
+        +     '</h2>'
         + '</li>';
     };
     CategorListTemplate.prototype = Object.create(Template);

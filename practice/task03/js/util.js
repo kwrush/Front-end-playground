@@ -274,13 +274,13 @@ var _util = (function() {
                 to[name] = typeof to[name] === 'undefined' ? this.cloneObject(src[name]) : to[name];
             }
 
-            return to;
+         s   return to;
 
         },
         
         // inherit
         inherit: function(subClass, parentClass) {
-            if (this.isFunction(parentClass.constructor)) { 
+            if (parentClass.constructor === Function) { 
                 //Normal Inheritance 
                 subClass.prototype = new parentClass;
                 subClass.prototype.constructor = subClass;
