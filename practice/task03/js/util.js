@@ -278,7 +278,7 @@ var _util = (function() {
 
         },
         
-        // inherita
+        // inherit
         inherit: function(subClass, parentClass) {
             if (this.isFunction(parentClass.constructor)) { 
                 //Normal Inheritance 

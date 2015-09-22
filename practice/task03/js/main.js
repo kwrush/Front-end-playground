@@ -1,1 +1,5 @@
-treeView.initTreeView('app-menu-treeview-holder');
+(function() {
+    'use strict';
+    
+    
+}());

@@ -14,20 +14,28 @@ body {
 	box-sizing: inherit;
 }
 
-h1, h2, h3, h4, .fa {
+h1, h2, h3, h4, a, li, .fa {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
 }
 
-h1 { font-size: 1.9em; }
+button { outline: none; }
 
-h2 { font-size: 1.4em; }
+a { text-decoration: none;}
 
-h3 { font-size: 1.1em; }
+h1 { font-size: 1.7em; }
+
+h2 { font-size: 1.1em; }
+
+h3 { font-size: 1em; }
 
 h4 { font-size: 1em; }
+
+.fa {
+    padding-right: .4em;
+}
 
 .shadow-top {
 	-webkit-box-shadow: ;
@@ -81,13 +89,15 @@ h4 { font-size: 1em; }
 	width: 100%;
 	height: 4em;
 	background-color: #5DAC81;
-	z-index: 4;
+    display: table;
 }
 
 .app-header > h1 {
 	padding-left: .8em;
-	line-height: 1.9em;
+	line-height: 1.8em;
 	color: #FCFAF2;
+    vertical-align: middle;
+    display: table-cell;
 }
 
 .app-header .fa-calendar-check-o {
@@ -140,6 +150,75 @@ h4 { font-size: 1em; }
 	background-color: #24936E;
 }
 
-.app-btn .fa-plus-square {
-	padding-right: .4em;
+/* Most left list */
+.app-list {
+    width: 100%;
+    color: #4A593D;
 }
+
+.app-list[data-list-level="1"] {
+    position: absolute;
+    top: 0;
+    bottom: 3em;
+    overflow: auto;
+}
+
+.app-list[data-list-level="1"] h2 {
+    padding: 1em;
+    -webkit-transition: background-color .2s, color .1s ease-in;
+    transition: background-color .2s, color .1s ease-in;
+}
+
+.app-list[data-list-level="2"] h3 {
+    padding: .7em .7em .7em 2em;
+    -webkit-transition: background-color .2s, color .1s ease-in;
+    transition: background-color .2s, color .1s ease-in;
+}
+
+.app-list[data-list-level="3"] > li {
+    padding: .7em .7em .7em 3em;
+    -webkit-transition: background-color .2s, color .1s ease-in;
+    transition: background-color .2s, color .1s ease-in;
+}
+
+.app-list[data-list-level="1"] h2:hover, 
+.app-list[data-list-level="2"] h3:hover, 
+.app-list[data-list-level="3"] > li:hover {
+    background-color: #A8D8B9;
+    color: #FCFAF2;
+    cursor: pointer; 
+}
+
+/* Middle list */
+.app-filter {
+    position: absolute;
+    width: 100%;
+}
+
+.app-filter > li {
+    float: left;
+    width: 33.3333%;
+    height: 100%;
+    color: #4A593D;
+    text-align: center;
+    padding: 1.2em 0;
+}
+
+.app-deactive-filter{
+    -webkit-transition: background-color .2s, color .1s ease-in;
+    transition: background-color .2s, color .1s ease-in;
+}
+
+.app-deactive-filter:hover {
+    background-color: #A8D8B9;
+    color: #FCFAF2; 
+    cursor: pointer;
+}
+
+.app-active-filter {
+    background-color: #5DAC81;
+    color: #FCFAF2; 
+    cursor: pointer;
+}
+
+/* Task content pane */

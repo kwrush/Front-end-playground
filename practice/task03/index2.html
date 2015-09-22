@@ -13,18 +13,50 @@
 <body>
 	<!-- Most outter wrapper -->
 	<div id="app-holder">
-		<header class="app-header shadow-bottom">
+		<header class="app-header shadow-bottom" style="z-index:4;">
 			<h1><i class="fa fa-calendar-check-o"></i>ToDo</h1>
 		</header>
 		<section class="app-body">
 			<div class="app-body-col-1-4 shadow-right" style="z-index:3;">
-				<ul></ul>
+                <ul class="app-list" data-list-level="1">
+                    <li>
+                        <h2>All task</h2>
+                        <ul>
+                        
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>Task category</h2>
+                        <ul class="app-list" data-list-level="2">
+                            <li>
+                                <h3>
+                                    <i class="fa fa-folder"></i>Default category
+                                </h3>
+                                <ul class="app-list" data-list-level="3">
+                                    <li>
+                                        <i class="fa fa-tasks"></i>Default task1
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-tasks"></i>Default task2
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
 				<button class="app-add-category-btn app-btn">
 					<i class="fa fa-plus-square"></i>New Category
 				</button>
 			</div>
 			<div class="app-body-col-1-4 shadow-right" style="z-index:2;">
-				<ul></ul>
+                <ul class="app-filter">
+                    <li class="app-active-filter">All</li>
+                    <li class="app-deactive-filter">Active</li>
+                    <li class="app-deactive-filter">Completed</li>
+                </ul>
+				<ul class="app-task-list">
+                    
+                </ul>
 				<button class="app-add-task-btn app-btn">
 					<i class="fa fa-plus-square"></i>New Task
 				</button>
@@ -35,4 +67,4 @@
 		</section>
 	</div>
 </body>
-</html>
+</html>     
