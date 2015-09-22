@@ -33,8 +33,10 @@
         +     '</h3>'
         + '</li>';
     };
+    CategorListTemplate.prototype = Object.create(Template);
     
     /* @constructor */
     function TaskListTemplate() {
     }
+    TaskListTemplate.prototype = Object.create(Template);
 }());
