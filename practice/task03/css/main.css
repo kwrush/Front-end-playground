@@ -175,15 +175,8 @@ h4 { font-size: 1em; }
     transition: background-color .2s, color .1s ease-in;
 }
 
-.app-list[data-list-level="3"] > li {
-    padding: .7em .7em .7em 3em;
-    -webkit-transition: background-color .2s, color .1s ease-in;
-    transition: background-color .2s, color .1s ease-in;
-}
-
 .app-list[data-list-level="1"] h2:hover, 
-.app-list[data-list-level="2"] h3:hover, 
-.app-list[data-list-level="3"] > li:hover {
+.app-list[data-list-level="2"] h3:hover {
     background-color: #A8D8B9;
     color: #FCFAF2;
     cursor: pointer; 
@@ -193,32 +186,64 @@ h4 { font-size: 1em; }
 .app-filter {
     position: absolute;
     width: 100%;
+    height: 3.4em;
 }
 
 .app-filter > li {
-    float: left;
     width: 33.3333%;
-    height: 100%;
-    color: #4A593D;
+    float: left;
     text-align: center;
     padding: 1.2em 0;
 }
 
-.app-deactive-filter{
+li[data-filter-status="deactive"]{
+    color: #4A593D;
     -webkit-transition: background-color .2s, color .1s ease-in;
     transition: background-color .2s, color .1s ease-in;
 }
 
-.app-deactive-filter:hover {
+li[data-filter-status="deactive"]:hover {
     background-color: #A8D8B9;
     color: #FCFAF2; 
     cursor: pointer;
 }
 
-.app-active-filter {
+li[data-filter-status="active"] {
     background-color: #5DAC81;
-    color: #FCFAF2; 
+    color: #FCFAF2;
     cursor: pointer;
+}
+
+.app-task-list {
+    position: absolute;
+    top: 3.4em;
+    bottom: 3em;
+    width: 100%;
+    overflow: auto;
+}
+
+.app-tasks-date {
+    padding: 1em;
+    background-color: #5DAC81;
+    color: #FCFAF2;
+    cursor: pointer;
+}
+
+.app-tasks {
+    padding: .3em;
+}
+
+.app-tasks > li {
+    padding: .5em 1em; 
+}
+
+.app-tasks > li:hover {
+    color: #5DAC81;
+    cursor: pointer;
+}
+
+.app-tasks > li[data-task-status="completed"] {
+    text-decoration: line-through;
 }
 
 /* Task content pane */
