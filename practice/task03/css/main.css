@@ -165,7 +165,6 @@ h4 { font-size: 1em; }
 
 .app-list-collapse[data-list-level="2"] > li {
 	height: 0;
-	opacity: 0;
 	overflow: hidden;
 }
 
