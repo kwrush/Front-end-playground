@@ -251,7 +251,7 @@ var _util = (function() {
 
         // deep copy an object, not including function and regexp objects
         cloneObject: function(src) {
-            var to = null;
+            var to = null; 
   
             if (src.constructor === Number 
                 || src.constructor === String 
@@ -274,7 +274,7 @@ var _util = (function() {
                 to[name] = typeof to[name] === 'undefined' ? this.cloneObject(src[name]) : to[name];
             }
 
-         s   return to;
+            return to;
 
         },
         

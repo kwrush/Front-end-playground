@@ -163,6 +163,12 @@ h4 { font-size: 1em; }
     overflow: auto;
 }
 
+.app-list-collapse[data-list-level="2"] > li {
+	height: 0;
+	opacity: 0;
+	overflow: hidden;
+}
+
 .app-list[data-list-level="1"] h2 {
     padding: 1em;
     -webkit-transition: background-color .2s, color .1s ease-in;

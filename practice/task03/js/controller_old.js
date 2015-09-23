@@ -1,4 +1,4 @@
-/*var 
+var 
 
 	treeView = (function(ut){
 
