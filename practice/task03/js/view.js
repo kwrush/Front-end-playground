@@ -12,7 +12,11 @@
 		var renderCommands = {
 			toggleList: function() {
 				self.toggleList(parameter.list, parameter.icon);
-			}
+			},
+            
+            hoverListItem: function() {
+                self.toggleDeleteIcon(parameter.icon);
+            }
 		}
 
 		renderCommands[renderCmd]();
@@ -45,8 +49,17 @@
 			});			
 
 		}
-		else if (event === 'delete') {
-
+		else if (event === 'hoverListItem') {
+            _u.delegateEvent(self.listWrapper, 'h3', 'mouseover', function() {
+                var iconClassname = '.fa-trash', 
+                    src = this,
+                    
+                    deleteIcon = src.tagName === 'I' ? 
+								 gc(iconClassname, src.parentNode) : 
+								 qs(iconClassname, src);
+                                 
+                handler({ icon: deleteIcon });
+            }); 
 		}
 	};
 
@@ -60,6 +73,11 @@
 			icon ? icon.className = 'fa fa-folder' : null;
 		}
 	};
+    
+    CategoryListView.prototype.toggleDeleteIcon = function(icon) {
+        var opacity = +icon.style.opacity ? '0' : '1';
+        icon.style.opacity = opacity;
+    };
 
 	// Export to window
 	window.app = window.app || {};

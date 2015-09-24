@@ -197,6 +197,18 @@ h4 { font-size: 1em; }
     cursor: pointer; 
 }
 
+.fa-trash {
+    opacity: 1;
+    color: #FCFAF2;
+    -webkit-transition: opacity.1s ease-in;
+    transition: opacity .1s ease-in;
+}
+
+.app-delete-category-btn {
+    float: right;
+    margin-right: 1em;
+}
+
 /* Middle list */
 .app-filter {
     position: absolute;
