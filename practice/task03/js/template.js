@@ -24,7 +24,10 @@
         return view;
     };*/
     
-    /* @constructor */
+    /** 
+     * Template of the category list item
+     * @constructor 
+     */
     function CategoryListTemplate() {
         this.defaultTemplate
         = '<li>'

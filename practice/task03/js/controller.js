@@ -3,12 +3,14 @@
 
 
 	/**
+     * Controller in MVC, controling category list view based on user's actions
      * @constructor
-	 *	
+	 * @param {object} Category list model object
+	 * @param {object} view object	
 	 */
 	function CategoryListController(model, view) {
 		var self = this;
-		//self.model = model;
+		self.model = model;
 		self.view = view;
 
 		self.view.bind('toggleList', function(item) {

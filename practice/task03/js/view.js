@@ -1,6 +1,11 @@
 (function(window, _u) {
 	'use strict';
 
+	/**
+	 * This view class controls the most left categoy list view of the todo app
+	 * @constructor
+	 * @param {object} template object
+	 */
 	function CategoryListView(template) {
 		this.template = template;
 		this.listWrapper = qs('.app-list[data-list-level="1"]');
@@ -9,16 +14,24 @@
 		this.addCategoryBtn = qs('.app-add-category-btn');
 	};
 
+	/**
+	 * Render view with the give command and parameters
+	 * @param {string} render view
+	 */
 	CategoryListView.prototype.render = function(renderCmd, parameter) {
 		var self = this;
 		var renderCommands = {
+			// expand or collapse list
 			toggleList: function() {
 				self.toggleList(parameter.list, parameter.icon);
 			},
             
+            // remove on item from category list
             removeItem: function() {
                 self.removeCategoryItem(parameter.listItem);
             }, 
+
+            // add a item to category list
             addItem: function() {
             	self.addCategoryItem(parameter.title);
             }
@@ -27,6 +40,11 @@
 		renderCommands[renderCmd]();
 	};
 
+	/**
+	 * Bind handler/callback with the given event
+	 * @param {string} event name
+	 * @param {function} handler/callback function that would excute as the given event is triggered
+	 */
 	CategoryListView.prototype.bind = function(event, handler) {
 		var self = this;
 		if (event === 'toggleList') {

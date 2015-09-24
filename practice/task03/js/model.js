@@ -1,5 +1,6 @@
 /**
  * Model
+ * To do: localStorage
  */
 (function(window, _u) {
     'use strict';
