@@ -163,9 +163,19 @@ h4 { font-size: 1em; }
     overflow: auto;
 }
 
-.app-list-collapse[data-list-level="2"] > li {
-	height: 0;
-	overflow: hidden;
+.app-list[data-list-level="2"] {
+    max-height: 9999px;
+    overflow: hidden;
+    -webkit-transition: max-height .3s cubic-bezier(1, 0, 1, 0);
+    -moz-transition: max-height .3s cubic-bezier(1, 0, 1, 0);
+    transition: max-height .3s scubic-bezier(1, 0, 1, 0);
+}
+
+.app-list-collapse[data-list-level="2"] {
+    max-height: 0;
+    -webkit-transition: max-height .3s cubic-bezier(0, 1, 0, 1) -.1s;
+    -moz-transition: max-height .3s cubic-bezier(0, 1, 0, 1) -.1s;
+    transition: max-height .3s cubic-bezier(0, 1, 0, 1) -.1s;
 }
 
 .app-list[data-list-level="1"] h2 {

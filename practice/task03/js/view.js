@@ -51,15 +51,11 @@
 	};
 
 	CategoryListView.prototype.toggleList = function(list, icon) {
-		// set a height to the list or its wrapper 
-		// in order to animate expand/collapse 
-
 		if (_u.hasClass(list, 'app-list-collapse')) {
 			_u.removeClass(list, 'app-list-collapse');
 			icon ? icon.className = 'fa fa-folder-open' : null;
 		}
 		else {
-			list.style.maxHeight = list.scrollHeight + 'px';
 			_u.addClass(list, 'app-list-collapse');
 			icon ? icon.className = 'fa fa-folder' : null;
 		}
