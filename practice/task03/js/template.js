@@ -1,8 +1,8 @@
-(function(window) {
+(function(window, _u) {
     'use strict';
     
     /* @constructor */
-    function Template() {};
+/*    function Template() {};
     
     Template.prototype.show = function(template, data) {
         var i, 
@@ -22,21 +22,41 @@
         }
         
         return view;
-    };
+    };*/
     
     /* @constructor */
-    function CategorListTemplate() {
+    function CategoryListTemplate() {
         this.defaultTemplate
         = '<li>'
-        +     '<h2>'
-        +         '<i class="fa fa-folder"></i>{{title}}'
-        +     '</h2>'
+        +     '<h3>'
+        +         '<i class="fa fa-tasks"></i>'
+        +         '{{title}}'
+        +         '<i class="fa fa-trash-o app-remove-btn"></i>'
+        +     '</h3>'
         + '</li>';
     };
-    CategorListTemplate.prototype = Object.create(Template);
+
+    CategoryListTemplate.prototype.add = function(categoryTitle) {
+        var template = this.defaultTemplate,
+            view = '';
+
+        template = template.replace('{{title}}', categoryTitle);
+        view += template;
+
+        return view;
+    }
     
     /* @constructor */
     function TaskListTemplate() {
-    }
-    TaskListTemplate.prototype = Object.create(Template);
-}());
+        this.defaultTemplate
+        = '<li>'
+        +     '<h2>'
+        +         '<i class="fa fa-folder-open"></i>{{title}}'
+        +     '</h2>'
+        + '</li>';
+    };
+
+    window.app = window.app || {};
+    window.app.CategoryListTemplate = CategoryListTemplate;
+
+}(window, _util));

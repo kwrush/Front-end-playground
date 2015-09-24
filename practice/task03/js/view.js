@@ -4,7 +4,9 @@
 	function CategoryListView(template) {
 		this.template = template;
 		this.listWrapper = qs('.app-list[data-list-level="1"]');
-		this.categoryList = qs('li[data-list-type="category"]', this.listWrapper);
+		this.categorylist = qs('.li[data-list-type="category]', this.listWrapper);
+		this.list = qs('.app-list[data-list-level="2"]', this.categorylist);
+		this.addCategoryBtn = qs('.app-add-category-btn');
 	};
 
 	CategoryListView.prototype.render = function(renderCmd, parameter) {
@@ -16,6 +18,9 @@
             
             removeItem: function() {
                 self.removeCategoryItem(parameter.listItem);
+            }, 
+            addItem: function() {
+            	self.addCategoryItem(parameter.title);
             }
 		}
 
@@ -61,6 +66,14 @@
 				handler({ listItem: elem });			
        		});  
 		}
+		else if (event === 'addItem') {
+			_u.addEvent(self.addCategoryBtn, 'click', function() {
+				var categoryName = prompt('Please enter the category name:', '');
+				categoryName === '' ? 
+					alert('Category name cannot be empty.') : 
+					handler({ title: categoryName });
+			});
+		}
 	};
 
 	CategoryListView.prototype.toggleList = function(list, icon) {
@@ -76,7 +89,13 @@
     
     CategoryListView.prototype.removeCategoryItem = function(listItem) {
     	var opt = confirm('Do you want to remove this category?');
+    	var list = listItem.parentNode;
         opt ? listItem.parentNode.removeChild(listItem) : null;   
+    };
+
+    CategoryListView.prototype.addCategoryItem = function(itemName) {  
+    	var self = this;  	
+    	self.list.innerHTML += self.template.add(itemName);
     };
 
 	// Export to window
