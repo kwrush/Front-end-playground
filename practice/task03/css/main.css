@@ -197,16 +197,27 @@ h4 { font-size: 1em; }
     cursor: pointer; 
 }
 
-.fa-trash {
-    opacity: 1;
+.fa-trash-o {
+    opacity: 0;
+    display: none;
     color: #FCFAF2;
-    -webkit-transition: opacity.1s ease-in;
-    transition: opacity .1s ease-in;
+    -webkit-transition: opacity .1s, color .2s ease-in;
+    transition: opacity .1s, color .2s ease-in;
 }
 
-.app-delete-category-btn {
+.app-remove-btn {
     float: right;
+    font-size: 1.1em;
     margin-right: 1em;
+}
+
+.app-list[data-list-level="2"] h3:hover .fa-trash-o {
+    opacity: 1;
+    display: inline;
+}
+
+.fa-trash-o:hover {
+    color: #4A593D;
 }
 
 /* Middle list */

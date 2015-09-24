@@ -24,7 +24,7 @@
         
     };
     
-    Model.protoype.remeveAll = function(callback) {
+    Model.protoype.removeAll = function(callback) {
         
     };
     

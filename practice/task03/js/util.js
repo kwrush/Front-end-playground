@@ -249,7 +249,7 @@ var _util = (function() {
             return key === undefined || hasOwnProperty.call( obj, key );
         },
 
-        // deep copy an object, not including function and regexp objects
+        // deep copy an object
         cloneObject: function(src) {
             var to = null; 
   

@@ -14,8 +14,8 @@
 				self.toggleList(parameter.list, parameter.icon);
 			},
             
-            hoverListItem: function() {
-                self.toggleDeleteIcon(parameter.icon);
+            removeItem: function() {
+                self.removeCategoryItem(parameter.listItem);
             }
 		}
 
@@ -49,17 +49,17 @@
 			});			
 
 		}
-		else if (event === 'hoverListItem') {
-            _u.delegateEvent(self.listWrapper, 'h3', 'mouseover', function() {
-                var iconClassname = '.fa-trash', 
-                    src = this,
-                    
-                    deleteIcon = src.tagName === 'I' ? 
-								 gc(iconClassname, src.parentNode) : 
-								 qs(iconClassname, src);
-                                 
-                handler({ icon: deleteIcon });
-            }); 
+		else if (event === 'removeItem') {
+       		delegate(self.listWrapper, 'i.app-remove-btn', 'click', function() {
+       			
+       			var elem = this;
+
+				while(!(elem.tagName === 'LI')) {
+					elem = elem.parentNode;
+				}  
+
+				handler({ listItem: elem });			
+       		});  
 		}
 	};
 
@@ -74,9 +74,9 @@
 		}
 	};
     
-    CategoryListView.prototype.toggleDeleteIcon = function(icon) {
-        var opacity = +icon.style.opacity ? '0' : '1';
-        icon.style.opacity = opacity;
+    CategoryListView.prototype.removeCategoryItem = function(listItem) {
+    	var opt = confirm('Do you want to remove this category?');
+        opt ? listItem.parentNode.removeChild(listItem) : null;   
     };
 
 	// Export to window

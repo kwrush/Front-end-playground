@@ -15,8 +15,8 @@
 			self.toggleCategoryList(item);
 		});
         
-        self.view.bind('hoverListItem', function(item) {
-            self.toggleDeleteIcon(item);
+        self.view.bind('removeItem', function(item) {
+            self.removeCategoryItem(item);
         });
 	};
 
@@ -25,9 +25,9 @@
 		self.view.render('toggleList', item);
 	};
     
-    CategoryListController.prototype.toggleDeleteIcon = function(item) {
+    CategoryListController.prototype.removeCategoryItem = function(item) {
         var self = this;
-        self.view.render('hoverListItem', item);
+        self.view.render('removeItem', item);
     };
 
 	// Export to window
