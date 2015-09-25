@@ -5,29 +5,7 @@
 (function(window, _u) {
     'use strict';
     
-    
-    /**
-     * Create a new model instance, 
-     * category model and task model inherit from it
-     *
-     * @constructor
-     * @param {object} storage a reference to the client side storage class
-     */
-    function Model(storage) {
-        this.storage = storage;
-    };
-    
-    Model.prototype.read = function(query, callback) {
-        
-    };
-    
-    Model.prototype.remove = function(id, callback) {
-        
-    };
-    
-    Model.protoype.removeAll = function(callback) {
-        
-    };
+
     
     /**
      * Create a new category model instance
@@ -36,12 +14,46 @@
      * @param {object} storage a reference to the client side storage class
      * @param {string} category name
      */
-    function CategoryModel(storage, categoryName) {
-        Model.call(this, storage);
-        this.categoryName = categoryName || '';
+    function CategoryModel(storage) {
+        this.storage = storage;
+    };
+    /**
+     * Creat a category item, if the category title exists, fire
+     * controller to control view to make a warning
+     * Not check the input argument
+     * @param {string} category title
+     * @param {function} callback that is fired after we create a model
+     */
+    CategoryModel.prototype.create = function(title, callback) {
+        title = title.trim() || '';
+        callback = callback || function() {};
+
+        var newCategoyr = {
+            title: title,
+            tasks: []
+        };
+
+        this.storage.findAll(function(data) {
+            this;
+        });
+
+        // Get all categorty names in the storage 
+        /*var allCategory = this.storage.readAllCategory();
+
+        var allTitles = [];
+        for (var i = allCategory.length; i--) {
+            allTitles.push(allCategory[i].title);
+        }
+
+        // check if the new title exists
+        if (allTitles.indexOf(title) >= 0) {
+            var msg = 'Cateogy title exists, please choose another one.'    
+            this.controller.alert(msg);
+        }*/
+
+        this.storage.save(newCategory, callback);
     };
 
-    _u.inherit(CategoryModel, Model);
     
 
     
@@ -62,7 +74,9 @@
         this.date = date || new Date();
         this.taskContent = taskContent || '';
     };
-    
-    _u.inherit(TaskModel, Model);
-     
+
+    // Export
+    window.app = window.app || {};
+    window.app.CategoryModel = CategoryModel;
+
 }(window, _util));

@@ -38,8 +38,15 @@
 
     CategoryListController.prototype.addCategoryItem = function(item) {
         var self = this;
-        self.view.render('addItem', item);
+        self.model.create(item.title, function() {
+        	this;
+        });
     };
+
+    CategoryListController.prototype.alert = function(msg) {
+    	var self = this;
+
+    }
 
 	// Export to window
 	window.app = window.app || {};
