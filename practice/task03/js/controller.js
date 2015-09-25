@@ -38,14 +38,22 @@
 
     CategoryListController.prototype.addCategoryItem = function(item) {
         var self = this;
-        self.model.create(item.title, function() {
-        	this;
+        self.model.create(item.title, function(newItem) {
+        	// the argument is undefined if the new category name
+        	// already exists
+        	if (!!newItem) {
+        		self.view.render('addItem', newItem);
+        	}	
+        	else {
+        		var msg = 'The category name already exists, please enter another one.';
+        		self.view.render('alert', msg);
+        	}
         });
     };
 
     CategoryListController.prototype.alert = function(msg) {
     	var self = this;
-
+    	self.view.render('alert', msg);
     }
 
 	// Export to window

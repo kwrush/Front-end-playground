@@ -28,30 +28,12 @@
         title = title.trim() || '';
         callback = callback || function() {};
 
-        var newCategoyr = {
+        var newCategory = {
             title: title,
             tasks: []
         };
 
-        this.storage.findAll(function(data) {
-            this;
-        });
-
-        // Get all categorty names in the storage 
-        /*var allCategory = this.storage.readAllCategory();
-
-        var allTitles = [];
-        for (var i = allCategory.length; i--) {
-            allTitles.push(allCategory[i].title);
-        }
-
-        // check if the new title exists
-        if (allTitles.indexOf(title) >= 0) {
-            var msg = 'Cateogy title exists, please choose another one.'    
-            this.controller.alert(msg);
-        }*/
-
-        this.storage.save(newCategory, callback);
+        this.storage.saveCategory(newCategory, callback);
     };
 
     

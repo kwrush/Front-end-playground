@@ -34,6 +34,11 @@
             // add a item to category list
             addItem: function() {
             	self.addCategoryItem(parameter.title);
+            },
+
+            // show alert dialog
+            alert: function() {
+            	self.showAlert(parameter);
             }
 		}
 
@@ -91,7 +96,7 @@
 					alert('Category name cannot be empty.') : 
 					handler({ title: categoryName });
 			});
-		}
+		};
 	};
 
 	CategoryListView.prototype.toggleList = function(list, icon) {
@@ -114,6 +119,10 @@
     CategoryListView.prototype.addCategoryItem = function(itemName) {  
     	var self = this;  	
     	self.list.innerHTML += self.template.add(itemName);
+    };
+
+    CategoryListView.prototype.showAlert = function(msg){
+    	alert(msg);
     };
 
 	// Export to window
