@@ -3,14 +3,10 @@
     
     function ToDo(name) {
     	this.storage = new app.Storage(name);
-    	this.initCategoryList(this.storage);
-    };
-
-    ToDo.prototype.initCategoryList = function(storage) {
-    	this.categoryModel = new app.CategoryModel(storage);
-    	this.categoryListTemplate = new app.CategoryListTemplate();
-    	this.categoryListView = new app.CategoryListView(this.categoryListTemplate);
-    	this.categoryListController = new app.CategoryListController(this.categoryModel, this.categoryListView);
+    	this.model = new app.TodoModel(this.storage);
+    	this.template = new app.AppTemplate();
+    	this.view = new app.AppView(this.template);
+    	this.controller = new app.AppController(this.model, this.view);
     };
 
     var todo = new ToDo('myToDoApp');

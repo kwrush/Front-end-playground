@@ -8,23 +8,23 @@
 
     
     /**
-     * Create a new category model instance
+     * Create a new todo model instance
      *
      * @constructor
      * @param {object} storage a reference to the client side storage class
      * @param {string} category name
      */
-    function CategoryModel(storage) {
+    function TodoModel(storage) {
         this.storage = storage;
     };
     /**
-     * Creat a category item, if the category title exists, fire
+     * Creat an empty category item, if the category title exists, fire
      * controller to control view to make a warning
      * Not check the input argument
      * @param {string} category title
      * @param {function} callback that is fired after we create a model
      */
-    CategoryModel.prototype.create = function(title, callback) {
+    TodoModel.prototype.createCategory = function(title, callback) {
         title = title.trim() || '';
         callback = callback || function() {};
 
@@ -36,8 +36,23 @@
         this.storage.saveCategory(newCategory, callback);
     };
 
-    
-
+    /*
+     * Create one todo item
+     * @param {object} a todo object contains info of one todo item,
+     *                 e.g. {
+                                id: random unique number,
+                                title: 'Todo-1',
+                                category: 'Default category',
+                                toDoDate: Date object,
+                                initDate: Date object,
+                                status: 'active',
+                                description: 'This is something to do-4...'
+                            }
+     * @param {function} callback that is fired after we add a new todo 
+     */ 
+    TodoModel.prototype.createTask = function(todo, callback) {
+        
+    };
     
     /**
      * Create a new task model instance
@@ -59,6 +74,6 @@
 
     // Export
     window.app = window.app || {};
-    window.app.CategoryModel = CategoryModel;
+    window.app.TodoModel = TodoModel;
 
 }(window, _util));

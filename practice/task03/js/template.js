@@ -1,35 +1,13 @@
 (function(window, _u) {
     'use strict';
-    
-    /* @constructor */
-/*    function Template() {};
-    
-    Template.prototype.show = function(template, data) {
-        var i, 
-            l = data.length,
-            view = '';
-            
-        switch (template) {
-            case 'category':
-                for (i = l; i--) {
-                    var template = this.defaultTemplate;
-                    template = template.replace('{{title}}', data[i].title);
-                    view += template;
-                }
-                break;
-            case 'task':
-                break;
-        }
-        
-        return view;
-    };*/
+
     
     /** 
-     * Template of the category list item
+     * Template provides various default views
      * @constructor 
      */
-    function CategoryListTemplate() {
-        this.defaultTemplate
+    function AppTemplate() {
+        this.categoryItemTemplate
         = '<li>'
         +     '<h3>'
         +         '<i class="fa fa-tasks"></i>'
@@ -39,8 +17,8 @@
         + '</li>';
     };
 
-    CategoryListTemplate.prototype.add = function(categoryTitle) {
-        var template = this.defaultTemplate,
+    AppTemplate.prototype.addCategory = function(categoryTitle) {
+        var template = this.categoryItemTemplate,
             view = '';
 
         template = template.replace('{{title}}', categoryTitle);
@@ -48,18 +26,11 @@
 
         return view;
     }
-    
-    /* @constructor */
-    function TaskListTemplate() {
-        this.defaultTemplate
-        = '<li>'
-        +     '<h2>'
-        +         '<i class="fa fa-folder-open"></i>{{title}}'
-        +     '</h2>'
-        + '</li>';
-    };
+
+
+
 
     window.app = window.app || {};
-    window.app.CategoryListTemplate = CategoryListTemplate;
+    window.app.AppTemplate = AppTemplate;
 
 }(window, _util));

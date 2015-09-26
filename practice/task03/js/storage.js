@@ -80,11 +80,17 @@
 		// Get all categorty names in the storage 
         var titles = this.findAllCategoryTitles();
 
-        // if the name already exists or it's empty, ask view to make a alert
+        // Convert all titles to upper case
+        titles.forEach(function(title, index, allTitles) {
+        	allTitles[index] = title.toUpperCase();
+        });
+
+        // if the name already exists (ignore case), 
+        // or it's empty, ask view to make a alert
         if (newCategory.title === '') {
         	callback.call(this, newCategory);
         }
-        else if (titles.indexOf(newCategory.title) >= 0) {
+        else if (titles.indexOf(newCategory.title.toUpperCase()) >= 0) {
             callback.call(this);
         }
         else {

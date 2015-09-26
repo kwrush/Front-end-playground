@@ -5,44 +5,44 @@
 	/**
      * Controller in MVC, controling view of category list
      *
-	 * @param {object} Category list model object
+	 * @param {object} todo model object
 	 * @param {object} view object	
 	 */
-	function CategoryListController(model, view) {
+	function AppController(model, view) {
 		var self = this;
 		self.model = model;
 		self.view = view;
 
-		self.view.bind('toggleList', function(item) {
+		self.view.bind('toggleCategoryList', function(item) {
 			self.toggleCategoryList(item);
 		});
         
-        self.view.bind('removeItem', function(item) {
+        self.view.bind('removeCategory', function(item) {
             self.removeCategoryItem(item);
         });
 
-        self.view.bind('addItem', function(item) {
+        self.view.bind('addCategory', function(item) {
         	self.addCategoryItem(item);
         });
 	};
 
-    CategoryListController.prototype.buildView = function(local) {
+    AppController.prototype.buildView = function(local) {
 
     };
 
-	CategoryListController.prototype.toggleCategoryList = function(item) {
+	AppController.prototype.toggleCategoryList = function(item) {
 		var self = this;
-		self.view.render('toggleList', item);
+		self.view.render('toggleCategoryList', item);
 	};
     
-    CategoryListController.prototype.removeCategoryItem = function(item) {
+    AppController.prototype.removeCategoryItem = function(item) {
         var self = this;
-        self.view.render('removeItem', item);
+        self.view.render('removeCategory', item);
     };
 
-    CategoryListController.prototype.addCategoryItem = function(item) {
+    AppController.prototype.addCategoryItem = function(item) {
         var self = this;
-        self.model.create(item.title, function(newItem) {
+        self.model.createCategory(item.title, function(newItem) {
         	// the argument is undefined if the new category name
         	// already exists
             if (!newItem) {
@@ -54,18 +54,18 @@
                 self.view.render('alert', msg);
             }	
         	else {
-        		self.view.render('addItem', newItem);
+        		self.view.render('addCategory', newItem);
         	}
         });
     };
 
-    CategoryListController.prototype.alert = function(msg) {
+    AppController.prototype.alert = function(msg) {
     	var self = this;
     	self.view.render('alert', msg);
     }
 
 	// Export to window
 	window.app = window.app || {};
-	window.app.CategoryListController = CategoryListController;
+	window.app.AppController = AppController;
 
 }(window, _util));

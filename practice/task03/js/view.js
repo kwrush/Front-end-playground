@@ -2,11 +2,11 @@
 	'use strict';
 
 	/**
-	 * This view class controls the most left categoy list view of the todo app
+	 * This view class
 	 * @constructor
 	 * @param {object} template object
 	 */
-	function CategoryListView(template) {
+	function AppView(template) {
 		this.template = template;
 		this.listWrapper = qs('.app-list[data-list-level="1"]');
 		this.categorylist = qs('.li[data-list-type="category]', this.listWrapper);
@@ -18,21 +18,21 @@
 	 * Render view with the give command and parameters
 	 * @param {string} render view
 	 */
-	CategoryListView.prototype.render = function(renderCmd, parameter) {
+	AppView.prototype.render = function(renderCmd, parameter) {
 		var self = this;
 		var renderCommands = {
 			// expand or collapse list
-			toggleList: function() {
-				self.toggleList(parameter.list, parameter.icon);
+			toggleCategoryList: function() {
+				self.toggleCategoryList(parameter.list, parameter.icon);
 			},
             
             // remove on item from category list
-            removeItem: function() {
+            removeCategory: function() {
                 self.removeCategoryItem(parameter.listItem);
             }, 
 
             // add a item to category list
-            addItem: function() {
+            addCategory: function() {
             	self.addCategoryItem(parameter.title);
             },
 
@@ -50,9 +50,9 @@
 	 * @param {string} event name
 	 * @param {function} handler/callback function that would excute as the given event is triggered
 	 */
-	CategoryListView.prototype.bind = function(event, handler) {
+	AppView.prototype.bind = function(event, handler) {
 		var self = this;
-		if (event === 'toggleList') {
+		if (event === 'toggleCategoryList') {
 			_u.delegateEvent(self.listWrapper, 'h2', 'click', function() {
 				var iconSelector = '[class^="fa"]',
 
@@ -77,7 +77,7 @@
 			});			
 
 		}
-		else if (event === 'removeItem') {
+		else if (event === 'removeCategory') {
        		delegate(self.listWrapper, 'i.app-remove-btn', 'click', function() {
        			
        			var elem = this;
@@ -89,7 +89,7 @@
 				handler({ listItem: elem });			
        		});  
 		}
-		else if (event === 'addItem') {
+		else if (event === 'addCategory') {
 			_u.addEvent(self.addCategoryBtn, 'click', function() {
 				var categoryName = prompt('Please enter the category name:', ''); 
 					handler({ title: categoryName });
@@ -97,7 +97,7 @@
 		};
 	};
 
-	CategoryListView.prototype.toggleList = function(list, icon) {
+	AppView.prototype.toggleCategoryList = function(list, icon) {
 		if (_u.hasClass(list, 'app-list-collapse')) {
 			_u.removeClass(list, 'app-list-collapse');
 			icon ? icon.className = 'fa fa-folder-open' : null;
@@ -108,23 +108,23 @@
 		}
 	};
     
-    CategoryListView.prototype.removeCategoryItem = function(listItem) {
+    AppView.prototype.removeCategoryItem = function(listItem) {
     	var opt = confirm('Do you want to remove this category?');
     	var list = listItem.parentNode;
         opt ? listItem.parentNode.removeChild(listItem) : null;   
     };
 
-    CategoryListView.prototype.addCategoryItem = function(itemName) {  
+    AppView.prototype.addCategoryItem = function(itemName) {  
     	var self = this;  	
-    	self.list.innerHTML += self.template.add(itemName);
+    	self.list.innerHTML += self.template.addCategory(itemName);
     };
 
-    CategoryListView.prototype.showAlert = function(msg){
+    AppView.prototype.showAlert = function(msg){
     	alert(msg);
     };
 
 	// Export to window
 	window.app = window.app || {};
-	window.app.CategoryListView = CategoryListView;
+	window.app.AppView = AppView;
 
 }(window, _util));
