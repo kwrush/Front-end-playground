@@ -14,15 +14,56 @@
 
 		if (!localStorage[name]) {
 			var data = {
+				// just create dummy initial data
 				todoApp: [
 					{
 						title: 'Default category-1',
-						tasks: []
+						tasks: [
+							{
+								id: new Date().getTime(),
+								category: 'Default category-1',  
+								title: 'Todo-1',
+								toDoDate: new Date(2015, 8, 30, 17, 30, 0),
+								initDate: new Date(2015, 8, 26, 9, 30, 1),
+								status: 'completed',
+								description: 'This is something to do...'
+							},
+
+							{
+								id: new Date().getTime(),
+								title: 'Todo-2',
+								category: 'Default category-1',
+								toDoDate: new Date(2015, 9, 1, 9, 0, 0),
+								initDate: new Date(2015, 8, 26, 12, 10, 32),
+								status: 'active',
+								description: 'This is something to do-2...'
+							}
+						]
 					},
 
 					{
 						title: 'Default category-2',
-						tasks: []
+						tasks: [
+							{
+								id: new Date().getTime(),
+								title: 'Todo-3',
+								category: 'Default category-2',
+								toDoDate: new Date(2015, 9, 18, 10, 0, 0),
+								initDate: new Date(2015, 9, 17, 10, 31, 21),
+								status: 'completed',
+								description: 'This is something to do-3...'
+							},
+
+							{
+								id: new Date().getTime(),
+								title: 'Todo-4',
+								category: 'Default category-2',
+								toDoDate: new Date(2015, 9, 28, 12, 0, 0),
+								initDate: new Date(2015, 9, 25, 11, 13, 27),
+								status: 'active',
+								description: 'This is something to do-4...'
+							}
+						]
 					}
 				]
 			};
@@ -39,8 +80,11 @@
 		// Get all categorty names in the storage 
         var titles = this.findAllCategoryTitles();
 
-        // if exists, ask view to make a alert
-        if (titles.indexOf(newCategory.title) >= 0) {
+        // if the name already exists or it's empty, ask view to make a alert
+        if (newCategory.title === '') {
+        	callback.call(this, newCategory);
+        }
+        else if (titles.indexOf(newCategory.title) >= 0) {
             callback.call(this);
         }
         else {

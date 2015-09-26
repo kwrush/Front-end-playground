@@ -3,8 +3,8 @@
 
 
 	/**
-     * Controller in MVC, controling category list view based on user's actions
-     * @constructor
+     * Controller in MVC, controling view of category list
+     *
 	 * @param {object} Category list model object
 	 * @param {object} view object	
 	 */
@@ -26,6 +26,10 @@
         });
 	};
 
+    CategoryListController.prototype.buildView = function(local) {
+
+    };
+
 	CategoryListController.prototype.toggleCategoryList = function(item) {
 		var self = this;
 		self.view.render('toggleList', item);
@@ -41,12 +45,16 @@
         self.model.create(item.title, function(newItem) {
         	// the argument is undefined if the new category name
         	// already exists
-        	if (!!newItem) {
-        		self.view.render('addItem', newItem);
-        	}	
+            if (!newItem) {
+                var msg = 'The category name already exists, please enter another one.';
+                self.view.render('alert', msg);
+            }
+            else if (!newItem.title) {
+                var msg = 'Category name cannot be empty.';
+                self.view.render('alert', msg);
+            }	
         	else {
-        		var msg = 'The category name already exists, please enter another one.';
-        		self.view.render('alert', msg);
+        		self.view.render('addItem', newItem);
         	}
         });
     };

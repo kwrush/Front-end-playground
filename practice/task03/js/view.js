@@ -91,9 +91,7 @@
 		}
 		else if (event === 'addItem') {
 			_u.addEvent(self.addCategoryBtn, 'click', function() {
-				var categoryName = prompt('Please enter the category name:', '');
-				categoryName === '' ? 
-					alert('Category name cannot be empty.') : 
+				var categoryName = prompt('Please enter the category name:', ''); 
 					handler({ title: categoryName });
 			});
 		};
