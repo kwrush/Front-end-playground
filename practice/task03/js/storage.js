@@ -14,7 +14,7 @@
 
 		if (!localStorage[name]) {
 			var data = {
-				// just create dummy initial data
+				// just create some dummy data
 				todoApp: [
 					{
 						title: 'Default category-1',
@@ -23,8 +23,8 @@
 								id: new Date().getTime(),
 								category: 'Default category-1',  
 								title: 'Todo-1',
-								toDoDate: new Date(2015, 8, 30, 17, 30, 0),
-								initDate: new Date(2015, 8, 26, 9, 30, 1),
+								todoDate: new Date(2015, 8, 30, 17, 30, 0),
+								createDate: new Date(2015, 8, 26, 9, 30, 1),
 								status: 'completed',
 								description: 'This is something to do...'
 							},
@@ -33,9 +33,19 @@
 								id: new Date().getTime(),
 								title: 'Todo-2',
 								category: 'Default category-1',
-								toDoDate: new Date(2015, 9, 1, 9, 0, 0),
-								initDate: new Date(2015, 8, 26, 12, 10, 32),
+								todoDate: new Date(2015, 9, 1, 9, 0, 0),
+								createDate: new Date(2015, 8, 26, 12, 10, 32),
 								status: 'active',
+								description: 'This is something to do-2...'
+							},
+
+							{
+								id: new Date().getTime(),
+								title: 'Todo-2',
+								category: 'Default category-1',
+								todoDate: new Date(2015, 9, 2, 11, 0, 0),
+								createDate: new Date(2015, 8, 27, 11, 31, 12),
+								status: 'completed',
 								description: 'This is something to do-2...'
 							}
 						]
@@ -48,8 +58,8 @@
 								id: new Date().getTime(),
 								title: 'Todo-3',
 								category: 'Default category-2',
-								toDoDate: new Date(2015, 9, 18, 10, 0, 0),
-								initDate: new Date(2015, 9, 17, 10, 31, 21),
+								todoDate: new Date(2015, 9, 18, 10, 0, 0),
+								createDate: new Date(2015, 9, 17, 10, 31, 21),
 								status: 'completed',
 								description: 'This is something to do-3...'
 							},
@@ -58,8 +68,8 @@
 								id: new Date().getTime(),
 								title: 'Todo-4',
 								category: 'Default category-2',
-								toDoDate: new Date(2015, 9, 28, 12, 0, 0),
-								initDate: new Date(2015, 9, 25, 11, 13, 27),
+								todoDate: new Date(2015, 9, 28, 12, 0, 0),
+								createDate: new Date(2015, 9, 25, 11, 13, 27),
 								status: 'active',
 								description: 'This is something to do-4...'
 							}

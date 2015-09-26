@@ -24,33 +24,33 @@
                     <li data-list-type="all">
                         <h2>
                             <i class="fa fa-folder"></i>
-                            All task
+                            <a href="#/all" class="app-label">All task</a>
                         </h2>
                     </li>
                     <li data-list-type="category">
                         <h2>
                             <i class="fa fa-folder-open"></i>
-                            Task category
+                            <a href="#/" class="app-label">Task category</a>
                         </h2>
                         <ul class="app-list" data-list-level="2">
                             <li>
                                 <h3>
                                     <i class="fa fa-tasks"></i>
-                                    Default category-1
+                                    <a href="#/Default category-1" class="app-label">Default category-1</a>
                                     <i class="fa fa-trash-o app-remove-btn"></i>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
                                     <i class="fa fa-tasks"></i>
-                                    Default category-2
+                                    <a href="#/Default category-2" class="app-label">Default category-2</a>
                                     <i class="fa fa-trash-o app-remove-btn"></i>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
                                     <i class="fa fa-tasks"></i>
-                                    Default category-3
+                                    <a href="#/Default category-3" class="app-label">Default category-3</a>
                                     <i class="fa fa-trash-o app-remove-btn"></i>
                                 </h3>
                             </li>
@@ -63,9 +63,15 @@
 			</div>
 			<div class="app-body-col-1-4 shadow-right" style="z-index:2;">
                 <ul class="app-filter">
-                    <li data-filter-status="active">All</li>
-                    <li data-filter-status="deactive">Active</li>
-                    <li data-filter-status="deactive">Completed</li>
+                    <li data-filter-status="active">
+                        <a href="#/all">All</a>
+                    </li>
+                    <li data-filter-status="deactive">
+                        <a href="#/active">Active</a>
+                    </li>
+                    <li data-filter-status="deactive">
+                        <a href="#/completed">Completed</a>
+                    </li>
                 </ul>
 				<ol class="app-task-list">
                     <li>

@@ -9,8 +9,8 @@
 	function AppView(template) {
 		this.template = template;
 		this.listWrapper = qs('.app-list[data-list-level="1"]');
-		this.categorylist = qs('.li[data-list-type="category]', this.listWrapper);
-		this.list = qs('.app-list[data-list-level="2"]', this.categorylist);
+		this.categoryListContainer = qs('li[data-list-type="category"]', this.listWrapper);
+		this.categoryList = qs('.app-list[data-list-level="2"]', this.categoryListContainer);
 		this.addCategoryBtn = qs('.app-add-category-btn');
 	};
 
@@ -53,19 +53,19 @@
 	AppView.prototype.bind = function(event, handler) {
 		var self = this;
 		if (event === 'toggleCategoryList') {
-			_u.delegateEvent(self.listWrapper, 'h2', 'click', function() {
+			delegate(self.categoryListContainer, 'a, i, h2', 'click', function() {
 				var iconSelector = '[class^="fa"]',
 
 					// click event source
 					src = this,
 
-					// in case user click on icon (<i> tag) instead of the 
+					// in case user click on icon or link (<i> or <a> tag) instead of the 
 					// actual menu item, so, we check the click source type 
 					// in order to get the correct list and icon object
-					list = src.tagName === 'I' ? 
+					list = (src.tagName === 'A' || src.tagName === 'I') ? 
 								 src.parentNode.nextElementSibling : src.nextElementSibling,
 
-					titleIcon = src.tagName === 'I' ? 
+					titleIcon = (src.tagName === 'A' || src.tagName === 'I')? 
 								 qs(iconSelector, src.parentNode) : 
 								 qs(iconSelector, src);
 							

@@ -23,7 +23,10 @@ h1, h2, h3, h4, a, li, .fa {
 
 button { outline: none; }
 
-a { text-decoration: none;}
+a { 
+    color: inherit;
+    text-decoration: none;
+}
 
 h1 { font-size: 1.7em; }
 
