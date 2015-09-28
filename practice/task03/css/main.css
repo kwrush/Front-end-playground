@@ -200,26 +200,22 @@ h4 { font-size: 1em; }
     cursor: pointer; 
 }
 
-.fa-trash-o {
+.app-remove-btn {
     opacity: 0;
     display: none;
     color: #FCFAF2;
+    float: right;
+    font-size: 1.1em;
     -webkit-transition: opacity .1s, color .2s ease-in;
     transition: opacity .1s, color .2s ease-in;
 }
 
-.app-remove-btn {
-    float: right;
-    font-size: 1.1em;
-    margin-right: 1em;
-}
-
-.app-list[data-list-level="2"] h3:hover .fa-trash-o {
+.app-list[data-list-level="2"] h3:hover .app-remove-btn {
     opacity: 1;
     display: inline;
 }
 
-.fa-trash-o:hover {
+.app-remove-btn:hover {
     color: #4A593D;
 }
 
