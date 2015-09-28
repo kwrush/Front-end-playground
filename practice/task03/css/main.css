@@ -40,7 +40,7 @@ h4 { font-size: 1em; }
     padding-right: .4em;
 }
 
-.shadow-top {
+/* .shadow-top {
 	-webkit-box-shadow: ;
 	-moz-box-shadow: ;
 	-box-shadow: ;
@@ -50,7 +50,7 @@ h4 { font-size: 1em; }
 	-webkit-box-shadow: ;
 	-moz-box-shadow: ;
 	-box-shadow: ;
-}
+} */
 
 .shadow-right {
 	-webkit-box-shadow: 2px 0 5px 0 rgba(0, 0, 0, .3), 
@@ -200,26 +200,22 @@ h4 { font-size: 1em; }
     cursor: pointer; 
 }
 
-.fa-trash-o {
+.app-remove-btn {
     opacity: 0;
     display: none;
     color: #FCFAF2;
+    float: right;
+    font-size: 1.1em;
     -webkit-transition: opacity .1s, color .2s ease-in;
     transition: opacity .1s, color .2s ease-in;
 }
 
-.app-remove-btn {
-    float: right;
-    font-size: 1.1em;
-    margin-right: 1em;
-}
-
-.app-list[data-list-level="2"] h3:hover .fa-trash-o {
+.app-list[data-list-level="2"] h3:hover .app-remove-btn {
     opacity: 1;
     display: inline;
 }
 
-.fa-trash-o:hover {
+.app-remove-btn:hover {
     color: #4A593D;
 }
 
