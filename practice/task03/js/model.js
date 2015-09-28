@@ -36,6 +36,11 @@
         this.storage.saveCategory(newCategory, callback);
     };
 
+    TodoModel.prototype.removeCategory = function(item, callback) {
+        callback = callback || function() {};
+        this.storage.deleteCategory(title, callback);
+    };
+
     /*
      * Create one todo item
      * @param {object} a todo object contains info of one todo item,

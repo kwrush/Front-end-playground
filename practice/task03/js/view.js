@@ -93,8 +93,9 @@
 		}
 		else if (event === 'addCategory') {
 			_u.addEvent(self.addCategoryBtn, 'click', function() {
-				var categoryName = prompt('Please enter the category name:', ''); 
-					handler({ title: categoryName });
+				var categoryName = self.showPrompt('Please enter the category name:', ''); 
+
+				handler({ title: categoryName });
 			});
 		}
 		else if (event === 'clickCategoryItem') {
@@ -116,19 +117,29 @@
 	};
     
     AppView.prototype.removeCategoryItem = function(listItem) {
-    	var opt = confirm('Do you want to remove this category?');
+    	var select = this.showConfirm('Do you want to remove this category?');
     	var list = listItem.parentNode;
-        opt ? listItem.parentNode.removeChild(listItem) : null;   
+        select ? listItem.parentNode.removeChild(listItem) : null;   
     };
 
     AppView.prototype.addCategoryItem = function(itemName) {  
     	var self = this;  	
-    	self.list.innerHTML += self.template.addCategory(itemName);
+    	self.categoryList.innerHTML += self.template.addCategory(itemName);
     };
 
-    AppView.prototype.showAlert = function(msg){
+    AppView.prototype.showAlert = function(msg) {
     	alert(msg);
     };
+
+    AppView.prototype.showConfirm = function(msg) {
+    	var select = confirm(msg);
+    	return select;
+    };
+
+    AppView.prototype.showPrompt = function(msg) {
+    	var input = prompt(msg);
+    	return input;
+    }
 
 	// Export to window
 	window.app = window.app || {};

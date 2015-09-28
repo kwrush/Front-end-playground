@@ -110,11 +110,17 @@
         }
 	};
 
+	Storage.prototype.deleteCategory = function(title, callback) {
+		var data = JSON.parse(localStorage[this.dbName]);
+		
+		
+	};
+
 	// list 
 	Storage.prototype.findAll = function(callback) {
 		callback = callback || function() {};
 		callback.call(this, JSON.parse(localStorage[this.dbName]).todoApp);
-	}
+	};
 
 	Storage.prototype.findAllCategoryTitles = function() {
 		var data = JSON.parse(localStorage[this.dbName]).todoApp;

@@ -38,9 +38,11 @@
         var route = locationHash.split('/')[1];
         var page = route || '';
 
+        this.updateCategoryListView(page);
+
     };
 
-    AppController.prototype.initCategoryListView = function(currentPage) {
+    AppController.prototype.updateAppView = function(currentPage) {
         
     }
 
@@ -51,8 +53,9 @@
     
     AppController.prototype.removeCategoryItem = function(item) {
         var self = this;
-        // get category title
-        self.view.render('removeCategory', item);
+        this.model.removeCategory(item, function() {
+            self.view.render('removeCategory', item);
+        });
     };
 
     AppController.prototype.addCategoryItem = function(item) {
