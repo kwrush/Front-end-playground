@@ -40,7 +40,7 @@ h4 { font-size: 1em; }
     padding-right: .4em;
 }
 
-.shadow-top {
+/* .shadow-top {
 	-webkit-box-shadow: ;
 	-moz-box-shadow: ;
 	-box-shadow: ;
@@ -50,7 +50,7 @@ h4 { font-size: 1em; }
 	-webkit-box-shadow: ;
 	-moz-box-shadow: ;
 	-box-shadow: ;
-}
+} */
 
 .shadow-right {
 	-webkit-box-shadow: 2px 0 5px 0 rgba(0, 0, 0, .3), 
