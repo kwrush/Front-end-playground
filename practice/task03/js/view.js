@@ -53,8 +53,8 @@
 	AppView.prototype.bind = function(event, handler) {
 		var self = this;
 		if (event === 'toggleCategoryList') {
-			delegate(self.categoryListContainer, 'a, i, h2', 'click', function() {
-				var iconSelector = '[class^="fa"]',
+			delegate(self.categoryListContainer, 'li[data-list-type="category"] > a', 'click', function() {
+				var iconSelector = '.app-folder-icon',
 
 					// click event source
 					src = this,
@@ -62,12 +62,12 @@
 					// in case user click on icon or link (<i> or <a> tag) instead of the 
 					// actual menu item, so, we check the click source type 
 					// in order to get the correct list and icon object
-					list = (src.tagName === 'A' || src.tagName === 'I') ? 
-								 src.parentNode.nextElementSibling : src.nextElementSibling,
+					list = src.tagName === 'I' ? 
+								src.parentNode.nextElementSibling : src.nextElementSibling,
 
-					titleIcon = (src.tagName === 'A' || src.tagName === 'I')? 
-								 qs(iconSelector, src.parentNode) : 
-								 qs(iconSelector, src);
+					titleIcon = src.tagName === 'I'? 
+								qs(iconSelector, src.parentNode) : 
+								qs(iconSelector, src);
 							
 
 				handler({
@@ -78,13 +78,15 @@
 
 		}
 		else if (event === 'removeCategory') {
-       		delegate(self.listWrapper, 'i.app-remove-btn', 'click', function() {
-       			
+       		delegate(self.listWrapper, 'i.app-trash-icon', 'click', function(evt) {
+       			// prevent triggering <a> click event
+       			evt.preventDefault(); 
+
        			var elem = this;
 
 				while(!(elem.tagName === 'LI')) {
 					elem = elem.parentNode;
-				}  
+				} 
 
 				handler({ listItem: elem });			
        		});  
@@ -94,17 +96,22 @@
 				var categoryName = prompt('Please enter the category name:', ''); 
 					handler({ title: categoryName });
 			});
-		};
+		}
+		else if (event === 'clickCategoryItem') {
+			delegate(self.listWrapper, '.app-list[data-list-level="2"] li > a', 'click', function(evt) {
+				
+			});
+		}
 	};
 
 	AppView.prototype.toggleCategoryList = function(list, icon) {
 		if (_u.hasClass(list, 'app-list-collapse')) {
 			_u.removeClass(list, 'app-list-collapse');
-			icon ? icon.className = 'fa fa-folder-open' : null;
+			icon ? icon.className = 'fa fa-folder-open app-folder-icon' : null;
 		}
 		else {
 			_u.addClass(list, 'app-list-collapse');
-			icon ? icon.className = 'fa fa-folder' : null;
+			icon ? icon.className = 'fa fa-folder app-folder-icon' : null;
 		}
 	};
     

@@ -24,11 +24,25 @@
         self.view.bind('addCategory', function(item) {
         	self.addCategoryItem(item);
         });
+
+        self.view.bind('clickCategoryItem', function(item) {});
 	};
 
-    AppController.prototype.buildView = function(local) {
+    /**
+     * Load data and build the inital view, and
+     * it would show all todo items
+     *
+     * @param {string} 'all' | '' |
+     */
+    AppController.prototype.buildView = function(locationHash) {
+        var route = locationHash.split('/')[1];
+        var page = route || '';
 
     };
+
+    AppController.prototype.initCategoryListView = function(currentPage) {
+        
+    }
 
 	AppController.prototype.toggleCategoryList = function(item) {
 		var self = this;
@@ -37,6 +51,7 @@
     
     AppController.prototype.removeCategoryItem = function(item) {
         var self = this;
+        // get category title
         self.view.render('removeCategory', item);
     };
 
