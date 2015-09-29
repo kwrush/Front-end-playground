@@ -38,7 +38,7 @@
 
     TodoModel.prototype.removeCategory = function(item, callback) {
         callback = callback || function() {};
-        this.storage.deleteCategory(title, callback);
+        this.storage.deleteCategory(item, callback);
     };
 
     /*

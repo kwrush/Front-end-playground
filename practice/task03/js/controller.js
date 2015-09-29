@@ -53,7 +53,8 @@
     
     AppController.prototype.removeCategoryItem = function(item) {
         var self = this;
-        this.model.removeCategory(item, function() {
+
+        this.model.removeCategory(item, function(item) {
             self.view.render('removeCategory', item);
         });
     };

@@ -82,13 +82,24 @@
        			// prevent triggering <a> click event
        			evt.preventDefault(); 
 
-       			var elem = this;
+                var select = self.showConfirm('Do you want to remove this category?');
+                
+                if (select) {
+                    var elem = this,
+                        a;
 
-				while(!(elem.tagName === 'LI')) {
-					elem = elem.parentNode;
-				} 
+                    while(!(elem.tagName === 'LI')) {
+                        elem.tagName === 'A' ? a = elem : null;   
+                        elem = elem.parentNode;
+                    } 
 
-				handler({ listItem: elem });			
+                    var title = a.innerText.trim();
+
+                    handler({ 
+                            title: title,
+                            listItem: elem, 
+                        });	
+                }                        
        		});  
 		}
 		else if (event === 'addCategory') {
@@ -117,9 +128,7 @@
 	};
     
     AppView.prototype.removeCategoryItem = function(listItem) {
-    	var select = this.showConfirm('Do you want to remove this category?');
-    	var list = listItem.parentNode;
-        select ? listItem.parentNode.removeChild(listItem) : null;   
+    	listItem.parentNode.removeChild(listItem);   
     };
 
     AppView.prototype.addCategoryItem = function(itemName) {  

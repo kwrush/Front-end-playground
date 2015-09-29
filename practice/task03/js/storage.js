@@ -109,11 +109,27 @@
 			callback.call(this, newCategory);
         }
 	};
-
-	Storage.prototype.deleteCategory = function(title, callback) {
+    
+    /**
+     * Delete category from db 
+     * @param {DOM object} category object,      
+     */
+	Storage.prototype.deleteCategory = function(category, callback) {
 		var data = JSON.parse(localStorage[this.dbName]);
 		
-		
+        var arr = data.todoApp,
+            index;
+        for (index = arr.length; index--; ) {
+            var obj = arr[index];
+            if (obj.title === category.title) break;
+        }
+
+        if (index >= 0) {
+            data.todoApp.splice(index, 1);
+            localStorage[this.dbName] = JSON.stringify(data);
+        }
+        
+        callback.call(this, category);
 	};
 
 	// list 
