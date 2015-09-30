@@ -36,6 +36,14 @@
             	self.addCategoryItem(parameter.title);
             },
 
+            showCategory: function() {
+            	self.showCategoryItems(parameter);
+            },
+
+            showTodos: function() {
+            	self.showTodoItems(parameter);
+            },
+
             // show alert dialog
             alert: function() {
             	self.showAlert(parameter);
@@ -138,6 +146,20 @@
 
     AppView.prototype.showAlert = function(msg) {
     	alert(msg);
+    };
+
+    AppView.prototype.showCategoryItems = function(categoryTitle) {
+    	var self = this;
+    	var temp = '';
+    	for (var i = 0; i < categoryTitle.length; i++) {
+    		temp += this.template.addCategory(categoryTitle[i]);
+    	}
+
+    	self.categoryList.innerHTML = temp;
+    };
+
+    AppView.prototype.showTodoItems = function(todos) {
+    	/* body... */
     };
 
     AppView.prototype.showConfirm = function(msg) {

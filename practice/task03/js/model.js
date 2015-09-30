@@ -58,6 +58,14 @@
     TodoModel.prototype.createTask = function(todo, callback) {
         
     };
+
+    /**
+     * @param {function} callback is fired after we get all todo items
+     */
+    TodoModel.prototype.getAll = function(callback) {
+        callback = callback || function() {};
+        this.storage.findAll(callback);
+    };
     
     /**
      * Create a new task model instance

@@ -30,20 +30,20 @@
 							},
 
 							{
-								id: new Date().getTime(),
+								id: new Date().getTime() + 1,
 								title: 'Todo-2',
 								category: 'Default category-1',
-								todoDate: new Date(2015, 9, 1, 9, 0, 0),
+								todoDate: new Date(2015, 9, 18, 15, 30, 0),
 								createDate: new Date(2015, 8, 26, 12, 10, 32),
 								status: 'active',
 								description: 'This is something to do-2...'
 							},
 
 							{
-								id: new Date().getTime(),
+								id: new Date().getTime() + 2,
 								title: 'Todo-2',
 								category: 'Default category-1',
-								todoDate: new Date(2015, 9, 2, 11, 0, 0),
+								todoDate: new Date(2015, 9, 28, 11, 0, 0),
 								createDate: new Date(2015, 8, 27, 11, 31, 12),
 								status: 'completed',
 								description: 'This is something to do-2...'
@@ -55,7 +55,7 @@
 						title: 'Default category-2',
 						tasks: [
 							{
-								id: new Date().getTime(),
+								id: new Date().getTime() + 3,
 								title: 'Todo-3',
 								category: 'Default category-2',
 								todoDate: new Date(2015, 9, 18, 10, 0, 0),
@@ -65,10 +65,10 @@
 							},
 
 							{
-								id: new Date().getTime(),
+								id: new Date().getTime() + 4,
 								title: 'Todo-4',
 								category: 'Default category-2',
-								todoDate: new Date(2015, 9, 28, 12, 0, 0),
+								todoDate: new Date(2015, 9, 28, 12, 30, 0),
 								createDate: new Date(2015, 9, 25, 11, 13, 27),
 								status: 'active',
 								description: 'This is something to do-4...'
@@ -132,10 +132,45 @@
         callback.call(this, category);
 	};
 
-	// list 
+	/**
+	 * Find all categories and to do items grouped by its "to do" date
+	 * @param {function} callback fired after we get all
+	 */
 	Storage.prototype.findAll = function(callback) {
 		callback = callback || function() {};
-		callback.call(this, JSON.parse(localStorage[this.dbName]).todoApp);
+		
+		var self = this;
+		var data = JSON.parse(localStorage[this.dbName]).todoApp;
+
+		// stores all categories 
+		var categories = [],
+			todos = [];
+
+		for (var i = 0, len = data.length; i < len; i++) {
+			categories.push(data[i].title);
+			var group = data[i].tasks;
+
+			for (var glen = group.length, j = glen; j--; ) {
+				todos.push(group[j]);
+			}
+		}
+
+		var sortTodos = {};
+
+		// group todo items by their to do date
+		for (len = todos.length, i = len; i--; ) {
+
+			// reset date to the beginning of the date,
+			// since we only check whether two todo item
+			// belong to the same day
+			var date = new Date(todos[i].todoDate).setHours(0, 0, 0, 0);
+
+			(!!!sortTodos[date]) ? sortTodos[date] = [] : null;
+
+		    sortTodos[date].push(todos[i]);
+		}
+
+		callback.call(this, categories, sortTodos);
 	};
 
 	Storage.prototype.findAllCategoryTitles = function() {

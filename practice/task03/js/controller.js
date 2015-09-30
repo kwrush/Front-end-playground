@@ -35,15 +35,27 @@
      * @param {string} 'all' | '' |
      */
     AppController.prototype.buildView = function(locationHash) {
-        var route = locationHash.split('/')[1];
+        var route = locationHash;
         var page = route || '';
 
-        this.updateCategoryListView(page);
+        this.updateAppView(page);
 
     };
 
     AppController.prototype.updateAppView = function(currentPage) {
-        
+        var self = this;
+
+        if (currentPage === 'all' || currentPage === '') {
+
+            // [categories] is an array of all category objects, and
+            // [todos] is an object groups todo objects by their todo date
+            self.model.getAll(function(categories, todos) {
+                self.view.render('showCategory', categories);
+                self.view.render('showTodos', todos);
+            });
+        }
+        else {  
+        }
     }
 
 	AppController.prototype.toggleCategoryList = function(item) {
