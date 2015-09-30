@@ -31,7 +31,7 @@
 
 							{
 								id: new Date().getTime() + 1,
-								title: 'Todo-2',
+								title: 'What Todo-2',
 								category: 'Default category-1',
 								todoDate: new Date(2015, 9, 18, 15, 30, 0),
 								createDate: new Date(2015, 8, 26, 12, 10, 32),
@@ -41,7 +41,7 @@
 
 							{
 								id: new Date().getTime() + 2,
-								title: 'Todo-2',
+								title: 'Something Todo-3',
 								category: 'Default category-1',
 								todoDate: new Date(2015, 9, 28, 11, 0, 0),
 								createDate: new Date(2015, 8, 27, 11, 31, 12),
@@ -56,7 +56,7 @@
 						tasks: [
 							{
 								id: new Date().getTime() + 3,
-								title: 'Todo-3',
+								title: 'Test Todo-3',
 								category: 'Default category-2',
 								todoDate: new Date(2015, 9, 18, 10, 0, 0),
 								createDate: new Date(2015, 9, 17, 10, 31, 21),
@@ -66,7 +66,7 @@
 
 							{
 								id: new Date().getTime() + 4,
-								title: 'Todo-4',
+								title: 'Test Todo-4',
 								category: 'Default category-2',
 								todoDate: new Date(2015, 9, 28, 12, 30, 0),
 								createDate: new Date(2015, 9, 25, 11, 13, 27),
@@ -163,7 +163,8 @@
 			// reset date to the beginning of the date,
 			// since we only check whether two todo item
 			// belong to the same day
-			var date = new Date(todos[i].todoDate).setHours(0, 0, 0, 0);
+			var date = new Date(todos[i].todoDate);
+			date.setHours(0, 0, 0, 0);
 
 			(!!!sortTodos[date]) ? sortTodos[date] = [] : null;
 

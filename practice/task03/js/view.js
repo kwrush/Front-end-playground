@@ -12,6 +12,7 @@
 		this.categoryListContainer = qs('li[data-list-type="category"]', this.listWrapper);
 		this.categoryList = qs('.app-list[data-list-level="2"]', this.categoryListContainer);
 		this.addCategoryBtn = qs('.app-add-category-btn');
+		this.todoList = qs('ol.app-task-list');
 	};
 
 	/**
@@ -149,17 +150,28 @@
     };
 
     AppView.prototype.showCategoryItems = function(categoryTitle) {
-    	var self = this;
     	var temp = '';
     	for (var i = 0; i < categoryTitle.length; i++) {
     		temp += this.template.addCategory(categoryTitle[i]);
     	}
 
-    	self.categoryList.innerHTML = temp;
+    	this.categoryList.innerHTML = temp;
     };
 
     AppView.prototype.showTodoItems = function(todos) {
-    	/* body... */
+    	var temp = '';
+
+    	for (var key in todos) {
+
+    		var todoObj = {
+    			todoDate: new Date(key),
+    			items: todos[key]
+    		};
+
+    		temp += this.template.addTodoList(todoObj);
+    	}
+
+    	this.todoList.innerHTML = temp;
     };
 
     AppView.prototype.showConfirm = function(msg) {
