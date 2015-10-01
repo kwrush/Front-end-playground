@@ -11,8 +11,8 @@
 		this.listWrapper = qs('.app-list[data-list-level="1"]');
 		this.categoryListContainer = qs('li[data-list-type="category"]', this.listWrapper);
 		this.categoryList = qs('.app-list[data-list-level="2"]', this.categoryListContainer);
-		this.addCategoryBtn = gc('.app-add-category-btn')[0];
-        this.addTaskBtn = gc('.app-add-task-btn')[0];
+		this.addCategoryBtn = gc('app-add-category-btn')[0];
+        this.addTaskBtn = gc('app-add-task-btn')[0];
 		this.todoList = qs('ol.app-task-list');
 	};
 

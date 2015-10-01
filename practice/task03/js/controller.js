@@ -123,7 +123,7 @@
         }
 
         self.model.createTask(item, function() {
-            self.view.render();
+            self.view.render('addTask', item);
         }); 
     };
 
