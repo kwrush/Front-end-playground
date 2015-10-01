@@ -22,7 +22,7 @@
 			<div class="app-body-col-1-4 shadow-right" style="z-index:3;">
                 <ul class="app-list" data-list-level="1">
                     <li data-list-type="all">
-                        <a href="#/all">
+                        <a href="#/all" class="app-active-item">
                             <i class="fa fa-list-alt"></i>All task
                         </a>
                     </li>
@@ -63,32 +63,18 @@
 				</button>
 			</div>
 			<div class="app-body-col-1-4 shadow-right" style="z-index:2;">
-                <ul class="app-filter">
-                    <li data-filter-status="active">
+                <ul class="app-filter-nav">
+                    <li class="app-filter app-active-filter">
                         All
                     </li>
-                    <li data-filter-status="deactive">
+                    <li class="app-filter">
                         Active
                     </li>
-                    <li data-filter-status="deactive">
+                    <li class="app-filter">
                         Completed
                     </li>
                 </ul>
-				<ol class="app-task-list">
-                    <li>
-                        <h3 class="app-tasks-date">Sep-22-2015</h3>
-                        <ul class="app-tasks">
-                            <li data-task-status="completed">Task1</li>
-                            <li>Task2</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h3 class="app-tasks-date">Sep-23-2015</h3>
-                        <ul class="app-tasks">
-                            <li>Task3</li>
-                            <li data-task-status="completed">Task4</li>
-                        </ul>
-                    </li>
+				<ol class="app-task-list">                
                 </ol>
 				<button class="app-add-task-btn app-btn">
 					<i class="fa fa-plus-square"></i>New Task

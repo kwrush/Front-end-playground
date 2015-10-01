@@ -44,6 +44,10 @@
             showTodos: function() {
             	self.showTodoItems(parameter);
             },
+            
+            clickOnAll: function() {
+
+            },
 
             // show alert dialog
             alert: function() {
@@ -62,7 +66,7 @@
 	AppView.prototype.bind = function(event, handler) {
 		var self = this;
 		if (event === 'toggleCategoryList') {
-			delegate(self.categoryListContainer, 'li[data-list-type="category"] > a', 'click', function() {
+			delegate(self.categoryListContainer, 'li[data-list-type="category"] > a, i.app-folder-icon', 'click', function() {
 				var iconSelector = '.app-folder-icon',
 
 					// click event source
@@ -123,6 +127,25 @@
 				
 			});
 		}
+        else if (event === 'clickOnAll') {
+            delegate(self.listWrapper, 'li[data-list-type="all"] > a, i.fa-list-alt', 'click', function(evt) {
+                var iconSelector = '.fa-list-alt',
+                    src = this,
+                    listItems = qsa('li > a', self.categoryList),
+                    
+                    item = src.tagName === 'I' ?
+                        src.parentNode : src;
+                    
+                for (var len = listItems.length, i = len; i--; ) {
+                    _u.removeClass(listItems, 'app-active-item')
+                }
+                        
+                _u.hasClass(item, 'app-active-item') ? 
+                    null : _u.addClass(item, 'app-active-item'); 
+                    
+                handler();
+            });
+        }
 	};
 
 	AppView.prototype.toggleCategoryList = function(list, icon) {

@@ -25,7 +25,12 @@
         + '</li>'
 
         this.todoItemTemplate
-        = '<li data-task-status="{{status}}">{{title}}</li>';
+        = '<li data-task-status="{{status}}">'
+        +     '<a href="#/{{title}}">' 
+        +         '{{title}}'
+        +         '<i class="fa fa-times"></i>'
+        +     '</a>'
+        + '</li>';
 
         this.month = [
             'Jan', 'Feb', 'Mar', 'Apr', 
@@ -78,7 +83,7 @@
             view = '';
 
         template = template.replace('{{status}}', item.status);
-        template = template.replace('{{title}}', item.title);
+        template = template.replace(/{{title}}/g, item.title);
         view += template;
 
         return view;

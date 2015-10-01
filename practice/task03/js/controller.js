@@ -24,6 +24,10 @@
         self.view.bind('addCategory', function(item) {
         	self.addCategoryItem(item);
         });
+        
+        self.view.bind('clickOnAll', function() {
+            self.showAllTasks();
+        });
 
         self.view.bind('clickCategoryItem', function(item) {});
 	};
@@ -46,7 +50,6 @@
         var self = this;
 
         if (currentPage === 'all' || currentPage === '') {
-
             // [categories] is an array of all category objects, and
             // [todos] is an object groups todo objects by their todo date
             self.model.getAll(function(categories, todos) {
@@ -56,7 +59,14 @@
         }
         else {  
         }
-    }
+    };
+    
+    AppController.prototype.showAllTasks = function(item) {
+        var self = this;
+        self.model.getAll(function(categories, todos) {
+            self.view.render('showTodos', todos);
+        });
+    };
 
 	AppController.prototype.toggleCategoryList = function(item) {
 		var self = this;
@@ -68,6 +78,11 @@
 
         this.model.removeCategory(item, function(item) {
             self.view.render('removeCategory', item);
+            // get all todo items, we don't have to render category list 
+            // which has been done by the above render command
+            self.model.getAll(function(categories, todos) {
+                self.view.render('showTodos', todos);
+            });
         });
     };
 
