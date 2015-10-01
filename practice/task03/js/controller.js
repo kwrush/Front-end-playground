@@ -24,12 +24,18 @@
         self.view.bind('addCategory', function(item) {
         	self.addCategoryItem(item);
         });
+
+        self.view.bind('addTask', function(item) {
+            self.addTaskItem(item);
+        });
+
+        self.view.bind('clickCategoryItem', function(item) {
+            self.clickOnCategoryItem(item);
+        });
         
         self.view.bind('clickOnAll', function() {
             self.showAllTasks();
         });
-
-        self.view.bind('clickCategoryItem', function(item) {});
 	};
 
     /**
@@ -87,16 +93,18 @@
     };
 
     AppController.prototype.addCategoryItem = function(item) {
-        var self = this;
+        var self = this,
+            msg = '';
+
         self.model.createCategory(item.title, function(newItem) {
         	// the argument is undefined if the new category name
         	// already exists
             if (!newItem) {
-                var msg = 'The category name already exists, please enter another one.';
+                msg = 'The category name already exists, please enter another one.';
                 self.view.render('alert', msg);
             }
-            else if (!newItem.title) {
-                var msg = 'Category name cannot be empty.';
+            else if (newItem.title.trim() === '') {
+                msg = 'Category name cannot be empty.';
                 self.view.render('alert', msg);
             }	
         	else {
@@ -105,10 +113,32 @@
         });
     };
 
-    AppController.prototype.alert = function(msg) {
+    AppController.prototype.addTaskItem = function(item) {
+        var self = this,
+            title = item.title.trim();
+
+        if (title === '') {
+            self.view.render('alert', 'The task name cannot be empty.');
+            return;
+        }
+
+        self.model.createTask(item, function() {
+            self.view.render();
+        }); 
+    };
+
+    AppController.prototype.clickOnCategoryItem = function(categoryTitle) {
+        var self = this;
+
+        self.model.getTasksByCategory(categoryTitle, function(todos) {
+            self.view.render('showTodos', todos);
+        });
+    };
+
+    /*AppController.prototype.alert = function(msg) {
     	var self = this;
     	self.view.render('alert', msg);
-    }
+    };*/
 
 	// Export to window
 	window.app = window.app || {};

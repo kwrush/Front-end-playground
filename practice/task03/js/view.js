@@ -11,7 +11,8 @@
 		this.listWrapper = qs('.app-list[data-list-level="1"]');
 		this.categoryListContainer = qs('li[data-list-type="category"]', this.listWrapper);
 		this.categoryList = qs('.app-list[data-list-level="2"]', this.categoryListContainer);
-		this.addCategoryBtn = qs('.app-add-category-btn');
+		this.addCategoryBtn = gc('.app-add-category-btn')[0];
+        this.addTaskBtn = gc('.app-add-task-btn')[0];
 		this.todoList = qs('ol.app-task-list');
 	};
 
@@ -35,6 +36,10 @@
             // add a item to category list
             addCategory: function() {
             	self.addCategoryItem(parameter.title);
+            },
+
+            addTask: function() {
+                self.addTaskItem(parameter);
             },
 
             showCategory: function() {
@@ -122,22 +127,39 @@
 				handler({ title: categoryName });
 			});
 		}
+        else if (event === 'addTask') {
+            
+        }
 		else if (event === 'clickCategoryItem') {
 			delegate(self.listWrapper, '.app-list[data-list-level="2"] li > a', 'click', function(evt) {
-				
+				var src = this,
+                    item = src.tagName === 'I' ?
+                        src.parentNode : src,
+
+                    categoryTitle = item.dataset.title,
+
+                    listItems = qsa('li > a', self.listWrapper);
+
+                for (var len = listItems.length, i = len; i--; ) {
+                    _u.removeClass(listItems[i], 'app-active-item') ;
+                }
+
+                _u.addClass(item, 'app-active-item');
+
+                handler(item.dataset.title);
 			});
 		}
         else if (event === 'clickOnAll') {
             delegate(self.listWrapper, 'li[data-list-type="all"] > a, i.fa-list-alt', 'click', function(evt) {
                 var iconSelector = '.fa-list-alt',
                     src = this,
-                    listItems = qsa('li > a', self.categoryList),
+                    listItems = qsa('li > a', self.categoryLis),
                     
                     item = src.tagName === 'I' ?
                         src.parentNode : src;
                     
                 for (var len = listItems.length, i = len; i--; ) {
-                    _u.removeClass(listItems, 'app-active-item')
+                    _u.removeClass(listItems[i], 'app-active-item')
                 }
                         
                 _u.hasClass(item, 'app-active-item') ? 

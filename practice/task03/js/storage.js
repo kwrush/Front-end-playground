@@ -223,8 +223,7 @@
 	 */
 	Storage.prototype.findAll = function(callback) {
 		callback = callback || function() {};
-		
-		var self = this;
+
 		var data = JSON.parse(localStorage[this.dbName]).todoApp;
 
 		// stores all categories 
@@ -240,23 +239,27 @@
 			}
 		}
 
-		var sortTodos = {};
-
-		// group todo items by their to do date
-		for (len = todos.length, i = len; i--; ) {
-
-			// reset date to the beginning of the date,
-			// since we only check whether two todo item
-			// belong to the same day
-			var date = new Date(todos[i].todoDate);
-			date.setHours(0, 0, 0, 0);
-
-			(!!!sortTodos[date]) ? sortTodos[date] = [] : null;
-
-		    sortTodos[date].push(todos[i]);
-		}
+		var sortTodos = this.groupTodosByDate(todos);
 
 		callback.call(this, categories, sortTodos);
+	};
+
+	Storage.prototype.findTodosByCategory = function(category, callback) {
+		callback = callback || function() {};
+
+		var data = JSON.parse(localStorage[this.dbName]).todoApp,
+			todos;
+
+		for (var len = data.length, i = len; i--; ) {
+			if (data[i].title === category) {
+				todos = data[i].tasks;
+				break;
+			}
+		}
+
+		var group = this.groupTodosByDate(todos);
+
+		callback.call(this, group);
 	};
 
 	Storage.prototype.findAllCategoryTitles = function() {
@@ -267,6 +270,45 @@
 		}
 
 		return titles;
+	};
+
+	/**
+	 * Group todos by their dates and sort todos in descending date
+	 * @param {array} array contains todo objects
+	 */
+	Storage.prototype.groupTodosByDate = function(todos) {
+		var sortTodos = {},
+			result = {},
+			dateKeys;
+
+		// group todo items by their to do date
+		for (var len = todos.length, i = len; i--; ) {
+
+			// reset date to the beginning of the date,
+			// since we only check whether two todo item
+			// belong to the same day
+			var date = new Date(todos[i].todoDate);
+			date.setHours(0, 0, 0, 0);
+
+			(!!!sortTodos[date]) ? sortTodos[date] = [] : null;
+
+			// so key is the date
+		    sortTodos[date].push(todos[i]);
+		}
+
+		// get keys for sortTdod
+		dateKeys = Object.keys(sortTodos);
+
+		// sort date in descend
+		dateKeys.sort(function(a, b) {
+			return new Date(b) - new Date(a);
+		});
+
+		dateKeys.map(function(val) {
+			result[val] = sortTodos[val];
+		});
+
+		return result;
 	}
 
 	// Export

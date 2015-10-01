@@ -66,6 +66,11 @@
         callback = callback || function() {};
         this.storage.findAll(callback);
     };
+
+    TodoModel.prototype.getTasksByCategory = function(category, callback) {
+        callback = callback || function() {};
+        this.storage.findTodosByCategory(category, callback);
+    }
     
     /**
      * Create a new task model instance
