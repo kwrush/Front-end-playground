@@ -11,4 +11,12 @@
 
     var todo = new ToDo('myToDoApp');
 
+    function setView(cmd) {
+    	todo.controller.buildView(cmd);
+    }
+
+    window.onload = function() {
+    	setView(document.location.hash);
+    }
+
 }());

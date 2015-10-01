@@ -36,6 +36,11 @@
         this.storage.saveCategory(newCategory, callback);
     };
 
+    TodoModel.prototype.removeCategory = function(item, callback) {
+        callback = callback || function() {};
+        this.storage.deleteCategory(item, callback);
+    };
+
     /*
      * Create one todo item
      * @param {object} a todo object contains info of one todo item,
@@ -52,6 +57,14 @@
      */ 
     TodoModel.prototype.createTask = function(todo, callback) {
         
+    };
+
+    /**
+     * @param {function} callback is fired after we get all todo items
+     */
+    TodoModel.prototype.getAll = function(callback) {
+        callback = callback || function() {};
+        this.storage.findAll(callback);
     };
     
     /**

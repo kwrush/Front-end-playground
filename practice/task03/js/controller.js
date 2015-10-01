@@ -24,11 +24,39 @@
         self.view.bind('addCategory', function(item) {
         	self.addCategoryItem(item);
         });
+
+        self.view.bind('clickCategoryItem', function(item) {});
 	};
 
-    AppController.prototype.buildView = function(local) {
+    /**
+     * Load data and build the inital view, and
+     * it would show all todo items
+     *
+     * @param {string} 'all' | '' |
+     */
+    AppController.prototype.buildView = function(locationHash) {
+        var route = locationHash;
+        var page = route || '';
+
+        this.updateAppView(page);
 
     };
+
+    AppController.prototype.updateAppView = function(currentPage) {
+        var self = this;
+
+        if (currentPage === 'all' || currentPage === '') {
+
+            // [categories] is an array of all category objects, and
+            // [todos] is an object groups todo objects by their todo date
+            self.model.getAll(function(categories, todos) {
+                self.view.render('showCategory', categories);
+                self.view.render('showTodos', todos);
+            });
+        }
+        else {  
+        }
+    }
 
 	AppController.prototype.toggleCategoryList = function(item) {
 		var self = this;
@@ -37,7 +65,10 @@
     
     AppController.prototype.removeCategoryItem = function(item) {
         var self = this;
-        self.view.render('removeCategory', item);
+
+        this.model.removeCategory(item, function(item) {
+            self.view.render('removeCategory', item);
+        });
     };
 
     AppController.prototype.addCategoryItem = function(item) {

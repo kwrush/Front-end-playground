@@ -9,25 +9,80 @@
     function AppTemplate() {
         this.categoryItemTemplate
         = '<li>'
-        +     '<h3>'
-        +         '<i class="fa fa-tasks"></i>'
+        +     '<a href="#/{{href}}">'
+        +         '<i class="fa fa-tasks app-tasks-icon"></i>'
         +         '{{title}}'
-        +         '<i class="fa fa-trash-o app-remove-btn"></i>'
-        +     '</h3>'
+        +         '<i class="fa fa-trash-o app-trash-icon"></i>'
+        +     '</a>'
         + '</li>';
+
+        this.todoListTemplate
+        = '<li>'
+        +     '<h3 class="app-tasks-date">{{todo-date}}</h3>'
+        +     '<ul class="app-tasks">'
+        +         '{{todo-list}}'
+        +     '</ul>'
+        + '</li>'
+
+        this.todoItemTemplate
+        = '<li data-task-status="{{status}}">{{title}}</li>';
+
+        this.month = [
+            'Jan', 'Feb', 'Mar', 'Apr', 
+            'May', 'Jun', 'Jul', 'Aug', 
+            'Sep', 'Oct', 'Nov', 'Dec'
+        ];
     };
 
     AppTemplate.prototype.addCategory = function(categoryTitle) {
         var template = this.categoryItemTemplate,
             view = '';
 
+        // relpace spaces in title and insert to <a>'s herf
+        template = template.replace('{{href}}', categoryTitle.replace(/\s/g, '%20'));
         template = template.replace('{{title}}', categoryTitle);
         view += template;
 
         return view;
     }
 
+    /**
+     * @param {object} one todo list objects, e.g. {
+                                                        todoDate: new Date(),
+                                                        items: [todo1, todo2]
+                                                   }
+     */
+    AppTemplate.prototype.addTodoList = function(todos) {
+        var template = this.todoListTemplate,
+            view = '', 
+            subView = '';
 
+        var date = todos.todoDate,
+            items = todos.items,
+            formattedDate = this.month[date.getMonth()] + '-' + date.getDate() + '-' + date.getFullYear();
+
+        // view of todo items inside this todo list
+        for (var i = 0, len = items.length; i < len; i++) {
+            subView += this.addTodoItem(items[i]);
+        }
+
+        template = template.replace('{{todo-date}}', formattedDate);
+        template = template.replace('{{todo-list}}', subView);
+        view += template;
+
+        return view;
+    }
+
+    AppTemplate.prototype.addTodoItem = function(item) {
+        var template = this.todoItemTemplate,
+            view = '';
+
+        template = template.replace('{{status}}', item.status);
+        template = template.replace('{{title}}', item.title);
+        view += template;
+
+        return view;
+    }
 
 
     window.app = window.app || {};
