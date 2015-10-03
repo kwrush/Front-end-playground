@@ -82,7 +82,7 @@
 							{
 								id: new Date().getTime() + 3,
 								title: 'Test Todo-3',
-								category: 'Default category-2',
+								category: 'Default category-3',
 								todoDate: new Date(2015, 10, 18, 10, 0, 0),
 								createDate: new Date(2015, 9, 17, 10, 31, 21),
 								status: 'completed',
@@ -92,7 +92,7 @@
 							{
 								id: new Date().getTime() + 4,
 								title: 'Test Todo-4',
-								category: 'Default category-2',
+								category: 'Default category-3',
 								todoDate: new Date(2015, 9, 28, 12, 30, 0),
 								createDate: new Date(2015, 9, 25, 11, 13, 27),
 								status: 'active',
@@ -107,7 +107,7 @@
 							{
 								id: new Date().getTime() + 3,
 								title: 'Test Todo-3',
-								category: 'Default category-2',
+								category: 'Default category-4',
 								todoDate: new Date(2015, 11, 18, 10, 0, 0),
 								createDate: new Date(2015, 9, 17, 10, 31, 21),
 								status: 'completed',
@@ -117,7 +117,7 @@
 							{
 								id: new Date().getTime() + 4,
 								title: 'Test Todo-4',
-								category: 'Default category-2',
+								category: 'Default category-4',
 								todoDate: new Date(2015, 10, 28, 17, 30, 0),
 								createDate: new Date(2015, 9, 25, 11, 13, 27),
 								status: 'active',
@@ -131,7 +131,7 @@
 						tasks: [
 							{
 								id: new Date().getTime(),
-								category: 'Default category-1',  
+								category: 'Default category-5',  
 								title: 'Todo-1',
 								todoDate: new Date(2015, 9, 30, 17, 30, 0),
 								createDate: new Date(2015, 8, 26, 9, 30, 1),
@@ -142,7 +142,7 @@
 							{
 								id: new Date().getTime() + 1,
 								title: 'What Todo-2',
-								category: 'Default category-1',
+								category: 'Default category-5',
 								todoDate: new Date(2015, 9, 18, 15, 30, 0),
 								createDate: new Date(2015, 8, 26, 12, 10, 32),
 								status: 'active',
@@ -152,7 +152,7 @@
 							{
 								id: new Date().getTime() + 2,
 								title: 'Something Todo-3',
-								category: 'Default category-1',
+								category: 'Default category-5',
 								todoDate: new Date(2015, 9, 30, 11, 0, 0),
 								createDate: new Date(2015, 8, 27, 11, 31, 12),
 								status: 'completed',
