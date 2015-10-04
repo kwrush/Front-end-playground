@@ -20,7 +20,7 @@
 						title: 'Default category-1',
 						tasks: [
 							{
-								id: new Date().getTime(),
+								id: new Date().getTime() - 1,
 								category: 'Default category-1',  
 								title: 'Todo-1',
 								todoDate: new Date(2015, 8, 30, 17, 30, 0),
