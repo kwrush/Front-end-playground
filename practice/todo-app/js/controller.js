@@ -29,12 +29,16 @@
             self.addTaskItem(item);
         });
 
+        self.view.bind('removeTask', function(item) {
+            self.removeTodoItem(item);
+        });
+
         self.view.bind('clickCategoryItem', function(item) {
             self.clickOnCategoryItem(item);
         });
         
-        self.view.bind('clickOnAll', function() {
-            self.showAllTasks();
+        self.view.bind('clickOnFilter', function() {
+            self.updateTaskView();
         });
 	};
 
@@ -82,7 +86,7 @@
     AppController.prototype.removeCategoryItem = function(item) {
         var self = this;
 
-        this.model.removeCategory(item, function(item) {
+        self.model.removeCategory(item, function(item) {
             self.view.render('removeCategory', item);
             // get all todo items, we don't have to render category list 
             // which has been done by the above render command
@@ -90,6 +94,12 @@
                 self.view.render('showTodos', todos);
             });
         });
+    };
+
+    AppController.prototype.removeTodoItem = function(item) {
+        var self = this;
+
+        self.model.removeTodo(item, function(item))
     };
 
     AppController.prototype.addCategoryItem = function(item) {

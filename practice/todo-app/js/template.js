@@ -25,7 +25,7 @@
         + '</li>'
 
         this.todoItemTemplate
-        = '<li data-task-status="{{status}}">'
+        = '<li data-task-status="{{status}}" data-task-id="{{id}}">'
         +     '<a href="#/{{title}}">' 
         +         '{{title}}'
         +         '<i class="fa fa-times"></i>'
@@ -81,6 +81,7 @@
             view = '';
 
         template = template.replace('{{status}}', item.status);
+        template = template.replace('{{id}}', item.id);
         template = template.replace(/{{title}}/g, item.title);
         view += template;
 

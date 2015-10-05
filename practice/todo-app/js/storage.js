@@ -285,7 +285,7 @@
 		for (var len = todos.length, i = len; i--; ) {
 
 			// reset date to the beginning of the date,
-			// since we only check whether two todo item
+			// since we only  group those todos which are
 			// belong to the same day
 			var date = new Date(todos[i].todoDate);
 			date.setHours(0, 0, 0, 0);
