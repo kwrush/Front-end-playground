@@ -9,7 +9,7 @@
     function AppTemplate() {
         this.categoryItemTemplate
         = '<li>'
-        +     '<a href="#/" data-title="{{title}}">'
+        +     '<a href="#" data-title="{{title}}">'
         +         '<i class="fa fa-tasks app-tasks-icon"></i>'
         +         '{{title}}'
         +         '<i class="fa fa-trash-o app-trash-icon"></i>'
@@ -26,7 +26,7 @@
 
         this.todoItemTemplate
         = '<li data-task-status="{{status}}" data-task-id="{{id}}">'
-        +     '<a href="#/{{title}}">' 
+        +     '<a href="#">' 
         +         '{{title}}'
         +         '<i class="fa fa-times"></i>'
         +     '</a>'
@@ -81,7 +81,7 @@
             view = '';
 
         template = template.replace('{{status}}', item.status);
-        template = template.replace('{{id}}', item.id);
+        template = template.replace(/{{id}}/g, item.id);
         template = template.replace(/{{title}}/g, item.title);
         view += template;
 

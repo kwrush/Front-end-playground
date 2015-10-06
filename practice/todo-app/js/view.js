@@ -49,9 +49,13 @@
             showTodos: function() {
             	self.showTodoItems(parameter);
             },
-            
-            clickOnAll: function() {
 
+            removeTodo: function() {
+                self.removeTodoItem(parameter);
+            },
+            
+            clickOnFilter: function() {
+                self.showTasksByFilter
             },
 
             // show alert dialog
@@ -168,6 +172,43 @@
                 handler();
             });
         }
+        else if (event === 'removeTask') {
+            delegate(self.todoList, '.app-task-list .fa-times', 'click', function(evt) {
+                evt.preventDefault();
+
+                var select = self.showConfirm('Do you want to remove this item?');
+
+                if (select) {
+                    var elem = this,
+                        category = qs('.app-active-item'),
+                        a;
+
+                    // wrapper wraps this item
+                    while(!(elem.tagName === 'LI')) {
+                        elem.tagName === 'A' ? a = elem : null;   
+                        elem = elem.parentNode;
+                    } 
+
+                    // if this is the last item within this list, 
+                    // get the list wrapper
+/*                    var parentElem = elem;
+                    if (!!!parentElem.nextSibling) {
+                        while(!(parentElem.tagName === 'LI')) {
+                            parentElem = parentElem.parentNode;
+                        }
+                    }*/
+
+                    var id = elem.dataset.taskId.trim();
+
+                    handler({ 
+                            id: id,
+                            listItem: elem, 
+                            //wrapper: parentElem,
+                            activeCategory: category.innerText
+                        }); 
+                }
+            });
+        }
 	};
 
 	AppView.prototype.toggleCategoryList = function(list, icon) {
@@ -217,6 +258,26 @@
     	}
 
     	this.todoList.innerHTML = temp;
+    };
+
+    AppView.prototype.removeTodoItem = function(id) {
+        var selector = 'li[data-task-id="' + id + '"]',
+            todoLi = qs(selector),
+            liWrapper = todoLi.parentNode;
+
+        liWrapper.removeChild(todoLi);
+
+        // if this is the last item within this list, remove this list
+        if (!liWrapper.childNodes.length) {
+            var sub = liWrapper,
+                parent = sub;
+            while (!(parent.tagName === 'OL')) {
+                parent.tagName === 'LI' ? sub = parent : null;
+                parent = parent.parentNode;
+            }
+
+            parent.removeChild(sub);
+        }
     };
 
     AppView.prototype.showConfirm = function(msg) {

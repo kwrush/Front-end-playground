@@ -59,6 +59,12 @@
         
     };
 
+    TodoModel.prototype.removeTask = function(id, category, callback) {
+        callback = callback || function() {};
+        
+        this.storage.deleteTodo(id, category, callback); 
+    };
+
     /**
      * @param {function} callback is fired after we get all todo items
      */

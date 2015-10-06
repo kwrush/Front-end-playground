@@ -217,6 +217,51 @@
         callback.call(this, category);
 	};
 
+	Storage.prototype.deleteTodo = function(id, category, callback) {
+		var dataArr = JSON.parse(localStorage[this.dbName]).todoApp;
+
+		if (category === 'All tasks') {
+			this.deleteTodoById(id, dataArr);
+		}
+		else if (category) {
+			this.deleteTodoByIdInCategory(id, category, dataArr);
+		}
+
+		callback.call(this, id);
+	};
+
+	Storage.prototype.deleteTodoById = function(id, dataArr) {
+		for (var len = dataArr.length, i = len; i--; ) {
+			var tasks = dataArr[i].tasks;
+
+			for (var tLen = tasks.length, j = tLen; j--; ) {
+				if (tasks[j].id === id) {
+					tasks.pop(j);
+
+					dataArr[i].tasks = tasks;
+					return;
+				}
+			}
+		}
+	};
+
+	Storage.prototype.deleteTodoByIdInCategory = function(id, category, dataArr) {
+		for (var len = dataArr.length, i = len; i--; ) {
+			if (dataArr[i].title === category) {
+				var tasks = dataArr[i].tasks;
+
+				for (var tLen = tasks.length, j = tLen; j--; ) {
+					if (tasks[j].id === id) {
+						tasks.pop(j);
+
+						dataArr[i].tasks = tasks;
+						return;
+					}
+				}
+			}
+		}
+	};
+
 	/**
 	 * Find all categories and to do items grouped by its "to do" date
 	 * @param {function} callback fired after we get all
