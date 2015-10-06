@@ -218,14 +218,18 @@
 	};
 
 	Storage.prototype.deleteTodo = function(id, category, callback) {
-		var dataArr = JSON.parse(localStorage[this.dbName]).todoApp;
+		var data = JSON.parse(localStorage[this.dbName]),
+			arr = data.todoApp;
 
 		if (category === 'All tasks') {
-			this.deleteTodoById(id, dataArr);
+			arr = this.deleteTodoById(id, arr);
 		}
 		else if (category) {
-			this.deleteTodoByIdInCategory(id, category, dataArr);
+			arr = this.deleteTodoByIdInCategory(id, category, arr);
 		}
+
+		data.todoApp = arr;
+		localStorage[this.dbName] = JSON.stringify(data);
 
 		callback.call(this, id);
 	};
@@ -235,11 +239,11 @@
 			var tasks = dataArr[i].tasks;
 
 			for (var tLen = tasks.length, j = tLen; j--; ) {
-				if (tasks[j].id === id) {
-					tasks.pop(j);
+				if (tasks[j].id + '' === id) {
+					tasks.splice(j, 1);
 
 					dataArr[i].tasks = tasks;
-					return;
+					return dataArr;
 				}
 			}
 		}
@@ -251,11 +255,11 @@
 				var tasks = dataArr[i].tasks;
 
 				for (var tLen = tasks.length, j = tLen; j--; ) {
-					if (tasks[j].id === id) {
-						tasks.pop(j);
+					if (tasks[j].id + '' === id) {
+						tasks.splice(j, 1);
 
 						dataArr[i].tasks = tasks;
-						return;
+						return dataArr;
 					}
 				}
 			}
