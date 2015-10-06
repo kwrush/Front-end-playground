@@ -75,6 +75,56 @@
 							}
 						]
 					}, 
+
+					{
+						title: 'Default category-6',
+						tasks: [
+							{
+								id: new Date().getTime() + 12,
+								title: 'Test Todo-66',
+								category: 'Default category-6',
+								todoDate: new Date(2015, 9, 18, 10, 0, 0),
+								createDate: new Date(2015, 9, 17, 10, 31, 21),
+								status: 'completed',
+								description: 'To do-6...'
+							},
+
+							{
+								id: new Date().getTime() + 13,
+								title: 'Todo6',
+								category: 'Default category-6',
+								todoDate: new Date(2015, 9, 28, 12, 30, 0),
+								createDate: new Date(2015, 9, 25, 11, 13, 27),
+								status: 'active',
+								description: 'This is something to do-6...'
+							}
+						]
+					}, 
+
+					{
+						title: 'Default category-7',
+						tasks: [
+							{
+								id: new Date().getTime() + 14,
+								title: 'Todo-7',
+								category: 'Default category-7',
+								todoDate: new Date(2015, 8, 15, 11, 0, 0),
+								createDate: new Date(2015, 9, 10, 10, 31, 21),
+								status: 'completed',
+								description: 'Something to do-7...'
+							},
+
+							{
+								id: new Date().getTime() + 15,
+								title: 'Test Todo-7',
+								category: 'Default category-7',
+								todoDate: new Date(2015, 9, 18, 10, 30, 0),
+								createDate: new Date(2015, 9, 25, 11, 13, 27),
+								status: 'active',
+								description: 'This is something to do-7...'
+							}
+						]
+					}, 
                     
                     {
 						title: 'Default category-3',
@@ -326,7 +376,7 @@
 		callback.call(this, group);
 	};
 
-	
+
 	Storage.prototype.findAllCategoryTitles = function() {
 		var data = JSON.parse(localStorage[this.dbName]).todoApp;
 		var titles = [];
