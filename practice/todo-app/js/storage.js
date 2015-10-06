@@ -197,7 +197,8 @@
     
     /**
      * Delete category from db 
-     * @param {DOM object} category object,      
+     * @param {object} category object, normaly it's a <li> element,   
+     * @param {function} callback fired after we delete the category  
      */
 	Storage.prototype.deleteCategory = function(category, callback) {
 		var data = JSON.parse(localStorage[this.dbName]);
@@ -217,6 +218,12 @@
         callback.call(this, category);
 	};
 
+	/**
+     * Delete todo from db 
+     * @param {string} todo id
+     * @param {string} todo category
+     * @param {function} callback fired after we delete the todo     
+     */
 	Storage.prototype.deleteTodo = function(id, category, callback) {
 		var data = JSON.parse(localStorage[this.dbName]),
 			arr = data.todoApp;
@@ -234,6 +241,8 @@
 		callback.call(this, id);
 	};
 
+
+	// find todo from db by id
 	Storage.prototype.deleteTodoById = function(id, dataArr) {
 		for (var len = dataArr.length, i = len; i--; ) {
 			var tasks = dataArr[i].tasks;
@@ -249,6 +258,7 @@
 		}
 	};
 
+	// find todo from db by id and its category
 	Storage.prototype.deleteTodoByIdInCategory = function(id, category, dataArr) {
 		for (var len = dataArr.length, i = len; i--; ) {
 			if (dataArr[i].title === category) {
@@ -293,6 +303,11 @@
 		callback.call(this, categories, sortTodos);
 	};
 
+	/**
+	 * Find all todos of the given category
+     * @param {string} category name
+	 * @param {function} callback fired after we get all
+	 */	
 	Storage.prototype.findTodosByCategory = function(category, callback) {
 		callback = callback || function() {};
 
@@ -311,6 +326,7 @@
 		callback.call(this, group);
 	};
 
+	
 	Storage.prototype.findAllCategoryTitles = function() {
 		var data = JSON.parse(localStorage[this.dbName]).todoApp;
 		var titles = [];

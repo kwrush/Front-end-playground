@@ -8,18 +8,6 @@ var _util = (function() {
          * DOM operations
          */
         
-        /**
-         * A simple selector engine
-         * @param {String} selector css selector string
-         * @return {Array} DOM element array
-        */
-        $: function(selector) {
-            var idReg = /^#([\w_\-]+)/,
-                classReg = /^\.([\w_\-]+)/,
-                tagReg = /^\w+$/i,
-                attrReg = /(\w+)?\[\]/;
-        },
-        
         hasClass: function(element, className) {
             var classNames = element.className;
             
@@ -95,10 +83,10 @@ var _util = (function() {
         
         /**
          * add event listener to the given DOM object for the given event
-         * @param {DOM object} element DOM node
-         * @param {String} eventType event name
-         * @param {Object} listener function that would be excuted once the event is triggered
-         * @return {DOM object} given DOM object
+         * @param {object} element DOM node
+         * @param {string} eventType event name
+         * @param {object} listener function that would be excuted once the event is triggered
+         * @return {object} given DOM object
          */
         addEvent: function (element, eventType, listener) {
             eventType = eventType.replace(/^on/i, '').toLowerCase();
@@ -128,10 +116,10 @@ var _util = (function() {
         
         /**
          * remove event listener to the given DOM object for the given event.
-         * @param {DOM object} element DOM node
-         * @param {String} eventType event name
-         * @param {Object} listener function that would be excuted once the event is triggered
-         * @return {DOM object} given DOM object
+         * @param {object} element DOM node
+         * @param {string} eventType event name
+         * @param {object} listener function that would be excuted once the event is triggered
+         * @return {object} given DOM object
          */
         removeEvent: function(element, eventType, listener) {
             eventType = eventType.replace(/^on/i, '').toLowerCase();
@@ -188,11 +176,11 @@ var _util = (function() {
         
         /**
          * event delegation
-         * @param {DOM object} element DOM node delegated
-         * @param {String} tag tag name of the DOM object listened
-         * @param {String} eventType event name
-         * @param {Object} listener function that would be excuted once the event is triggered
-         * @return {DOM object} given DOM object
+         * @param {object} element DOM node delegated
+         * @param {string} tag tag name of the DOM object listened
+         * @param {string} eventType event name
+         * @param {object} listener function that would be excuted once the event is triggered
+         * @return {object} given DOM object
          */
         delegateEvent: function(element, tag, event, listener) {
             this.addEvent(element, event, function(e) {
@@ -358,91 +346,3 @@ var _util = (function() {
         }
     }
 })();
-
-
-/************ test $ function************/
-
-/************ test event binding function************/
-/* var btn = document.getElementsByTagName('button')[0];
-_util.addEvent(btn, 'click', function(e) {
-    target = e.target || e.srcElement;
-    alert('blabla');
-}, false); */
-
-/************ basic tool test ************/
-/*var a = [1, 2, 4, 5];
-function fcn() {}
-console.log(_util.isFunction(fcn));
-console.log(_util.isArray(a));*/
-
-/*var srcObj = {
-    a: 1,
-    b: {
-        b1: ["hello", "hi"],
-        b2: "JavaScript"
-    }
-};
-var abObj = srcObj;
-var tarObj = _util.cloneObject(srcObj);
-
-srcObj.a = 2;
-srcObj.b.b1[0] = "Hello";
-
-console.log(abObj.a);
-console.log(abObj.b.b1[0]);
-
-console.log(tarObj.a);      // 1
-console.log(tarObj.b.b1[0]);    // "hello"
-
-console.log(_util.cloneObject(1)); *///1...
-
-//console.log(_util.uniqArray([1, 2, '1', 'a', 'b', 'b', 3]));
-
-/*console.log(_util.trim('    Sthrhtc gggret ggdg  '));
-console.log(_util.trim('  hi!! '));*/
-
-/*var arr = ['java', 'c', 'php', 'html'];
-function output(item) {
-    console.log(item)
-}
-_util.each(arr, output);*/  // java, c, php, html
-
-/*var arr = ['java', 'c', 'php', 'html'];
-function output(item, index) {
-    console.log(index + ': ' + item)
-}
-_util.eachAlt(arr, output);*/  // java, c, php, html
-
-/*var obj = {
-    a: 1,
-    b: 2,
-    c: {
-        c1: 3,
-        c2: 4
-    }
-};
-console.log(_util.getObjectLength(obj));*/
-
-/*console.log(_util.isEmail('k.ehw@ee-eee.com'));
-console.log(_util.isEmail('khh-ehw09988@ee-eee898.com'));
-console.log(_util.isEmail('k998.ehw@abc.cn'));
-console.log(_util.isEmail('-hw@abc.cn'));
-
-console.log(_util.isMobilePhone('13842179545'));
-console.log(_util.isMobilePhone('008613842179545'));
-console.log(_util.isMobilePhone('(+86)13842179545'));*/
-
-/*********** DOM operation test *************/
-/*
-var div = document.getElementsByTagName('div')[0];
-_util.addClass(div, 'bb2');
-console.log(div.className);
-
-_util.removeClass(div, 'bb2');
-console.log(div.className);
-*/
-/*
-var elem = document.getElementsByTagName('p')[0];
-var sib = document.getElementsByTagName('table')[0];
-
-console.log(_util.isSiblingNode(elem, sib));*/

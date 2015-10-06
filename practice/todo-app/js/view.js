@@ -189,14 +189,6 @@
                         elem = elem.parentNode;
                     } 
 
-                    // if this is the last item within this list, 
-                    // get the list wrapper
-/*                    var parentElem = elem;
-                    if (!!!parentElem.nextSibling) {
-                        while(!(parentElem.tagName === 'LI')) {
-                            parentElem = parentElem.parentNode;
-                        }
-                    }*/
 
                     var id = elem.dataset.taskId.trim();
 
@@ -211,6 +203,11 @@
         }
 	};
 
+    /**
+     * Expand and shrink category list
+     * @param {object} DOM object
+     * @param {object} DOM object
+     */
 	AppView.prototype.toggleCategoryList = function(list, icon) {
 		if (_u.hasClass(list, 'app-list-collapse')) {
 			_u.removeClass(list, 'app-list-collapse');
@@ -221,20 +218,37 @@
 			icon ? icon.className = 'fa fa-folder app-folder-icon' : null;
 		}
 	};
-    
+
+
+    /**
+     * Remove select category item from the list 
+     * @param {object} DOM object
+     */
     AppView.prototype.removeCategoryItem = function(listItem) {
     	listItem.parentNode.removeChild(listItem);   
     };
 
+    /**
+     * Append new category item to the list
+     * @param {string} New category name
+     */
     AppView.prototype.addCategoryItem = function(itemName) {  
     	var self = this;  	
     	self.categoryList.innerHTML += self.template.addCategory(itemName);
     };
 
+    /**
+     * show alert with the given message
+     * @param {string} message
+     */
     AppView.prototype.showAlert = function(msg) {
     	alert(msg);
     };
 
+    /**
+     * Render category list based on given category title array
+     * @param {array} category title array
+     */
     AppView.prototype.showCategoryItems = function(categoryTitle) {
     	var temp = '';
     	for (var i = 0; i < categoryTitle.length; i++) {
@@ -244,6 +258,11 @@
     	this.categoryList.innerHTML = temp;
     };
 
+
+    /**
+     * Render todo list based on given todo objects list
+     * @param {object} todo objects list
+     */
     AppView.prototype.showTodoItems = function(todos) {
     	var temp = '';
 
@@ -260,6 +279,10 @@
     	this.todoList.innerHTML = temp;
     };
 
+    /**
+     * Rmove todo item with the give id
+     * @param {id} id string
+     */
     AppView.prototype.removeTodoItem = function(id) {
         var selector = 'li[data-task-id="' + id + '"]',
             todoLi = qs(selector),
@@ -280,11 +303,19 @@
         }
     };
 
+    /**
+     * Show a comfirm didlog
+     * @param {string} confirm message
+     */
     AppView.prototype.showConfirm = function(msg) {
     	var select = confirm(msg);
     	return select;
     };
 
+    /**
+     * Show an dialog
+     * @param {string} message 
+     */
     AppView.prototype.showPrompt = function(msg) {
     	var input = prompt(msg);
     	return input;
