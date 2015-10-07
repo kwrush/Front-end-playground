@@ -335,6 +335,10 @@ li.app-active-filter {
     background-color: #5DAC81;
     color: #FCFAF2;
     overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .app-todo-set {
@@ -369,7 +373,7 @@ li.app-active-filter {
 
 .app-todo-action {
     float: right;
-    padding: .8em .5em;
+    padding: .8em 1em;
     height: 100%;
     font-size: 1.5em;
 }
@@ -396,9 +400,9 @@ li.app-active-filter {
 .app-task-content-editor textarea {
     width: 100%;
     height: 100%;
-    padding: 1.5em;
+    padding: 1.7em;
     outline: none !important;
     resize: none;
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 
