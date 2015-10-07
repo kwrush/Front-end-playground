@@ -3,6 +3,7 @@ html {
 	box-sizing: border-box;
 	min-height: 100%;
 	position: relative;
+    overflow: hidden;
 }
 
 body {
@@ -248,6 +249,7 @@ h4 { font-size: 1em; }
 
 li.app-filter {
     color: #4A593D;
+    background-color: #FCFAF2;
     -webkit-transition: background-color .2s, color .2s ease-out;
     transition: background-color .2s, color .2s ease-out;    
 }
@@ -326,4 +328,77 @@ li.app-active-filter {
     display: inline;
 }
 
-/* Task content pane */
+/* Task editor pane */
+.app-editor-header {
+    width: 100%;
+    height: 11%;
+    background-color: #5DAC81;
+    color: #FCFAF2;
+    overflow: hidden;
+}
+
+.app-todo-set {
+    height: 100%;
+    float: left;
+}
+
+.app-todo-set > div:first-child {
+    padding: 1em 1.1em;
+    height: 50%;
+}
+
+.app-todo-set > div:last-child {
+    padding: .8em 1.1em;
+    height: 50%;
+}
+
+.app-todo-set select {
+}
+
+.app-todo-set select,
+.app-todo-set input {
+    min-width: 12em;
+    font-size: 1em;
+    color: #4A593D;
+    outline: none !important;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border: none;
+}
+
+.app-todo-action {
+    float: right;
+    padding: .8em .5em;
+    height: 100%;
+    font-size: 1.5em;
+}
+
+.app-task-content-editor {
+    padding: 2em;
+    width: 100%;
+    height: 89%;
+}
+
+.fa-floppy-o,
+.fa-check-square {
+    color: inherit;
+    -webkit-transition: color .2s ease-out;
+    transition: color .2s ease-out;
+}
+
+.fa-floppy-o:hover,
+.fa-check-square:hover {
+    color: #4A593D;
+    cursor: pointer;
+}
+
+.app-task-content-editor textarea {
+    width: 100%;
+    height: 100%;
+    padding: 1.5em;
+    outline: none !important;
+    resize: none;
+    font-size: 1.2em;
+}
+

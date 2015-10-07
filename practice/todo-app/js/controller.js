@@ -3,7 +3,7 @@
 
 
 	/**
-     * Controller in MVC, controling view of category list
+     * Controller in MVC
      *
 	 * @param {object} todo model object
 	 * @param {object} view object	
@@ -92,11 +92,9 @@
 
         self.model.removeCategory(item, function(item) {
             self.view.render('removeCategory', item);
+            
             // get all todo items, we don't have to render category list 
             // which has been done by the above render command
-            /*self.model.getAll(function(categories, todos) {
-                self.view.render('showTodos', todos);
-            });*/
             self.showAllTasks(item);
         });
     };
