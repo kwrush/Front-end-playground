@@ -14,6 +14,7 @@
 		this.addCategoryBtn = gc('app-add-category-btn')[0];
         this.addTaskBtn = gc('app-add-task-btn')[0];
 		this.todoList = qs('ol.app-task-list');
+        this.filterNav = qs('ul.app-filter-nav');
 	};
 
 	/**
@@ -137,6 +138,7 @@
 		else if (event === 'clickCategoryItem') {
 			delegate(self.listWrapper, '.app-list[data-list-level="2"] li > a', 'click', function(evt) {
 				var src = this,
+                    filter = qs('.app-active-filter'),
                     item = src.tagName === 'I' ?
                         src.parentNode : src,
 
@@ -150,12 +152,15 @@
 
                 _u.addClass(item, 'app-active-item');
 
-                handler(item.dataset.title);
+                handler({
+                    category: item.dataset.title, 
+                    status: filter.innerText});
 			});
 		}
         else if (event === 'clickOnAll') {
             delegate(self.listWrapper, 'li[data-list-type="all"] > a, i.fa-list-alt', 'click', function(evt) {
                 var iconSelector = '.fa-list-alt',
+                    filter = qs('.app-active-filter'),
                     src = this,
                     listItems = qsa('li > a', self.categoryLis),
                     
@@ -169,7 +174,7 @@
                 _u.hasClass(item, 'app-active-item') ? 
                     null : _u.addClass(item, 'app-active-item'); 
                     
-                handler();
+                handler(filter.innerText);
             });
         }
         else if (event === 'removeTask') {
@@ -199,6 +204,25 @@
                             activeCategory: category.innerText
                         }); 
                 }
+            });
+        }
+        else if (event === 'clickOnFilter') {
+            delegate(self.filterNav, '.app-filter', 'click', function(evt) {
+                var fLi = self.filterNav.children,
+                    selectCategory = qs('a.app-active-item');
+                for (var len = fLi.length, i = len; i--; ) {
+                    _u.removeClass(fLi[i], 'app-active-filter');
+                } 
+                
+                _u.addClass(this, 'app-active-filter');
+                
+                var status = this.innerText,
+                    category = selectCategory.innerText;
+                    
+                handler({
+                    category: category,
+                    status: status
+                });
             });
         }
 	};

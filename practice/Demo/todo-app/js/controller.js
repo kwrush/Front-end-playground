@@ -33,16 +33,43 @@
             self.removeTodoItem(item);
         });
 
-        self.view.bind('clickOnAll', function(item) {
-            self.showAllTasks(item);
+        self.view.bind('clickOnAll', function(status) {
+            if (status.toLowerCase() === 'all') {
+                self.showAllTasks();
+            }
+            else {
+                self.filterTaskView('All tasks', status)
+            }
         });
 
         self.view.bind('clickCategoryItem', function(item) {
-            self.clickOnCategoryItem(item);
+            if (item.status.toLowerCase() === 'all') {
+                self.clickOnCategoryItem(item.category);
+            }
+            else {
+                self.filterTaskView(item.category, item.status)
+            }
+            
         });
         
-        self.view.bind('clickOnFilter', function() {
-            self.updateTaskView();
+        self.view.bind('clickOnFilter', function(item) {
+            
+            if (item.category === 'All tasks') {
+                if (item.status.toLowerCase() === 'all') {
+                    self.showAllTasks();
+                }
+                else {
+                    self.filterTaskView(item.category, item.status);
+                }
+            }
+            else {
+                if (item.status.toLowerCase() === 'all') {
+                    self.clickOnCategoryItem(item.category);
+                }
+                else {
+                    self.filterTaskView(item.category, item.status);
+                }
+            }
         });
 	};
 
@@ -75,7 +102,7 @@
         }
     };
     
-    AppController.prototype.showAllTasks = function(item) {
+    AppController.prototype.showAllTasks = function() {
         var self = this;
         self.model.getAll(function(categories, todos) {
             self.view.render('showTodos', todos);
@@ -144,6 +171,28 @@
             self.view.render('addTask', item);
         }); 
     };
+    
+    /**
+     * Filter task list view based on user's action   
+    */
+    AppController.prototype.filterTaskView = function(category, status) {
+        var self = this;
+        
+        if (category === 'All tasks') {
+            self.model.getAll(function(categories, todos) {
+                self.model.filterTasksByStatus(todos, status, function(todos) {
+                    self.view.render('showTodos', todos);
+                });
+            });
+        }
+        else {
+            self.model.getTasksByCategory(category, function(todos) {
+                self.model.filterTasksByStatus(todos, status, function(todos) {
+                    self.view.render('showTodos', todos);
+                });
+            });
+        }
+    }
 
     AppController.prototype.clickOnCategoryItem = function(categoryTitle) {
         var self = this;

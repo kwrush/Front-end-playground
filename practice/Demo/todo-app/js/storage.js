@@ -375,7 +375,33 @@
 
 		callback.call(this, group);
 	};
-
+    
+    /** 
+     * filter todos by their status
+     * @param {object} object contains ordered todos
+     * @param {string} status used for filtering
+     * @param {function} callback fired after filering
+    */
+    Storage.prototype.todoFilter = function(todos, status, callback) {
+        callback = callback || function() {};
+        
+        var newTodos = {};
+        
+        for (var key in todos) {
+            var newItems = [];
+            var items = todos[key];
+            
+            for (var len = items.length, i = len; i--; ) {
+                if (items[i].status === status.toLowerCase()) {
+                    newItems.push(items[i]);
+                }
+            }
+            
+            newItems.length ? newTodos[key] = newItems : null;
+    	}
+        
+        callback.call(this, newTodos);
+    };
 
 	Storage.prototype.findAllCategoryTitles = function() {
 		var data = JSON.parse(localStorage[this.dbName]).todoApp;
