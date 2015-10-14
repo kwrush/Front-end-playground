@@ -78,6 +78,15 @@
         this.storage.findTodosByCategory(category, callback);
     };
     
+    TodoModel.prototype.getTaskByCategoryAndId = function(category, id, callback) {
+        callback = callback || function() {};
+        this.storage.getTodosByCategory(category, callback);
+    };
+    
+    TodoModel.prototype.getTaskById = function(id, callback) {
+        callback = callback || function() {};
+    };
+    
     TodoModel.prototype.filterTasksByStatus = function(todos, status, callback) {
         callback = callback || function() {};
         this.storage.todoFilter(todos, status, callback);
