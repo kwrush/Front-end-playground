@@ -71,6 +71,15 @@
                 }
             }
         });
+        
+        self.view.bind('clickTaskItem', function(item) {
+            if (item.category === 'All tasks') {
+                self.findTaskById(item.id);
+            }
+            else {
+                self.findTaskByCategoryAndId(item.category, item.id);
+            }
+        });
 	};
 
     /**
@@ -155,6 +164,20 @@
         	else {
         		self.view.render('addCategory', newItem);
         	}
+        });
+    };
+    
+    AppController.prototype.findTaskByCategoryAndId = function(category, id) {
+        var self = this;
+        self.model.getTaskByCategoryAndId(category, id, function(todo) {
+            self.view.render('showTodoContent', todo);
+        });
+    };
+    
+    AppController.prototype.findTaskById = function(id) {
+        var self = this;
+        self.model.getTaskById(id, function(todo) {
+            self.view.render('showTodoContent', todo);
         });
     };
 

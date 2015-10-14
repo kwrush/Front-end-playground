@@ -292,7 +292,7 @@
 	};
 
 
-	// find todo from db by id
+	// delete todo from db by id
 	Storage.prototype.deleteTodoById = function(id, dataArr) {
 		for (var len = dataArr.length, i = len; i--; ) {
 			var tasks = dataArr[i].tasks;
@@ -308,8 +308,8 @@
 		}
 	};
 
-	// find todo from db by id and its category
-	Storage.prototype.deleteTodoByIdInCategory = function(id, category, dataArr) {
+	// delete todo from db by id and its category
+	Storage.prototype.deleteTodoByCategoryAndId = function(category, id, dataArr) {
 		for (var len = dataArr.length, i = len; i--; ) {
 			if (dataArr[i].title === category) {
 				var tasks = dataArr[i].tasks;
@@ -324,6 +324,52 @@
 				}
 			}
 		}
+	};
+    
+    // find todo from db by id
+	Storage.prototype.getTodoById = function(id, callback) {
+        var data = JSON.parse(localStorage[this.dbName]),
+			arr = data.todoApp,
+            todoItem;
+            
+		for (var len = arr.length, i = len; i--; ) {
+			var tasks = dataArr[i].tasks;
+
+			for (var tLen = tasks.length, j = tLen; j--; ) {
+				if (tasks[j].id + '' === id) {
+					todoItem = tasks[j];
+                    break;
+				}
+			}
+		}
+        
+        if (todoItem) {
+            callback.call(this, todoItem);
+        }
+	};
+
+	// find todo from db by id and its category
+	Storage.prototype.getTodoByIdAndCategory = function(id, category, dataArr) {
+		var data = JSON.parse(localStorage[this.dbName]),
+			arr = data.todoApp,
+            todoItem;
+            
+        for (var len = arr.length, i = len; i--; ) {
+			if (arr[i].title === category) {
+				var tasks = dataArr[i].tasks;
+
+				for (var tLen = tasks.length, j = tLen; j--; ) {
+                    if (tasks[j].id + '' === id) {
+                        todoItem = tasks[j];
+                        break;
+                    }
+                }
+			}
+		}
+        
+        if (todoItem) {
+            callback.call(this, todoItem);
+        }
 	};
 
 	/**

@@ -82,24 +82,6 @@
         callback = callback || function() {};
         this.storage.todoFilter(todos, status, callback);
     }
-    
-    /**
-     * Create a new task model instance
-     *
-     * @constructor
-     * @param {object} storage a reference to the client side storage class
-     * @param {string} category name that the task belongs to
-     * @param {string} task name
-     * @param {object} deadline of the task 
-     * @param {string} detailed contents of the task
-     */
-    function TaskModel(storage, categoryName, taskName, date, taskContent) {
-        Model.call(this, storage);
-        this.categoryName = categoryName || '';
-        this.taskName = taskName || '';
-        this.date = date || new Date();
-        this.taskContent = taskContent || '';
-    };
 
     // Export
     window.app = window.app || {};

@@ -225,6 +225,19 @@
                 });
             });
         }
+        else if (event === 'clickTaskItem') {
+            delegate(self.todoList, '.app-tasks > li > a', 'click', function(evt) {
+                this.preventDefault();
+                
+                var id = this.parentElement.dataset.taskId,
+                    category = qs('a.app-active-item').innerText;
+                
+                handler({
+                    category: category,
+                    id: id
+                });
+            });
+        }
 	};
 
     /**
