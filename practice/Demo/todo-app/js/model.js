@@ -78,7 +78,7 @@
     
     TodoModel.prototype.getTaskByCategoryAndId = function(category, id, callback) {
         callback = callback || function() {};
-        this.storage.getTodoByCategorAndId(category, id, callback);
+        this.storage.getTodoByCategoryAndId(category, id, callback);
     };
     
     TodoModel.prototype.getTaskById = function(id, callback) {

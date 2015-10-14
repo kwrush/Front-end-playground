@@ -355,14 +355,14 @@
 	};
 
 	// find todo from db by id and its category
-	Storage.prototype.getTodoByIdAndCategory = function(category, id, callback) {
+	Storage.prototype.getTodoByCategoryAndId = function(category, id, callback) {
 		var data = JSON.parse(localStorage[this.dbName]),
 			arr = data.todoApp,
             todoItem;
             
         for (var len = arr.length, i = len; i--; ) {
 			if (arr[i].title === category) {
-				var tasks = dataArr[i].tasks;
+				var tasks = arr[i].tasks;
 
 				for (var tLen = tasks.length, j = tLen; j--; ) {
                     if (tasks[j].id + '' === id) {
