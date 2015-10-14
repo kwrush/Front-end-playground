@@ -5,8 +5,6 @@
 (function(window, _u) {
     'use strict';
     
-
-    
     /**
      * Create a new todo model instance
      *
@@ -80,11 +78,12 @@
     
     TodoModel.prototype.getTaskByCategoryAndId = function(category, id, callback) {
         callback = callback || function() {};
-        this.storage.getTodosByCategory(category, callback);
+        this.storage.getTodoByCategorAndId(category, id, callback);
     };
     
     TodoModel.prototype.getTaskById = function(id, callback) {
         callback = callback || function() {};
+        this.storage.getTodoById(id, callback);
     };
     
     TodoModel.prototype.filterTasksByStatus = function(todos, status, callback) {

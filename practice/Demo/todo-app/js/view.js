@@ -15,6 +15,9 @@
         this.addTaskBtn = gc('app-add-task-btn')[0];
 		this.todoList = qs('ol.app-task-list');
         this.filterNav = qs('ul.app-filter-nav');
+        this.todoTitle = gid('app-todo-title');
+        this.todoTime = gid('app-todo-date');
+        this.todoContent = qs('.app-task-content-editor > textarea');
 	};
 
 	/**
@@ -57,6 +60,10 @@
             
             clickOnFilter: function() {
                 self.showTasksByFilter
+            },
+
+            showTodoContent: function() {
+                self.showTodoContent(parameter);
             },
 
             // show alert dialog
@@ -227,7 +234,7 @@
         }
         else if (event === 'clickTaskItem') {
             delegate(self.todoList, '.app-tasks > li > a', 'click', function(evt) {
-                this.preventDefault();
+                evt.preventDefault();
                 
                 var id = this.parentElement.dataset.taskId,
                     category = qs('a.app-active-item').innerText;
@@ -314,6 +321,24 @@
     	}
 
     	this.todoList.innerHTML = temp;
+    };
+
+    AppView.prototype.showTodoContent = function(todo) {
+        var category = todo.category,
+            title = todo.title,
+            time = new Date(todo.todoDate),
+            status = todo.status,
+            content = todo.description,
+
+            formattedTime = time.getFullYear() + 
+                            '-' + time.getMonth() + 
+                            '-' + time.getDate() + 
+                            ' ' + time.getHours() + 
+                            ':' + (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes());
+
+        this.todoTitle.value = title;
+        this.todoTime.value = formattedTime;
+        this.todoContent.innerText = content;
     };
 
     /**

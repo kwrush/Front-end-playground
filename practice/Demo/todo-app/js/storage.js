@@ -310,20 +310,26 @@
 
 	// delete todo from db by id and its category
 	Storage.prototype.deleteTodoByCategoryAndId = function(category, id, dataArr) {
-		for (var len = dataArr.length, i = len; i--; ) {
-			if (dataArr[i].title === category) {
-				var tasks = dataArr[i].tasks;
+		var data = JSON.parse(localStorage[this.dbName]),
+			arr = data.todoApp,
+            todoItem;
+
+		for (var len = arr.length, i = len; i--; ) {
+			if (arr[i].title === category) {
+				var tasks = arr[i].tasks;
 
 				for (var tLen = tasks.length, j = tLen; j--; ) {
 					if (tasks[j].id + '' === id) {
-						tasks.splice(j, 1);
-
-						dataArr[i].tasks = tasks;
-						return dataArr;
+						todoItem = tasks[j];
+                    	break;
 					}
 				}
 			}
 		}
+
+		if (todoItem) {
+            callback.call(this, todoItem);
+        }
 	};
     
     // find todo from db by id
@@ -333,7 +339,7 @@
             todoItem;
             
 		for (var len = arr.length, i = len; i--; ) {
-			var tasks = dataArr[i].tasks;
+			var tasks = arr[i].tasks;
 
 			for (var tLen = tasks.length, j = tLen; j--; ) {
 				if (tasks[j].id + '' === id) {
@@ -349,7 +355,7 @@
 	};
 
 	// find todo from db by id and its category
-	Storage.prototype.getTodoByIdAndCategory = function(id, category, dataArr) {
+	Storage.prototype.getTodoByIdAndCategory = function(category, id, callback) {
 		var data = JSON.parse(localStorage[this.dbName]),
 			arr = data.todoApp,
             todoItem;
