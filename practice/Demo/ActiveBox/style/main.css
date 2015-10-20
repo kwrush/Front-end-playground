@@ -2,10 +2,18 @@
 	box-sizing: border-box;
 }
 
+/****** override default Bootstrap css ******/
+
+/****** custom css ******/
+
+/* bannner */
 #banner {
 	background-color: #ccc;
 }
 
+
+
+/* feature */
 #features {
 	background-color: #333;
 }
