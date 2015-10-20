@@ -1,0 +1,47 @@
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+#banner {
+	background-color: #ccc;
+}
+
+#features {
+	background-color: #333;
+}
+
+#works {
+	background-color: #ccc;
+}
+
+#our-team {
+	background-color: #333;
+}
+
+#testimonials {
+	background-color: #ccc;
+}
+
+#download {
+	background-color: #333;
+}
+
+.main-section {
+	width: 100%;
+	min-height: 728px;
+}
+
+.feature-info {
+	background-color: #ddd;
+	min-height: 200px;
+}
+
+.work-info {
+	background-color: #eee;
+	min-height: 200px;
+}
+
+.team-info {
+	background-color: #ddd;
+	min-height: 150px;	
+}
