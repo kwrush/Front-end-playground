@@ -4,14 +4,43 @@
 
 /****** override default Bootstrap css ******/
 
+
 /****** custom css ******/
 
 /* bannner */
 #banner {
+	background-image: url("../images/banner.jpg");
 	background-color: #ccc;
+	width: 100%;
+	height: 750px;
 }
 
+.banner-header {
+	width: 100%;
+}
 
+.fixed {
+	padding: 12px 0;
+	position: fixed;
+	background-color: #292c47;
+}
+
+.navbar {
+	margin: 0 auto;
+	max-width: 1170px;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0);
+	border: none;
+}
+
+button[data-target="#me-navmenu"] {
+	border-radius: 20px;
+	background-color: #e84545;
+}
+
+button[data-target="#me-navmenu"] .icon-bar {
+	background-color: #fff !important;
+}
 
 /* feature */
 #features {
