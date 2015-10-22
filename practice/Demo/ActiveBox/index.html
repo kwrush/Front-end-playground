@@ -8,113 +8,91 @@
     <link rel="icon" type="image/png" sizes="96x96" href="images/icons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16x16.png">
-    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="style/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="style/normalize.css">
     <link rel="stylesheet" href="style/font-awesome.min.css">
+    <link rel="stylesheet" href="style/mixin.css">
     <link rel="stylesheet" href="style/main.css">
     <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <!-- <script src="js/bootstrap.min.js"></script> -->
 </head>
 <body>
 	<section id="banner" class="main-section">
-		<!-- <header class="banner-header banner-header-fixed">
-			<nav role="navigation" class="navbar navbar-default navbar-fixed-top">
-				Toggle menu for better display on small screens
-				<div class="navbar-header">
-					<button type="button" data-target="#me-navbar" data-toggle="collapse" class="navbar-toggle">
-		                <span class="sr-only">Toggle navigation</span>
-		                <span class="icon-bar"></span>
-		                <span class="icon-bar"></span>
-		                <span class="icon-bar"></span>
-		            </button>
-					<a href="index.html" class="logo navbar-brand">
-						<img src="images/logo.png" alt="Logo">
-					</a>
-				</div>
-				Normal nav bar
-				<div id="me-navbar" class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li><a href="#features">Features</a></li>
-						<li><a href="#works">Works</a></li>
-						<li><a href="#ourteam">Our team</a></li>
-						<li><a href="#testional">Testimonials</a></li>
-						<li><a href="#download">Download</a></li>
-					</ul>
-				</div>
-			</nav>
-		</header> -->
-		<header class="banner-header fixed">
-			<nav role="navigation" class="navbar navbar-default">
-				<div class="header-content">
-					<button type="button" data-target="#me-navmenu" data-toggle="collapse" class="navbar-toggle">
-						<span class="sr-only">Toggle navigation</span>
-		                <span class="icon-bar"></span>
-		                <span class="icon-bar"></span>
-		                <span class="icon-bar"></span>	
-					</button>
-					<a href="index.html" class="logo navbar-brand">
-						<img src="images/logo.png" alt="Logo">
-					</a>
-				</div>
-				<div id="me-navmenu" class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
+		<header id="header">Header</header>
+		<div class="container">Container</div>
+		<!-- <header id="header">
+			<div class="header-content">
+				<a href="index.html" class="logo">
+					<img src="images/logo.png" alt="Logo">
+				</a>
+				<nav class="navbar">
+					<ul>
 						<li><a href="#features">Features</a></li>
 						<li><a href="#works">Works</a></li>
 						<li><a href="#team">Our team</a></li>
 						<li><a href="#testimonials">Testimonials</a></li>
 						<li><a href="#download">Download</a></li>
 					</ul>
-				</div>
-			</nav>
+				</nav>
+			</div>
 		</header>
 		<div class="container">
-			<!-- <div class="col-md-10">
-				<h1>YOUR FAVORITE ONE PAGE MULTI PURPOSE TEMPLATE</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla libero delectus voluptate, accusamus soluta, necessitatibus sit vero.</p>
-				<button>Find out more</button>
-			</div> -->
-		</div>
+		</div> -->
 	</section>
 	<section id="features" class="main-section">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-4 col-sm-6 text-center feature-info">A</div>
-				<div class="col-md-4 col-sm-6 text-center feature-info">B</div>
-				<div class="clearfix visible-sm-block"></div>
-				<div class="col-md-4 col-sm-6 text-center feature-info">C</div>
-				<div class="clearfix visible-md-block"></div>
-				<div class="col-md-4 col-sm-6 text-center feature-info">D</div>
-				<div class="clearfix visible-sm-block"></div>
-				<div class="col-md-4 col-sm-6 text-center feature-info">E</div>
-				<div class="col-md-4 col-sm-6 text-center feature-info">F</div>
-			</div>
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-2 col-sm-1-1 feature">A</div>
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-2 col-sm-1-1 feature">B</div>
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-2 col-sm-1-1 feature">C</div>
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-2 col-sm-1-1 feature">D</div>
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-2 col-sm-1-1 feature">E</div>
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-2 col-sm-1-1 feature">F</div>
 		</div>
 	</section>
 	<section id="works" class="main-section">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-3 col-sm-6 text-center work-info">A</div>
-				<div class="col-md-3 col-sm-6 text-center work-info">B</div>
-				<div class="col-md-3 col-sm-6 text-center work-info">C</div>
-				<div class="col-md-3 col-sm-6 text-center work-info">D</div>
-				<div class="col-md-3 col-sm-6 text-center work-info">E</div>
-				<div class="col-md-3 col-sm-6 text-center work-info">F</div>
-				<div class="col-md-3 col-sm-6 text-center work-info">G</div>
-				<div class="col-md-3 col-sm-6 text-center work-info">H</div>
-			</div>
+			<div class="col-xl-1-4 col-lg-1-2 col-md-1-2 col-sm-1-1 work">AA</div>
+			<div class="col-xl-1-4 col-lg-1-2 col-md-1-2 col-sm-1-1 work">BB</div>
+			<div class="col-xl-1-4 col-lg-1-2 col-md-1-2 col-sm-1-1 work">CC</div>
+			<div class="col-xl-1-4 col-lg-1-2 col-md-1-2 col-sm-1-1 work">DD</div>
+			<div class="col-xl-1-4 col-lg-1-2 col-md-1-2 col-sm-1-1 work">EE</div>
+			<div class="col-xl-1-4 col-lg-1-2 col-md-1-2 col-sm-1-1 work">FF</div>
+			<div class="col-xl-1-4 col-lg-1-2 col-md-1-2 col-sm-1-1 work">GG</div>
+			<div class="col-xl-1-4 col-lg-1-2 col-md-1-2 col-sm-1-1 work">HH</div>
 		</div>
 	</section>
-	<section id="team" class="main-section">
+	<section id="teams" class="main-section">
 		<div class="container">
+			<div class="col-xl-1-4 col-lg-1-4 col-md-1-2 col-sm-1-1 team">AAA</div>
+			<div class="col-xl-1-4 col-lg-1-4 col-md-1-2 col-sm-1-1 team">BBB</div>
+			<div class="col-xl-1-4 col-lg-1-4 col-md-1-2 col-sm-1-1 team">CCC</div>
+			<div class="col-xl-1-4 col-lg-1-4 col-md-1-2 col-sm-1-1 team">DDD</div>
+		</div>
+	</section>
+	<section id="testimonials" class="main-section">
+		<div class="container">
+			<div class="col-xl-1-2 col-lg-1-2 col-md-1-1 col-sm-1-1">AAAAAAA</div>
+			<div class="col-xl-1-2 col-lg-1-2 col-md-1-1 col-sm-1-1">BBBBBBB</div>
+		</div>
+	</section>
+	<section id="download" class="main-section">
+		<div class="container-col">
 			<div class="row">
-				<div class="col-md-3 col-sm-6 team-info">A</div>
-				<div class="col-md-3 col-sm-6 team-info">B</div>
-				<div class="col-md-3 col-sm-6 team-info">C</div>
-				<div class="col-md-3 col-sm-6 team-info">D</div>
+				<h3>Doloribus delectus nesciunt omnisLorem ipsum dolor sit amet!</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				<button>Download for free</button>
 			</div>
 		</div>
 	</section>
-	<section id="testimonials" class="main-section"></section>
-	<section id="download" class="main-section"></section>
-	<footer class="main-footer"></footer>
+	<footer id="main-footer" class="main-section">
+		<div class="container">
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-1 col-sm-1-1">AAAAAA</div>
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-1 col-sm-1-1">BBBBBB</div>
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-1 col-sm-1-1">CCCCCC</div>
+		</div>
+		<div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit suscipit ducimus accusamus deleniti repellat praesentium labore laboriosam. Aut perferendis et, tempora consequatur magnam rerum praesentium aspernatur ipsum quasi, sint quo!</p>
+		</div>
+	</footer>
 </body>
 </html>

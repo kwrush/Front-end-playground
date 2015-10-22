@@ -1,84 +1,153 @@
-*, *:before, *:after {
+/* =============================
+responsive layout					
+================================*/
+
+.container {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+
+.container-col {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+}
+
+/* media queries */
+@media screen and (min-width: 1200px) {
+	.col-xl-1-4 {
+		flex: 0 0 25%;
+	}
+
+	.col-xl-1-3 {
+		flex: 0 0 33.33333%;
+	}
+
+	.col-xl-1-2 {
+		flex: 0 0 50%;
+	}
+}
+
+@media screen and (min-width: 970px) and (max-width: 1200px) {
+	.col-lg-1-4 {
+		flex: 0 0 25%;
+	}
+	
+	.col-lg-1-3 { 
+		flex: 0 0 33.33333%;
+	}
+
+	.col-lg-1-2 {
+		flex: 0 0 50%;
+	}
+}
+
+@media screen and (min-width: 750px) and (max-width: 970px) {
+	.col-md-1-3 {
+		flex: 0 0 33.33333%;
+	}
+
+	.col-md-1-2 {
+		flex: 0 0 50%;
+	}
+
+	.col-md-1-1 {
+		flex: 0 0 100%;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.col-sm-1-1 {
+		flex: 0 0 100%;
+	}
+}
+
+/* =============================
+general style					
+================================*/
+*, 
+*:before, 
+*:after {
 	box-sizing: border-box;
 }
 
-/****** override default Bootstrap css ******/
-
-
-/****** custom css ******/
-
-/* bannner */
-#banner {
-	background-image: url("../images/banner.jpg");
-	background-color: #ccc;
-	width: 100%;
-	height: 750px;
+.main-section {
+	min-height: 300px;
 }
 
-.banner-header {
-	width: 100%;
+.feature {
+	background-color: #123;
+	color: #fff;
 }
 
-.fixed {
-	padding: 12px 0;
-	position: fixed;
-	background-color: #292c47;
+.work {
+	background: #ddd;
+	color: #fff;
 }
 
-.navbar {
-	margin: 0 auto;
-	max-width: 1170px;
-	width: 100%;
-	background-color: rgba(255, 255, 255, 0);
-	border: none;
-}
-
-button[data-target="#me-navmenu"] {
-	border-radius: 20px;
-	background-color: #e84545;
-}
-
-button[data-target="#me-navmenu"] .icon-bar {
-	background-color: #fff !important;
-}
-
-/* feature */
-#features {
+.team {
 	background-color: #333;
+	color: #fff;
 }
 
+
+/* =============================
+banner					
+================================*/
+#banner {
+	background-color: #ccc;
+	min-height: 750px;
+}
+
+
+/* =============================
+features
+================================*/
+#features {
+	background-color: #aaa;
+}
+
+/* =============================
+works				
+================================*/
 #works {
 	background-color: #ccc;
 }
 
-#our-team {
-	background-color: #333;
+/* =============================
+team
+================================*/
+#team {
+	background-color: #aaa;
 }
 
+/* =============================
+testimonials					
+================================*/
 #testimonials {
 	background-color: #ccc;
 }
 
+/* =============================
+download					
+================================*/
 #download {
-	background-color: #333;
+	background-color: #aaa;
 }
 
-.main-section {
-	width: 100%;
-	min-height: 728px;
-}
-
-.feature-info {
-	background-color: #ddd;
+/* =============================
+main footer
+================================*/
+#main-footer {
+	background-color: #ccc;
 	min-height: 200px;
-}
-
-.work-info {
-	background-color: #eee;
-	min-height: 200px;
-}
-
-.team-info {
-	background-color: #ddd;
-	min-height: 150px;	
 }
