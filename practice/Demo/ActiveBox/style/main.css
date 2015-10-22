@@ -41,7 +41,7 @@ responsive layout
 	.col-lg-1-4 {
 		flex: 0 0 25%;
 	}
-	
+
 	.col-lg-1-3 { 
 		flex: 0 0 33.33333%;
 	}
@@ -80,6 +80,72 @@ general style
 	box-sizing: border-box;
 }
 
+body {
+	font-family: "Raleway", sans-serif;
+}
+
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+	*zoom: 1;
+}
+
+/* reset style */
+ul,
+ol {
+	list-style: none;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+	text-decoration: none;
+	color: inherit;
+}
+
+p {
+	font-size: 14px;
+	line-height: 22.4px;
+	color: #6c7279;
+}
+
+h1 {
+  	font-size: 65px;
+  	color: #2d3033; 
+}
+
+h2 {
+  	font-size: 40px;
+  	color: #2d3033; 
+}
+
+h3 {
+  	font-size: 28px;
+  	color: #2d3033;
+  	font-weight: 300; 
+}
+
+h4 {
+  	font-size: 22px;
+  	color: #2d3033;
+  	font-weight: 400; 
+}
+
+h5 {
+  	font-size: 14px;
+  	color: #2d3033;
+  	text-transform: uppercase;
+  	font-weight: 700; 
+}
+
+/* common elements style */
 .main-section {
 	min-height: 300px;
 }
@@ -103,8 +169,66 @@ general style
 /* =============================
 banner					
 ================================*/
+/* header */
+#header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0);
+	z-index: 999;
+}
+
+#header.shrink {
+	background-color: #292c47;
+}
+
+#header .header-content {
+	position: relative;
+	margin: 0 auto;
+	padding: 30px 0;
+	max-width: 1170px;
+	border-bottom: 1px solid rgba(255, 255, 255, .15);
+	-webkit-transition: padding .3s ease-out;
+	-moz-transition: padding .3s ease-out;
+	transition: padding .3s ease-out;
+}
+
+#header.shrink .header-content {
+	padding: 15px 0;
+	border-bottom: none;
+}
+
+.logo {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.navbar {
+	float: right;
+}
+
+.navmenu li {
+	display: inline-block;
+}
+
+.navmenu li > a {
+	margin-left: 40px;
+	color: rgba(255, 255, 255, .75);
+	font-size: 12px;
+	font-weight: 900;
+	text-transform: uppercase;
+}
+
+.navmenu li > a:hover {
+	color: #ddd;
+}
+
 #banner {
-	background-color: #ccc;
+	background-image: url(../images/banner.jpg);
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: cover;
 	min-height: 750px;
 }
 
