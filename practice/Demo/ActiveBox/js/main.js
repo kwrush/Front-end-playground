@@ -1,22 +1,36 @@
 $(document).ready(function() {
 
 	var $win = $(window);
-	var header = document.getElementById('header');
-
+    var $navToggle = $('button.nav-toggle');
+    var $nav = $('.navbar');
+    var header = document.getElementById('header');
+    
+    /* Expand header when scroll to the top of page */
 	(function() {
-		var headerHeight = $(header).height();
+        var $h = $(header);
+		var headerHeight = $h.height();
 
 		$win.scroll(function() {
 			var pos = $win.scrollTop();
 
 			if (pos <= headerHeight / 3) {
-				$(header).removeClass('shrink');
+				$h.removeClass('shrink');
 			}
 			else {
-				$(header).addClass('shrink');
+				$h.addClass('shrink');
 			}
 		});
-
 	} ());
+    
+    /* Animate nav-toggle button, toggle navbar */
+    (function() {
+        $navToggle.click(function() {
+            $(this).toggleClass('nav-toggle-x');
+            
+            $(this).hasClass('nav-toggle-x') ?               
+                $nav.addClass('navbar-show') :
+                $nav.removeClass('navbar-show');
+        });
+    } ());
 	
 });
