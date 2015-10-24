@@ -54,5 +54,10 @@ $(document).ready(function() {
                 $nav.removeClass('navbar-show');
         });
     } ());
+
+    /* Resize image with hover */
+    /*(function() {
+        $('.work a')
+    } ());*/
 	
 });
