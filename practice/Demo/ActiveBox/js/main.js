@@ -15,6 +15,12 @@ $(document).ready(function() {
 
     			event.preventDefault();
 
+                if ($navToggle.hasClass('nav-toggle-x')) {
+
+                    $navToggle.toggleClass('nav-toggle-x');
+                    $nav.removeClass('navbar-show');
+                }
+
     			var $html = $('html, body');
 
     			// 75 is the general difference before and after we modify 
@@ -53,6 +59,61 @@ $(document).ready(function() {
                 $nav.addClass('navbar-show') :
                 $nav.removeClass('navbar-show');
         });
+    } ());
+
+    /* Slider */
+    (function() {
+        var timer = null;
+        var $slideItem = $('.slides li');
+        var $indicator = $('.slider-indicator li');
+
+        /* auto play */
+        function play() {
+
+            stopPlay();
+
+            timer = setInterval(function() {
+                $slideItem.toggleClass('show-slide');
+                $indicator.toggleClass('active-indicator');
+            }, 10000);
+        }
+        play();
+
+        // stop timer
+        function stopPlay() {
+            clearInterval(timer);
+            timer = null;
+        }
+
+        // fire or stop timer when mouse leave or enter the slider
+        $('.flex-slider').on(
+                {
+                    mouseenter: function() {
+                        stopPlay();
+                    },
+
+                    mouseleave: function() {
+                        play();
+                    }
+                }
+            );
+
+        // click on indicator
+        $('.slider-indicator').on('click', $indicator, function(event) {
+            var target = event.target;
+            var index = target ? target.dataset.index : undefined;
+
+            if(index) {
+                $indicator.removeClass('active-indicator');
+                $slideItem.removeClass('show-slide');
+
+                $($slideItem[index]).addClass('show-slide');
+                $($indicator[index]).addClass('active-indicator');
+
+                play();
+            }
+        });      
+
     } ());
 
     /* Resize image with hover */

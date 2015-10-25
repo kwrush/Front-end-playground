@@ -123,6 +123,22 @@ responsive layout
     .banner-text {
     	padding-top: 35%;
     }
+
+    .footer {
+    	padding: 0 30% !important;
+    }
+
+    .second blockquote {
+	    padding: 20px 5% 0 !important;
+	}
+
+	.second p {
+		font-size: 23px !important;
+	}
+
+	.slider-indicator {
+		bottom: 30px !important;
+	}
 }
 
 /* =============================
@@ -208,6 +224,13 @@ h5 {
     border: none;
     outline: none;
     background-color: #e84545;
+}
+
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    border-left: 5px solid #eee;
 }
 
 
@@ -652,9 +675,167 @@ download
 }
 
 /* =============================
+Testimonials
+================================*/
+.flex-slider {
+	float: left;
+	position: relative;
+}
+
+.slides {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+}
+
+.slides li {
+	width: 100%;
+	float: left;
+	opacity: 0;
+	position: relative;
+	margin-right: -100%;
+	background-color: #51344A;
+	-webkit-transition: opacity .8s ease-in-out;
+	-moz-transition: opacity .8s ease-in-out;
+	transition: opacity .8s ease-in-out;
+}
+
+.slides li.show-slide {
+	opacity: 1;
+}
+
+.slides li .container {
+	max-width: 100%;
+}
+
+.slides .container img {
+	width: 100%;
+	display: block;
+}
+
+.second blockquote {
+    border: 0;
+    margin: 0;
+    padding: 80px 15% 0;
+}
+
+.second cite {
+	font-size: 13px;
+	font-weight: 500;
+	font-style: normal;
+	color: #fff;
+}
+
+.second p {
+	font: italic 30px "Cardo", Georgia, "Times New Roman", serif;
+	margin-top: 0;
+	line-height: 1.4;
+	color: #fff;
+}
+
+/* Indicator */
+.slider-indicator {
+	margin: 0 auto;
+	padding: 0;
+	z-index: 3;
+	position: absolute;
+	width: 50%;
+	text-align: center;
+	bottom: 100px;
+	right: 0;
+	font-size: 0;
+}
+
+.slider-indicator li {
+	background-color: rgba(255, 255, 255, .2);
+	width: 12px;
+	height: 12px;
+	border-radius: 100%;
+	margin-right: 12px;
+	display: inline-block;
+	-webkit-transition: background-color .3s ease-out;
+	-moz-transition: background-color .3s ease-out;
+	transition: background-color .3s ease-out;
+}
+
+.slider-indicator li:hover {
+	background-color: #fff;
+	cursor: pointer;
+}
+
+li.active-indicator {
+	background-color: #fff;
+}
+
+#testimonials {
+	margin: 0 auto;
+	background-color: #fff;
+	display: inline-block;
+}
+
+
+/* =============================
 main footer
 ================================*/
+.footer {
+	text-align: center;
+	padding: 0 15px;
+}
+
+.footer h5 {
+	color: #fff;
+	margin: 10px 0;
+}
+
+.footer p {
+	color: #ccc;
+}
+
+.footer-social-media {
+	display: inline-block;
+	color: #fff;
+	margin: 10px auto;
+	padding: 0;
+}
+
+.footer-social-media li {
+	float: left;
+	margin-left: 10px;
+}
+
+.footer-social-media li a {
+	display: block;
+	border: 2px solid #fff;
+	border-radius: 1px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	-webkit-transition: background-color .3s, border-color .2s ease-in-out;
+	-moz-transition: background-color .3s, border-color .2s ease-in-out;
+	transition: background-color .3s, border-color .2s ease-in-out;
+
+}
+
+.footer-social-media li a:hover {
+	background-color: #e84545;
+	border-color: #e84545;
+}
+
+#main-footer .container {
+	margin: 0 auto;
+	padding-top: 50px;
+	padding-bottom: 80px;
+}
+
+
 #main-footer {
-	background-color: #ccc;
+	background-color: #3a3e64;
 	min-height: 200px;
+}
+
+.copyright {
+	width: 100%;
+	text-align: center;
+	background-color: #313454
 }

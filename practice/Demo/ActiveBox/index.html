@@ -301,9 +301,39 @@
 		</div>
 	</section>
 	<section id="testimonials" class="main-section">
-		<div class="container">
-			<div class="col-xl-1-2 col-lg-1-2 col-md-1-1 col-sm-1-1">AAAAAAA</div>
-			<div class="col-xl-1-2 col-lg-1-2 col-md-1-1 col-sm-1-1">BBBBBBB</div>
+		<div class="flex-slider">
+			<ul class="slides">
+				<li class="show-slide" style="z-index:2;">
+					<div class="container">
+						<div class="col-xl-1-2 col-lg-1-2 col-md-1-1 col-sm-1-1 first">
+							<img src="images/testimonial-1.jpg" alt="testimonial">
+						</div>
+						<div class="col-xl-1-2 col-lg-1-2 col-md-1-1 col-sm-1-1 second">
+							<blockquote>
+								<p>"Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec sed odio dui. Aenean eu leo quam..."</p>
+								<cite>SUSAN SIMS, INTERACTION DESIGNER AT XYZ</cite>
+							</blockquote>
+						</div>
+					</div>
+				</li>
+				<li style="z-index:1;">
+					<div class="container">
+						<div class="col-xl-1-2 col-lg-1-2 col-md-1-1 col-sm-1-1 first">
+							<img src="images/testimonial-2.jpg" alt="testimonial">
+						</div>
+						<div class="col-xl-1-2 col-lg-1-2 col-md-1-1 col-sm-1-1 second">
+							<blockquote>
+								<p>"Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur..."</p>
+								<cite>SUSAN SIMS, INTERACTION DESIGNER AT XYZ</cite>
+							</blockquote>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<ol class="slider-indicator">
+				<li data-index="0" class="active-indicator"></li>
+				<li data-index="1"></li>
+			</ol>
 		</div>
 	</section>
 	<section id="download" class="main-section">
@@ -317,13 +347,38 @@
 	</section>
 	<footer id="main-footer" class="main-section">
 		<div class="container">
-			<div class="col-xl-1-3 col-lg-1-3 col-md-1-1 col-sm-1-1">AAAAAA</div>
-			<div class="col-xl-1-3 col-lg-1-3 col-md-1-1 col-sm-1-1">BBBBBB</div>
-			<div class="col-xl-1-3 col-lg-1-3 col-md-1-1 col-sm-1-1">CCCCCC</div>
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-1 col-sm-1-1 footer">
+				<h5>Location</h5>
+				<p>
+					3481 Melrose Place<br/>
+					Beverly Hills, CA 90210
+				</p>
+			</div>
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-1 col-sm-1-1 footer">
+				<h5>Share with love</h5>
+				<ul class="footer-social-media">
+					<li>
+						<a href="#"><i class="fa fa-facebook"></i></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-linkedin"></i></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-google-plus"></i></a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-xl-1-3 col-lg-1-3 col-md-1-1 col-sm-1-1 footer">
+				<h5>About ActiveBox</h5>
+				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla non metus auctor fringilla.</p>
+			</div>
 		</div>
 		<div class="copyright">
 			<p>Copyright&copy;2015 ActiveBox. All Right Reserved</p>
-			<p>Made with</p>
+			<p>Made with </p>
 		</div>
 	</footer>
 </body>
