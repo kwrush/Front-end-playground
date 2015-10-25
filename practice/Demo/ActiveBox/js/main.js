@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	var $win = $(window);
+    var $win = $(window);
     var $navToggle = $('button.nav-toggle');
     var $nav = $('.navbar');
     var header = document.getElementById('header');
