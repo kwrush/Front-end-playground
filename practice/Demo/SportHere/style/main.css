@@ -1,0 +1,245 @@
+/* ===================
+General style
+=================== */
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Open Sans", sans-serif;
+}
+
+.clearfix:before,
+.clearfix:after {
+	content: "";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+	*zoom: 1;
+}
+
+/* reset some elements' styles */
+ul, 
+ol {
+	list-style: none;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+	text-decoration: none;
+	color: inherit;
+}
+
+p {
+	font-size: 14px;
+	line-height: 22.4px;
+	color: #6c7279;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	color: #2d3033;
+}
+
+h1 {
+	font-size: 65px;
+}
+
+h2 {
+	font-size: 40px;
+}
+
+h3 {
+	font-size: 28px;
+	font-weight: 300;
+}
+
+h4 {
+	font-size: 22px;
+	font-weight: 400;
+}
+
+h5 {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+/* common styles */
+.btn {
+	border: none;
+	outline: none;
+	background-color: #fff;
+}
+
+.round {
+	display: block;
+	border: none;
+	border-radius: 100%;
+}
+
+.box {
+	margin: 0 auto;
+	padding: 0 30px;
+	max-width: 1000px;
+}
+
+.intro {
+	min-height: 300px;
+	background-color: #666;
+}
+
+.slider-box {
+	min-height: 200px;
+	background-color: #ccc;
+}
+
+.ad-box {
+	min-height: 150px;
+	background-color: #666;
+}
+
+.subscribe-box {
+	min-height: 300px;
+	background-color: #ccc;
+}
+
+.main-footer {
+	min-height: 200px;
+	background-color: #666;
+}
+
+
+/* ===================s
+Responsive layout
+=================== */
+.container {
+	ddisplay: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: center;
+}
+
+.row {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+
+.col-1-2 {
+	flex: 0 0 50%;
+}
+
+.col-1-3 {
+	flex: 0 0 33.33333%;
+}
+
+
+/* media queries */
+
+
+/* ===================
+Banner style
+=================== */
+#banner {
+	width: 100%;
+	min-height: 850px;
+	background-color: #fff;
+}
+
+.banner-header {
+	background-color: #fff;
+}
+
+.header-content {
+	width: 100%;
+	padding: 69px 30px;
+}
+
+.logo {
+	font-size: 0;
+	display: inline-block;
+}
+
+.social-media-list {
+	float: right;
+}
+
+.social-media-list ul {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+}
+
+.social-media-list ul li {
+	float: left;	
+}
+
+.social-media-list li a {
+	margin-left: 24px;
+	width: 48px;
+	height: 48px;
+	text-align: center;
+	line-height: 48px;
+	font-size: 1.25em;
+	color: #fff;
+	-webkit-transition: background-color .2s ease-out;
+	-moz-transition: background-color .2s ease-out;
+	transition: background-color .2s ease-out;
+}
+
+.fb {
+	background-color: #3b5998;	
+}
+
+.tw {
+	background-color: #55acee;
+}
+
+.gp {
+	background-color: #dd4b39;
+}
+
+/* lower part of the banner */
+.inner-banner {
+	width: 100%;
+	background-color: #3db39e;
+	color: #fff;
+}
+
+
+
+/* ===================
+Intro style
+=================== */
+
+/* ===================
+Slider-box style
+=================== */
+
+/* ===================
+Ad-box style
+=================== */
+
+/* ===================
+Subscribe-box style
+=================== */
+
+/* ===================
+Footer style
+=================== */
