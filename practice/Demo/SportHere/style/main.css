@@ -52,7 +52,7 @@ h5 {
 }
 
 h1 {
-	font-size: 65px;
+	font-size: 60px;
 }
 
 h2 {
@@ -151,14 +151,55 @@ Responsive layout
 
 
 /* media queries */
+@media screen and (max-width: 1024px) {
+	.header-content {
+		text-align: center;
+	}
 
+	.social-media-list {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.col-sm-1-1 {
+		flex: 0 0 100%;
+	}
+
+	.col-sm-1-2 {
+		flex: 0 0 50%;
+	}
+
+	#banner h1 {
+		font-size: 40px;
+	}
+
+	.banner-content,
+	.phone-box {
+		text-align: center;
+	}
+
+	.banner-content {
+		padding-bottom: 40px;
+	}
+
+	.phone-box div {
+		float: none !important;
+		margin: 0 auto;
+	}
+
+	.inner-banner .row {
+		padding-top: 30px !important;
+	}
+}
+
+@media 
 
 /* ===================
 Banner style
 =================== */
 #banner {
 	width: 100%;
-	min-height: 850px;
 	background-color: #fff;
 }
 
@@ -167,8 +208,11 @@ Banner style
 }
 
 .header-content {
+	position: relative;
 	width: 100%;
-	padding: 69px 30px;
+	padding-top: 68px;
+	padding-bottom: 68px;
+	line-height: 0;
 }
 
 .logo {
@@ -176,8 +220,17 @@ Banner style
 	display: inline-block;
 }
 
+.logo img {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
 .social-media-list {
-	float: right;
+	position: absolute;
+	top: 50%;
+	right: 30px;
+	transform: translateY(-50%);
 }
 
 .social-media-list ul {
@@ -219,10 +272,53 @@ Banner style
 .inner-banner {
 	width: 100%;
 	background-color: #3db39e;
+}
+
+.inner-banner .row {
+	padding-top: 85px;
+}
+
+.banner-content h1, p {
 	color: #fff;
 }
 
+.banner-content h1 {
+	line-height: 1em;
+	font-weight: 700;
+	text-transform: uppercase;
+}
 
+.banner-content p {
+	font-size: 1.1em;
+	line-height: 1.68em;
+	margin-bottom: 40px;
+}
+
+.banner-content .btn {
+	padding: 13px 30px;
+	border-radius: 5px;
+	color: #26a6d1;
+	font-size: 1.3em;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.banner-content a {
+	margin-left: 40px; 
+	text-transform: uppercase;
+	text-decoration: underline;
+	color: #fff;
+	font-size: 1.3em;
+	font-weight: 700;
+}
+
+.phone-box {
+	font-size: 0;
+}
+
+.phone-box div {
+	float: right;
+}
 
 /* ===================
 Intro style
