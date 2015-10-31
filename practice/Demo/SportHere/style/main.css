@@ -93,21 +93,6 @@ h5 {
 	max-width: 1000px;
 }
 
-.intro {
-	min-height: 300px;
-	background-color: #666;
-}
-
-.slider-box {
-	min-height: 200px;
-	background-color: #ccc;
-}
-
-.ad-box {
-	min-height: 150px;
-	background-color: #666;
-}
-
 .subscribe-box {
 	min-height: 300px;
 	background-color: #ccc;
@@ -123,7 +108,7 @@ h5 {
 Responsive layout
 =================== */
 .container {
-	ddisplay: -webkit-box;
+	display: -webkit-box;
 	display: -moz-box;
 	display: -ms-flexbox;
 	display: -webkit-flex;
@@ -191,9 +176,42 @@ Responsive layout
 	.inner-banner .row {
 		padding-top: 30px !important;
 	}
+
+	.slider-wrap {
+		padding-top: 100px !important;
+	}
+
+	.indicator {
+		top: 50px !important;
+		padding: 0 !important;
+		margin: 0 auto;
+		transform: translateX(-50%);
+	}
+
+	.slider .row {
+		flex-direction: column-reverse;
+		text-align: center;
+	}
+
+	.tab-pane {
+		margin: 0 auto;
+		width: 100%;
+	}
+
+	.tab-pane div {
+		margin: 0 auto;
+	}
+
+	.tab-text,
+	.tab-text h3 {
+		margin-top: 0 !important;
+	}
+
+	.tab-text p {
+		margin-bottom: 60px;
+	}
 }
 
-@media 
 
 /* ===================
 Banner style
@@ -385,37 +403,34 @@ Slider-box style
 #slider-box {
 	width: 100%;
 	background-color: #f6f6f6;
-	height: 500px;
 }
 
 .slider-wrap {
 	position: relative;
-	top: 0;
-	left: 0;
+	padding-top: 120px;
 	width: 100%;
-	height: 100%;
-	overflow: hidden;
 }
 
 .slider-wrap ul {
 	margin: 0;
-	padding: 0;
 }
 
 .indicator {
+	padding: 0 60px;
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 140px;
+	left: 50%;
+	z-index: 9999;
 }
 
 .indicator li {
 	float: left;
-	margin-right: 13px;
+	margin-right: 12px;
 }
 
 .indicator li a {
-	width: 13px;
-	height: 13px;
+	width: 12px;
+	height: 12px;
 	background-color: #cbcfd1;
 	-webkit-transition: background-color .2s ease-out;
 	-moz-transition: background-color .2s ease-out;
@@ -427,12 +442,97 @@ Slider-box style
 }
 
 .indicator li a:hover {
-	background-color: 
+	background-color: #8cc6bc;
+}
+
+/* slider components style */
+.slider {
+	position: relative;
+	padding: 0;
+}
+
+.slider li {
+	float: left;
+	width: 100%;
+	height: 100%;
+	margin-right: -100%;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity .4s ease-in-out;
+	-moz-transition: opacity .4s ease-in-out;
+	transition: opacity .4s ease-in-out;
+
+}
+
+.slider .show {
+	visibility: visible;
+	opacity: 1;
+}
+
+.tab-pane {
+	font-size: 0;
+	width: 100%;
+}
+
+.tab-pane {
+	width: 470px;
+}
+
+.lower-pane,
+.higher-pane {
+	display: inline-block;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1), 0 0 20px 0 rgba(0, 0, 0, .1);
+}
+
+.lower-pane {
+	background-color: #f6f6f6;
+	width: 60%;
+	height: 380px;
+}
+
+.higher-pane {
+	margin-left: -35% !important;
+	background-color: #fafafa;
+	width: 60%;
+	height: 480px;
+}
+
+.tab-text {
+	padding: 0 60px;
+	margin-top: 45px;
+}
+
+.tab-text h3 {
+	font-size: 30px;
+	font-weight: 600;
+	word-spacing: 1.1;
+	line-height: 1.4;
+	color: #324d5b;
+}
+
+.tab-text p {
+	font-size: 17px;
+	line-height: 1.5;
+	color: #6a6a6a;
 }
 
 /* ===================
 Ad-box style
 =================== */
+#ad-box {
+	position: relative;
+	width: 100%;
+	background-color: #fff;
+	z-index: 999;
+}
+
+.ad-text {
+	margin: 0 auto;
+	padding: 90px 30px;
+	text-align: center;
+}
+
+
 
 /* ===================
 Subscribe-box style
