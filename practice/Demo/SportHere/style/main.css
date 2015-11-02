@@ -134,6 +134,10 @@ Responsive layout
 	flex: 0 0 33.33333%;
 }
 
+.col-1-4 {
+	flex: 0 0 25%;
+}
+
 
 /* media queries */
 @media screen and (max-width: 1024px) {
@@ -142,6 +146,14 @@ Responsive layout
 	}
 
 	.social-media-list {
+		display: none;
+	}
+
+	.col-md-1-1 {
+		flex: 0 0 100%;
+	}
+
+	.hide-logo {
 		display: none;
 	}
 }
@@ -209,6 +221,13 @@ Responsive layout
 
 	.tab-text p {
 		margin-bottom: 60px;
+	}
+
+	.sub-box button {
+		display: block;
+		margin-top: 20px;
+		margin-right: auto;
+		margin-left: auto !important;
 	}
 }
 
@@ -296,7 +315,8 @@ Banner style
 	padding-top: 85px;
 }
 
-.banner-content h1, p {
+.banner-content h1, 
+.banner-content p {
 	color: #fff;
 }
 
@@ -532,11 +552,75 @@ Ad-box style
 	text-align: center;
 }
 
+.ad-text h3, 
+.ad-text p {
+	color: #6a6a6a;
+	margin: 20px auto;
+}
+
+.ad-text h3 {
+	font-size: 30px;
+}
+
+.ad-text p {
+	font-size: 17px;
+	line-height: 30px;
+}
 
 
 /* ===================
 Subscribe-box style
 =================== */
+#subscribe {
+	padding: 80px 0;
+	background-color: #26a6d1;
+	text-align: center;
+}
+
+.sub-box {
+	display: inline-block;
+}
+
+.sub-box h3, 
+.sub-box p {
+	color: #fff;
+}
+
+.sub-box h3 {
+	font-size: 30px;
+	font-weight: 500;
+}
+
+.sub-box input {
+	margin: 0 auto;
+	padding: 15px;
+	width: 392px;
+	height: 52px;
+	border: none;
+	outline: none;
+	font-size: 18px;
+	line-height: 22px;
+	border-radius: 5px;
+}
+
+.sub-box button {
+	margin-left: 15px;
+	background-color: #fff;
+	color: #26a6d1;
+	border: none;
+	width: 160px;
+	height: 52px;
+	font-size: 20px;
+	font-weight: 700;
+	text-transform: uppercase;
+	border-radius: 5px;
+}
+
+.sub-box p {
+	margin-top: 32px;
+	margin-bottom: 32px;
+	font-size: 17px;
+}
 
 /* ===================
 Footer style
