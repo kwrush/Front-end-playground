@@ -1,0 +1,81 @@
+/* This includes mixin and general styles */
+
+/* Typography */
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+$font-stack: 'Roboto' Helvetica, sans-serif;
+$font-light: 100;
+$font-regular: 400;
+$font-bold: 700;
+
+$font-size-regular: 14px;
+$line-height-regular: 20px;
+
+$pimary-color: #333;
+$white-color: #fff;
+
+/* Minin */
+@mixin transition($transition...) {
+	-webkit-transition: $transition;
+	   -moz-transition: $transition;
+	    -ms-transition: $transition;
+			transition: $transition;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+/* extend */
+.clearfix {
+	&:before,
+	&:after {
+		content: "";
+		display: table-cell;
+	}
+
+	&:after {
+		clear: both;
+		*zoom: 1;
+	}
+}
+
+/* color */
+$light-blue: #00aeef;
+
+/* General */
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: $font-stack;
+	font-size: $font-size-regular;
+	color: $pimary-color;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+.title {
+	font-weight: $font-regular;
+	font-size: 68px;
+}
+
+.container {
+	width: 100%;
+}
+
+.slider-wrapper {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	height: 650px;
+	background-color: $light-blue;
+}

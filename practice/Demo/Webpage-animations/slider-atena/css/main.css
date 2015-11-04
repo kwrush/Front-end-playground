@@ -1,0 +1,65 @@
+/* This includes mixin and general styles */
+/* Typography */
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+/* Minin */
+/* extend */
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table-cell; }
+.clearfix:after {
+  clear: both;
+  *zoom: 1; }
+
+/* color */
+/* General */
+*,
+*:before,
+*:after {
+  box-sizing: border-box; }
+
+body {
+  font-family: "Roboto" Helvetica, sans-serif;
+  font-size: 14px;
+  color: #333; }
+
+ul, ol {
+  list-style: none; }
+
+.title {
+  font-weight: 400;
+  font-size: 68px; }
+
+.container {
+  width: 100%; }
+
+.slider-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 650px;
+  background-color: #00aeef; }
+
+.btn {
+  border: none;
+  outline: none;
+  -webkit-transition: background-color 0.3s, color 0.3s ease-out;
+  -moz-transition: background-color 0.3s, color 0.3s ease-out;
+  -ms-transition: background-color 0.3s, color 0.3s ease-out;
+  transition: background-color 0.3s, color 0.3s ease-out; }
+  .btn:hover {
+    background-color: #fff;
+    color: #00aeef; }
+
+.blue-btn {
+  background-color: #00aeef;
+  text-transform: uppercase; }
+
+.tran-btn {
+  background-color: transparent;
+  border: 2px solid #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px; }
+
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,20 @@
+.btn {
+	border: none;
+	outline: none;
+	@include transition(background-color .3s, color .3s ease-out);
+	&:hover {
+		background-color: #fff;
+		color: $light-blue;
+	}
+}
+	
+.blue-btn {
+	background-color: $light-blue;
+	text-transform: uppercase;
+}
+
+.tran-btn {
+	background-color: transparent;
+	border: 2px solid #fff;
+	@include border-radius(5px);
+}
