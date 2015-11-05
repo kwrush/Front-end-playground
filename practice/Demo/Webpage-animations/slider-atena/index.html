@@ -5,61 +5,88 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta author="Kai Wang">
 	<title>Slider Atena demo</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-	<h1 class="title">This is a slider demo</h1>
 	<div class="container">
 		<div class="slider-wrapper">
 			<ul class="slider">
 				<li>
 					<div class="slide">
-						<img src="images/slide_1.jpg" alt="Slide1">
-						<h3>Atena Excellence in teaching</h3>
-						<p>COLLEGE / UNIVERSITY / CAMPUS</p>
-						<button class="btn blue-btn">Take a tour</button>
-						<button class="btn tran-btn">About Us</button>
+						<section class="image-container">
+							<img src="images/slide_1.jpg" alt="Slide1">
+						</section>
+						<section class="text-container">
+							<h2>Atena <span class="bold">Excellence</span> in teaching</h2>
+							<p>COLLEGE / UNIVERSITY / CAMPUS</p>	
+						</section>
+						<section class="btn-container">
+							<button class="btn blue-btn">Take a tour</button>
+							<button class="btn tran-btn">About Us</button>
+						</section>
 					</div>
 				</li>
-				<li>
+				<li class="hide">
 					<div class="slide">
-						<img src="images/slide_2.jpg" alt="Slide2">
-						<h3>Atena Qualified teachers</h3>
-						<p>COLLEGE / UNIVERSITY / CAMPUS</p>
-						<button class="btn blue-btn">Take a tour</button>
-						<button class="btn tran-btn">About Us</button>
+						<section class="image-container">
+							<img src="images/slide_2.jpg" alt="Slide2">
+						</section>
+						<section class="text-container">
+							<h2>Atena <span class="bold">Qualified</span> teachers</h2>
+							<p>COLLEGE / UNIVERSITY / CAMPUS</p>	
+						</section>
+						<section class="btn-container">
+							<button class="btn blue-btn">Take a tour</button>
+							<button class="btn tran-btn">About Us</button>
+						</section>
 					</div>
 				</li>
-				<li>
+				<li class="hide">
 					<div class="slide">
-						<img src="images/slide_3.jpg" alt="Slide3">
-						<h3>Great students community</h3>
-						<p>COLLEGE / UNIVERSITY / CAMPUS</p>
-						<button class="btn blue-btn">Take a tour</button>
-						<button class="btn tran-btn">About Us</button>
+						<section class="image-container">
+							<img src="images/slide_3.jpg" alt="Slide3">	
+						</section>
+						<section class="text-container">
+							<h2><span class="bold">Great</span> students community</h2>
+							<p>COLLEGE / UNIVERSITY / CAMPUS</p>	
+						</section>
+						<section class="btn-container">
+							<button class="btn blue-btn">Take a tour</button>
+							<button class="btn tran-btn">About Us</button>
+						</section>
 					</div>
 				</li>
-				<li>
+				<li class="hide">
 					<div class="slide">
-						<img src="images/slide_4.jpg" alt="Slide4">
-						<h3>Well equiped classrooms</h3>
-						<p>COLLEGE / UNIVERSITY / CAMPUS</p>
-						<button class="btn blue-btn">Take a tour</button>
-						<button class="btn tran-btn">About Us</button>
+						<section class="image-container">
+							<img src="images/slide_4.jpg" alt="Slide4">	
+						</section>
+						<section class="text-container">
+							<h2><span class="bold">Well equiped</span> classrooms</h2>
+							<p>COLLEGE / UNIVERSITY / CAMPUS</p>	
+						</section>
+						<section class="btn-container">
+							<button class="btn blue-btn">Take a tour</button>
+							<button class="btn tran-btn">About Us</button>
+						</section>
 					</div>
 				</li>
 			</ul>
 			<div class="indicator">
+				<a href="#" class="play"></a>
 				<ul>
+					<li><a href="#" data-index="0"></a></li>
 					<li><a href="#" data-index="1"></a></li>
 					<li><a href="#" data-index="2"></a></li>
 					<li><a href="#" data-index="3"></a></li>
-					<li><a href="#" data-index="4"></a></li>
 				</ul>
+				<a href="#" class="pause"></a>
+				<div class="preview"></div>
 			</div>
-			<a href="#" class="pre-arrow"></a>
-			<a href="#" class="next-arrow"></a>
+			<a href="#" class="nav-arrow pre-arrow"></a>
+			<a href="#" class="nav-arrow next-arrow"></a>
 		</div>
 	</div>
 	<script src="js/jquery-1.11.3.min.js"></script>

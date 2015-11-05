@@ -1,6 +1,6 @@
 /* This includes mixin and general styles */
 /* Typography */
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
 /* Minin */
 /* extend */
 .clearfix:before, .clearfix:after {
@@ -10,6 +10,22 @@
   clear: both;
   *zoom: 1; }
 
+.center, .slide .text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.horz-center, .slide .btn-container, .indicator, .indicator .preview:after {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); }
+
+.vert-center, .nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); }
+
 /* color */
 /* General */
 *,
@@ -18,19 +34,46 @@
   box-sizing: border-box; }
 
 body {
-  font-family: "Roboto" Helvetica, sans-serif;
+  font-family: "Open Sans" Helvetica, sans-serif;
   font-size: 14px;
-  color: #333; }
+  color: #333;
+  background-color: #ccc; }
 
 ul, ol {
   list-style: none; }
 
+h1, h2, h3, h4, h5 {
+  font-weight: 400; }
+
+h1 {
+  font-size: 65px; }
+
+h2 {
+  font-size: 58px; }
+
+h3 {
+  font-size: 40px; }
+
+h4 {
+  font-size: 28px; }
+
+h5 {
+  font-size: 20px; }
+
+p {
+  font-size: 14px; }
+
+.bold {
+  font-weight: 700 !important; }
+
 .title {
+  margin: 20px auto;
   font-weight: 400;
-  font-size: 68px; }
+  text-align: center; }
 
 .container {
-  width: 100%; }
+  width: 100%;
+  min-width: 1280px; }
 
 .slider-wrapper {
   position: relative;
@@ -40,8 +83,20 @@ ul, ol {
   background-color: #00aeef; }
 
 .btn {
+  padding: 12px 25px;
+  min-width: 110px;
+  width: 160px;
+  height: 41px;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #fff;
   border: none;
   outline: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
   -webkit-transition: background-color 0.3s, color 0.3s ease-out;
   -moz-transition: background-color 0.3s, color 0.3s ease-out;
   -ms-transition: background-color 0.3s, color 0.3s ease-out;
@@ -55,11 +110,154 @@ ul, ol {
   text-transform: uppercase; }
 
 .tran-btn {
+  padding: 10px 23px !important;
   background-color: transparent;
-  border: 2px solid #fff;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  border-radius: 5px; }
+  text-transform: uppercase;
+  border: 2px solid #fff; }
+
+.nav-arrow {
+  background-image: url(../images/skin.png);
+  background-repeat: no-repeat;
+  opacity: 1;
+  width: 40px;
+  height: 50px;
+  z-index: 99999;
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -ms-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out; }
+  .nav-arrow:hover {
+    display: block;
+    opacity: 1; }
+
+.pre-arrow {
+  left: 20px;
+  background-position: 0 0; }
+  .pre-arrow:hover {
+    background-position: 0 -75px; }
+
+.next-arrow {
+  right: 20px;
+  background-position: -150px 0; }
+  .next-arrow:hover {
+    background-position: -150px -75px; }
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 650px; }
+  .slider li {
+    float: left;
+    margin-right: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    -webkit-transition: opacity 0.4s ease-in-out;
+    -moz-transition: opacity 0.4s ease-in-out;
+    -ms-transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.4s ease-in-out; }
+    .slider li.hide {
+      visibility: hidden;
+      opacity: 0; }
+
+.slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: center; }
+  .slide .image-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0; }
+    .slide .image-container img {
+      display: block;
+      width: 100%; }
+  .slide .text-container {
+    color: #fff;
+    display: inline-block; }
+    .slide .text-container h2 {
+      font-weight: 300;
+      margin: 0 auto; }
+    .slide .text-container p {
+      margin-top: 8px;
+      font-size: 16px; }
+  .slide .btn-container {
+    display: inline-block;
+    bottom: 190px; }
+
+.indicator {
+  bottom: 8px; }
+  .indicator ul {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    font-size: 0; }
+    .indicator ul li {
+      display: inline-block; }
+      .indicator ul li a {
+        display: block;
+        width: 10px;
+        height: 10px;
+        margin: 5px;
+        border: 2px solid #fff;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        -ms-border-radius: 100%;
+        border-radius: 100%;
+        -webkit-transition: background-color 0.3s ease-out;
+        -moz-transition: background-color 0.3s ease-out;
+        -ms-transition: background-color 0.3s ease-out;
+        transition: background-color 0.3s ease-out; }
+        .indicator ul li a:hover {
+          background-color: #fff; }
+  .indicator .play,
+  .indicator .pause {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    text-align: center;
+    font-size: 0;
+    background-image: url(../images/skin.png);
+    background-repeat: no-repeat; }
+  .indicator .play {
+    content: "";
+    background-position: -300px -75px;
+    margin-right: 5px; }
+    .indicator .play:hover {
+      background-position: -300px -75px;
+      cursor: pointer; }
+  .indicator .pause {
+    content: "";
+    background-position: -450px 0; }
+    .indicator .pause:hover {
+      background-position: -450px -75px;
+      cursor: pointer; }
+  .indicator .preview {
+    position: absolute;
+    left: -42px;
+    bottom: 30px;
+    width: 100px;
+    height: 60px;
+    -webkit-transition: opacity 0.4s ease-out;
+    -moz-transition: opacity 0.4s ease-out;
+    -ms-transition: opacity 0.4s ease-out;
+    transition: opacity 0.4s ease-out;
+    background-color: transparent;
+    border: 2px solid #fff; }
+    .indicator .preview:after {
+      content: "";
+      top: 100%;
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid #fff; }
 
 /*# sourceMappingURL=main.css.map */

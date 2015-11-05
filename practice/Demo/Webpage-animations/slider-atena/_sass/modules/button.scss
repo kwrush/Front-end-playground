@@ -1,6 +1,15 @@
 .btn {
+	padding: 12px 25px;
+	min-width: 110px;
+	width: 160px;
+	height: 41px;
+	font-size: 14px;
+	line-height: $line-height-regular;
+	text-align: center;
+	color: #fff;
 	border: none;
 	outline: none;
+	@include border-radius(3px);
 	@include transition(background-color .3s, color .3s ease-out);
 	&:hover {
 		background-color: #fff;
@@ -14,7 +23,8 @@
 }
 
 .tran-btn {
+	padding: 10px 23px !important;
 	background-color: transparent;
+	text-transform: uppercase;
 	border: 2px solid #fff;
-	@include border-radius(5px);
 }
