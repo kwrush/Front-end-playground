@@ -58,13 +58,17 @@
 
 	.preview {
 		position: absolute;
-		left: -42px;
-		bottom: 30px;
-		width: 100px;
-		height: 60px;
-		@include transition(opacity .4s ease-out);
+		left: 0;
+		bottom: 25px;
+		width: 104px;
+		height: 64px;
 		background-color: transparent;
+		background-image: url(../images/slide_1.jpg);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover; 
 		border: 2px solid #fff;
+		@include transition(opacity .4s, visibility .4s ease-out);
 
 		&:after {
 			content: "";
@@ -77,5 +81,10 @@
 			border-right: 7px solid transparent;
 			border-top: 7px solid #fff;
 		}
+	}
+
+	.preview-hide {
+		opacity: 0;
+		visibility: hidden;
 	}
 }

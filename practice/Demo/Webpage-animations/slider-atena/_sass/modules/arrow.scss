@@ -2,16 +2,17 @@
 	background-image: url(../images/skin.png);
 	background-repeat: no-repeat;
 	opacity: 1;
+	visibility: visible;
 	width: 40px;
 	height: 50px;
 	z-index: 99999;
 	@extend .vert-center;
-	@include transition(opacity .4s ease-in-out);
+	@include transition(opacity .4s, visibility .4s ease-in-out);
 	
-	&:hover {
+	/* &:hover {
 		display: block;
 		opacity: 1;
-	}
+	} */
 }
 
 .pre-arrow {
@@ -30,4 +31,9 @@
 	&:hover {
 		background-position: -150px -75px;
 	}
+}
+
+.nav-arrow-hide {
+	opacity: 0;
+	visibility: hidden;
 }

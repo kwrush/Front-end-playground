@@ -111,6 +111,12 @@ p {
 	font-size: 14px;
 }
 
+/* media query constants */
+$break-extra-small: 480px;
+$break-small: 750px;
+$break-medium: 1024px;
+$break-large: 1200px;
+
 .bold {
 	font-weight: $font-bold !important;
 }
@@ -123,13 +129,14 @@ p {
 
 .container {
 	width: 100%;
-	min-width: 1280px;
+	height: 100%;
 }
 
 .slider-wrapper {
 	position: relative;
 	display: inline-block;
-	width: 100%;
-	height: 650px;
-	background-color: $light-blue;
+	min-width: 1600px;
+	height: auto;
+	font-size: 0;
+	background-color: transparent;
 }
