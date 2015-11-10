@@ -45,11 +45,8 @@ $(document).ready(function() {
 		$preview.addClass('preview-hide');
 	});
 
-	/* Switch slider */
-	$('.indicator').on('click', 'li > a', function() {
-
-	});
-
+	// Functioning slider
+	var slider = new Slider({});
 
 	/*function autoPlay() {
 		play = setTimeout(play(), 3000);

@@ -13,7 +13,7 @@
 		height: 100%;
 		background-color: transparent;
 		overflow: hidden;
-		@include transition(opacity .4s ease-in-out);
+		@include transition(opacity 1.3s, visibility 1.3s ease-out);
 
 		&.hide {
 			visibility: hidden;

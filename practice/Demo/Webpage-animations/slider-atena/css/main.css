@@ -164,10 +164,10 @@ p {
     height: 100%;
     background-color: transparent;
     overflow: hidden;
-    -webkit-transition: opacity 0.4s ease-in-out;
-    -moz-transition: opacity 0.4s ease-in-out;
-    -ms-transition: opacity 0.4s ease-in-out;
-    transition: opacity 0.4s ease-in-out; }
+    -webkit-transition: opacity 1.3s, visibility 1.3s ease-out;
+    -moz-transition: opacity 1.3s, visibility 1.3s ease-out;
+    -ms-transition: opacity 1.3s, visibility 1.3s ease-out;
+    transition: opacity 1.3s, visibility 1.3s ease-out; }
     .slider li.hide {
       visibility: hidden;
       opacity: 0; }
@@ -217,6 +217,8 @@ p {
         transition: background-color 0.3s ease-out; }
         .indicator ul li a:hover {
           background-color: #fff; }
+  .indicator .active {
+    background-color: #fff; }
   .indicator .play,
   .indicator .pause {
     width: 20px;
