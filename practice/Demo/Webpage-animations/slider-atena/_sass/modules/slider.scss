@@ -13,7 +13,9 @@
 		height: 100%;
 		background-color: transparent;
 		overflow: hidden;
-		@include transition(opacity 1.3s, visibility 1.3s ease-out);
+		opacity: 1;
+		visibility: visible;
+		@include transition(opacity 1.3s, visibility 1.3s ease-in);
 
 		&.hide {
 			visibility: hidden;
@@ -42,17 +44,41 @@
 		h2 {
 			font-weight: $font-light;
 			margin: 0 auto;
+			@include transform(skewX(-90deg));
+
+			&.show {
+				opacity: 1;
+				visibility: visible;
+			}
 		}
 
 		p {
+			margin-left: 230px; 
 			margin-top: 8px;
 			font-size: 16px;
+			opacity: 0;
+			visibility: hidden;
+			@include transition(opacity .6s, visibility .6s ease-in-out);
+
+			&.show {
+				opacity: 1;
+				visibility: visible;
+			}	
 		}
 	}
 
 	.btn-container {
+		margin-left: 230px;
 		display: inline-block;
 		@extend .horz-center;
 		bottom: 190px;
+		opacity: 0;
+		visibility: hidden;
+		@include transition(opacity .6s, visibility .6s ease-in-out);
+
+		&.show {
+			opacity: 1;
+			visibility: visible;
+		}
 	}
 }

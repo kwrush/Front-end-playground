@@ -63,7 +63,6 @@ h5 {
 p {
   font-size: 14px; }
 
-/* media query constants */
 .bold {
   font-weight: 700 !important; }
 
@@ -164,10 +163,12 @@ p {
     height: 100%;
     background-color: transparent;
     overflow: hidden;
-    -webkit-transition: opacity 1.3s, visibility 1.3s ease-out;
-    -moz-transition: opacity 1.3s, visibility 1.3s ease-out;
-    -ms-transition: opacity 1.3s, visibility 1.3s ease-out;
-    transition: opacity 1.3s, visibility 1.3s ease-out; }
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 1.3s, visibility 1.3s ease-in;
+    -moz-transition: opacity 1.3s, visibility 1.3s ease-in;
+    -ms-transition: opacity 1.3s, visibility 1.3s ease-in;
+    transition: opacity 1.3s, visibility 1.3s ease-in; }
     .slider li.hide {
       visibility: hidden;
       opacity: 0; }
@@ -184,13 +185,40 @@ p {
     color: #fff; }
     .slide .text-container h2 {
       font-weight: 300;
-      margin: 0 auto; }
+      margin: 0 auto;
+      -webkit-transform: skewX(-90deg);
+      -moz-transform: skewX(-90deg);
+      -o-transform: skewX(-90deg);
+      transform: skewX(-90deg); }
+      .slide .text-container h2.show {
+        opacity: 1;
+        visibility: visible; }
     .slide .text-container p {
+      margin-left: 230px;
       margin-top: 8px;
-      font-size: 16px; }
+      font-size: 16px;
+      opacity: 0;
+      visibility: hidden;
+      -webkit-transition: opacity 0.6s, visibility 0.6s ease-in-out;
+      -moz-transition: opacity 0.6s, visibility 0.6s ease-in-out;
+      -ms-transition: opacity 0.6s, visibility 0.6s ease-in-out;
+      transition: opacity 0.6s, visibility 0.6s ease-in-out; }
+      .slide .text-container p.show {
+        opacity: 1;
+        visibility: visible; }
   .slide .btn-container {
+    margin-left: 230px;
     display: inline-block;
-    bottom: 190px; }
+    bottom: 190px;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity 0.6s, visibility 0.6s ease-in-out;
+    -moz-transition: opacity 0.6s, visibility 0.6s ease-in-out;
+    -ms-transition: opacity 0.6s, visibility 0.6s ease-in-out;
+    transition: opacity 0.6s, visibility 0.6s ease-in-out; }
+    .slide .btn-container.show {
+      opacity: 1;
+      visibility: visible; }
 
 .indicator {
   bottom: 8px; }

@@ -22,6 +22,13 @@ $white-color: #fff;
 			transition: $transition;
 }
 
+@mixin transform($transform...) {
+	-webkit-transform: $transform;
+	   -moz-transform: $transform;
+	    -o-transform: $transform;
+			transform: $transform;
+}
+
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
@@ -110,12 +117,6 @@ h5{
 p {
 	font-size: 14px;
 }
-
-/* media query constants */
-$break-extra-small: 480px;
-$break-small: 750px;
-$break-medium: 1024px;
-$break-large: 1200px;
 
 .bold {
 	font-weight: $font-bold !important;
