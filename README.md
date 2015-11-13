@@ -1,3 +1,3 @@
 ### Front-end-Development
-Repository of learning front-end development
+Repository of learning front end development
 ###############################
