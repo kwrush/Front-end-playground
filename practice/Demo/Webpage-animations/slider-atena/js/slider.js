@@ -96,7 +96,7 @@ var Slider = (function($) {
 		
 		$(btn).addClass('show')
 			  .stop()
-			  .animate({ "margin-left": 0 }, 1300, 'easeOutElastic');
+			  .animate({ "margin-left": 0 }, 1400, 'easeOutElastic');
 
 		return this;	
 	};
@@ -116,26 +116,16 @@ var Slider = (function($) {
 		var $mainTitle = $('h2', this.$title[this.index]);
 		var $subTitle = $('p', this.$title[this.index]);
 
-		$mainTitle.css({'transform': 'skewX(-90deg)'});
 		$subTitle.css({'margin-left': this.elemInFrom});
 
-		$mainTitle.addClass('show')
-				  .stop()
-				  .animate(
-				  	{ 
-				  		'transform': 'skewX(0)' 
-				  	}, 
-				  	{
-				  		duration: 1300,
-				  		easing: 'easeOutElastic',
-				  		step: function(now, tween) {
-				  			$(this).css('transform', 'skewX('+ now +'deg)');
-				  		}
-				  	});
-		
+		$mainTitle.css({'margin-left': 0})
+				  .addClass('initial show expand-title')
+			      .delay(1400)
+			      .removeClass('initial');
+
 		$subTitle.addClass('show')
 			     .stop()
-			     .animate({ "margin-left": 0 }, 1300, 'easeOutElastic');
+			     .animate({ "margin-left": 0 }, 1400, 'easeOutElastic');
 
 		return this;
 	};
@@ -145,16 +135,8 @@ var Slider = (function($) {
 		var $subTitle = $('p', this.$title[this.lastIndex]);
 
 		$mainTitle.stop()
-				  .animate(
-				  	{ 'transform': 'skewX(-90deg)' }, 
-
-				  	{
-				  		duration: 1000,
-				  		step: function(now, tween) {
-				  			$(this).css('transform', 'skewX('+ now +'deg)' );
-				  		}
-				  	})
-				  .removeClass('show');
+				  .animate({ "margin-left": this.elemOutTo }, 1000)
+				  .removeClass('show expand-title')
 
 		$subTitle.stop()
 			     .animate({ "margin-left": this.elemOutTo }, 1000)

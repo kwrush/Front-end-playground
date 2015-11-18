@@ -22,6 +22,13 @@ $white-color: #fff;
 			transition: $transition;
 }
 
+@mixin animation($animation...) {
+	-webkit-animation: $animation;
+	   -moz-animation: $animation;
+	     -o-animation: $animation;
+	        animation: $animation;
+}
+
 @mixin transform($transform...) {
 	-webkit-transform: $transform;
 	   -moz-transform: $transform;
@@ -35,6 +42,61 @@ $white-color: #fff;
       -ms-border-radius: $radius;
           border-radius: $radius;
 }
+
+@mixin keyframes($name) {
+	@-webkit-keyframes #{$name} {
+		@content; 
+	}
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+	@-ms-keyframes #{$name} {
+		@content;
+	}
+	@keyframes #{$name} {
+		@content;
+	} 
+}
+
+@include keyframes(elastic) {
+	5% {
+		@include transform(rotateX(80deg));
+	}
+
+	25% {
+		@include transform(rotateX(15deg));
+	}
+
+	45% {
+		@include transform(rotateX(-40deg));
+	}
+
+	60% {
+		@include transform(rotateX(30deg));
+	}
+
+	70% {
+		@include transform(rotateX(-20deg));
+	}
+
+	85% {
+		@include transform(rotateX(15deg));
+	}
+
+	90% {
+		@include transform(rotateX(-10deg));
+	}
+
+	95% {
+		@include transform(rotateX(5deg));
+	}
+
+
+	100% {
+		@include transform(rotateX(0deg));
+	}
+}
+
 
 /* extend */
 .clearfix {

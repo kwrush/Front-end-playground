@@ -39,16 +39,24 @@
 
 	.text-container {
 		color: #fff;
+		perspective: 500px;
 		@extend .center;
 
 		h2 {
 			font-weight: $font-light;
 			margin: 0 auto;
-			@include transform(skewX(-90deg));
+			opacity: 0;
+			visibility: hidden;
+			@include transition(opacity .6s, visibility .6s ease-in-out);
 
 			&.show {
 				opacity: 1;
 				visibility: visible;
+			}
+
+			&.initial {
+				margin-left: 0;
+				@include transform(rotateX(90deg));
 			}
 		}
 
@@ -65,6 +73,10 @@
 				visibility: visible;
 			}	
 		}
+	}
+
+	.expand-title {
+		@include animation(elastic 1.4s ease-in);
 	}
 
 	.btn-container {
