@@ -63,7 +63,8 @@ var Slider = (function($) {
 		self.hideButton();
 
 
-		self.$layer.not($(self.$layer[self.index]).removeClass('hide'))
+		self.$layer.not($(self.$layer[self.index])
+				   .removeClass('hide'))
 		           .each(function() {
 		           		$(this).addClass('hide');
 		           });
@@ -78,13 +79,6 @@ var Slider = (function($) {
 		}, 2000);
 
 		return self;
-	};
-
-	slider.prototype.delay = function(delay) {
-
-		$(this).delay(delay);
-
-		return this;
 	};
 
 	slider.prototype.showButton = function() {
