@@ -1,0 +1,20 @@
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+};
+
+body {
+	font-family: 'Raleway' Arial, sans-serif;
+}
+
+.container {
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateY(-50%, -50%);
+	padding: 30px;
+	background-color: #ccc;
+	font-size: 15px;
+	font-weight: 500;
+}
