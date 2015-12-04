@@ -48,7 +48,7 @@ body {
 
 .btn:hover {
 	background-color: #0089A7;
-};
+}
 
 .weather-info {
 	margin-top: 20px;
@@ -66,7 +66,7 @@ body {
 
 .weather-data li {
 	float: left;
-	width: 33.33333%;
+	width: 35%;
 	height: 40px;
 	font-size: 16px;
 	line-height: 40px;
@@ -75,6 +75,7 @@ body {
 }
 
 .weather-data li[data-name="current-date"] {
+	width: 30%;
 	background-color: #33A6B8;
 	color: #fff;
 }
