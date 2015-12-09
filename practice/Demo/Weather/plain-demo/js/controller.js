@@ -63,7 +63,7 @@
 
 		var data = {};
 		data.city = status.display_location.city;
-		data.date = this._getDate(status.local_time_rfc822);
+		data.date = this._getDate(status.local_time_rfc822 + ' ' + status.local_tz_short);
 		data.temperature = status.temp_c;
 		data.weather = status.weather;
 
@@ -73,7 +73,7 @@
 
 	Controller.prototype._makeURL = function(city) {
 		city = city || this.model.defaultCiy;
-		return this.header + this.key + '/conditions/lang/q/' + city + '.json';
+		return this.header + this.key + '/conditions/lang/q/' + city.replace(/\s+/, '_') + '.json';
 	};
 
 	Controller.prototype._getDate = function(dateString) {
