@@ -60,8 +60,8 @@ body {
 	list-style: none;
 	width: 100%;
 	background-color: #fcfcfc;
-	box-shadow: 0 2px 5px -3px rgba(0, 0, 0, .5),
-	            0 4px 16px -3px rgba(0, 0, 0, .2);
+	box-shadow: 0 3px 5px -3px rgba(0, 0, 0, .5),
+	            0 5px 10px -3px rgba(0, 0, 0, .2);
 }
 
 .weather-data li {
@@ -71,11 +71,19 @@ body {
 	font-size: 16px;
 	line-height: 40px;
 	text-align: center;
+	color: #fff;
 
 }
 
 .weather-data li[data-name="date"] {
-	width: 40%;
 	background-color: #33A6B8;
-	color: #fff;
+}
+
+.weather-data li[data-name="temp"] {
+	background-color: #81C7D4;
+}
+
+.weather-data li[data-name="weather"] {
+	width: 40%;
+	background-color: #A5DEE4;
 }

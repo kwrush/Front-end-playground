@@ -7,10 +7,10 @@
 		= '<li data-name="date">'
 		+     '{{date}}'
 		+ '</li>'
-		+ '<li date-name="temp">'
+		+ '<li data-name="temp">'
 		+     '{{temp}}' + this.tempUnit
 		+ '</li>'
-		+ '<li date-name="weather">'
+		+ '<li data-name="weather">'
 		+     '{{weather}}'
 		+ '</li>';
 	};
