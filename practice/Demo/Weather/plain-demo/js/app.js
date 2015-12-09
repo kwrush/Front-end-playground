@@ -1,20 +1,20 @@
 (function() {
 	'use strict';
 
-	function Weather(name) {
+	function Weather() {
 		this.model = new app.Model();
 		this.template = new app.Template();
-		this.view = new app.View(template);
+		this.view = new app.View(this.template);
 		this.controller = new app.Controller(this.model, this.view);
 	}
 
-	var weather = new Weather('plain-weather');
+	var weather = new Weather();
 
-	function buildView(cmd) {
-		weather.controller.bindView(cmd);
+	function setView() {
+		weather.controller.setView();
 	}
 
 	window.onload = function() {
-		buildView(document.location.hash);
+		setView('Arnhem');
 	}
 })();

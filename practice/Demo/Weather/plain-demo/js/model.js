@@ -1,33 +1,46 @@
 (function(window) {
 	'use strict';
 
-	function Model(name, callback) {
+	function Model(name) {
 		this.dbName = name || 'weather'; 
-		this.defaultCity = 'Arnhem';
+		this.defaultCity = 'Netherlands/Arnhem';
 
 		if (!localStorage[this.dbName]) {
-			var data = {
-				weather: []
+			var store = {
+				data: {
+					city: '',
+					date: '',
+					temperature: '',
+					weather: ''
+				}
 			};
 
-			localStorage[this.dbName] = JSON.stringify(data);
+			localStorage[this.dbName] = JSON.stringify(store);
+		}
+	};
+
+	Model.prototype.read = function(callback) {
+
+		var store = JSON.parse(localStorage[this.dbName]);
+		var city = store.data.city || this.defaultCity;
+
+		callback.call(this, city);
+	};
+
+	Model.prototype.save = function(data){
+		var info = JSON.parse(localStorage[this.dbName]);
+		var weatherData = info.data;
+
+		for (var key in data) {
+			weatherData[key] = data[key];
 		}
 
-		callback.call(this, JSON.parse(localStorage[this.dbName]));
-	}
+		info.data = weatherData;
 
-	Model.prototype.create = function(callback) {
-		callback = callback || function() {};
-
-
+		localStorage[this.dbName] = JSON.stringify(info);
 	};
 
-	Model.prototype.read = function() {
-
-	};
-
-	Model.prototype.save = function(argument){
-		
-	};
+	window.app = window.app || {};
+	window.app.Model = Model;
 
 })(window);

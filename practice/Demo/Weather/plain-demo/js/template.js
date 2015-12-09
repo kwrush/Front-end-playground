@@ -2,12 +2,13 @@
 	'use strict';
 
 	function Template() {
+		this.tempUnit = '&#8451';
 		this.defaultTemplate 
-		= '<li data-name="current-date">'
+		= '<li data-name="date">'
 		+     '{{date}}'
 		+ '</li>'
 		+ '<li date-name="temp">'
-		+     '{{temp}}&#8451';
+		+     '{{temp}}' + this.tempUnit
 		+ '</li>'
 		+ '<li date-name="weather">'
 		+     '{{weather}}'
@@ -23,5 +24,8 @@
 
 		return template;
 	};
+
+	window.app = window.app || {};
+	window.app.Template = Template;
 
 })(window);

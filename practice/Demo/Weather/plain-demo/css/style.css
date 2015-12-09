@@ -30,7 +30,7 @@ body {
 }
 
 .input-city {
-	width: 250px;
+	width: 300px;
 	height: 27px;
 	border: 1px solid #ccc;
 	outline-color: #33A6B8;
@@ -60,13 +60,13 @@ body {
 	list-style: none;
 	width: 100%;
 	background-color: #fcfcfc;
-	box-shadow: 0 2px 4px -2px rgba(0, 0, 0, .5),
-	            0 4px 13px -2px rgba(0, 0, 0, .2);
+	box-shadow: 0 2px 5px -3px rgba(0, 0, 0, .5),
+	            0 4px 16px -3px rgba(0, 0, 0, .2);
 }
 
 .weather-data li {
 	float: left;
-	width: 35%;
+	width: 30%;
 	height: 40px;
 	font-size: 16px;
 	line-height: 40px;
@@ -74,8 +74,8 @@ body {
 
 }
 
-.weather-data li[data-name="current-date"] {
-	width: 30%;
+.weather-data li[data-name="date"] {
+	width: 40%;
 	background-color: #33A6B8;
 	color: #fff;
 }
