@@ -63,7 +63,7 @@
 
 		var data = {};
 		data.city = status.display_location.city;
-		data.date = this._getDate(status.local_time_rfc822 + ' ' + status.local_tz_short);
+		data.date = this._getDate(status.local_tz_long);
 		data.temperature = status.temp_c;
 		data.weather = status.weather;
 
@@ -76,14 +76,15 @@
 		return this.header + this.key + '/conditions/lang/q/' + city.replace(/\s+/, '_') + '.json';
 	};
 
-	Controller.prototype._getDate = function(dateString) {
+	Controller.prototype._getDate = function(timeZone) {
 		var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 
 					 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 
 					 'Nov', 'Dec'];
 
 		var day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-		var date = new Date(dateString);
+		var formattedDate = new Date().toLocaleString('en-US', {timeZone: timeZone});
+		var date = new Date(formattedDate);
 
 		return month[date.getMonth()] + ' ' + date.getDate() + ', ' + day[date.getDay()];
 	};
