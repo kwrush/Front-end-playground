@@ -16,10 +16,14 @@
 			<button class="add-btn">Add</button>
 		</header>
 		<section id="suggest" class="hide">
-			
+			<script type="text/template" id="suggest-template">
+			<ul>
+
+			</ul>
+			</script>
 		</section>
 		<section id="city-list">
-			
+			<script type="text/template"></script>
 		</section>
 		<section id="weather-info" class="btm-shadow">
 			<ul class="weather-data clearfix">
@@ -42,5 +46,8 @@
 	<script src="js/lib/backbone.min.js"></script>
 	<script src="js/lib/backbone.localStorage.min.js"></script>
 	<script src="js/models/city.js"></script>
+	<script src="js/collections/cities.js"></script>
+	<script src="js/views/view.js"></script>
+	<script src="js/app.js"></script>
 </body>
 </html>
