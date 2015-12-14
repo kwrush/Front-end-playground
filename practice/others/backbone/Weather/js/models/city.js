@@ -2,7 +2,7 @@
 
 var app = app || {};
 
-var City = Backbone.Model.extend({
+app.City = Backbone.Model.extend({
 
 	defaults: {
 		name: '',
@@ -12,5 +12,9 @@ var City = Backbone.Model.extend({
 		localTime: null,
 		temperature: null,
 		weather: null,
+	},
+
+	initialize: function() {
+		console.log(this.name + ' is created.');
 	}
 });
