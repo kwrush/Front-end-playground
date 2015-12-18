@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Backbone-test-3</title>
+	<style>
+		#list ul {
+			padding: 5px;
+			margin: 3px 0;
+			border: 1px solid #ccc;
+			list-style: none;
+			min-width: 245px;
+		}
+
+		.item {
+			padding: 3px;
+			border-bottom: 1px solid #ccc;
+		}
+
+		#input-area {
+			width: 180px;
+		}
+
+		.remove-btn {
+			margin-right: 2px;
+			float: right;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<section id="enter">
+			<input type="text" placeholder="" id="input-area">
+			<button id="add-btn">Add book</button>
+		</section>
+		<section id="list">
+			<ul>
+				<script type="text/template" id="list-template">
+				<% _.each(collection, function(model) { %>
+					<li class="item">
+						<span><%= model.title %></span>
+						<a href="#" class="remove-btn">Remove</a>
+					</li>
+				<% }); %>
+				</script>
+			</ul>
+		</section>	
+	</div>
+	<script src="js/lib/jquery.min.js"></script>
+	<script src="js/lib/underscore.min.js"></script>
+	<script src="js/lib/backbone.min.js"></script>
+	<script src="js/app3.js"></script>
+</body>
+</html>
