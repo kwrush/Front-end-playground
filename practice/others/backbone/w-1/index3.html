@@ -4,21 +4,23 @@
 	<meta charset="UTF-8">
 	<title>Backbone-test-3</title>
 	<style>
-		#list ul {
-			padding: 5px;
-			margin: 3px 0;
-			border: 1px solid #ccc;
-			list-style: none;
-			min-width: 245px;
+		.container {
+			margin: 0 auto;
+			padding: 10px;
+			width: 350px;
+			border: 1px solid #333;
 		}
 
-		.item {
-			padding: 3px;
-			border-bottom: 1px solid #ccc;
+		#title-edit {
+			width: 200px;
 		}
 
-		#input-area {
-			width: 180px;
+		#intro-edit {
+			display: block;
+			margin: 5px 0;
+			width: 200px;
+			height: 100px;
+			resize: none;
 		}
 
 		.remove-btn {
@@ -26,12 +28,46 @@
 			float: right;
 		}
 
+
+		#list {
+			margin-top: 20px;
+			width: 300px;
+		}
+
+		
+		#list ul {
+			padding: 5px;
+			margin: 3px 0;
+			border: 1px solid #ccc;
+			list-style: none;
+			min-width: 300px;
+		}
+
+		.item {
+			padding: 3px;
+			border-bottom: 1px solid #ccc;
+		}
+
+		.item:hover {
+			cursor: pointer;
+			background-color: #eee;
+		}
+
+		.intro {
+			margin-top: 10px;
+			padding: 5px;
+			min-width: 300px;
+			min-height: 100px;
+			border: 1px solid #333;
+		}
+
 	</style>
 </head>
 <body>
 	<div class="container">
 		<section id="enter">
-			<input type="text" placeholder="" id="input-area">
+			<input type="text" placeholder="" id="title-edit">
+			<textarea id="intro-edit"></textarea>
 			<button id="add-btn">Add book</button>
 		</section>
 		<section id="list">
@@ -39,17 +75,24 @@
 				<script type="text/template" id="list-template">
 				<% _.each(collection, function(model) { %>
 					<li class="item">
-						<span><%= model.title %></span>
+						<label><%= model.title %></label>
 						<a href="#" class="remove-btn">Remove</a>
 					</li>
 				<% }); %>
 				</script>
 			</ul>
+			<div class="intro">
+				<script type="text/template" id="intro-template">
+				<h3><%= model.title %></h3>
+				<p><%= model.intro %></p>	
+				</script>
+			</div>
 		</section>	
 	</div>
 	<script src="js/lib/jquery.min.js"></script>
 	<script src="js/lib/underscore.min.js"></script>
 	<script src="js/lib/backbone.min.js"></script>
+	<script src="js/lib/backbone.localStorage.min.js"></script>
 	<script src="js/app3.js"></script>
 </body>
 </html>
