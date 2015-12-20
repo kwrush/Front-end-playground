@@ -81,17 +81,16 @@ var BookView = Backbone.View.extend({
 		event.preventDefault();
 
 		var target = event.target;
-		var index = $(target).index();
+		var index = $(target).closest('li.item').index();
 
 		var model = this.collection.at(index);
-		this.collection.remove(model);	
-		model.destory();	
+		model.destroy();	
 	},
 
 	showBookIntro: function(event) {
 		var self = this;
 		var target = event.target;
-		var index = $(target).index();
+		var index = $(target).closest('li.item').index();
 
 		var model = this.collection.at(index);
 		this.intro.html( self.introTpl( {
