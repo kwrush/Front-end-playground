@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Simple Backbone weather app</title>
+	<link rel="stylesheet" href="styles/normalize.css">
+	<link rel="stylesheet" href="styles/app-w.css">
+</head>
+<body>
+	<div id="app-container">
+		<header>
+			<h1>Simple weather app</h1>
+		</header>
+		<section id="edit">
+			<input type="text" value="" placeholder="Enter a city name" id="city-edit">
+			<div class="btn-wrapper">
+				<button id="search-btn">Search</button>
+				<button id="add-btn">Add</button>
+			</div>
+			<ul id="suggest" class="">
+				<li>Amsterdam, The Netherlands</li>
+				<script type="text/template" id="suggest-template">
+					<% _.each(results, function(item) { %>
+					    <li>
+					    	<%= (item.name || item.city) + (item.state.length > 0 ? ', ' + item.state : '') + ', ' + (item.country_name || item.country) %>
+					    </li>
+					<% }); %>
+				</script>
+			</ul>
+		</section>
+		<section id="list">
+			<h3>Cities</h3>
+			<ul id="cities">
+				<li class="city">
+					<span>Amsterdam, The Netherlands</span>
+					<a href="#" class="remove">Remove</a>
+				</li>
+				<script type="text/template" id="list-template">
+					<% _.each(collection, function(model) { %>
+					    <li class="city">
+					    	<span>
+					    		<%= (model.location.city || model.current_observation.display_location.city) + (model.location.state.length > 0 ? ', ' + model.location.state : '') + ', ' + (item.country_name || item.country) %>
+					    	</span>
+					    	<a href="#" class="remove">Remove</a>
+					   	</li>
+					<% }); %>
+				</script>
+			</ul>
+		</section>
+		<section id="result">
+			<ul>
+			</ul>
+		</section>
+		<section id="footer">
+			<p>Data provided by <a href="http://www.wunderground.com/">Weather Underground</a></p>
+		</section>
+	</div>
+
+	<script src="js/lib/jquery.min.js"></script>
+	<script src="js/lib/underscore.min.js"></script>
+	<script src="js/lib/backbone.min.js"></script>
+	<script src="js/lib/backbone.localStorage.min.js"></script>
+	<script src="js/app-w.js"></script>
+</body>
+</html>
