@@ -18,11 +18,10 @@
 				<button id="add-btn">Add</button>
 			</div>
 			<ul id="suggest" class="">
-				<li>Amsterdam, The Netherlands</li>
 				<script type="text/template" id="suggest-template">
 					<% _.each(results, function(item) { %>
 					    <li>
-					    	<%= (item.name || item.city) + (item.state.length > 0 ? ', ' + item.state : '') + ', ' + (item.country_name || item.country) %>
+					    	<%= item.error || ((item.name || item.city) + (item.state ? ', ' + item.state : '') + ', ' + (item.country_name || item.country)) %>
 					    </li>
 					<% }); %>
 				</script>
@@ -31,25 +30,29 @@
 		<section id="list">
 			<h3>Cities</h3>
 			<ul id="cities">
-				<li class="city">
-					<span>Amsterdam, The Netherlands</span>
-					<a href="#" class="remove">Remove</a>
-				</li>
 				<script type="text/template" id="list-template">
 					<% _.each(collection, function(model) { %>
 					    <li class="city">
 					    	<span>
-					    		<%= (model.location.city || model.current_observation.display_location.city) + (model.location.state.length > 0 ? ', ' + model.location.state : '') + ', ' + (item.country_name || item.country) %>
+					    		<%= (model.location.city || model.current_observation.display_location.city) + (model.location.state ? ', ' + model.location.state : '') + ', ' + model.location.country_name %>
 					    	</span>
 					    	<a href="#" class="remove">Remove</a>
 					   	</li>
 					<% }); %>
 				</script>
 			</ul>
-		</section>
-		<section id="result">
-			<ul>
-			</ul>
+            <div id="result">
+                <ul class="clearfix">
+					<script type="text/template" id="result-template">
+						<li><%- model.localTime %></li>
+						<li><%- model.current_observation.temp_c %>&#8451;</li>
+						<li>
+							<img src="<%- model.current_observation.icon_url %>" alt="<%- model.current_observation.icon %>">
+							<span><%- model.current_observation.weather %></span>
+						</li>
+					</script>
+                </ul>
+            </div>
 		</section>
 		<section id="footer">
 			<p>Data provided by <a href="http://www.wunderground.com/">Weather Underground</a></p>

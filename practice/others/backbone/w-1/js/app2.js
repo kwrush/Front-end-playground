@@ -37,7 +37,7 @@ var EnterView = Backbone.View.extend({
     tlp: _.template($('#suggest-template').html()),
     
     events: {
-        'keydown #input': 'getSuggest',
+        'keypress #input': 'getSuggest',
         'click #new-btn': 'addCity',
     },
    
