@@ -1,15 +1,16 @@
 // constant
 var AppData = {
-	DB_NAME      : 'app-w',
-	BASE_URL     : 'http://api.wunderground.com',
-	DATA_FEATURE : 'conditions/geolookup',
-	SEARCH_FEATURE: 'geolookup',
-	DATA_FORMAT  : 'json',
-	API_KEY      : 'c9914a3fccc20133',
-	KEY_ENTER    : 13,
-	KEY_BACKSPACE: 8,
-	MONTH: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-		    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	DB_NAME          : 'app-w',
+	BASE_URL         : 'http://api.wunderground.com',
+	CONDITION_FEATURE: 'conditions/geolookup',
+	FORECAST_FEATURE : 'forecast/geolookup',
+	SEARCH_FEATURE   : 'geolookup',
+	DATA_FORMAT      : 'json',
+	API_KEY          : 'c9914a3fccc20133',
+	KEY_ENTER        : 13,
+	KEY_BACKSPACE    : 8,
+	MONTH            : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+		                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 }
 
 /*
@@ -68,7 +69,8 @@ var SearchView = Backbone.View.extend({
 		var input = this.$edit.val().trim();
 		if (!input) return;
 
-		//Todo: format input text
+		input = input.replace(/\s+/g, '').replace(/[^\w]+/g, '/');
+
 		this.model.clear()
                   .set(this.model.defaults)
                   .set({ query: input })
@@ -154,10 +156,28 @@ var City = Backbone.Model.extend({
 		console.log('City model has been initialized.');
 	},
 
+	fetchFromServer: function(options) {
+		return Backbone.Model.prototype.fetch.call(this, options);
+	},
+
+	setLocalTime: function() {
+		if (!this.attributes.current_observation) return;
+
+		var timeString = new Date().toLocaleString('en-US', { timeZone: this.get('current_observation').local_tz_long });
+		var date = new Date(timeString);
+
+		var localTime = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':'
+		    + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ', '
+			+ AppData.MONTH[date.getMonth()] + ' '
+			+ (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());
+
+		this.set({ localTime: localTime });
+	},
+
 	url: function() {
 		return AppData.BASE_URL + '/api/'
 			+ AppData.API_KEY + '/'
-			+ AppData.DATA_FEATURE
+			+ AppData.CONDITION_FEATURE
 			+ this.get('link') + '.'
 			+ AppData.DATA_FORMAT;
 	}
@@ -210,11 +230,13 @@ var WeatherView = Backbone.View.extend({
 
     events: {
         'click .remove': 'removeItem',
+        'click .update': 'updateItem',
         'click .city': 'selectCity'
     },
 
     initialize: function() {
-        _.bindAll(this, 'render');
+        _.bindAll(this, 'showData');
+
         this.$list = this.$('#cities');
         this.$weatherInfo = this.$('#result ul');
 
@@ -224,7 +246,7 @@ var WeatherView = Backbone.View.extend({
 
 		// Get collection from local storage
 		this.collection.fetch();
-		this.acquire(this.collection.at(0));
+		this.acquire(this.collection.at(0), false);
 
 		$('li.city').removeClass('select');
 		$($('li.city')[0]).addClass('select');
@@ -247,6 +269,18 @@ var WeatherView = Backbone.View.extend({
 		model.destroy();
 	},
 
+	updateItem: function(event) {
+		event.preventDefault();
+
+		var target = event.target;
+		var index = $(target).closest('li.city').index();
+
+		var model = this.collection.at(index);
+
+		// fetch from server
+		this.acquire(model, true);
+	},
+
 	selectCity: function(event) {
 		var target = event.target;
 
@@ -256,35 +290,33 @@ var WeatherView = Backbone.View.extend({
 		var index = select.addClass('select').index();
 		var model = this.collection.at(index);
 
-		this.acquire(model);
+		// fetch from cache
+		this.acquire(model, false);
 	},
 
-	acquire: function(model) {
+	acquire: function(model, online) {
 		model.fetch({
-			success: this.render
+			ajaxSync: online,
+			success: this.showData
 		});
 	},
 
-	setLocalTime: function(model) {
-		var time_rfc822 = model.get('current_observation').local_time_rfc822;
-		var date = new Date(time_rfc822);
-		var timeStr = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':'
-		    + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ', '
-			+ AppData.MONTH[date.getMonth()] + ' '
-			+ (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());
+	showData: function(model, response) {
+		var self = this;
 
-		model.set({ localTime: timeStr });
-
-		return model;
+		model.setLocalTime();
+		model.save().done(function() {
+			self.render(model);
+		});
 	},
 
-	render: function(model, response) {
-		model = this.setLocalTime(model);
-
+	render: function(model) {
 		var self = this;
 		this.$weatherInfo.html(
 			this.resultTpl({ model: model.attributes })
 		);
+
+		console.log('Render done......');
 
 		return this;
 	}

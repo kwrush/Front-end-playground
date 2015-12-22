@@ -37,7 +37,7 @@ h1 {
 	margin: 100px auto;
 	padding: 10px;
 	width: 480px;
-	height: 420px;
+	height: 450px;
 	border: 1px solid #ccc;
 }
 
@@ -95,11 +95,13 @@ h1 {
 	cursor: pointer;
 }
 
-.remove {
+.city a {
+	margin-left: 5px;
 	float: right;
 }
 
-.remove:hover {
+.remove:hover,
+.update:hover {
 	color: #fff;
 }
 
