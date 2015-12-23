@@ -1,17 +1,34 @@
+/*
+ * no auto complete as the ajax calls per minute are limited with free key...
+ */
 // constant
 var AppData = {
-	DB_NAME          : 'app-w',
-	BASE_URL         : 'http://api.wunderground.com',
-	CONDITION_FEATURE: 'conditions/geolookup',
-	FORECAST_FEATURE : 'forecast/geolookup',
-	SEARCH_FEATURE   : 'geolookup',
-	DATA_FORMAT      : 'json',
-	API_KEY          : 'c9914a3fccc20133',
-	KEY_ENTER        : 13,
-	KEY_BACKSPACE    : 8,
-	MONTH            : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-		                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	DB_NAME         : 'app-w',
+	BASE_URL        : 'http://api.wunderground.com',
+	FORECAST_FEATURE: 'conditions/forecast/geolookup',
+	GEO_FEATURE     : 'geolookup',
+	DATA_FORMAT     : 'json',
+	API_KEY         : 'c9914a3fccc20133',
+	KEY_ENTER       : 13,
+	KEY_BACKSPACE   : 8,
+	MONTH           : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+		               'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 }
+
+var AppRouter = Backbone.Router.extend({
+	routes: {
+		"*current": "switchView",
+		"*forecast": "switchView"
+	},
+
+	initialize: function(options) {
+		this.cities = options['cities'];
+	},
+
+	switchView: function(param) {
+		this.cities.trigger('switchView', param);
+	}
+});
 
 /*
  * Search
@@ -29,7 +46,7 @@ var Result = Backbone.Model.extend({
 	url: function() {
 		return AppData.BASE_URL + '/api/'
 			+ AppData.API_KEY + '/'
-			+ AppData.SEARCH_FEATURE + '/q/'
+			+ AppData.GEO_FEATURE + '/q/'
 			+ this.get('query') + '.'
 			+ AppData.DATA_FORMAT;
 	}
@@ -143,7 +160,8 @@ var City = Backbone.Model.extend({
         link: '', // /q/link_code
 		localTime: '', // hh:mm, MM dd
 		location: null,
-		current_observation: null
+		current_observation: null,
+		forecase: null
 	},
 
     validate: function(attrs) {
@@ -174,10 +192,44 @@ var City = Backbone.Model.extend({
 		this.set({ localTime: localTime });
 	},
 
+	getForecast: function() {
+		var forecast = [];
+
+		if (this.get('forecast')) {
+			var data = this.get('forecast').simpleforecast.forecastday;
+
+			for (var i = 0; i < data.length; i++) {
+				var dataItem = data[i];
+
+				var date = dataItem.date.weekday_short + ', '
+					+ AppData.MONTH[parseInt(dataItem.date.month, 10) - 1] + ' '
+					+ dataItem.date.day;
+
+				var tempHigh = dataItem.high.celsius;
+				var tempLow = dataItem.low.celsius;
+
+				var iconURL = dataItem.icon_url;
+				var iconName = dataItem.icon;
+
+				var item = {
+					date: date,
+					temp_c_h: tempHigh,
+					temp_c_l: tempLow,
+					icon_url: iconURL,
+					icon_name: iconName
+				};
+
+				forecast.push(item);
+			}
+		}
+
+		return forecast;
+	},
+
 	url: function() {
 		return AppData.BASE_URL + '/api/'
 			+ AppData.API_KEY + '/'
-			+ AppData.CONDITION_FEATURE
+			+ AppData.FORECAST_FEATURE
 			+ this.get('link') + '.'
 			+ AppData.DATA_FORMAT;
 	}
@@ -228,6 +280,10 @@ var WeatherView = Backbone.View.extend({
 
     resultTpl: _.template($('#result-template').html()),
 
+	forecastTpl: _.template($('#forecast-template').html()),
+
+	titleTpl: _.template($('#title-template').html()),
+
     events: {
         'click .remove': 'removeItem',
         'click .update': 'updateItem',
@@ -237,16 +293,20 @@ var WeatherView = Backbone.View.extend({
     initialize: function() {
         _.bindAll(this, 'showData');
 
+		this.$title = this.$('#result > h4');
         this.$list = this.$('#cities');
-        this.$weatherInfo = this.$('#result ul');
+        this.$current = this.$('.current');
+		this.$forecast = this.$('.forecast');
 
         this.listenTo(this.collection, 'newCityAdded', this.updateList);
+		this.listenTo(this.collection, 'switchView', this.showForecast)
 		this.listenTo(this.collection, 'add', this.updateList);
         this.listenTo(this.collection, 'remove', this.updateList);
 
 		// Get collection from local storage
 		this.collection.fetch();
-		this.acquire(this.collection.at(0), false);
+		var model = this.collection.at(0);
+		model && this.acquire(model, false);
 
 		$('li.city').removeClass('select');
 		$($('li.city')[0]).addClass('select');
@@ -301,6 +361,16 @@ var WeatherView = Backbone.View.extend({
 		});
 	},
 
+	showForecast: function(event) {
+		if (!event) return;
+
+		$('.switch a').removeClass('active');
+		$('#result ul').addClass('hide');
+
+		$('#to-' + event).addClass('active');
+		$('.' + event).removeClass('hide');
+	},
+
 	showData: function(model, response) {
 		var self = this;
 
@@ -312,11 +382,17 @@ var WeatherView = Backbone.View.extend({
 
 	render: function(model) {
 		var self = this;
-		this.$weatherInfo.html(
+
+		this.$title.html(this.titleTpl({ model: model.attributes }));
+
+		this.$current.html(
 			this.resultTpl({ model: model.attributes })
 		);
 
-		console.log('Render done......');
+		var results = model.getForecast();
+		this.$forecast.html(
+			this.forecastTpl({results: results})
+		);
 
 		return this;
 	}
@@ -329,4 +405,7 @@ $(function() {
     var cities = new Cities();
 	var searchView = new SearchView({ model: rs, collection: cities });
     var weatherView = new WeatherView({ collection: cities });
+
+	var router = new AppRouter({cities: cities});
+	Backbone.history.start();
 });

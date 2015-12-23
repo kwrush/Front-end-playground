@@ -34,10 +34,10 @@ h1 {
 }
 
 #app-container {
-	margin: 100px auto;
+	margin: 50px auto;
 	padding: 10px;
-	width: 480px;
-	height: 450px;
+	width: 650px;
+	height:525px;
 	border: 1px solid #ccc;
 }
 
@@ -49,7 +49,7 @@ h1 {
 }
 
 #city-edit {
-	width: 250px;
+	width: 500px;
 }
 
 .btn-wrapper {
@@ -106,30 +106,109 @@ h1 {
 }
 
 /* weather info */
-#result ul {
-	margin: 15px 0 25px 0;
+#result {
+	position: relative;
+	margin: 15px 0 45px 0;
+	width: 100%;
+	height: 120px;
+}
+
+#result h4 {
+	margin: 0;
+}
+
+.switch {
+	position: absolute;
+	top: 25px;
+	left: 0;
+	width: 100%;
+	height: 25px;
+	line-height: 25px;
+	color: #333;
+}
+
+.switch a {
+	padding: 0 10px;
+	display: inline-block;
+	text-decoration: none;
+}
+
+.switch a.active {
+	background-color: #ccc;
+}
+
+.current,
+.forecast {
+	position: absolute;
+	top: 50px;
+	left: 0;
+	width: 100%;
+	height: 90px;
 	font-size: 16px;
-	line-height: 50px;
 	text-align: center;
 }
 
-#result ul li{
-	padding: 5px 8px;
+.current li{
+	margin: 10px 0;
+	padding: 0 8px;
 	float: left;
 	width: 28%;
+	height: 90px;
+	line-height: 90px;
 	border-right: 1px solid #ccc;
 }
 
-#result ul li:last-child {
+.current li:last-child {
 	width: 44%;
 	border-right: none;
 }
 
-#result ul img {
+.current li img {
+	position: relative;
 	float: left;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.forecast li {
+	float: left;
+	width: 25%;
+	height: 90px;
+	margin: 10px 0;
+	border-right: 1px solid #ccc;
+}
+
+.forecast li:last-child {
+	border-right: none;
+}
+
+.date {
+	margin: 10px 0;
+}
+
+.weather {
+	width: 100%;
+	height: 55px;
+	font-size: 14px;
+}
+
+.weather img {
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.weather span {
+	line-height: 55px;
+	transform: rotate(90deg);
+}
+
+.weather .symbol {
+	font-style: normal;
+	font-size: 17px;
 }
 
 /* footer */
 #footer {
 	font-size: 13px;
+	text-align: right;
 }

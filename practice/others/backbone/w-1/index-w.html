@@ -43,7 +43,16 @@
 				</script>
 			</ul>
             <div id="result">
-                <ul class="clearfix">
+				<h4>
+				<script type="text/template" id="title-template">
+				<%= model.location.city || model.current_observation.display_location.city %></h4>
+				</script>
+				</h4>
+				<div class="switch">
+					<a href="#current" id="to-current" class="active">Current weather</a>
+					<a href="#forecast" id="to-forecast">Four days forecast</a>
+				</div>
+                <ul class="current clearfix">
 					<script type="text/template" id="result-template">
 						<li><%- model.localTime %></li>
 						<li><%- model.current_observation.temp_c %>&#8451;</li>
@@ -53,6 +62,20 @@
 						</li>
 					</script>
                 </ul>
+				<ul class="forecast hide clearfix">
+					<script type="text/template" id="forecast-template">
+						<% _.each(results, function(item) { %>
+						<li>
+							<h5 class="date"><%= item.date %></h5>
+							<div class="weather">
+								<img src="<%= item.icon_url %>" alt="<%= item.icon_name %>">
+								<span><i class="symbol">&#8657;</i><%= item.temp_c_h %>&#8451;</span>
+								<span><i class="symbol">&#8659;</i><%= item.temp_c_l %>&#8451;</span>
+							</div>
+						</li>
+						<% }); %>
+					</script>
+				</ul>
             </div>
 		</section>
 		<section id="footer">
