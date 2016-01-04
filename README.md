@@ -1,3 +1,3 @@
 ### Front-end-Development
-Personal repository for learning front end development
+Personal repository for learning front end :smile:
 ###############################
