@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title>Very simple slider</title>
+    <link rel="stylesheet" href="../../public/css/normalize.css"></link>
+    <style>
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;  
+        }
+
+        #slider {
+            position: relative;
+            overflow: hidden;
+            width: 350px;
+            height: 220px;
+            background-color: #ccc;  
+        }
+
+        .spot {
+            margin: 0;
+            padding: 10px;
+            list-style: none;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+        }
+
+        .spot li {
+            margin-bottom: 10px;
+            width: 10px;
+            height: 10px;
+            transform: rotate(45deg);
+            background-color: rgba(255, 255, 255, .2);
+            border: 1px solid rgba(0, 0, 0, 7);
+        }
+
+        .spot li.active {
+            background-color: rgba(255, 255, 255, .6);
+        }
+
+        .container {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 350px;
+            height: auto;
+            transition: top .7s ease-in-out;
+        }
+
+        .sheet {
+            position: relative;
+            left: 0;
+            top: 0;
+            width: 350px;
+            height: 220px;
+        }
+
+        .sheet[data-num="0"] {
+            background-color: #947A6D;
+        }
+
+        .sheet[data-num="1"] {
+            background-color: #544A6D;
+        }
+
+        .sheet[data-num="2"] {
+            background-color: #347B6D;
+        }
+
+        .sheet[data-num="3"] {
+            background-color: #7A2E6D;
+        }
+    </style>
+</head>
+<body>
+    <div id="slider">
+        <div class="container">
+            <section class="sheet" data-num="0"></section>
+            <section class="sheet" data-num="1"></section>
+            <section class="sheet" data-num="2"></section>
+            <section class="sheet" data-num="3"></section>
+        </div>
+        <ul class="spot">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        qs = function(selector) {
+            return document.querySelector(selector);
+        };
+
+        qsa = function(selector) {
+            return document.querySelectorAll(selector);
+        };
+        
+        window.onload = function() {
+            var slider = qs('#slider');
+            var container = qs('.container');
+            var sheets = qsa('.sheet');
+            var spot = qs('.spot');
+            var spots = qsa('.spot li');
+            var index = 0;
+            var count = sheets.length;
+            var scrolling = false;
+
+            goTo = function(newIndex) {
+                index = newIndex;
+                scrolling = true;
+                container.style.top = (sheets[0].offsetHeight * newIndex * -1) + 'px';
+            };
+
+            getIndex = function(newIndex) {
+                if (newIndex < 0) return 0;
+                if (newIndex >= count) return count - 1;
+                return newIndex;
+            };
+
+            slider.addEventListener('wheel', function(event) {
+                event = event || window.event;
+              
+                if (!scrolling) {
+                    var deltaY = event.deltaY;
+                    var nextIndex = deltaY < 0 ? getIndex(index - 1) : getIndex(index + 1);
+                    if (index !== nextIndex) {
+                        goTo(nextIndex);
+                    }
+                }
+            }, false);
+
+            container.addEventListener('transitionend', function(event) {
+                scrolling = false;
+                for(var i = 0; i < count; i++) {
+                    spots[i].className = '';
+                }
+                spots[index].className = 'active';
+            }, false);
+        }
+    </script>
+</body>
+</html>
