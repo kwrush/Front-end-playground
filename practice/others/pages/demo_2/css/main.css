@@ -109,18 +109,18 @@
 }
 
 .box:nth-child(2) {
-    right: 5px;
+    left: 200px;
     top: 5px;
 }
 
 .box:nth-child(3) {
     left: 5px;
-    bottom: 5px;
+    top: 140px;
 }
 
 .box:nth-child(4) {
-    right: 5px;
-    bottom: 5px;
+    left: 200px;
+    top: 140px;
 }
 
 .box h4 {
@@ -135,8 +135,16 @@
 /* Animate inner view when scroll to it*/
 
 /* fade in */
+
+/* hide fade in, initial phase */
+ul.hide-fade-in li {
+    opacity: 0;
+    transition: none !important; 
+}
+
+/* fade in animation */
 ul.fade-in li {
-    transition: opacity .8s ease-out;
+    transition: opacity .6s ease-in-out;
 }
 
 ul.fade-in li:nth-child(1) {
@@ -155,7 +163,80 @@ ul.fade-in li:nth-child(4) {
     transition-delay: .3s;
 }
 
-/* hide */
-ul.hide-fade-in li {
+/* shrink */
+/* initial phase */
+ul.hide-shrink li {
     opacity: 0;
+    transition: none !important; 
 }
+
+ul.hide-shrink li:nth-child(1) {
+    left: -50px;
+    top: -34px;
+}
+
+ul.hide-shrink li:nth-child(2) {
+    left: 250px;
+    top: -34px;
+}
+
+ul.hide-shrink li:nth-child(3) {
+    left: -50px;
+    top: 174px;
+}
+
+ul.hide-shrink li:nth-child(4) {
+    left: 250px;
+    top: 174px;
+}
+
+ul.shrink li {
+    transition: opacity .5s,
+                left .6s,
+                top .6s ease-in-out;
+}
+
+/* flip */
+ul.hide-flip li {
+    opacity: 0;
+    transition: none !important; 
+}
+
+ul.hide-flip li:nth-child(1) {
+    transform: rotateY(80deg);
+}
+
+ul.hide-flip li:nth-child(2) {
+    transform: rotateX(-60deg);
+}
+
+ul.hide-flip li:nth-child(3) {
+    transform: rotateX(70deg);
+}
+
+ul.hide-flip li:nth-child(4) {
+    transform: rotateY(-80deg);
+}
+
+ul.flip {
+    perspective: 99999px;
+}
+
+ul.flip li {
+    transition: opacity .4s, 
+                transform .7s ease-in-out;
+}
+
+/* stack */
+ul.hide-stack li {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: none !important;
+}
+
+ul.stack li {
+    transition: left .7s, top .7s, transform .7s, opacity .3s ease-in-out;
+}
+

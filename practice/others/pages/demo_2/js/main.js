@@ -44,6 +44,20 @@ var addClass = function(elem, className) {
     }
 };
 
+var findClassByPrefix = function(elems, prefix) {
+    if (!elems) return [];
+    
+    var results = [];
+    var regexp = new RegExp(prefix + '\\-\\w+(\\-\\w+)*', 'g');
+    
+    for (var i = 0, len = elems.length; i < len; i++) {
+        var classes = elems[i].className.trim();
+        results = results.concat(classes.match(regexp));
+    }
+    
+    return results;
+}
+
 
 // Slider class
 var Slider = function() {
@@ -56,9 +70,16 @@ var Slider = function() {
 
     this.index = 0;
     this.pre = -1;
-
+    
+    // private variables
     this._count = this.sheets.length;
     this._running = false;
+    this._transitionCounter = 0;
+    this._allTransitions = 0;
+    
+    this.hideClasses = findClassByPrefix(this.viewBoxes, 'hide');
+    
+    this._bindStop = this._stop.bind(this);
 
     self = this;
 
@@ -69,7 +90,7 @@ var Slider = function() {
 
         self.scroll(event.deltaY);
 
-    }, true);
+    }, false);
 
     // callback exexutes once scroll to current sheet completely
     this.container.addEventListener('transitionend', function(event) {
@@ -80,7 +101,7 @@ var Slider = function() {
 
     }, false);
 
-    removeClass(this.viewBoxes[0], 'hide-fade-in');
+    this._showCurrSheet();
 };
 
 
@@ -117,7 +138,7 @@ Slider.prototype.goTo = function(index) {
     this._scrollToCurrent();
 };
 
-
+// private methods
 Slider.prototype._scrollToCurrent = function() {
     this._running = true;
     this.container.style.top = (this.sheets[0].offsetHeight * this.index * -1) + 'px';
@@ -143,22 +164,39 @@ Slider.prototype._showCurrSheet = function() {
     var preViewBox = this.viewBoxes[this.pre];
 
     if (preViewBox) {
-        this.viewBoxes[this.pre].removeEventListener('transitionend', self._stop.bind(self), true);
+        this.viewBoxes[this.pre].removeEventListener('transitionend', self._bindStop, false);
     }
-
-    this.viewBoxes[this.index].addEventListener('transitionend', self._stop.bind(self), true);
-
-    removeClass(this.viewBoxes[this.index], 'hide-fade-in');
+    
+    this.viewBoxes[this.index].addEventListener('transitionend', self._bindStop, false);
+    
+    removeClass(this.viewBoxes[this.index], this.hideClasses[this.index]);
+    this._allTransitions = this._countChildrenTransition(this.viewBoxes[this.index]);
 
     return this;
 };
+
+Slider.prototype._getTransitionCount = function(elem) {
+    if (!elem) return 0;
+    var tr = window.getComputedStyle(elem, null).getPropertyValue('transition');
+    return tr.split(',').length;
+}
+
+Slider.prototype._countChildrenTransition = function(elem) {
+    var children = elem.children;
+    var count = 0;
+    for (var i = 0, len = children.length; i < len; i++) {
+        count += this._getTransitionCount(children[i]);
+    }
+    
+    return count;
+}
 
 
 Slider.prototype._hidePreSheet = function() {
     var preViewBox = this.viewBoxes[this.pre];
 
     if (preViewBox) {
-        addClass(this.viewBoxes[this.pre], 'hide-fade-in');
+        addClass(this.viewBoxes[this.pre], this.hideClasses[this.pre]);
     }
 
     return this;
@@ -167,12 +205,17 @@ Slider.prototype._hidePreSheet = function() {
 
 Slider.prototype._stop = function(event) {
     event = event || window.event;
-    //event.stopPropagation();
-
-    this._running = false;
+    event.stopPropagation();
+    
+    if (++this._transitionCounter >= this._allTransitions 
+        && this.viewBoxes[this.index].contains(event.target)) {
+        this._running = false;
+        this._transitionCounter = 0;
+        this._allTransitions = 0;
+    }        
 };
 
 
 window.onload = function() {
-    var slider = new Slider();
+    var aSlider = new Slider();
 }
