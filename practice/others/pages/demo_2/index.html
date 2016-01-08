@@ -2,109 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-	<title>Very simple slider</title>
-    <link rel="stylesheet" href="../public/css/normalize.css"></link>
-    <link rel="stylesheet" href="css/main.css"></link>
+    <title>Animations and effects</title>
+    <link rel="stylesheet" href="../public/css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div id="slider">
-        <div class="container">
-            <section class="sheet" data-num="0">
-                <div class="view-box">
-                    <ul class="shrink hide-shrink">
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                    </ul>
+    <div class="container">
+        <section class="show-box" id="pendulum">
+            <div class="p-block">
+                <div class="p-stick-wrap">
+                    <div class="p-stick"></div>
                 </div>
-            </section>
-            <section class="sheet" data-num="1">
-                <div class="view-box">
-                    <ul class="fade-in hide-fade-in">
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-            <section class="sheet" data-num="2">
-                <div class="view-box">
-                    <ul class="stack hide-stack">
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-            <section class="sheet" data-num="3">
-                <div class="view-box">
-                    <ul class="flip hide-flip">
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                        <li class="box">
-                            <h4>This is title</h4>
-                            <p>Lorem ipsum dolor sit amet eiusmod tempor</p>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        </div>
-        <ul class="spot">
-            <li class="active"></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+                <div class="p-spot"></div>
+            </div>
+        </section>
+        <section class="show-box" id="s-flip-board">
+            <div class="sfb-block">
+                <div class="sfb-upper"></div>
+                <div class="sfb-lower">g</div>
+            </div>
+        </section>
     </div>
-    <script src="js/main.js"></script>
+    <script src="../public/js/easing.js" charset="utf-8"></script>
+    <script src="js/main.js" charset="utf-8"></script>
 </body>
 </html>

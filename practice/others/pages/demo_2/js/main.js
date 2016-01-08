@@ -1,221 +1,90 @@
-// simple helper
-var qs = function(selector) {
-    return document.querySelector(selector);
-};
+// Common
+var requestAnimationFrame = (window.requestAnimationFrame && window.requestAnimationFrame.bind(window))       ||
+                            (window.mozRequestAnimationFrame && window.mozRequestAnimationFrame.bind(window)) ||
+                            (window.webkitRequestAnimationFrame && window.webkitRequestAnimationFrame.bind(window));
 
-var qsa = function(selector) {
-    return document.querySelectorAll(selector);
-};
+var cancelAnimationFrame = (window.cancelAnimationFrame && window.cancelAnimationFrame.bind(window))       ||
+                           (window.mozCancelAnimationFrame && window.mozCancelAnimationFrame.bind(window)) ||
+                           (window.webkitCancelAnimationFrame && window.webkitCancelAnimationFrame(window));
+// End of common
 
-var hasClass = function hasClass(elem, className) {
+// Pendulum
+var showPendulum = function(duration) {
 
-    var classes = elem.className;
-    className = className.trim();
-    if (!classes) return false;
-    
-    classes = classes.trim().split(/\s+/);
-    for (var i = 0, len = classes.length; i < len; i++) {
-        if (classes[i] === className) return true;
-    }
-    
-    return false;
-};
+    var Pendulum = function(duration) {
+        this.box = document.querySelector('#pendulum .p-stick-wrap');
+        this.startTime = null;
+        this.begAngle = this.pGetAngle();
+        this.duration = duration || 3000;
+        this.anReq = null;
+        this.aniamteFcn = this.pSwing.bind(this);
 
-var removeClass = function(elem, className) {
-    if (className && hasClass(elem, className)) {
-        className = className.trim();
-        var classes = elem.className.trim().split(/\s+/);
-        
-        for (var i = 0, len = classes.length; i < len; i++) {
-            if (classes[i] === className) {
-                classes.splice(i, 1);
-                break;
-            }
+        this.pAnimate();
+    };
+
+    Pendulum.prototype.pSwing = function(timeStamp) {
+        var drawStart = Date.now();
+        var diff = drawStart - this.startTime;
+
+        var angle = this.pGetAngle();
+        var newAngle = Easing.easeOutElastic(diff, this.begAngle, 0 - this.begAngle, this.duration);
+
+        if (diff <= this.duration) {
+            this.box.style.transform = 'rotate(' + newAngle + 'deg)';
+            this.anReq = requestAnimationFrame(this.aniamteFcn);
         }
-        
-        elem.className = classes.join(' ');
-    }
-};
-
-var addClass = function(elem, className) {
-
-    if (className && !hasClass(elem, className)) {
-        elem.className = [elem.className, className].join(' ');
-    }
-};
-
-var findClassByPrefix = function(elems, prefix) {
-    if (!elems) return [];
-    
-    var results = [];
-    var regexp = new RegExp(prefix + '\\-\\w+(\\-\\w+)*', 'g');
-    
-    for (var i = 0, len = elems.length; i < len; i++) {
-        var classes = elems[i].className.trim();
-        results = results.concat(classes.match(regexp));
-    }
-    
-    return results;
-}
-
-
-// Slider class
-var Slider = function() {
-    this.slider = qs('#slider');
-    this.container = qs('.container');
-    this.sheets = qsa('.sheet');
-    this.spot = qs('.spot');
-    this.spots = qsa('.spot li');
-    this.viewBoxes = qsa('.view-box ul');
-
-    this.index = 0;
-    this.pre = -1;
-    
-    // private variables
-    this._count = this.sheets.length;
-    this._running = false;
-    this._transitionCounter = 0;
-    this._allTransitions = 0;
-    
-    this.hideClasses = findClassByPrefix(this.viewBoxes, 'hide');
-    
-    this._bindStop = this._stop.bind(this);
-
-    self = this;
-
-    // scroll the sheets 
-    this.slider.addEventListener('wheel', function(event) {
-        event = event || window.event;
-        event.stopPropagation();
-
-        self.scroll(event.deltaY);
-
-    }, false);
-
-    // callback exexutes once scroll to current sheet completely
-    this.container.addEventListener('transitionend', function(event) {
-        event = event || window.event;
-        event.stopPropagation();
-
-        self.doAfterScroll();
-
-    }, false);
-
-    this._showCurrSheet();
-};
-
-
-Slider.prototype.scroll = function(delta) {
-
-    if (delta && !this._running) {
-        var nextIndex = delta < 0 ? this.getIndex(this.index - 1) : this.getIndex(this.index + 1);
-        if (this.index !== nextIndex) {
-            this.goTo(nextIndex);
+        else {
+            this.pStop();
         }
-    }
+    };
+
+    Pendulum.prototype.pStart = function() {
+        this.startTime = Date.now();
+        this.anReq || requestAnimationFrame(this.aniamteFcn);
+    };
+
+    Pendulum.prototype.pStop = function() {
+        cancelAnimationFrame(this.anReq);
+        this.anReq = null;
+
+        clearTimeout(this.timer);
+        this.timer = null;
+
+        var self = this;
+        this.timer = setTimeout(function() {
+            self.box.style.transform = 'rotate(' + self.begAngle + 'deg)';
+        }, 1500);
+    };
+
+    Pendulum.prototype.pGetAngle = function() {
+        var trans = window.getComputedStyle(this.box, null)
+                          .getPropertyValue('transform');
+
+        var val = trans.split('(')[1].split(')')[0].split(',');
+        var a = val[0],
+            b = val[1],
+            c = val[2],
+            d = val[3];
+
+        var scale = Math.sqrt(a*a + b*b);
+        var sin = b / scale;
+
+        return Math.round(Math.atan2(b, a) * (180 / Math.PI));
+    };
+
+    Pendulum.prototype.pAnimate = function() {
+        this.pStart();
+
+        var self = this;
+        setInterval(function() {
+            self.pStart();
+        }, 5000);
+    };
+
+    return new Pendulum(duration);
 };
-
-
-Slider.prototype.doAfterScroll = function() {
-
-    this._showCurrSheet()
-        ._hidePreSheet()
-        ._setActiveSpot();
-};
-
-
-Slider.prototype.getIndex = function(newIndex) {
-    if (newIndex < 0) return 0;
-    if (newIndex >= this._count) return this._count - 1;
-
-    return newIndex;
-};
-
-
-Slider.prototype.goTo = function(index) {
-    this.pre = this.index;
-    this.index = index;
-    this._scrollToCurrent();
-};
-
-// private methods
-Slider.prototype._scrollToCurrent = function() {
-    this._running = true;
-    this.container.style.top = (this.sheets[0].offsetHeight * this.index * -1) + 'px';
-};
-
-
-Slider.prototype._setActiveSpot = function() {
-    var activeSpots = qsa('.spot li.active');
-
-    for (var i = 0, len = activeSpots.length; i < len; i++) {
-        removeClass(activeSpots[i], 'active');
-    }
-
-    addClass(this.spots[this.index], 'active');
-
-    return this;
-};
-
-
-Slider.prototype._showCurrSheet = function() {
-    var self = this;
-
-    var preViewBox = this.viewBoxes[this.pre];
-
-    if (preViewBox) {
-        this.viewBoxes[this.pre].removeEventListener('transitionend', self._bindStop, false);
-    }
-    
-    this.viewBoxes[this.index].addEventListener('transitionend', self._bindStop, false);
-    
-    removeClass(this.viewBoxes[this.index], this.hideClasses[this.index]);
-    this._allTransitions = this._countChildrenTransition(this.viewBoxes[this.index]);
-
-    return this;
-};
-
-Slider.prototype._getTransitionCount = function(elem) {
-    if (!elem) return 0;
-    var tr = window.getComputedStyle(elem, null).getPropertyValue('transition');
-    return tr.split(',').length;
-}
-
-Slider.prototype._countChildrenTransition = function(elem) {
-    var children = elem.children;
-    var count = 0;
-    for (var i = 0, len = children.length; i < len; i++) {
-        count += this._getTransitionCount(children[i]);
-    }
-    
-    return count;
-}
-
-
-Slider.prototype._hidePreSheet = function() {
-    var preViewBox = this.viewBoxes[this.pre];
-
-    if (preViewBox) {
-        addClass(this.viewBoxes[this.pre], this.hideClasses[this.pre]);
-    }
-
-    return this;
-};
-
-
-Slider.prototype._stop = function(event) {
-    event = event || window.event;
-    event.stopPropagation();
-    
-    if (++this._transitionCounter >= this._allTransitions 
-        && this.viewBoxes[this.index].contains(event.target)) {
-        this._running = false;
-        this._transitionCounter = 0;
-        this._allTransitions = 0;
-    }        
-};
-
+// End of Pendulum
 
 window.onload = function() {
-    var aSlider = new Slider();
+    showPendulum(3000);
 }
