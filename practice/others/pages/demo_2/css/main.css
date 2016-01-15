@@ -60,38 +60,3 @@
     border-bottom-right-radius: 125px;
 }
 /* end of pendulum */
-
-/* simple flip board */
-.sfb-block {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: #ccc;
-    perspective: 1000px;
-}
-
-.sfb-block > div {
-    position: relative;
-    margin: 0 auto;
-    top: 0;
-    width: 90%;
-    height: 50%;
-    background-color: #eee;
-}
-
-.sfb-lower {
-    z-index: 1;
-}
-
-.sfb-upper {
-    transform: rotateX(0);
-    transform-origin: bottom;
-    transition: background-color 1.2s, transform 1.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-    z-index: 2;
-}
-
-.sfb-block:hover .sfb-upper {
-    background-color: #ddd;
-    transform: rotateX(-180deg);
-}
-/* end of simple flip board */

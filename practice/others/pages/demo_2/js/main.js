@@ -6,7 +6,6 @@ var requestAnimationFrame = (window.requestAnimationFrame && window.requestAnima
 var cancelAnimationFrame = (window.cancelAnimationFrame && window.cancelAnimationFrame.bind(window))       ||
                            (window.mozCancelAnimationFrame && window.mozCancelAnimationFrame.bind(window)) ||
                            (window.webkitCancelAnimationFrame && window.webkitCancelAnimationFrame(window));
-// End of common
 
 // Pendulum
 var showPendulum = function(duration) {
