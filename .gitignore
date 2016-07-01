@@ -41,3 +41,7 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# npm and bower folders
+**/npm_modules/
+**/bower_components/
