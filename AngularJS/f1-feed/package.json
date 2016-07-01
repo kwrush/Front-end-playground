@@ -1,0 +1,12 @@
+{
+  "name": "f1-feed",
+  "version": "1.0.0",
+  "description": "An AngularJS based simple application",
+  "main": "index.html",
+  "scripts": {
+      "start": "http-server -a localhost -p 8000 -c-1"
+  },
+  "devDependencies": {
+
+  }
+}
