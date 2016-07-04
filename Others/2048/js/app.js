@@ -29,6 +29,7 @@ function EventController () {
     this.listenKeyDown();
 }
 
+// listen to keydow event
 EventController.prototype.listenKeyDown = function () {
     var self = this;
     var map = {};
@@ -47,6 +48,7 @@ EventController.prototype.listenKeyDown = function () {
     });
 }
 
+// triger callback for the given event
 EventController.prototype.listen = function (eventName, callback, callee) {
     var callee = callee || this;
     var callback = callback ? callback.bind(callee) : {}
@@ -56,6 +58,7 @@ EventController.prototype.listen = function (eventName, callback, callee) {
     this.event[eventName].push(callback);
 }
 
+// fire the specific event
 EventController.prototype.fire = function (eventName, eventData) {
     var callbacks = this.event[eventName];
     if (!!callbacks.length) {
@@ -74,25 +77,92 @@ function ViewController () {
     this.tileContainer = document.getElementsByClassName('tile-container')[0];
 }
 
-ViewController.prototype.addTile() {
-
+// Add a tile on the screen
+ViewController.prototype.addTile(tile) {
+    var tileElement = document.createElement('div');
+    var classes = ['tile', 'tile-' + tile.value, this.positionClass(tile)];
+    this.attachTileElement(tileElement, classes);
 }
 
+// Return tile-cell-row-col class name
+ViewController.prototype.positionClass = function (tile) {
+    return 'tile-cell-' + tile.row + '-' + tile.col;
+}
+
+// Add tile element to tileContainer
+ViewController.prototype.attachTileElement = function (elem, classes) {
+    this.applyClass(elem, classes);
+    this.tileContainer.appendChild(elem);
+}
+
+// renew element class attribute
+ViewController.prototype.applyClass = function (elem, classes) {
+    elem.setAttribute('class', classes.join(' '));
+}
+
+// update value displayed in score board
 ViewController.prototype.updateScore = function (newScore) {
     this.scoreBoard.innerText = newScore;
 }
 
-function Grid () {
+/**
+ * Saves the current tile grid status
+ */
+function TileGrid (size) {
+    this.gridSize = size;
+    this.tileCells = [];
+    this.initTileCells();
+}
 
+// Initialize tileCells (2D array of Tile object)
+TileGrid.prototype.initTileCells = function () {
+    for (var row = 0; row < this.gridSize; row++) {
+        var rows = tileCells[row] = [];
+        for (var col = 0; col < this.gridSize; col++) {
+            rows.push(null);
+        }
+    }
+}
+
+// Return a random empty cell ({ row, col})
+TileGrid.prototype.emptyCellAvailale = funciton () {
+    var cells = this.findEmptyCells();
+    return cells.length ? cells[Math.random() * cells.length] || null;
+}
+
+// Return all empty cells
+TileGrid.prototype.findEmptyCells = function () {
+    var cells = [];
+    for (var row = 0; row < this.gridSize; row++) {
+        for (var col = 0; col < this.gridSize; col++) {
+            var tile = this.tileCells[row][col];
+            if (!tile) {
+                cells.push({
+                    row: row,
+                    col: col
+                });
+            }
+        }
+    }
+}
+
+// Add a Tile object to tileCells
+TileGrid.prototype.addTile = function (tile) {
+    this.tileCells[tile.row][tile.col] = tile;
+}
+
+// Remove a Tile object in tileCells
+TileGrid.prototype.removeTile = function (row, col) {
+    this.tileCells[row][col] = null;
 }
 
 /**
  * Stores tile's position and value
  */
-function Tile (row, col, value) {
+function Tile (row, col) {
     this.row = row;
     this.col = col;
-    this.value = value || this.randomValue();
+    this.value = this.randomValue();
 }
 
 Tile.prototype.randomValue = function () {
@@ -104,16 +174,20 @@ Tile.prototype.updatePosition(row, col) {
     this.col = col;
 }
 
-function GameController () {
-    this.init();
-}
+function GameController (startTiles) {
+    this.startTiles = startTiles || constants.START_TILES;
 
-GameController.prototype.init = function () {
     this.eventController = new EventController();
     this.viewController = new ViewController();
+    this.grid = new TileGrid();
 
     this.eventController.listen('move', this.moveTile, this);
-    this.viewController.updateScore(12);
+}
+
+GameController.prototype.restart = function () {
+    this.viewController.updateScore(0);
+    for (var i = 0; i < this.startTiles; i++) {
+    }
 }
 
 GameController.prototype.moveTile = function (moveDirt) {
