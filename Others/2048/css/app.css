@@ -1,0 +1,310 @@
+/* General setup */
+*,
+html,
+body {
+    box-sizing: border-box;
+    color: #776E65;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    content: "";
+    clear: both;
+}
+
+.container {
+    margin: 50px auto;
+    width: 500px;
+}
+
+.hide {
+    display: none;
+}
+
+.rounded-border-normal {
+    border-radius: 3px;
+}
+
+.rounded-border-large {
+    border-radius: 6px;
+}
+
+.btn {
+    margin: 0;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    color: #F9F6F2;
+    background-color: #8F7A66;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Header style */
+h1.title {
+    margin: 0;
+    padding: 0;
+    float: left;
+    font-size: 80px;
+    font-weight: 700;
+}
+
+div.score-board {
+    margin-top: 12px;
+    padding: 10px 25px;
+    float: right;
+    font-size: 25px;
+    font-weight: 700;
+    color: #FFF;
+    text-align: center;
+    line-height: 35px;
+    background-color: #BBADA0;
+}
+
+div.score-board:before {
+    content: "Score";
+    color: #EEE4DA;
+    font-size: 13px;
+    line-height: 13px;
+    display: block;
+}
+
+/* Game container */
+.game-container {
+    margin-top: 30px;
+    padding: 15px;
+    position: relative;
+    width: 500px;
+    height: 500px;
+    background-color: #BBADA0;
+}
+
+/* Message dialog */
+.message-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, .3);
+    z-index: 9999;
+}
+
+.message-box {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+h3.message {
+    margin: 0 auto;
+    padding: 0;
+    font-size: 50px;
+    line-height: 2;
+}
+
+/* Grid style */
+.grid-container {
+    position: absolute;
+    z-index: 1;
+}
+
+.grid-row {
+    margin-bottom: 15px;
+}
+
+.grid-row:last-child {
+    margin-bottom: 0;
+}
+
+.grid-cell {
+    margin-right: 15px;
+    width: 106.25px;
+    height: 106.25px;
+    float: left;
+    background-color: rgba(238, 228, 218, 0.35);
+}
+
+/* Tile container and tile's styles */
+.tile-container {
+    position: absolute;
+    z-index: 2;
+}
+
+.tile {
+    width: 106.25px;
+    height: 106.25px;
+    line-height: 106.25px;
+    font-size: 55px;
+    font-weight: 700;
+    border-radius: 3px;
+    text-align: center;
+    -webkit-transition: top .1s ease-in-out, left .1s ease-in-out;
+    transition: top .1s ease-in-out, left .1s ease-in-out;
+}
+
+.tile.tile-new {
+    -webkit-animation: zoomin .2s ease;
+    animation: zoomin .2s ease;
+}
+
+.tile.tile-2 {
+    background-color: #EEE4DA;
+}
+
+.tile.tile-4 {
+    background-color: #EEE1C9;
+}
+
+.tile.tile-2,
+.tile.tile-4 {
+    color: inherit;
+}
+
+.tile.tile-8 {
+    background-color: #F3B27A;
+}
+
+.tile.tile-16 {
+    background-color: #F69664
+}
+
+.tile.tile-32 {
+    background-color: #F77C5F;
+}
+
+.tile.tile-64 {
+    background-color: #F75F3B;
+}
+
+.tile.tile-128 {
+    background-color: #EDD073;
+}
+
+.tile.tile-256 {
+    background-color: #EDCC61;
+}
+
+.tile.tile-8,
+.tile.tile-16,
+.tile.tile-32,
+.tile.tile-64,
+.tile.tile-128,
+.tile.tile-256 {
+    color: #F9F6F2;
+}
+
+.tile.tile-cell-0-0 {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.tile.tile-cell-0-1 {
+    position: absolute;
+    left: 121px;
+    top: 0;
+}
+
+.tile.tile-cell-0-2 {
+    position: absolute;
+    left: 243px;
+    top: 0;
+}
+
+.tile.tile-cell-0-3 {
+    position: absolute;
+    left: 364px;
+    top: 0;
+}
+
+.tile.tile-cell-1-0 {
+    position: absolute;
+    left: 0;
+    top: 121px;
+}
+
+.tile.tile-cell-1-1 {
+    position: absolute;
+    left: 121px;
+    top: 121px;
+}
+
+.tile.tile-cell-1-2 {
+    position: absolute;
+    left: 243px;
+    top: 121px;
+}
+
+.tile.tile-cell-1-3 {
+    position: absolute;
+    left: 364px;
+    top: 121px;
+}
+
+.tile.tile-cell-2-0 {
+    position: absolute;
+    left: 0;
+    top: 243px;
+}
+
+.tile.tile-cell-2-1 {
+    position: absolute;
+    left: 121px;
+    top: 243px;
+}
+
+.tile.tile-cell-2-2 {
+    position: absolute;
+    left: 243px;
+    top: 243px;
+}
+
+.tile.tile-cell-2-3 {
+    position: absolute;
+    left: 364px;
+    top: 243px;
+}
+
+.tile.tile-cell-3-0 {
+    position: absolute;
+    left: 0;
+    top: 364px;
+}
+
+.tile.tile-cell-3-1 {
+    position: absolute;
+    left: 121px;
+    top: 364px;
+}
+
+.tile.tile-cell-3-2 {
+    position: absolute;
+    left: 243px;
+    top: 364px;
+}
+
+.tile.tile-cell-3-3 {
+    position: absolute;
+    left: 364px;
+    top: 364px;
+}
+
+/* Footer */
+#footer {
+    margin-top: 25px;
+    text-align: center;
+}
+
+#footer p {
+    font-size: 17px;
+}

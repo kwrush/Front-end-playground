@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>2048 Game</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header clearfix">
+            <h1 class="title">2048</h1>
+            <div class="score-board rounded-border-normal">0</div>
+        </div>
+        <div class="game-container rounded-border-large">
+            <div class="message-container hide">
+                <div class="message-box">
+                    <h3 class="message">You win!</h3>
+                    <div class="btn restart-btn rounded-border-normal">Try again</div>
+                </div>
+            </div>
+            <div class="grid-container">
+                <div class="grid-row clearfix">
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                </div>
+                <div class="grid-row clearfix">
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                </div>
+                <div class="grid-row clearfix">
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                </div>
+                <div class="grid-row clearfix">
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                    <div class="grid-cell rounded-border-normal"></div>
+                </div>
+            </div>
+            <div class="tile-container">
+                <div class="tile tile-2 tile-cell-0-1">2</div>
+                <div class="tile tile-4 tile-cell-1-2">4</div>
+                <div class="tile tile-8 tile-cell-2-3">8</div>
+                <div class="tile tile-16 tile-cell-3-2">16</div>
+                <div class="tile tile-32 tile-cell-0-3">32</div>
+                <div class="tile tile-128 tile-cell-3-0">128</div>
+                <div class="tile tile-256 tile-cell-2-1">256</div>
+            </div>
+        </div>
+        <footer id="footer">
+            <p class="intro">Use arrow keys to move tiles. Tow tiles with the same value merge into one with the sum. You <strong>win</strong> if you can reach <strong>2048</strong>.</p>
+        </footer>
+    </div>
+    <script src="js/app.js" charset="utf-8"></script>
+</body>
+</html>
