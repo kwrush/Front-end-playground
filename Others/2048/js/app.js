@@ -74,7 +74,7 @@ function ViewController () {
     this.tileContainer = document.getElementsByClassName('tile-container')[0];
 }
 
-ViewController.prototype.addTile() {
+ViewController.prototype.addTile(tile) {
 
 }
 
@@ -82,8 +82,19 @@ ViewController.prototype.updateScore = function (newScore) {
     this.scoreBoard.innerText = newScore;
 }
 
-function Grid () {
+function TilesGrid (size) {
+    this.gridSize = size;
+    this.tileCells = [];
+    this.initTileCells();
+}
 
+TilesGrid.prototype.initTileCells = function () {
+    for (var row = 0; row < this.gridSize; row++) {
+        var row = this.tileCells[row] = [];
+        for (var col = 0; col < this.gridSize; col++) {
+            row.push(null);
+        }
+    }
 }
 
 /**
