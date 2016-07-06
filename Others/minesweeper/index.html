@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mine sweeper</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header row">
+            <div class="counter">
+                <p>010</p>
+            </div>
+            <div class="reset">
+                <button id="reset-btn">&#9786;</button>
+            </div>
+            <div class="timer">
+                <p>12</p>
+            </div>
+        </div>
+        <div class="game-container">
+            <div class="row row-10">
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+            </div>
+            <div class="row row-10">
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+            </div>
+            <div class="row row-10">
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+            </div>
+            <div class="row row-10">
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+            </div>
+            <div class="row row-10">
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+            </div>
+            <div class="row row-10">
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+            </div>
+            <div class="row row-10">
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+            </div>
+            <div class="row row-10">
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+            </div>
+            <div class="row row-10">
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+            </div>
+            <div class="row row-10">
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

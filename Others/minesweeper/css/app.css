@@ -1,0 +1,215 @@
+/* General style */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.row:before,
+.row:after {
+    contant: "";
+    display: table;
+}
+
+.row:after {
+    clear: both;
+}
+
+.col-1-10 {
+    float: left;
+}
+
+.container {
+    margin: 30px auto;
+    width: 460px;
+    text-align: center;
+}
+
+/* Header */
+div.header {
+    width: 100%;
+    height: 50px;
+}
+
+div.counter,
+div.reset,
+div.timer {
+    width: 33.33333333%;
+    height: 50px;
+    float: left;
+}
+
+div.counter {
+    text-align: left;
+}
+
+div.timer {
+    text-align: right;
+}
+
+div.reset {
+    position: relative;
+}
+
+#reset-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding-bottom: 5px; /* align unicode */
+    width: 45px;
+    height: 45px;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    border-radius: 3px;
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+}
+
+#reset-btn:active {
+    margin-top: 2px;
+    border: none;
+}
+
+/* Game container */
+div.game-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Tiles styles */
+.row-10 {
+    width: 100%;
+    height: 42px;
+    margin-bottom: 4px;
+}
+
+.tile {
+    position: relative;
+    margin: 0 2px;
+    width: 42px;
+    height: 42px;
+    background: #BDC0BA;
+    border-bottom: 2px solid #333;
+    border-radius: 3px;
+    transition: background .2s ease-out;
+}
+
+.tile:active {
+    transform: translateY(2px);
+    border: none;
+}
+
+.tile-0:after,
+.tile-1:after,
+.tile-2:after,
+.tile-3:after,
+.tile-4:after,
+.tile-5:after,
+.tile-6:after,
+.tile-7:after,
+.tile-8:after,
+.tile-flag:after,
+.tile-bomb:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    color: #52433D;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.tile-0 {
+    background: #A8D8B9;
+}
+
+.tile-1 {
+    background: #FAD689;
+}
+
+.tile-1:after {
+    content: "1";
+}
+
+.tile-2 {
+    background: #F6C555;
+}
+
+.tile-2:after {
+    content: "2";
+}
+
+.tile-3 {
+    background: #F7C242;
+}
+
+.tile-3:after {
+    content: "3";
+}
+
+.tile-4 {
+    background: #FFB11B;
+}
+
+.tile-4:after {
+    content: "4";
+}
+
+.tile-5 {
+    background: #FC9F4D;
+}
+
+.tile-5:after {
+    content: "5";
+}
+
+.tile-6 {
+    background: #ED784A;
+}
+
+.tile-6:after {
+    content: "6";
+}
+
+.tile-7 {
+    background: #F05E1C;
+}
+
+.tile-7:after {
+    content: "7";
+}
+
+.tile-8 {
+    background: #E83015;
+}
+
+.tile-8:after {
+    content: "8";
+}
+
+.tile-flag {
+    background: #BDC0BA;
+}
+
+.tile-flag:after {
+    content: "\002691";
+    font-size: 1.5em;
+    color: #E83015;
+}
+
+.tile-bomb {
+    background: #E83015;
+}
+
+.tile-bomb:after {
+    margin-top: 3px;
+    content: "\1F4A3";
+    font-size: 1.2em;
+    color: #080808;
+}
+
+/* Game container */
