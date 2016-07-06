@@ -255,7 +255,8 @@ ViewController.prototype.addTile = function (tile) {
 
 // Return "tile-value" css class name
 ViewController.prototype.valueClass = function (tile) {
-    return 'tile-' + tile.value;
+    var value = tile.value > 256 ? 256 : tile.value;
+    return 'tile-' + value;
 }
 
 // Return "tile-cell-row-col" css class name
@@ -305,18 +306,6 @@ ViewController.prototype.buildTileElements = function (cells) {
     }
 
     return elements;
-}
-
-ViewController.prototype.drawTiles = function (cells) {
-    for (var row = 0; row < cells.length; row++) {
-        var columns = cells[row];
-        for (var col = 0; col < columns.length; col++) {
-            var tile = columns[col];
-            if (tile) {
-
-            }
-        }
-    }
 }
 
 // Clear everything in tile container
@@ -439,6 +428,39 @@ GameController.prototype.buildTraversals = function (direction) {
     return traversals;
 }
 
+// Check if move tile is possible
+GameController.prototype.moveAvailable = function () {
+    return this.grid.emptyCellAvailable() ||
+           this.siblingMergeAvailable();
+}
+
+// Check merge is possible when there is no empty cell
+GameController.prototype.siblingMergeAvailable = function () {
+    var size = this.grid.gridSize;
+
+    for (var x = 0; x < size; x++) {
+        for (var y = 0; y < size; y++) {
+            var tile = this.grid.tileAt(x, y);
+            if (tile) {
+                // iterate 4 go direction, up left right down
+                for (var go = 0; go < 4; go++) {
+                    var direction = this.direction(go);
+
+                    var row = tile.row + direction.row,
+                        col = tile.col + direction.col;
+
+                    var sibling = this.grid.tileAt(row, col);
+                    if (sibling && sibling.value === tile.value) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
 // Move tiles by pressing arrow keys
 GameController.prototype.move = function (direction) {
     // Don't do anything if game is over
@@ -479,8 +501,10 @@ GameController.prototype.move = function (direction) {
     // If anything changes in cell grid, update view
     if (moved) {
         // Game continues if it can still add tile, otherwise game is over.
-        var randTile = this.addRandomTile();
-        randTile ? this.lose = false : this.lose = true;
+        this.addRandomTile();
+
+        // if it's not possible to move or merge tiles, game over.
+        if (!this.moveAvailable()) this.lose = true;
 
         // refresh tile container to show updated tiles
         var metaData = {
