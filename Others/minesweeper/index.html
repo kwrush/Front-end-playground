@@ -9,10 +9,17 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
+    <div id="difficulty">
+        <select>
+            <option value="0">Easy</option>
+            <option value="1">Medium</option>
+            <option value="2">Hard</option>
+        </select>
+    </div>
     <div class="container">
         <div class="header row">
             <div class="counter">
-                <p>010</p>
+                <p>10</p>
             </div>
             <div class="reset">
                 <button id="reset-btn">&#9786;</button>
@@ -95,22 +102,10 @@
                 <div class="col-1-10 tile"></div>
             </div>
             <div class="row row-10">
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
-            </div>
-            <div class="row row-10">
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile tile-1"></div>
+                <div class="col-1-10 tile tile-0"></div>
+                <div class="col-1-10 tile tile-0"></div>
+                <div class="col-1-10 tile tile-0"></div>
                 <div class="col-1-10 tile"></div>
                 <div class="col-1-10 tile"></div>
                 <div class="col-1-10 tile"></div>
@@ -121,10 +116,22 @@
             <div class="row row-10">
                 <div class="col-1-10 tile"></div>
                 <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile tile-3"></div>
                 <div class="col-1-10 tile"></div>
                 <div class="col-1-10 tile"></div>
                 <div class="col-1-10 tile"></div>
                 <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile tile-2"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+            </div>
+            <div class="row row-10">
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile tile-flag"></div>
                 <div class="col-1-10 tile"></div>
                 <div class="col-1-10 tile"></div>
                 <div class="col-1-10 tile"></div>
@@ -132,7 +139,7 @@
             </div>
             <div class="row row-10">
                 <div class="col-1-10 tile"></div>
-                <div class="col-1-10 tile"></div>
+                <div class="col-1-10 tile tile-bomb"></div>
                 <div class="col-1-10 tile"></div>
                 <div class="col-1-10 tile"></div>
                 <div class="col-1-10 tile"></div>
@@ -144,5 +151,9 @@
             </div>
         </div>
     </div>
+    <footer id="footer">
+        <p>Use mouse <strong>right</strong> key or <strong>Alt+left</strong> key to mark the mine</p>
+    </footer>
+    <script src="js/app.js" charset="utf-8"></script>
 </body>
 </html>

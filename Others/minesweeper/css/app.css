@@ -21,30 +21,51 @@
 
 .container {
     margin: 30px auto;
-    width: 460px;
+    padding: 20px 10px 10px;
+    text-align: center;
+    background: #DDD;
+    border-radius: 4px;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, .4);
+}
+
+#footer {
+    margin: 0 auto;
+    width: 480px;
     text-align: center;
 }
 
 /* Header */
 div.header {
     width: 100%;
-    height: 50px;
+    height: 40px;
 }
 
 div.counter,
 div.reset,
 div.timer {
     width: 33.33333333%;
-    height: 50px;
+    height: 40px;
     float: left;
 }
 
-div.counter {
-    text-align: left;
+div.counter,
+div.timer {
+    text-align: center;
 }
 
-div.timer {
-    text-align: right;
+div.counter p,
+div.timer p {
+    margin: 0;
+    width: 50%;
+    height: 38px;
+    line-height: 38px;
+    font-size: 1.3em;
+    font-weight: bold;
+    display: inline-block;
+    background: #535953;
+    color: #FCFAF2;
+    border-bottom: 2px solid rgba(0, 0, 0, .3);
+    border-radius: 3px;
 }
 
 div.reset {
@@ -55,15 +76,18 @@ div.reset {
     position: absolute;
     left: 50%;
     top: 50%;
-    padding-bottom: 5px; /* align unicode */
-    width: 45px;
-    height: 45px;
+    padding: 0 4px 6px 4px; /* align unicode */
+    width: 40px;
+    height: 40px;
     transform: translate(-50%, -50%);
     font-size: 2em;
+    color: #52433D;
     border-radius: 3px;
     border: none;
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
     outline: none;
+    background: #FAD689;
+    cursor: pointer;
 }
 
 #reset-btn:active {
@@ -80,24 +104,31 @@ div.game-container {
 /* Tiles styles */
 .row-10 {
     width: 100%;
-    height: 42px;
+    height: 37px;
     margin-bottom: 4px;
 }
 
 .tile {
     position: relative;
     margin: 0 2px;
-    width: 42px;
-    height: 42px;
+    width: 35px;
+    height: 35px;
     background: #BDC0BA;
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 3px;
     transition: background .2s ease-out;
+    box-sizing: content-box;
+    cursor: pointer;
 }
 
-.tile:active {
+.tile:active,
+.tile.cleared {
     transform: translateY(2px);
     border: none;
+}
+
+.tile.cleared {
+    cursor: default;
 }
 
 .tile-0:after,
@@ -114,9 +145,9 @@ div.game-container {
     position: absolute;
     left: 0;
     top: 0;
-    width: 42px;
-    height: 42px;
-    line-height: 42px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
     text-align: center;
     color: #52433D;
     font-size: 1.2em;
