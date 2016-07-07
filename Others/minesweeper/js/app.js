@@ -129,9 +129,10 @@ var MineSweeper = (function () {
                     cols.push({
                         content: constants.NO_BOMB,
                         bombCount: 0,
-                        marked: false
+                        marked: false,
+                        cleared: false
                     });
-                    row += '<div class="col-1-10 tile ' + this.getCellClass(x, y) + '"></div>';
+                    row += '<div class="col tile ' + this.getCellClass(x, y) + '"></div>';
                 }
                 cells.push(cols);
                 row += '</div>';
@@ -144,8 +145,13 @@ var MineSweeper = (function () {
 
         adjustContainerSize: function () {
             var tile = document.getElementsByClassName('tile')[0];
-            var width = tile.offsetWidth * gridSize.y;
-            this.mainContainer.style.width = width;
+
+            var padding = 2 * parseInt(window.getComputedStyle(this.mainContainer).paddingLeft, 10);
+            var margin = 2 * parseInt(window.getComputedStyle(this.mainContainer).marginLeft, 10);
+            var tileWidth = tile.offsetWidth + 2 * parseInt(window.getComputedStyle(tile).marginRight, 10);
+
+            var width = tileWidth * gridSize.y + padding + margin;
+            this.mainContainer.style.width = width + 'px';
         },
 
         getCellClass: function (x, y) {
@@ -186,8 +192,9 @@ var MineSweeper = (function () {
             if (combined) return;
 
             var action = this.actionType(event);
+            var pos = this.tilePosition(tile);
 
-            if (action === constants.MARK && !this.isCleared(tile)) {
+            if (action === constants.MARK && !this.isCleared(pos.x, pos.y)) {
                 this.toggleFlag(tile);
             } else if (action === constants.CLEAR) {
                 this.openTile(tile);
@@ -196,11 +203,33 @@ var MineSweeper = (function () {
 
         // Open the tile
         openTile: function (tile) {
-            if (this.hasBomb(tile)) {
+            var pos = this.tilePosition(tile);
+
+            if (this.hasBomb(pos.x, pos.y)) {
                 this.revealBomb(tile);
             } else {
-                var pos = this.tilePosition(tile);
-                this.clearTile(tile, cells[pos.x][pos.y].bombCount);
+                this.clearAdjacentTiles(pos.x, pos.y);
+            }
+        },
+
+        // clear tiles with no bombs
+        clearAdjacentTiles: function (x, y) {
+            if (this.withinBound(x, y) && !this.hasBomb(x, y) && !cells[x][y].cleared) {
+
+                var tile = document.getElementsByClassName(this.getCellClass(x, y))[0];
+                this.clearTile(tile, x, y);
+
+                if (!this.adjacentBombs(x, y)) {
+
+                    this.clearAdjacentTiles(x - 1, y);
+                    this.clearAdjacentTiles(x - 1, y + 1);
+                    this.clearAdjacentTiles(x - 1, y - 1);
+                    this.clearAdjacentTiles(x, y - 1);
+                    this.clearAdjacentTiles(x, y + 1);
+                    this.clearAdjacentTiles(x + 1, y);
+                    this.clearAdjacentTiles(x + 1, y - 1);
+                    this.clearAdjacentTiles(x + 1, y + 1);
+                }
             }
         },
 
@@ -218,28 +247,35 @@ var MineSweeper = (function () {
         },
 
         // Check if the given tile has been marked
-        isMarked: function (tile) {
-            return tile.classList.contains('tile-flag');
+        isMarked: function (x, y) {
+            return cells[x][y].marked;
         },
 
         // Check if the given tile has been opened
-        isCleared: function (tile) {
-            return tile.classList.contains('cleared');
+        isCleared: function (x, y) {
+            return cells[x][y].cleared;
         },
 
         // clear the given tile
-        clearTile: function (tile, bombCount) {
-            if (!this.isCleared(tile)) {
+        clearTile: function (tile, x, y) {
+            if (!this.isCleared(x, y)) {
+
+                cells[x][y].cleared = true;
+
                 var classList = tile.classList;
                 classList.remove('tile-flag');
-                classList.add('tile-'.concat(bombCount), 'cleared');
+                classList.add('tile-' + cells[x][y].bombCount, 'cleared');
             }
         },
 
-        // Check if the given tile has bomb
-        hasBomb: function (tile) {
-            var pos = this.tilePosition(tile);
-            return cells[pos.x][pos.y].content === constants.HAS_BOMB;
+        // Check if the given cell has bomb
+        hasBomb: function (x, y) {
+            return cells[x][y].content === constants.HAS_BOMB;
+        },
+
+        // Check if adjacent cells have bombs
+        adjacentBombs: function (x, y) {
+            return cells[x][y].bombCount > 0;
         },
 
         revealBomb: function (tile) {
@@ -250,9 +286,12 @@ var MineSweeper = (function () {
 
         // Toggle flag tile
         toggleFlag: function (tile) {
-            if (this.isMarked(tile)) {
+            var pos = this.tilePosition(tile);
+            if (this.isMarked(pos.x, pos.y)) {
+                cells[pos.x][pos.y].marked = false;
                 tile.classList.remove('tile-flag');
             } else {
+                cells[pos.x][pos.y].marked = true;
                 tile.classList.add('tile-flag');
             }
         },

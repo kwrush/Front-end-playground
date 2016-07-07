@@ -15,13 +15,13 @@
     clear: both;
 }
 
-.col-1-10 {
+.col {
     float: left;
 }
 
 .container {
-    margin: 30px auto;
-    padding: 20px 10px 10px;
+    margin: 20px auto;
+    padding: 20px 15px 15px;
     text-align: center;
     background: #DDD;
     border-radius: 4px;
@@ -56,7 +56,7 @@ div.timer {
 div.counter p,
 div.timer p {
     margin: 0;
-    width: 50%;
+    width: 60%;
     height: 38px;
     line-height: 38px;
     font-size: 1.3em;
@@ -76,18 +76,51 @@ div.reset {
     position: absolute;
     left: 50%;
     top: 50%;
-    padding: 0 4px 6px 4px; /* align unicode */
     width: 40px;
     height: 40px;
     transform: translate(-50%, -50%);
-    font-size: 2em;
-    color: #52433D;
     border-radius: 3px;
     border: none;
     border-bottom: 2px solid rgba(0, 0, 0, 0.3);
     outline: none;
-    background: #FAD689;
     cursor: pointer;
+}
+
+#reset-btn.win:after,
+#reset-btn.running:after,
+#reset-btn.lose:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 2px;
+    width: 100%;
+    height: 100%;
+    color: #52433D;
+    font-size: 1.5em;
+}
+
+#reset-btn.win {
+    background: #A8D8B9;
+}
+
+#reset-btn.win:after {
+    content: "\1F603";
+}
+
+#reset-btn.lose {
+    background: #ED784A;
+}
+
+#reset-btn.lose:after {
+    content: "\1F623";
+}
+
+#reset-btn.running {
+    background: #FAD689;
+}
+
+#reset-btn.running:after {
+    content: "\1F610";
 }
 
 #reset-btn:active {
