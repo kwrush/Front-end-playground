@@ -1,5 +1,5 @@
 /**
- * Handle events operation,
+ * Handle events operations,
  * return a singleton EventHandler object
  */
 var EventsHandler = (function () {
@@ -7,6 +7,16 @@ var EventsHandler = (function () {
 
     function init () {
         var events = {};
+
+        function _getCallback (element, callback) {
+            var aCallback = function (evt) {
+                if (typeof callback === 'function') {
+                    return callback.call(element, evt);
+                }
+            };
+
+            return aCallback;
+        }
 
         return {
             delegateMouseClick: function (element, targetClass, callback, rightClick) {
@@ -22,16 +32,16 @@ var EventsHandler = (function () {
             },
 
             click: function (element, callback, rightClick) {
-                var aCallback = function (evt) {
-                    if (typeof callback === 'function') {
-                        return callback.call(element, evt);
-                    }
-                };
+                callback = _getCallback(element, callback);
 
-                if (rightClick) element.addEventListener('contextmenu', aCallback, false);
+                if (rightClick) element.addEventListener('contextmenu', callback, false);
+                element.addEventListener('click', callback, false);
+                return element;
+            },
 
-                element.addEventListener('click', aCallback, false);
-
+            onchange: function (element, callback) {
+                callback = _getCallback(element, callback);
+                element.addEventListener('change', callback, false);
                 return element;
             },
 
@@ -107,7 +117,7 @@ MineGrid.prototype = (function () {
         }
     }
 
-    function _eachCell () {
+    function _eachCell (callback) {
         for (var x = 0; x < this.gridSize.x; x++) {
             for (var y = 0; y < this.gridSize.y; y++) {
                 callback(_cells[x][y], x, y);
@@ -205,19 +215,25 @@ function MineView (level) {
 
 MineView.prototype = (function () {
     var _eventsHandler = EventsHandler.getInstance();
+    var _constants = {
+        0 : 'over',
+        1 : 'won',
+        2: 'running'
+    };
 
     // Get DOM elements and setup initial values
     function _init (level) {
         this.mainContainer = document.getElementsByClassName('container')[0];
 
-        this.difficultyList = document.querySelector('#difficulty select');
-        this.difficultyList.value = level;
+        this.levelList = document.getElementById('level-select');
+        this.levelList.value = level;
 
         this.timeBoard = document.querySelector('div.timer p');
         this.bombCountBoard = document.querySelector('div.counter p');
 
         this.gameContainer = document.getElementsByClassName('game-container')[0];
         this.resetBtn = document.getElementById('reset-btn');
+        this.gameStatus(2);
 
         this.listen();
     }
@@ -227,8 +243,12 @@ MineView.prototype = (function () {
             _eventsHandler.emit('clickTile', { tile: tile, event: evt });
         }.bind(this), true);
 
+        _eventsHandler.onchange(this.levelList, function (evt) {
+            _eventsHandler.emit('levelChanged', this.value);
+        });
+
         _eventsHandler.click(this.resetBtn, function (evt) {
-            _eventsHandler.emit('reset');
+            _eventsHandler.emit('reset', 2);
         });
     }
 
@@ -263,10 +283,9 @@ MineView.prototype = (function () {
         var tile = this.tileAt(0, 0);
 
         var padding = 2 * parseInt(window.getComputedStyle(this.mainContainer).paddingLeft, 10);
-        var margin = 2 * parseInt(window.getComputedStyle(this.mainContainer).marginLeft, 10);
         var tileWidth = tile.offsetWidth + 2 * parseInt(window.getComputedStyle(tile).marginRight, 10);
 
-        var width = tileWidth * gridY + padding + margin;
+        var width = tileWidth * gridY + padding;
         this.mainContainer.style.width = width + 'px';
     }
 
@@ -294,9 +313,28 @@ MineView.prototype = (function () {
         return 'cell-' + x + '-' + y;
     }
 
-    function _setCounter (bombLeft, time) {
-        this.bombCountBoard.textContent = bombLeft;
-        this.timeBoard.textContent = time;
+    // Set time passed
+    function _setTime (time) {
+        if (time >= 0 && time <= 99999) this.timeBoard.textContent = time;
+    }
+
+    // Set bombs left
+    function _setBombLeft (bombLeft) {
+        if (bombLeft >= 0) this.bombCountBoard.textContent = bombLeft;
+    }
+
+    // Toggle blocking game container
+    function _toggleBlock (block) {
+        if (block) {
+            this.gameContainer.classList.add('block');
+        } else {
+            this.gameContainer.classList.remove('block');
+        }
+    }
+
+    // Update view of game status
+    function _gameStatus (status) {
+        this.resetBtn.setAttribute('class', _constants[status]);
     }
 
     return {
@@ -308,7 +346,10 @@ MineView.prototype = (function () {
         tileAt: _tileAt,
         adjustContainerWidth: _adjustContainerWidth,
         buildGridView: _buildGridView,
-        setCounter: _setCounter
+        setTime: _setTime,
+        setBombLeft: _setBombLeft,
+        toggleBlock: _toggleBlock,
+        gameStatus: _gameStatus
     };
 })();
 
@@ -321,21 +362,21 @@ var MineSweeper = (function () {
             // easy
             0: {
                 LEVEL: 0,
-                BOMB_NUM: 10,
+                BOMB_NUM: 2,
                 GRID_X: 10,
                 GRID_Y: 10
             },
             // medium
             1: {
                 LEVEL: 1,
-                BOMB_NUM: 20,
-                GRID_X: 20,
-                GRID_Y: 10
+                BOMB_NUM: 40,
+                GRID_X: 16,
+                GRID_Y: 16
             },
             //hard
             2: {
                 LELVE: 2,
-                BOMB_NUM: 50,
+                BOMB_NUM: 99,
                 GRID_X: 16,
                 GRID_Y: 30
             }
@@ -351,12 +392,16 @@ var MineSweeper = (function () {
         LEFT_CLICK: 1,
         MID_CLICK: 2,
         RIGHT_CLICK: 3,
+
+        OVER: 0,
+        WON: 1,
+        RUN: 2
     };
 
     var _eventsHandler = EventsHandler.getInstance(),
         _grid = new MineGrid(),     // MineGrid object
         _won = false,               // has won ?
-        _lose = false,              // has lose ?
+        _over = false,              // is over ?
         _bombLeft,                  // Bombs not marked
         _timer;                     // timer
 
@@ -373,19 +418,54 @@ var MineSweeper = (function () {
             var self = this;
 
             _eventsHandler.listen('clickTile', this.clickTile, this);
-            _eventsHandler.listen('won', this.reset, this);
-            _eventsHandler.listen('lose', this.reset, this);
-            _eventsHandler.listen('reset', this.reset, this);
+            _eventsHandler.listen('won', this.updateGameStatus, this);
+            _eventsHandler.listen('over', this.updateGameStatus, this);
+            _eventsHandler.listen('reset', this.updateGameStatus, this);
+            _eventsHandler.listen('levelChanged', this.changeDifficulty, this);
+        },
+
+        changeDifficulty: function (level) {
+            this.difficulty = _constants.DIFFICULTY[level];
+            _eventsHandler.emit('reset', _constants.RUN);
+        },
+
+        updateGameStatus: function (status) {
+            switch (status) {
+                case _constants.WON:
+                case _constants.OVER:
+                    this.stopGame(status);
+                    break;
+                case _constants.RUN:
+                    this.reset();
+                    break;
+            }
+        },
+
+        stopGame: function (status) {
+            this.view.toggleBlock(true);
+            this.gameStatus = status;
+            this.view.gameStatus(this.gameStatus);
+            this.stopTimer();
         },
 
         reset: function () {
             this.setup();
             this.initMineGrid();
+            this.startTimer();
         },
 
         setup: function () {
             _bombLeft = this.difficulty.BOMB_NUM;
-            this.view.setCounter(_bombLeft, 0);
+            _won = false;
+            _over = false;
+
+            this.gameStatus = _constants.RUN;
+            this.timePassed = 0;
+
+            this.view.setTime(this.timePassed);
+            this.view.setBombLeft(_bombLeft);
+            this.view.gameStatus(this.gameStatus);
+            this.view.toggleBlock(false);
         },
 
         initMineGrid: function () {
@@ -408,7 +488,7 @@ var MineSweeper = (function () {
 
         // Callback for clicking tile
         clickTile: function (metaData) {
-            if (_won || _lose) return;
+            if (_won || _over) return;
 
             var tile = metaData.tile;
             var event = metaData.event || window.event;
@@ -424,20 +504,29 @@ var MineSweeper = (function () {
             } else if (action === _constants.CLEAR) {
                 this.openTile(tile, pos.x, pos.y);
             }
+
+            if (this.hasWon()) {
+                _over = false;
+                this.gameStatus = _constants.WON;
+                _eventsHandler.emit('won', this.gameStatus);
+            }
         },
 
         // Open the tile
         openTile: function (tile, x, y) {
-            if (_grid.hasBomb(x, y)) {
-                this.revealBomb(tile);
-            } else {
-                this.clearAdjacentTiles(x, y);
+            if (_grid.withinBound(x, y) && !_grid.isMarked(x, y)) {
+                if (_grid.hasBomb(x, y)) {
+                    this.revealBomb(tile);
+                } else {
+                    this.clearAdjacentTiles(x, y);
+                }
             }
         },
 
         // clear tiles with no bombs
         clearAdjacentTiles: function (x, y) {
-            if (_grid.withinBound(x, y) && !_grid.hasBomb(x, y) && !_grid.isCleared(x, y)) {
+            if (_grid.withinBound(x, y) && !_grid.hasBomb(x, y) &&
+                !_grid.isCleared(x, y) && !_grid.isMarked(x, y)) {
 
                 var tile = this.view.tileAt(x, y);
                 this.clearTile(tile, x, y);
@@ -472,14 +561,17 @@ var MineSweeper = (function () {
             this.view.revealBomb(tile);
 
             _won = false;
-            _lose = true;
-            this.eventHandler.emit('lose');
+            _over = true;
+            _eventsHandler.emit('over', _constants.OVER);
         },
 
         // Toggle flag on tile
         toggleFlag: function (tile, x, y) {
+            var marked = _grid.isMarked(x, y);
+            _bombLeft += marked ? 1 : -1;
+            this.view.toggleFlag(tile, marked);
+            this.view.setBombLeft(_bombLeft);
             _grid.toggleMarkCell(x, y);
-            this.view.toggleFlag(tile, _grid.isMarked(x, y));
         },
 
         // Return the given tile's position
@@ -505,6 +597,38 @@ var MineSweeper = (function () {
                 type = _constants.MARK;
             }
             return type;
+        },
+
+        // Start timer
+        startTimer: function () {
+            var self = this;
+            this.stopTimer();
+            this.timePassed = 0;
+            _timer = window.setInterval(function () {
+                self.timePassed++;
+                self.view.setTime(self.timePassed);
+            }, 1000);
+        },
+
+        // Stop timer
+        stopTimer: function () {
+            window.clearInterval(_timer);
+        },
+
+        // Check if it has won
+        hasWon: function () {
+            if (_bombLeft === 0) {
+                _won = true;
+                _grid.eachCell(function (cell, x, y) {
+                    if ((!_grid.isMarked(x, y) && !_grid.isCleared(x, y)) ||
+                       (_grid.isMarked(x, y) && !_grid.hasBomb(x, y))) {
+                        _won = false;
+                        return;
+                    }
+                });
+            }
+
+            return _won;
         }
     };
 })();

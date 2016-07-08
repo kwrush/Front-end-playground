@@ -19,6 +19,11 @@
     float: left;
 }
 
+.level {
+    margin: 15px auto
+    position: relative;
+}
+
 .container {
     margin: 20px auto;
     padding: 20px 15px 15px;
@@ -86,9 +91,9 @@ div.reset {
     cursor: pointer;
 }
 
-#reset-btn.win:after,
+#reset-btn.won:after,
 #reset-btn.running:after,
-#reset-btn.lose:after {
+#reset-btn.over:after {
     position: absolute;
     left: 0;
     top: 0;
@@ -99,19 +104,19 @@ div.reset {
     font-size: 1.5em;
 }
 
-#reset-btn.win {
+#reset-btn.won {
     background: #A8D8B9;
 }
 
-#reset-btn.win:after {
+#reset-btn.won:after {
     content: "\1F603";
 }
 
-#reset-btn.lose {
+#reset-btn.over {
     background: #ED784A;
 }
 
-#reset-btn.lose:after {
+#reset-btn.over:after {
     content: "\1F623";
 }
 
@@ -130,8 +135,20 @@ div.reset {
 
 /* Game container */
 div.game-container {
+    position: relative;
     width: 100%;
     margin-top: 20px;
+}
+
+div.game-container.block:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 9999;
 }
 
 /* Tiles styles */

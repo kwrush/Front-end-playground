@@ -9,27 +9,30 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-    <form id="difficulty">
-        <label for="">Difficulty:</label>
-        <select>
-            <option value="0">Easy</option>
-            <option value="1">Medium</option>
-            <option value="2">Hard</option>
-        </select>
-    </form>
+    <div id="level">
+        <form>
+            <label for="level-select">Difficulty:</label>
+            <select id="level-select">
+                <option value="0">Easy</option>
+                <option value="1">Medium</option>
+                <option value="2">Hard</option>
+            </select>
+        </form>
+    </div>
     <div class="container">
         <div class="header row">
             <div class="counter">
                 <p>10</p>
             </div>
             <div class="reset">
-                <button id="reset-btn" class="running"></button>
+                <button id="reset-btn" class="win"></button>
             </div>
             <div class="timer">
                 <p>12</p>
             </div>
         </div>
-        <div class="game-container"></div>
+        <div class="game-container">
+        </div>
     </div>
     <footer id="footer">
         <p>Use mouse <strong>right</strong> key or <strong>Alt+left</strong> key to mark the mine</p>
