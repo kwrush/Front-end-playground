@@ -117,7 +117,7 @@ div.reset {
 }
 
 #reset-btn.over {
-    background: #ED784A;
+    background: #E83015;
 }
 
 #reset-btn.over:after {
@@ -195,7 +195,8 @@ div.game-container.block:before {
 .tile-7:after,
 .tile-8:after,
 .tile-flag:after,
-.tile-bomb:after {
+.tile-bomb:after,
+.tile-wrong:after {
     position: absolute;
     left: 0;
     top: 0;
@@ -281,7 +282,7 @@ div.game-container.block:before {
 }
 
 .tile-flag:after {
-    content: "\002691";
+    content: "\26F3";
     font-size: 1.5em;
     color: #E83015;
 }
@@ -291,10 +292,19 @@ div.game-container.block:before {
 }
 
 .tile-bomb:after {
-    margin-top: 3px;
+    margin-top: 4px;
     content: "\1F4A3";
     font-size: 1.2em;
     color: #080808;
 }
 
-/* Game container */
+.tile-wrong {
+    background: #F05E1C;
+}
+
+.tile-wrong:after {
+    margin-top: 1px;
+    content: "\274C";
+    font-size: 1.2em;
+    color: #080808;
+}

@@ -259,9 +259,18 @@ MineView.prototype = (function () {
         classList.add(tileClass, 'cleared');
     }
 
+    // Show X on the incorrect mark
+    function _revealWrongMark (tile) {
+        var classList = tile.classList;
+        classList.remove('tile-flag');
+        classList.add('tile-wrong', 'cleared');
+    }
+
     // Show bomb on the tile
     function _revealBomb (tile) {
-        tile.classList.add('tile-bomb', 'cleared');
+        var classList = tile.classList;
+        classList.remove('tile-flag');
+        classList.add('tile-bomb', 'cleared');
     }
 
     // Toggle flag on the tile
@@ -341,6 +350,7 @@ MineView.prototype = (function () {
         init: _init,
         listen: _listen,
         revealBomb: _revealBomb,
+        revealWrongMark: _revealWrongMark,
         toggleFlag: _toggleFlag,
         clearTile: _clearTile,
         tileAt: _tileAt,
@@ -442,10 +452,20 @@ var MineSweeper = (function () {
         },
 
         stopGame: function (status) {
+            var self = this;
+            this.stopTimer();
             this.view.toggleBlock(true);
             this.gameStatus = status;
             this.view.gameStatus(this.gameStatus);
-            this.stopTimer();
+            if (_over) {
+                _grid.eachCell(function (cell, x, y) {
+                    if (_grid.hasBomb(x, y)) {
+                        self.view.revealBomb(self.view.tileAt(x, y));
+                    } else if (_grid.isMarked(x, y) && !_grid.hasBomb(x, y)) {
+                        self.view.revealWrongMark(self.view.tileAt(x, y));
+                    }
+                });
+            }
         },
 
         reset: function () {
