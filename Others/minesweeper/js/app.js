@@ -362,7 +362,7 @@ var MineSweeper = (function () {
             // easy
             0: {
                 LEVEL: 0,
-                BOMB_NUM: 2,
+                BOMB_NUM: 10,
                 GRID_X: 10,
                 GRID_Y: 10
             },

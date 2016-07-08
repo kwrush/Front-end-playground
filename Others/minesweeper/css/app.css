@@ -19,13 +19,8 @@
     float: left;
 }
 
-.level {
-    margin: 15px auto
-    position: relative;
-}
-
 .container {
-    margin: 20px auto;
+    margin: 40px auto;
     padding: 20px 15px 15px;
     text-align: center;
     background: #DDD;
@@ -37,6 +32,15 @@
     margin: 0 auto;
     width: 480px;
     text-align: center;
+}
+
+/* Select */
+#level {
+    position: relative;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
 }
 
 /* Header */
