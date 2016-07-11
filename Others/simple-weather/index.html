@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple weather</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div class="container">
+        <header id="heading">
+            <form id="search">
+                <span class="search-icon"></span>
+                <input type="text" value="" placeholder="e.g. New York" id="city-entry">
+            </form>
+            <div id="search-result" class="hide">
+                <ul>
+                <script type="text/template" class="template">
+                    <%_.each(RESULTS, function (city) {%>
+                        <li>
+                            <%- city.name%>
+                        </li>
+                    <%});%>
+                </script>
+                </ul>
+            </div>
+        </header>
+        <section class="main">
+            <div class="flex-container content">
+
+            </div>
+        </section>
+    </div>
+    <!-- <script src="js/lib/underscore.min.js" charset="utf-8"></script> -->
+    <script src="js/loader.js" charset="utf-8"></script>
+    <script src="js/app.js" charset="utf-8"></script>
+</body>
+</html>
