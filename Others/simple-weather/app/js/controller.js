@@ -34,7 +34,7 @@ Controller.prototype = function () {
     }
 
     // fires when we select a city from result list
-    // TODO: use promise, first show spin loader, if get() success, add city view, 
+    // TODO: use promise, first show spin loader, if get() success, add city view,
     // otherwise show alert and remove empty city view, finally remove loader
     function _newCity (event, eventData) {
         event.preventDefault();

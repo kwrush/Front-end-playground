@@ -44,4 +44,9 @@ Temporary Items
 
 # npm and bower folders
 **/npm_modules/
+**/node_modules/
 **/bower_components/
+
+#api key
+apiKey.js
+apiKey.txt
