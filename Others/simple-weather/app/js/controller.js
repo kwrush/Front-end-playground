@@ -7,6 +7,7 @@ function Controller (cities, view) {
 Controller.prototype = function () {
     function _init () {
         $(document).on('newCity', _.bind(this.newCity, this));
+<<<<<<< HEAD
         $(document).on('getSucceed', _.bind(this.upateCityView, this));
         $(document).on('cityAdded', _.bind(this.updateCitiesView, this));
         $(document).on('cityRemoved', _.bind(this.updateCitiesView, this));
@@ -60,5 +61,5 @@ Controller.prototype = function () {
         updateView: _updateView,
         updateCityView: _updateCityView,
         updateCitiesView: _updateCitiesView
-    };
+
 }();

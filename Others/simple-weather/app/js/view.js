@@ -13,6 +13,7 @@ View.prototype = function () {
         // DOM elements
         this.$entry = $('#city-entry')
             .val(currentText)
+<<<<<<< HEAD
             .on('keyup', _.bind(this.searchOnEnter, this))
             .on('', _.bind(this.hideResults, this));
 
