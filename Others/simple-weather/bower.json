@@ -1,0 +1,22 @@
+{
+  "name": "simple-weather",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "strivk <winhosa0905@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/strivk/Front-end-playground",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+      "jquery": "^1.8.0",
+      "underscore": "^1.0.0"
+  }
+}

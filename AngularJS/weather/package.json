@@ -1,0 +1,22 @@
+{
+  "name": "WeatherApp",
+  "version": "0.0.1",
+  "description": "A simple forecast app based on AngularJS",
+  "main": "app/index.html",
+  "keywords": [
+    "angular",
+    "weather",
+    "weatherapp"
+  ],
+  "private": "true",
+  "license": "MIT",
+  "stcript": {
+    "postinstall": "bower install",
+    "start": "http-server -a localhost -p 8080"
+  },
+  "devDependencies": {
+    "bower": "^1.3.1",
+    "gulp": "^3.6.2",
+    "http-server": "^0.6.1"
+  }
+}
