@@ -1,14 +1,22 @@
 /**
  * City class
  */
-function City (query, data) {
+function City (query) {
     this.query = query || '';
-    this.data = data || null;
 }
 
 City.prototype = function () {
-    function _valid (data) {
-        return data.response && data.location && data.current_observation;
+    var day = 6;
+    var night = 19;
+
+    var _data = null;
+
+    function _validate () {
+        return this.query.length > 0 && this.isDataValid(_data);
+    }
+
+    function _isDataValid (data) {
+        return data.response && data.forecast && data.current_observation;
     }
 
     function _url () {
@@ -24,10 +32,33 @@ City.prototype = function () {
         });
     }
 
+    function _getLocalTime () {
+        var epoch = _data.current_observation.local_epoch;
+        return new Date(parseInt(epoch, 10) * 1000);
+    }
+
+    function _isDay () {
+        var hours = this.getLocalTime().getHours();
+        return hours > day && hours < night;
+    }
+
+    function _setData (data) {
+        if (this.isDataValid(data)) _data = data;
+    }
+
+    function _getData () {
+        return _data;
+    }
+
     return {
         url: _url,
         get: _get,
-        valid: _valid
+        validate: _validate,
+        isDataValid: _isDataValid,
+        getLocalTime: _getLocalTime,
+        isDay: _isDay,
+        setData: _setData,
+        getData: _getData
     };
 }();
 
@@ -47,10 +78,7 @@ Cities.prototype = function () {
     }
 
     function _isValidCity (city) {
-        return city.data.response &&
-               city.data.location &&
-               city.data.current_observation &&
-               !_isDuplicate(city);
+        return city.validate() && !this.isDuplicate(city);
     }
 
     function _isDuplicate (city) {
@@ -61,10 +89,10 @@ Cities.prototype = function () {
     }
 
     function _addCity (city) {
-        if (_isValidCity(city)) {
+        if (this.isValidCity(city)) {
             _cities.push(city);
             this.save();
-            $(document).trigger('cityAdded', [_cities, city]);
+            $(document).trigger('cityAdded', city);
         }
     }
 
@@ -76,7 +104,7 @@ Cities.prototype = function () {
         var city =  _cities.splice(index, 1);
         if (city.length) {
             this.save();
-            $(document).trigger('cityRemoved', [_cities, city]);
+            $(document).trigger('cityRemoved', city);
         }
     }
 
@@ -99,6 +127,8 @@ Cities.prototype = function () {
         getCity: _getCity,
         removeCity: _removeCity,
         load: _load,
-        save: _save
+        save: _save,
+        isDuplicate: _isDuplicate,
+        isValidCity: _isValidCity
     };
 }();

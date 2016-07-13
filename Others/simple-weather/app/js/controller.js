@@ -7,8 +7,7 @@ function Controller (cities, view) {
 Controller.prototype = function () {
     function _init () {
         $(document).on('newCity', _.bind(this.newCity, this));
-<<<<<<< HEAD
-        $(document).on('getSucceed', _.bind(this.upateCityView, this));
+        $(document).on('getSucceed', _.bind(this.updateCityView, this));
         $(document).on('cityAdded', _.bind(this.updateCitiesView, this));
         $(document).on('cityRemoved', _.bind(this.updateCitiesView, this));
     }
@@ -26,33 +25,51 @@ Controller.prototype = function () {
     function _updateCitiesView (event, eventData) {
         event.preventDefault();
         var self = this;
+        var $cityView = this.view.getCityView(eventData.query);
         if (event.type === 'cityAdded') {
-
-
+            var city = eventData;
+            var icons = constants.icons(city.isDay());
+            var viewData = {
+                data: city.getData(),
+                icons: icons
+            };
+            this.view.renderCityViwe($cityView, viewData);
         } else if (event.type === 'cityRemoved') {
-
+            $cityView.remove();
         }
     }
 
-    // fires when we select a city from result list
-    // TODO: use promise, first show spin loader, if get() success, add city view,
-    // otherwise show alert and remove empty city view, finally remove loader
     function _newCity (event, eventData) {
         event.preventDefault();
+        this.view.hideResults();
 
         var self = this;
         if (event.type === 'newCity') {
+            this.view.addTrailingEmptyCityView(eventData);
             var city = new City(eventData);
-            city.get()
-                .success(function (response) {
-                    if (city.valid(response)) {
-                        city.data = response;
-                        self.cities.addCity(city);
-                    }
-                }).fail(function (error) {
-                    self.view.alert('Cannot get weather data. Error:' + error);
-                });
+            _loadData(city).then(function (response) {
+                city.setData(response);
+                self.cities.addCity(city);
+            }).then(function () {
+                self.view.stopRefreshing();
+            }).catch(function (error) {
+                self.view.alert('Error! Cannot add this city.');
+                self.view.removeTrailingEmptyCityView();
+                // debug
+                console.error(error.stack);
+            });
         }
+    }
+
+    // Load json data and return a promise
+    function _loadData (city) {
+        return new Promise (function (resolve, reject) {
+            city.get().success(function (response) {
+                resolve(response);
+            }).fail(function (error) {
+                reject(error);
+            });
+        });
     }
 
     return {
@@ -61,5 +78,5 @@ Controller.prototype = function () {
         updateView: _updateView,
         updateCityView: _updateCityView,
         updateCitiesView: _updateCitiesView
-
+    };
 }();

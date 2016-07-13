@@ -6,6 +6,7 @@
 }
 
 body {
+    margin: 0 auto;
     font-family: Helvetica, "Arial", sans-serif;
     font-size: 14px;
 }
@@ -26,8 +27,20 @@ ul, ol {
     clear:both;
 }
 
+.col-1-3 {
+    float: left;
+    width: 33.333333%;
+    display: block;
+}
+
 .hide {
     display: none;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
 }
 
 .flex-container {
@@ -49,6 +62,7 @@ ul, ol {
     width: 100%;
     height: 48px;
     background: #333;
+    z-index: 9999;
 }
 
 /* Search entry */
@@ -118,3 +132,110 @@ li.result-item:hover {
 }
 
 /* Main */
+.main {
+    margin: 0 auto;
+    padding: 62px 18px;
+}
+
+.city {
+    position: relative;
+    margin: 0 auto 48px auto;
+    padding: 12px;
+    width: 380px;
+    min-height: 280px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    align-items: flex-start;
+}
+
+.city:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.refresh-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 34px;
+    height: 34px;
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: 1.6em;
+    cursor: pointer;
+}
+
+.refreshing > .refresh-btn {
+    animation: spin 1s linear infinite;
+}
+
+.inner {
+    margin-bottom: 22px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.inner:last-child {
+    margin-bottom: 0;
+}
+
+/* header */
+.city-name h3 {
+    font-size: 1.5em;
+}
+
+.city-name p {
+    font-size: 1.15em;
+}
+
+.city-name h3,
+.city-name p {
+    margin: 6px;
+}
+
+/* Current weather */
+.current {
+    padding-bottom: 12px;
+    font-size: 2.5em;
+}
+
+.condition {
+    padding-bottom: 12px;
+    font-size: 1.15em;
+}
+
+.condition > span {
+    padding: 0 8px;
+    display: inline-block;
+}
+
+.temp-range .low {
+    color: #777;
+}
+
+/* Forecast of 3 days */
+.forecast-day > h4 {
+    margin: 0 0 14px 0;
+    font-size: 1.15em;
+}
+
+.forecast-weather {
+    margin-bottom: 8px;
+    font-size: 1.15em;
+}
+
+.forecast-weather > .wi {
+    font-size: 1.2em;
+}
+
+.forecast-weather > .temp-range {
+    font-size: 1em;
+}
+
+
+/* Animation */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

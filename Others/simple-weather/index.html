@@ -16,19 +16,10 @@
                 <span class="search-icon"></span>
                 <input type="text" value="" placeholder="e.g. New York" id="city-entry">
             </form>
-            <ul id="search-result">
-            <script type="text/template" class="template" id="results-template">
-                <%_.each(RESULTS, function (city) {%>
-                <li class="result-item" data-query="<%= city.l %>">
-                    <%- city.name %>
-                </li>
-                <%});%>
-            </script>
-            </ul>
+            <ul id="search-result"></ul>
         </header>
         <section class="main">
             <div class="flex-container content">
-
             </div>
         </section>
     </div>
