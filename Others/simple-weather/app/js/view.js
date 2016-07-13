@@ -20,7 +20,9 @@ View.prototype = function () {
         this.$results = $('#search-result').off('click')
             .on('click', 'li.result-item', _.bind(this.addCityView, this));
 
-        this.$content = $('div.content');
+        this.$content = $('div.content').off('click')
+            .on('click', 'button.refresh-btn' , _.bind(this.updateCityView, this))
+            .on('click', 'button.delete-btn', _.bind(this.deleteCityView, this));
 
         // load template
         constants.requireTemplate('#results-template', 'search');
@@ -50,6 +52,15 @@ View.prototype = function () {
         $(document).trigger('newCity', [$target.attr('data-query')]);
     }
 
+    function _updateCityView (event) {
+        var $target = $(event.target || window.event.target);
+        $(document).trigger('updateView', [$target.attr('data-query')]);
+    }
+
+    function _deleteCityView (event) {
+        var $target = $(event.target || window.event.target);
+        $(document).trigger('removeView', [$target.attr('data-query')]);
+    }
 
     function _canSearch (keyword) {
         return keyword.length > 2;
@@ -88,7 +99,7 @@ View.prototype = function () {
     function _addTrailingEmptyCityView (query) {
         query = query.trim();
         this.$content.append(constants.cityView(query));
-        this.getCityView(query).addClass('refreshing');
+        this.startRefreshing(this.getCityView(query));
     }
 
     function _getCityView (query) {
@@ -97,6 +108,10 @@ View.prototype = function () {
 
     function _removeTrailingCityView () {
         $('.city').last().remove();
+    }
+
+    function _startRefreshing (cityView) {
+        $(cityView).addClass('refreshing');
     }
 
     function _stopRefreshing () {
@@ -134,8 +149,11 @@ View.prototype = function () {
         showResults: _showResults,
         searchOnEnter: _searchOnEnter,
         addCityView: _addCityView,
+        updateCityView: _updateCityView,
+        deleteCityView: _deleteCityView,
         renderCityViwe: _renderCityView,
         getCityView: _getCityView,
+        startRefreshing: _startRefreshing,
         stopRefreshing: _stopRefreshing,
         addTrailingEmptyCityView: _addTrailingEmptyCityView,
         removeTrailingEmptyCityView: _removeTrailingCityView

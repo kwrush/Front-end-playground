@@ -153,10 +153,9 @@ li.result-item:hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.refresh-btn {
+.btn {
     position: absolute;
     top: 0;
-    right: 0;
     width: 34px;
     height: 34px;
     outline: none;
@@ -164,6 +163,21 @@ li.result-item:hover {
     background: transparent;
     font-size: 1.6em;
     cursor: pointer;
+}
+
+.refresh-btn {
+    right: 0;
+}
+
+.delete-btn {
+    left: 0;
+    font-size: 1em;
+    transform: scale(0);
+    transition: transform .2s ease-out;
+}
+
+.city:hover .delete-btn {
+    transform: scale(1);
 }
 
 .refreshing > .refresh-btn {
@@ -177,16 +191,18 @@ li.result-item:hover {
 }
 
 .inner:last-child {
-    margin-bottom: 0;
+    margin-bottom: 10px;
 }
 
 /* header */
 .city-name h3 {
-    font-size: 1.5em;
+    font-size: 1.4em;
+    text-transform: uppercase;
 }
 
 .city-name p {
-    font-size: 1.15em;
+    font-size: 1.1em;
+    text-transform: uppercase;
 }
 
 .city-name h3,
@@ -194,7 +210,6 @@ li.result-item:hover {
     margin: 6px;
 }
 
-/* Current weather */
 .current {
     padding-bottom: 12px;
     font-size: 2.5em;
@@ -216,8 +231,9 @@ li.result-item:hover {
 
 /* Forecast of 3 days */
 .forecast-day > h4 {
-    margin: 0 0 14px 0;
-    font-size: 1.15em;
+    margin: 0 0 16px 0;
+    font-size: 1.1em;
+    text-transform: uppercase;
 }
 
 .forecast-weather {
@@ -226,7 +242,8 @@ li.result-item:hover {
 }
 
 .forecast-weather > .wi {
-    font-size: 1.2em;
+    padding-right: 4px;
+    font-size: 1.3em;
 }
 
 .forecast-weather > .temp-range {

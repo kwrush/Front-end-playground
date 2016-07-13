@@ -26,9 +26,13 @@ var constants = (function (key) {
 
         cityView: function (query) {
             return '<div data-query="' + query + '" class="city">' +
-                   '<button class="refresh-btn">'               +
-                   '<i class="wi wi-refresh"></i>'              +
-                   '</button></div>';
+                   '<button class="btn refresh-btn">'              +
+                   '<i class="wi wi-refresh"></i>'                 +
+                   '</button>'                                     +
+                   '<button class="btn delete-btn">'               +
+                   '&#10060;'                                      +
+                   '</button>'                                     +
+                   '</div>';
         },
 
         url: function (query) {
@@ -41,24 +45,24 @@ var constants = (function (key) {
             var time = day ? 'day' : 'night';
             return {
                 'chanceflurries': 'wi-snow-wind',
-                'chancerain':     'wi-' + time + '-rain',
-                'chancesleat':    'wi-' + time + '-sleet',
-                'chancesnow':     'wi-' + time + '-snow',
-                'chancetstorms':  'wi-' + time + '-thunderstorm',
-                'clear':          day ? 'wi-day-sunny' : 'wi-night-clear',
-                'cloudy':         day ? 'wi-day-cloudy' : 'wi-night-alt-cloudy',
-                'flurries':       day ? 'wi-day-snow-wind' : 'wi-night-alt-snow-wind',
                 'hazy':           'wi-day-haze',
                 'mostlycloudy':   'wi-cloudy',
                 'mostlysunny':    'wi-sunny',
-                'partlycloudy':   day ? 'wi-day-cloudy' : 'wi-night-alt-cloudy',
                 'partlysunny':    'wi-day-sunny',
                 'rain':           'wi-showers',
                 'sleat':          'wi-sleet',
                 'snow':           'wi-snow',
                 'sunny':          'wi-day-sunny',
                 'tstorms':        'wi-thunderstorm',
-                'unknown':        'wi-day-sunny'
+                'unknown':        'wi-day-sunny',
+                'chancerain':     'wi-' + time + '-rain',
+                'chancesleat':    'wi-' + time + '-sleet',
+                'chancesnow':     'wi-' + time + '-snow',
+                'chancetstorms':  day ? 'wi-day-thunderstorm' : 'wi-night-alt-thunderstorm',
+                'clear':          day ? 'wi-day-sunny' : 'wi-night-clear',
+                'cloudy':         day ? 'wi-day-cloudy' : 'wi-night-alt-cloudy',
+                'flurries':       day ? 'wi-day-snow-wind' : 'wi-night-alt-snow-wind',
+                'partlycloudy':   day ? 'wi-day-cloudy' : 'wi-night-alt-cloudy',
             };
         }
     };
