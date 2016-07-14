@@ -10,62 +10,95 @@ View.prototype = function () {
     var currentText = '';
 
     function _init () {
-        // DOM elements
-        $(document).on('click', _.bind(this.hideResults, this));
+        // DOM elements and events binding
+        $(document).off('click')
+            .on('click', _.bind(this.hideResults, this));
 
-        this.$entry = $('#city-entry')
-            .val(currentText)
+        this.$entry = $('#city-entry').val(currentText)
             .on('keyup', _.bind(this.searchOnEnter, this));
 
         this.$results = $('#search-result').off('click')
-            .on('click', 'li.result-item', _.bind(this.addCityView, this));
+        .on('click', 'li.result-item', _.bind(this.addCity, this));
 
         this.$content = $('div.content').off('click')
-            .on('click', 'button.refresh-btn' , _.bind(this.updateCityView, this))
-            .on('click', 'button.delete-btn', _.bind(this.deleteCityView, this));
+            .on('click', 'button.refresh-btn', _.bind(this.updateCity, this))
+            .on('click', 'button.delete-btn', _.bind(this.deleteCity, this));
 
         // load template
         constants.requireTemplate('#results-template', 'search');
         constants.requireTemplate('#city-template', 'city');
 
-        // templates
+        // parse templates
         this.resultsTemplate = _.template($('#results-template').html());
         this.cityTemplate = _.template($('#city-template').html());
 
         // do search in every 300ms
         this.searchOnEnter = _.debounce(this.searchOnEnter, wait);
-
-        // prevent quick click
     }
 
-    // Update content view
-    function _render (data) {
+    function _addTrailingEmptyCityView (query) {
+        this.addCityView(query);
+        this.startRefreshing(this.getCityView(query));
+    }
 
+    function _removeTrailingCityView () {
+        $('.city').last().remove();
+    }
+
+    function _addCityView (query) {
+        query = query.trim();
+        this.$content.append(constants.cityView(query));
+    }
+
+    function _removeCityView (cityView) {
+        $(cityView).remove();
+    }
+
+    function _getCityView (query) {
+        return $('.city[data-query="' + query + '"]');
+    }
+
+    function _startRefreshing (cityView) {
+        $(cityView).addClass('refreshing');
+    }
+
+    function _stopRefreshing (cityView) {
+        $(cityView).removeClass('refreshing');
     }
 
     function _renderCityView (cityView, viewData) {
         $(cityView).append(this.cityTemplate(viewData));
     }
 
-    function _addCityView (event) {
+    function _addCity (event) {
         var $target = $(event.target || window.event.target);
         $(document).trigger('newCity', [$target.attr('data-query')]);
     }
 
-    function _updateCityView (event) {
+    function _updateCity (event) {
         var $target = $(event.target || window.event.target);
-        $(document).trigger('updateView', [$target.attr('data-query')]);
+        var $cityView = $target.closest('div.city');
+        if (!_isRefreshing.call(this, $cityView)) {
+            $(document).trigger('updateCity', [$cityView.attr('data-query')]);
+        }
     }
 
-    function _deleteCityView (event) {
-        var $target = $(event.target || window.event.target);
-        $(document).trigger('removeView', [$target.attr('data-query')]);
+    function _isRefreshing (cityView) {
+        return $(cityView).hasClass('refreshing');
     }
 
+    function _deleteCity (event) {
+        var $target = $(event.target || window.event.target);
+        var $cityView = $target.closest('div.city');
+        $(document).trigger('removeCity', [$cityView.attr('data-query')]);
+    }
+
+    // Do searching once typing more than two letters
     function _canSearch (keyword) {
         return keyword.length > 2;
     }
 
+    // Auto complete when typing city's name
     function _searchOnEnter (event) {
         var keyword = this.$entry.val().replace(/\s+/g, '');
         var self = this;
@@ -96,43 +129,23 @@ View.prototype = function () {
         });
     }
 
-    function _addTrailingEmptyCityView (query) {
-        query = query.trim();
-        this.$content.append(constants.cityView(query));
-        this.startRefreshing(this.getCityView(query));
+    // Only display cities
+    function _resultsFilter(results) {
+        return results.filter(function (elem) {
+            return elem && elem.type && elem.type === 'city';
+        });
     }
 
-    function _getCityView (query) {
-        return $('.city[data-query="' + query + '"]');
-    }
-
-    function _removeTrailingCityView () {
-        $('.city').last().remove();
-    }
-
-    function _startRefreshing (cityView) {
-        $(cityView).addClass('refreshing');
-    }
-
-    function _stopRefreshing () {
-        $('.city.refreshing').removeClass('refreshing');
-    }
-
+    // Show auto complete list
     function _showResults(response) {
-        if (response.RESULTS) {
+        if (response && response.RESULTS) {
             response.RESULTS = _resultsFilter(response.RESULTS);
             this.$results.html(this.resultsTemplate(response));
             this.$results.show();
         }
     }
 
-    // Only cities are left
-    function _resultsFilter(results) {
-        return results.filter(function (elem) {
-            return elem.type && elem.type === 'city';
-        });
-    }
-
+    // Hide auto complete list
     function _hideResults() {
         this.$results.hide();
     }
@@ -148,14 +161,16 @@ View.prototype = function () {
         hideResults: _hideResults,
         showResults: _showResults,
         searchOnEnter: _searchOnEnter,
-        addCityView: _addCityView,
-        updateCityView: _updateCityView,
-        deleteCityView: _deleteCityView,
-        renderCityViwe: _renderCityView,
+        addCity: _addCity,
+        updateCity: _updateCity,
+        deleteCity: _deleteCity,
+        renderCityView: _renderCityView,
         getCityView: _getCityView,
         startRefreshing: _startRefreshing,
         stopRefreshing: _stopRefreshing,
         addTrailingEmptyCityView: _addTrailingEmptyCityView,
-        removeTrailingEmptyCityView: _removeTrailingCityView
+        addCityView: _addCityView,
+        removeTrailingEmptyCityView: _removeTrailingCityView,
+        removeCityView: _removeCityView
     };
 }();

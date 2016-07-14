@@ -1,39 +1,100 @@
 function Controller (cities, view) {
-    this.cities = new Cities();
-    this.view = new View();
     this.init();
+    this.cities = cities || new Cities();
+    this.view = view || new View();
+    this.cities.init();
 }
 
 Controller.prototype = function () {
     function _init () {
         $(document).on('newCity', _.bind(this.newCity, this));
-        $(document).on('updateView', _.bind(this.updateCityView, this));
+        $(document).on('updateCity', _.bind(this.updateCity, this));
+        $(document).on('removeCity', _.bind(this.removeCity, this));
+        $(document).on('cityUpdated', _.bind(this.updateCitiesView, this));
         $(document).on('cityAdded', _.bind(this.updateCitiesView, this));
         $(document).on('cityRemoved', _.bind(this.updateCitiesView, this));
+        $(document).on('cityDuplicated', _.bind(this.updateCitiesView, this));
+        $(document).on('citiesLoaded', _.bind(this.revealCities, this));
     }
 
-    // Update individual city's view
-    function _updateCityView (event, eventData) {
-        var cityView = this.view.getCityView(eventData);
-        this.view.startRefreshing(cityView);
+    // Show saved cities
+    function _revealEachCity (cities) {
         var self = this;
-        var city = this.cities.getCity(0);
-        _loadData(city).then(function (response) {
-            city.setData(response);
-            //self.cities.addCity(city);
-        }).catch(function (error) {
-            self.view.alert('Cannot get weather data, try again later.');
-            // debug
-            console.error(error.stack);
-        }).then(function () {
-            self.view.stopRefreshing();
+
+        return new Promise(function (resolve) {
+            cities.reduce(function (sequence, city) {
+                self.view.addCityView(city.query);
+                $(document).trigger('cityAdded', [city]);
+            }, Promise.resolve());
+            resolve(cities);
         });
     }
 
-    function _updateView (event, eventData) {
-
+    // Reveal saved data, eventData is cities
+    function _revealCities (event, eventData) {
+        var self = this;
+        var cities = eventData;
+        _revealEachCity.call(this, cities).then(function (cities) {
+            cities.reduce(function (sequence, city) {
+                var aCity = city;
+                return sequence.then(function () {
+                    $(document).trigger('updateCity', [aCity.query]);
+                });
+            }, Promise.resolve());
+        });
     }
 
+    // Update city's weather, eventData is city query
+    function _updateCity (event, eventData) {
+        event.stopPropagation();
+
+        var city = this.cities.getCityByQuery(eventData);
+        var self = this;
+        if (city) {
+            var $cityView = this.view.getCityView(eventData);
+            this.view.startRefreshing($cityView);
+
+            _fetchData(city).then(function (response) {
+                city.setData(response);
+            }).catch(function (error) {
+                self.view.alert('Cannot get the weather data, try again later.');
+                console.error(error.stack);
+            }).then(function () {
+                self.view.stopRefreshing($cityView);
+            });
+        }
+    }
+
+    // Remove city, eventData is city query
+    function _removeCity (event, eventData) {
+        event.stopPropagation();
+        this.cities.removeCityByQuery(eventData);
+    }
+
+    // newCity event listener, eventData is the city query
+    function _newCity (event, eventData) {
+        event.stopPropagation();
+
+        this.view.hideResults();
+        this.view.addTrailingEmptyCityView(eventData);
+
+        var city = new City(eventData);
+        var self = this;
+
+        _fetchData(city).then(function (response) {
+            city.setData(response);
+            self.cities.addCity(city);
+        }).then(function () {
+            self.view.stopRefreshing(self.view.getCityView(city.query));
+        }).catch(function (error) {
+            self.view.alert('Error! Cannot add this city.');
+            self.view.removeTrailingEmptyCityView();
+            // debug
+            console.error(error.stack);
+        });
+    }
+
+    // Render the city data in the given city's view
     function _showData (cityView, city) {
         var data = city.getData();
         var icon = constants.icons(city.isDay())[data.current_observation.icon];
@@ -43,62 +104,28 @@ Controller.prototype = function () {
             icon: icon,
             forecastIcons: forecastIcons
         };
-        this.view.renderCityViwe(cityView, viewData);
+        this.view.renderCityView(cityView, viewData);
     }
 
     // append or remove city view block
     function _updateCitiesView (event, eventData) {
-        event.preventDefault();
-        var self = this;
-        var $cityView = this.view.getCityView(eventData.query);
-        if (event.type === 'cityAdded' || event.type === 'getSucceed') {
-            this.showData($cityView, eventData);
-        } else if (event.type === 'cityRemoved') {
-            $cityView.remove();
-        }
-    }
-
-    function _newCity (event, eventData) {
-        event.preventDefault();
         event.stopPropagation();
+        var $cityView = this.view.getCityView(eventData.query);
+        var type = event.type;
 
-        this.view.hideResults();
-
-        var self = this;
-        if (event.type === 'newCity') {
-            this.view.addTrailingEmptyCityView(eventData);
-            var city = new City(eventData);
-            _loadData(city).then(function (response) {
-                city.setData(response);
-                self.cities.addCity(city);
-            }).then(function () {
-                self.view.stopRefreshing();
-            }).catch(function (error) {
-                self.view.alert('Error! Cannot add this city.');
-                self.view.removeTrailingEmptyCityView();
-                // debug
-                console.error(error.stack);
-            });
+        if (type === 'cityAdded' || type === 'cityUpdated') {
+            _showData.call(this, $cityView, eventData);
+        } else if (type === 'cityRemoved' || type === 'cityDuplicated') {
+            this.view.removeCityView($cityView.last());
         }
-    }
-
-    // Load json data and return a promise
-    function _loadData (city) {
-        return new Promise (function (resolve, reject) {
-            city.get().success(function (response) {
-                resolve(response);
-            }).fail(function (error) {
-                reject(error);
-            });
-        });
     }
 
     return {
         init: _init,
         newCity: _newCity,
-        showData: _showData,
-        updateView: _updateView,
-        updateCityView: _updateCityView,
-        updateCitiesView: _updateCitiesView
+        updateCity: _updateCity,
+        removeCity: _removeCity,
+        updateCitiesView: _updateCitiesView,
+        revealCities: _revealCities
     };
 }();

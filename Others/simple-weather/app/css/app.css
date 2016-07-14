@@ -27,9 +27,9 @@ ul, ol {
     clear:both;
 }
 
-.col-1-3 {
+.col-1-4 {
     float: left;
-    width: 33.333333%;
+    width: 25%;
     display: block;
 }
 
@@ -134,7 +134,7 @@ li.result-item:hover {
 /* Main */
 .main {
     margin: 0 auto;
-    padding: 62px 18px;
+    padding: 60px 12px 18px;
 }
 
 .city {
@@ -151,6 +151,10 @@ li.result-item:hover {
 
 .city:hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.city:last-child {
+    margin-bottom: auto;
 }
 
 .btn {
@@ -187,21 +191,22 @@ li.result-item:hover {
 .inner {
     margin-bottom: 22px;
     padding: 0;
-    overflow: hidden;
+    width: 100%;
+    display: inline-block;
 }
 
 .inner:last-child {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 /* header */
 .city-name h3 {
-    font-size: 1.4em;
+    font-size: 1.38em;
     text-transform: uppercase;
 }
 
 .city-name p {
-    font-size: 1.1em;
+    font-size: 1.04em;
     text-transform: uppercase;
 }
 
@@ -212,7 +217,7 @@ li.result-item:hover {
 
 .current {
     padding-bottom: 12px;
-    font-size: 2.5em;
+    font-size: 2.46em;
 }
 
 .condition {
@@ -225,29 +230,28 @@ li.result-item:hover {
     display: inline-block;
 }
 
-.temp-range .low {
-    color: #777;
-}
-
 /* Forecast of 3 days */
 .forecast-day > h4 {
-    margin: 0 0 16px 0;
-    font-size: 1.1em;
+    margin: 0 0 12px 0;
+    font-size: 1em;
     text-transform: uppercase;
 }
 
 .forecast-weather {
-    margin-bottom: 8px;
-    font-size: 1.15em;
+    margin-bottom: 4px;
 }
 
-.forecast-weather > .wi {
-    padding-right: 4px;
-    font-size: 1.3em;
+.forecast-weather div.forecast-weather-icon {
+    padding-bottom: 10px;
+    font-size: 1.4em;
 }
 
-.forecast-weather > .temp-range {
+.forecast-weather div.temp-range {
     font-size: 1em;
+}
+
+.forecast-weather span.low {
+    color: #777;
 }
 
 
