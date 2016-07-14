@@ -67,7 +67,7 @@ View.prototype = function () {
     }
 
     function _renderCityView (cityView, viewData) {
-        $(cityView).append(this.cityTemplate(viewData));
+        $(cityView).children('div.city-view').html(this.cityTemplate(viewData));
     }
 
     function _addCity (event) {

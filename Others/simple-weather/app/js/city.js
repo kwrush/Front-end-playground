@@ -3,24 +3,28 @@
  */
 function City (query) {
     this.query = query || '';
-    this.data = this.getData();
+    this.data = null;
 }
 
 City.prototype = function () {
     var day = 6;
     var night = 19;
 
-    var _data = null;
-
     // Return true if the it's a valid city object
     // TODO: more specific check for query
     function _validate () {
-        return this.query.length > 0 && this.isDataValid(_data);
+        return  this.isQueryValid(this.query) && this.isDataValid(this.data);
     }
 
     // Check if the given data is valid
     function _isDataValid (data) {
         return data && data.response && data.forecast && data.current_observation;
+    }
+
+    // Check if the given query is validate
+    // TODO: regexp
+    function _isQueryValid (query) {
+        return typeof query === 'string' && this.query.length > 0;
     }
 
     // Return the json url of this city
@@ -48,12 +52,17 @@ City.prototype = function () {
             }).fail(function (error) {
                 reject(error);
             });
+        }).then(function (response) {
+            self.setData(response);
+            return self;
+        }).catch(function (error) {
+            return Promise.reject(error);
         });
     }
 
     // Return an array of time ['hh', 'mm', 'ss']
     function _getLocalTime () {
-        var rfc = _data.current_observation.local_time_rfc822;
+        var rfc = this.data.current_observation.local_time_rfc822;
         var time = rfc.match(/\d+\:\d+\:\d+/g);
         return time[0].split(':');
     }
@@ -64,18 +73,16 @@ City.prototype = function () {
         return hours > day && hours < night;
     }
 
-    // Set _data
+    // Set data
     function _setData (data) {
         if (this.isDataValid(data)) {
-            data = _roundTemp(data);
-            this.data = _data = data;
+            this.data = _roundTemp(data);
         }
     }
 
-    // Return _data
+    // Return data
     function _getData () {
-        this.data = _data;
-        return _data;
+        return this.data;
     }
 
     // Round temperature value
@@ -90,6 +97,7 @@ City.prototype = function () {
         fetch: _fetch,
         validate: _validate,
         isDataValid: _isDataValid,
+        isQueryValid: _isQueryValid,
         getLocalTime: _getLocalTime,
         isDay: _isDay,
         setData: _setData,

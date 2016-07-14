@@ -32,6 +32,7 @@ var constants = (function (key) {
                    '<button class="btn delete-btn">'               +
                    '&#10060;'                                      +
                    '</button>'                                     +
+                   '<div class="city-view"></div>'                 +
                    '</div>';
         },
 

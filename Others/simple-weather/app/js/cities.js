@@ -3,22 +3,22 @@
  */
 function Cities (dbName) {
     this.dbName = dbName || 'simple-weather';
+    this.cities = [];
 }
 
 Cities.prototype = function () {
-    var _cities = [];
 
     function _init () {
-        _load.call(this);
-        if (_cities.length > 0) {
-            $(document).trigger('citiesLoaded', [_cities]);
-        } else {
-            this.save();
-        }
+        var self = this;
+        _load.call(this).then(function () {
+            $(document).trigger('citiesLoaded', [self.cities]);
+        }).catch(function (error) {
+            return Promise.reject(error);
+        });
     }
 
     function _getCities () {
-        return _cities;
+        return this.cities;
     }
 
     function _isValidCity (city) {
@@ -27,7 +27,7 @@ Cities.prototype = function () {
 
     function _isDuplicate (city) {
         var duplicate = false;
-        _cities.forEach(function (aCity) {
+        this.cities.forEach(function (aCity) {
             if (aCity.query === city.query) {
                 duplicate = true;
                 return;
@@ -38,7 +38,7 @@ Cities.prototype = function () {
 
     function _addCity (city) {
         if (this.isValidCity(city)) {
-            _cities.push(city);
+            this.cities.push(city);
             this.save();
             $(document).trigger('cityAdded', city);
         } else {
@@ -47,28 +47,28 @@ Cities.prototype = function () {
     }
 
     function _getCity (index) {
-        return _cities[index];
+        return this.cities[index];
     }
 
     function _getCityByQuery (query) {
-        for (var i = 0; i < _cities.length; i++) {
-            if (_cities[i].query === query) {
+        for (var i = 0; i < this.cities.length; i++) {
+            if (this.cities[i].query === query) {
                 return this.getCity(i);
             }
         }
     }
 
     function _removeCity (index) {
-        var city =  _cities.splice(index, 1);
+        var city =  this.cities.splice(index, 1);
         if (city.length) {
             this.save();
-            $(document).trigger('cityRemoved', [city]);
+            $(document).trigger('cityRemoved', city);
         }
     }
 
     function _removeCityByQuery (query) {
-        for (var i = 0; i < _cities.length; i++) {
-            if (_cities[i].query === query) {
+        for (var i = 0; i < this.cities.length; i++) {
+            if (this.cities[i].query === query) {
                 return this.removeCity(i);
             }
         }
@@ -76,43 +76,80 @@ Cities.prototype = function () {
 
     // local storage
     function _save () {
-        localStorage.setItem(this.dbName, JSON.stringify(_cities));
+        localStorage.setItem(this.dbName, JSON.stringify(this.cities));
     }
 
     // load data from localStorage
     // TODO: could verify data more completely
     function _load () {
-        var raw = localStorage.getItem(this.dbName);
-        if (raw) {
-            var data = JSON.parse(raw);
-            if (data && typeof data === 'object') {
-                data.forEach(function (elem, index) {
-                    if (elem.query && elem.data) {
-                        var city = new City (elem.query);
-                        city.setData(elem.data);
-                        _cities[index] = city;
-                    }
-                });
+        var self = this;
+
+        return new Promise(function (resolve, reject) {
+            var raw = localStorage.getItem(self.dbName);
+            if (!raw) {
+                return Promise.reject(Error('No such data field.'));
             }
-        }
+            resolve(raw);
+        }).then(function (rawData) {
+            var data = JSON.parse(rawData);
+            if (!data || typeof data !== 'object') {
+                return Promise.reject(Error('Invalid data type.'));
+            }
+            return data;
+        }).then(function (data) {
+            return Promise.all(data.map(function (elem, index) {
+                if (!elem.query || !elem.data) {
+                    return Promise.reject(Error('invalid data values.'));
+                }
+                var city = new City(elem.query);
+                city.setData(elem.data);
+                self.cities[index] = city;
+            }));
+        }).catch(function (error) {
+            return Promise.reject(error);
+        });
     }
 
-    function _fetchAt (index) {
-        var city = this.getCity(index);
-        if (city) {
-            return city.fetch();
-        } else {
-            throw Error('Index out of boundary.');
-        }
+    function _newCity (query) {
+        var self = this;
+        var city = new City(query);
+        return city.fetch().then(function (city) {
+            self.addCity(city);
+        }).catch(function (error) {
+            return Promise.reject(error);
+        });
     }
 
-    function _fetchAll () {
-        return _cities.reduce(function (sequence, city) {
-            return sequence.then(function () {
-                return city.fetch();
+    function _fetchFor (identity) {
+        var city = null;
+        if (typeof identity === 'number') {
+            city = this.getCity(identity);
+        } else if (typeof identity === 'string') {
+            city = this.getCityByQuery(identity);
+        }
+        return new Promise(function (resolve, reject) {
+            if (!city) {
+                reject(error);
+            }
+            resolve(city);
+        }).then(function (city) {
+            return city.fetch().then(function (city) {
+                $(document).trigger('cityUpdated', [city]);
+            }).catch(function (error) {
+                return Promise.reject(error);
             });
-        }, Promise.resolve());
+        }).catch(function (error) {
+            return Promise.reject(error);
+        });
     }
+
+    // function _fetchAll () {
+    //     return _cities.reduce(function (sequence, city) {
+    //         return sequence.then(function () {
+    //             return city.fetch();
+    //         });
+    //     }, Promise.resolve());
+    // }
 
     return {
         init: _init,
@@ -125,7 +162,7 @@ Cities.prototype = function () {
         save: _save,
         isDuplicate: _isDuplicate,
         isValidCity: _isValidCity,
-        fetchAt: _fetchAt,
-        fetchAll: _fetchAll
+        fetchFor: _fetchFor,
+        newCity: _newCity
     };
 }();
