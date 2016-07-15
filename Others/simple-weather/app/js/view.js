@@ -38,10 +38,10 @@ View.prototype = function () {
 
     function _addTrailingEmptyCityView (query) {
         this.addCityView(query);
-        
+
         var $newView = this.getCityView(query);
 
-        $newView.children('.refresh-btn').css('color', '#333');
+        $newView.last().children('.refresh-btn').css('color', '#333');
         this.startRefreshing($newView);
     }
 
@@ -66,7 +66,7 @@ View.prototype = function () {
     }
 
     function _startRefreshing (cityView) {
-        $(cityView).addClass('refreshing');
+        $(cityView).last().addClass('refreshing');
     }
 
     function _stopRefreshing (cityView) {
@@ -76,9 +76,9 @@ View.prototype = function () {
     // filling data in city view
     function _renderCityView (cityView, viewData) {
         var color = constants.colors();
-        $(cityView).children('button.refresh-btn').css('color', '#fff');
+        $(cityView).last().children('button.refresh-btn').css('color', '#fff');
 
-        $(cityView).children('div.city-view')
+        $(cityView).last().children('div.city-view')
                    .html(this.cityTemplate(viewData))
                    .css('color', color)
                    .children('.color-board')
