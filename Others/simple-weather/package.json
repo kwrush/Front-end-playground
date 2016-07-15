@@ -1,5 +1,6 @@
 {
-  "name": "simple-weather",
+  "name": "colorful-weather",
+  "description": "a simple weather web app with colorful design",
   "version": "0.0.1",
   "main": "index.html",
   "private": "true",

@@ -1,4 +1,6 @@
 var constants = (function (key) {
+    var randomColorIndex = {};
+
     return {
         requireTemplate: function (templateName, templateFileName) {
             var template = $(templateName);
@@ -65,6 +67,24 @@ var constants = (function (key) {
                 'flurries':       day ? 'wi-day-snow-wind' : 'wi-night-alt-snow-wind',
                 'partlycloudy':   day ? 'wi-day-cloudy' : 'wi-night-alt-cloudy',
             };
+        },
+
+        colors: function () {
+            var colorSets = [
+                '#EF5350', '#C62828',
+                '#AB47BC', '#6A1B9A',
+                '#7E57C2', '#BA68C8',
+                '#5C6BC0', '#283593',
+                '#304FFE', '#2962FF',
+                '#F50057', '#0091EA',
+                '#0097A7', '#00796B',
+                '#7C4DFF', '#EF6C00',
+                '#E65100', '#F4511E',
+                '#A1887F', '#607D8B',
+                '#0097A7', '#FF5252',
+                '#AD1457', '#C51162'
+            ];
+            return colorSets[Math.floor(Math.random() * colorSets.length)];
         }
     };
 })(apiKey);

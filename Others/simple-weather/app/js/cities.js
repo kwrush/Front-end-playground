@@ -143,14 +143,6 @@ Cities.prototype = function () {
         });
     }
 
-    // function _fetchAll () {
-    //     return _cities.reduce(function (sequence, city) {
-    //         return sequence.then(function () {
-    //             return city.fetch();
-    //         });
-    //     }, Promise.resolve());
-    // }
-
     return {
         init: _init,
         getCities: _getCities,

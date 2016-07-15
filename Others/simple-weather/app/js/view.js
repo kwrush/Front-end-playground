@@ -45,15 +45,18 @@ View.prototype = function () {
         $('.city').last().remove();
     }
 
+    // Append the specified city view
     function _addCityView (query) {
         query = query.trim();
         this.$content.append(constants.cityView(query));
     }
 
+    // Remove the given city view
     function _removeCityView (cityView) {
         $(cityView).remove();
     }
 
+    // Return the specified city view elements
     function _getCityView (query) {
         return $('.city[data-query="' + query + '"]');
     }
@@ -66,15 +69,26 @@ View.prototype = function () {
         $(cityView).removeClass('refreshing');
     }
 
+    // filling data in city view
     function _renderCityView (cityView, viewData) {
-        $(cityView).children('div.city-view').html(this.cityTemplate(viewData));
+        var color = constants.colors();
+        $(cityView).children('div.city-view')
+            .html(this.cityTemplate(viewData))
+            .css({
+                'color': color
+            })
+            .children('.color-board').css({
+                'background': color
+            });
     }
 
+    // Callback fires when we click on one search result
     function _addCity (event) {
         var $target = $(event.target || window.event.target);
         $(document).trigger('newCity', [$target.attr('data-query')]);
     }
 
+    // Callback fires when we click on refresh button
     function _updateCity (event) {
         var $target = $(event.target || window.event.target);
         var $cityView = $target.closest('div.city');
@@ -83,10 +97,12 @@ View.prototype = function () {
         }
     }
 
+    // Return true is it's still refreshing
     function _isRefreshing (cityView) {
         return $(cityView).hasClass('refreshing');
     }
 
+    // Callback fires when we click on delete button
     function _deleteCity (event) {
         var $target = $(event.target || window.event.target);
         var $cityView = $target.closest('div.city');

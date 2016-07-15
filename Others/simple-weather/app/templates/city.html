@@ -1,9 +1,9 @@
 <script type="text/template" id="city-template">
-    <header class="city-name inner">
+    <header class="city-name inner color-board">
         <h3><%- data.current_observation.display_location.city %></h3>
         <p><%- data.forecast.simpleforecast.forecastday[0].date.weekday_short + ', ' + data.forecast.simpleforecast.forecastday[0].date.monthname + ' ' + data.forecast.simpleforecast.forecastday[0].date.day %></p>
     </header>
-    <section class="weather inner">
+    <section class="weather inner color-board">
         <div class="current">
             <i class="wi <%= icon %>"></i>
             <span class="temp">

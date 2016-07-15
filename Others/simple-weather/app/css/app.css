@@ -1,3 +1,6 @@
+/* font */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);
+
 /* General setup */
 *,
 *:before,
@@ -7,7 +10,7 @@
 
 body {
     margin: 0 auto;
-    font-family: Helvetica, "Arial", sans-serif;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-size: 14px;
 }
 
@@ -61,8 +64,9 @@ ul, ol {
     padding: 10px 20px;
     width: 100%;
     height: 48px;
-    background: #333;
+    background: #0288D1;
     z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 /* Search entry */
@@ -79,8 +83,7 @@ ul, ol {
     width: 28px;
     height: 28px;
     display: inline-block;
-    word-spacing: 0;
-    z-index: 999;
+    letter-spacing: 0;
 }
 
 #search .search-icon:before {
@@ -91,20 +94,25 @@ ul, ol {
     height: 100%;
     line-height: 28px;
     content: "\1F50E";
-    color: #333;
+    color: #0288D1;
     text-align: center;
     font-size: 1.15em;
+    z-index: 9999;
 }
 
 #city-entry {
     position: relative;
-    padding: 0 28px 0 10px;
-    width: 220px;
+    padding: 0 32px 0 12px;
+    width: 240px;
     height: 100%;
     outline: none;
     border: none;
     border-radius: 3px;
     font-size: 14px;
+    transition: background .2s ease;
+    background: #fff;
+    appearance: textfield;
+    vertical-align: bottom;
 }
 
 #search-result {
@@ -114,16 +122,29 @@ ul, ol {
     width: 220px;
     max-height: 300px;
     background: #fff;
-    border: 1px solid #333;
-    border-radius: 3px;
     font-size: inherit;
     overflow: auto;
-    display: done;
+    display: none;
 }
 
-#search-result li.result-item {
+li.result-item {
     margin: 0;
-    padding: 5px 10px;
+    padding: 6px 10px;
+    border-color: #1C1C1C;
+    border-left: 1px solid;
+    border-right: 1px solid;
+}
+
+li.result-item:first-child {
+    border-top: 1px solid #333;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+li.result-item:last-child {
+    border-bottom: 1px solid #333;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 li.result-item:hover {
@@ -139,8 +160,8 @@ li.result-item:hover {
 
 .city {
     position: relative;
-    margin: 0 auto 48px auto;
-    padding: 12px;
+    margin: 0 auto 30px auto;
+    padding: 0;
     width: 380px;
     min-height: 280px;
     text-align: center;
@@ -167,6 +188,7 @@ li.result-item:hover {
     background: transparent;
     font-size: 1.6em;
     cursor: pointer;
+    color: #fff;
 }
 
 .refresh-btn {
@@ -188,20 +210,30 @@ li.result-item:hover {
     animation: spin 1s linear infinite;
 }
 
-.inner {
-    margin-bottom: 22px;
-    padding: 0;
-    width: 100%;
-    display: inline-block;
+.city-view {
+    color: #0288D1;
 }
 
-.inner:last-child {
-    margin-bottom: 8px;
+.inner {
+    margin: 0;
+    padding: 14px;
+    width: 100%;
+    display: inline-block;
+    vertical-align: bottom;
 }
+
+.color-board {
+    color: #fff;
+}
+
+/*.inner:last-child {
+    padding-bottom: 18px;
+}*/
 
 /* header */
 .city-name h3 {
     font-size: 1.38em;
+    font-weight: 500;
     text-transform: uppercase;
 }
 
@@ -212,16 +244,22 @@ li.result-item:hover {
 
 .city-name h3,
 .city-name p {
-    margin: 6px;
+    margin: 0;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+}
+
+section.weather.inner {
+    padding: 7px 7px 21px;
 }
 
 .current {
-    padding-bottom: 12px;
+    padding-bottom: 7px;
     font-size: 2.46em;
 }
 
 .condition {
-    padding-bottom: 12px;
+    line-height: 1.5;
     font-size: 1.15em;
 }
 
@@ -232,18 +270,18 @@ li.result-item:hover {
 
 /* Forecast of 3 days */
 .forecast-day > h4 {
-    margin: 0 0 12px 0;
     font-size: 1em;
     text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
-.forecast-weather {
-    margin-bottom: 4px;
-}
-
-.forecast-weather div.forecast-weather-icon {
-    padding-bottom: 10px;
+.forecast-day div.forecast-weather-icon {
     font-size: 1.4em;
+}
+
+.forecast-day h4,
+.forecast-day div.forecast-weather-icon {
+    margin: 0 0 10px;
 }
 
 .forecast-weather div.temp-range {
@@ -251,7 +289,7 @@ li.result-item:hover {
 }
 
 .forecast-weather span.low {
-    color: #777;
+    color: #787878;
 }
 
 
