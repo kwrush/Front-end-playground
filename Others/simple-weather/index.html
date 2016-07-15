@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Simple weather</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
     <link rel="stylesheet" href="app/css/app.css">
 </head>
@@ -13,21 +14,12 @@
         <header id="heading">
             <form id="search">
                 <span class="search-icon"></span>
-                <input type="text" value="" placeholder="e.g. New York" id="city-entry">
+                <input type="text" value="" placeholder="e.g. NEW YORK" id="city-entry">
             </form>
-            <ul id="search-result">
-            <script type="text/template" class="template" id="results-template">
-                <%_.each(RESULTS, function (city) {%>
-                <li class="result-item" data-query="<%= city.l %>">
-                    <%- city.name %>
-                </li>
-                <%});%>
-            </script>
-            </ul>
+            <ul id="search-result"></ul>
         </header>
         <section class="main">
             <div class="flex-container content">
-
             </div>
         </section>
     </div>
@@ -35,6 +27,7 @@
     <script src="bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
     <script src="app/js/apiKey.js" charset="utf-8"></script>
     <script src="app/js/constants.js" charset="utf-8"></script>
+    <script src="app/js/city.js" charset="utf-8"></script>
     <script src="app/js/cities.js" charset="utf-8"></script>
     <script src="app/js/view.js" charset="utf-8"></script>
     <script src="app/js/controller.js" charset="utf-8"></script>

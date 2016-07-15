@@ -1,3 +1,6 @@
+/* font */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);
+
 /* General setup */
 *,
 *:before,
@@ -6,7 +9,8 @@
 }
 
 body {
-    font-family: Helvetica, "Arial", sans-serif;
+    margin: 0 auto;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-size: 14px;
 }
 
@@ -26,8 +30,20 @@ ul, ol {
     clear:both;
 }
 
+.col-1-4 {
+    float: left;
+    width: 25%;
+    display: block;
+}
+
 .hide {
     display: none;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
 }
 
 .flex-container {
@@ -48,7 +64,9 @@ ul, ol {
     padding: 10px 20px;
     width: 100%;
     height: 48px;
-    background: #333;
+    background: #0288D1;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 /* Search entry */
@@ -65,8 +83,7 @@ ul, ol {
     width: 28px;
     height: 28px;
     display: inline-block;
-    word-spacing: 0;
-    z-index: 999;
+    letter-spacing: 0;
 }
 
 #search .search-icon:before {
@@ -77,40 +94,56 @@ ul, ol {
     height: 100%;
     line-height: 28px;
     content: "\1F50E";
-    color: #333;
+    color: #0288D1;
     text-align: center;
     font-size: 1.15em;
+    z-index: 9999;
 }
 
 #city-entry {
     position: relative;
-    padding: 0 28px 0 10px;
-    width: 220px;
+    padding: 0 32px 0 12px;
+    width: 230px;
     height: 100%;
     outline: none;
     border: none;
     border-radius: 3px;
     font-size: 14px;
+    transition: background .2s ease;
+    background: #fff;
+    appearance: textfield;
+    vertical-align: bottom;
 }
 
 #search-result {
     position: absolute;
     top: 39px;
     right: 20px;
-    width: 220px;
+    width: 230px;
     max-height: 300px;
     background: #fff;
-    border: 1px solid #333;
-    border-radius: 3px;
     font-size: inherit;
     overflow: auto;
-    display: done;
+    display: none;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-#search-result li.result-item {
+li.result-item {
     margin: 0;
-    padding: 5px 10px;
+    padding: 6px 10px;
 }
+
+/*li.result-item:first-child {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+li.result-item:last-child {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}*/
 
 li.result-item:hover {
     background: rgba(0, 0, 0, .2);
@@ -118,3 +151,148 @@ li.result-item:hover {
 }
 
 /* Main */
+.main {
+    margin: 0 auto;
+    padding: 60px 12px 18px;
+}
+
+.city {
+    position: relative;
+    margin: 0 auto 30px auto;
+    padding: 0;
+    width: 380px;
+    min-height: 280px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    align-items: flex-start;
+}
+
+.city:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.city:last-child {
+    margin-bottom: auto;
+}
+
+.btn {
+    position: absolute;
+    top: 0;
+    width: 34px;
+    height: 34px;
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: 1.6em;
+    cursor: pointer;
+    color: #fff;
+}
+
+.refresh-btn {
+    right: 0;
+}
+
+.delete-btn {
+    left: 0;
+    font-size: 1em;
+    transform: scale(0);
+    transition: transform .2s ease-out;
+}
+
+.city:hover .delete-btn {
+    transform: scale(1);
+}
+
+.refreshing > .refresh-btn {
+    animation: spin 1s linear infinite;
+}
+
+.city-view {
+    color: #0288D1;
+}
+
+.inner {
+    margin: 0;
+    padding: 14px;
+    width: 100%;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.color-board {
+    color: #fff;
+}
+
+/*.inner:last-child {
+    padding-bottom: 18px;
+}*/
+
+/* header */
+.city-name h3 {
+    font-size: 1.38em;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.city-name p {
+    font-size: 1.04em;
+    text-transform: uppercase;
+}
+
+.city-name h3,
+.city-name p {
+    margin: 0;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+}
+
+section.weather.inner {
+    padding: 7px 7px 21px;
+}
+
+.current {
+    padding-bottom: 7px;
+    font-size: 2.46em;
+}
+
+.condition {
+    line-height: 1.5;
+    font-size: 1.15em;
+}
+
+.condition > span {
+    padding: 0 8px;
+    display: inline-block;
+}
+
+/* Forecast of 3 days */
+.forecast-day > h4 {
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.forecast-day div.forecast-weather-icon {
+    font-size: 1.4em;
+}
+
+.forecast-day h4,
+.forecast-day div.forecast-weather-icon {
+    margin: 0 0 10px;
+}
+
+.forecast-weather div.temp-range {
+    font-size: 1em;
+}
+
+.forecast-weather span.low {
+    color: #787878;
+}
+
+
+/* Animation */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

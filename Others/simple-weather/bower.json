@@ -1,12 +1,12 @@
 {
-  "name": "simple-weather",
-  "description": "",
+  "name": "colorful-weather",
+  "description": "a simple weather web app with colorful design",
   "main": "index.html",
   "authors": [
     "strivk <winhosa0905@gmail.com>"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/strivk/Front-end-playground",
+  "homepage": "https://github.com/strivk/Front-end-playground/Others/",
   "private": true,
   "ignore": [
     "**/.*",
