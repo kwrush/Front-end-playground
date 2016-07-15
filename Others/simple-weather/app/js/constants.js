@@ -82,7 +82,8 @@ var constants = (function (key) {
                 '#E65100', '#F4511E',
                 '#A1887F', '#607D8B',
                 '#0097A7', '#FF5252',
-                '#AD1457', '#C51162'
+                '#AD1457', '#C51162',
+                '#E53935', '#43A047'
             ];
             return colorSets[Math.floor(Math.random() * colorSets.length)];
         }

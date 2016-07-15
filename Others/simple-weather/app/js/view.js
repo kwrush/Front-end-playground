@@ -38,7 +38,11 @@ View.prototype = function () {
 
     function _addTrailingEmptyCityView (query) {
         this.addCityView(query);
-        this.startRefreshing(this.getCityView(query));
+        
+        var $newView = this.getCityView(query);
+
+        $newView.children('.refresh-btn').css('color', '#333');
+        this.startRefreshing($newView);
     }
 
     function _removeTrailingCityView () {
@@ -72,14 +76,13 @@ View.prototype = function () {
     // filling data in city view
     function _renderCityView (cityView, viewData) {
         var color = constants.colors();
+        $(cityView).children('button.refresh-btn').css('color', '#fff');
+
         $(cityView).children('div.city-view')
-            .html(this.cityTemplate(viewData))
-            .css({
-                'color': color
-            })
-            .children('.color-board').css({
-                'background': color
-            });
+                   .html(this.cityTemplate(viewData))
+                   .css('color', color)
+                   .children('.color-board')
+                   .css('background', color);
     }
 
     // Callback fires when we click on one search result
