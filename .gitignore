@@ -47,6 +47,6 @@ Temporary Items
 **/node_modules/
 **/bower_components/
 
-#api key
-apiKey.js
-apiKey.txt
+# api key
+**/apiKey.js
+**/apiKey.txt
