@@ -1,0 +1,15 @@
+{
+  "name": "gameoflife",
+  "version": "0.0.0",
+  "description": "game of lifes",
+  "main": "index.html",
+  "scripts": {
+	"start": "http-server -a localhost -p 8080 -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+	"http-server": "*",
+  }
+}
