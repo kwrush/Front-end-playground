@@ -26,7 +26,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -43,5 +44,6 @@ Temporary Items
 .apdisk
 
 # npm and bower folders
+**/node_modules/
 **/npm_modules/
 **/bower_components/
