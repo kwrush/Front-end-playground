@@ -44,6 +44,10 @@ Temporary Items
 .apdisk
 
 # npm and bower folders
-**/node_modules/
 **/npm_modules/
+**/node_modules/
 **/bower_components/
+
+# api key
+**/apiKey.js
+**/apiKey.txt

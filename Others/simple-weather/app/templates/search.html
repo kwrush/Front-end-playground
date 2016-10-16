@@ -1,0 +1,7 @@
+<script type="text/template" id="results-template">
+    <%_.each(RESULTS, function (city) {%>
+    <li class="result-item" data-query="<%= city.l %>">
+        <%- city.name %>
+    </li>
+    <%});%>
+</script>

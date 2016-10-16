@@ -1,0 +1,310 @@
+/* General style */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.row:before,
+.row:after {
+    contant: "";
+    display: table;
+}
+
+.row:after {
+    clear: both;
+}
+
+.col {
+    float: left;
+}
+
+.container {
+    margin: 40px auto;
+    padding: 20px 15px 15px;
+    text-align: center;
+    background: #DDD;
+    border-radius: 4px;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, .4);
+}
+
+#footer {
+    margin: 0 auto;
+    width: 480px;
+    text-align: center;
+}
+
+/* Select */
+#level {
+    position: relative;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+}
+
+/* Header */
+div.header {
+    width: 100%;
+    height: 40px;
+}
+
+div.counter,
+div.reset,
+div.timer {
+    width: 33.33333333%;
+    height: 40px;
+    float: left;
+}
+
+div.counter,
+div.timer {
+    text-align: center;
+}
+
+div.counter p,
+div.timer p {
+    margin: 0;
+    width: 60%;
+    height: 38px;
+    line-height: 38px;
+    font-size: 1.3em;
+    font-weight: bold;
+    display: inline-block;
+    background: #535953;
+    color: #FCFAF2;
+    border-bottom: 2px solid rgba(0, 0, 0, .3);
+    border-radius: 3px;
+}
+
+div.reset {
+    position: relative;
+}
+
+#reset-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
+    border: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+    outline: none;
+    cursor: pointer;
+}
+
+#reset-btn.won:after,
+#reset-btn.running:after,
+#reset-btn.over:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 2px;
+    width: 100%;
+    height: 100%;
+    color: #52433D;
+    font-size: 1.5em;
+}
+
+#reset-btn.won {
+    background: #A8D8B9;
+}
+
+#reset-btn.won:after {
+    content: "\1F603";
+}
+
+#reset-btn.over {
+    background: #E83015;
+}
+
+#reset-btn.over:after {
+    content: "\1F623";
+}
+
+#reset-btn.running {
+    background: #FAD689;
+}
+
+#reset-btn.running:after {
+    content: "\1F610";
+}
+
+#reset-btn:active {
+    margin-top: 2px;
+    border: none;
+}
+
+/* Game container */
+div.game-container {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+
+div.game-container.block:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 9999;
+}
+
+/* Tiles styles */
+.row-10 {
+    width: 100%;
+    height: 37px;
+    margin-bottom: 4px;
+}
+
+.tile {
+    position: relative;
+    margin: 0 2px;
+    width: 35px;
+    height: 35px;
+    background: #BDC0BA;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    transition: background .2s ease-out;
+    box-sizing: content-box;
+    cursor: pointer;
+}
+
+.tile:active,
+.tile.cleared {
+    transform: translateY(2px);
+    border: none;
+}
+
+.tile.cleared {
+    cursor: default;
+}
+
+.tile-0:after,
+.tile-1:after,
+.tile-2:after,
+.tile-3:after,
+.tile-4:after,
+.tile-5:after,
+.tile-6:after,
+.tile-7:after,
+.tile-8:after,
+.tile-flag:after,
+.tile-bomb:after,
+.tile-wrong:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #52433D;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.tile-0 {
+    background: #A8D8B9;
+}
+
+.tile-1 {
+    background: #FAD689;
+}
+
+.tile-1:after {
+    content: "1";
+}
+
+.tile-2 {
+    background: #F6C555;
+}
+
+.tile-2:after {
+    content: "2";
+}
+
+.tile-3 {
+    background: #F7C242;
+}
+
+.tile-3:after {
+    content: "3";
+}
+
+.tile-4 {
+    background: #FFB11B;
+}
+
+.tile-4:after {
+    content: "4";
+}
+
+.tile-5 {
+    background: #FC9F4D;
+}
+
+.tile-5:after {
+    content: "5";
+}
+
+.tile-6 {
+    background: #ED784A;
+}
+
+.tile-6:after {
+    content: "6";
+}
+
+.tile-7 {
+    background: #F05E1C;
+}
+
+.tile-7:after {
+    content: "7";
+}
+
+.tile-8 {
+    background: #E83015;
+}
+
+.tile-8:after {
+    content: "8";
+}
+
+.tile-flag {
+    background: #BDC0BA;
+}
+
+.tile-flag:after {
+    content: "\26F3";
+    font-size: 1.5em;
+    color: #E83015;
+}
+
+.tile-bomb {
+    background: #E83015;
+}
+
+.tile-bomb:after {
+    margin-top: 4px;
+    content: "\1F4A3";
+    font-size: 1.2em;
+    color: #080808;
+}
+
+.tile-wrong {
+    background: #F05E1C;
+}
+
+.tile-wrong:after {
+    margin-top: 1px;
+    content: "\274C";
+    font-size: 1.2em;
+    color: #080808;
+}
