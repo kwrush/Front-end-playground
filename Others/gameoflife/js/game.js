@@ -25,7 +25,7 @@ class GameCore {
 
 // private functions
 function randomStatus () {
-    return Math.round(Math.random());
+    return !!Math.round(Math.random());
 }
 
 export default GameCore;
