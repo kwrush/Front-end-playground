@@ -1,12 +1,13 @@
 import GameUI from './ui.js';
 import GameCore from './game.js';
 
-let core = new GameCore();
+let core = new GameCore({
+    row: 50,
+    col: 70
+});
 let ui = new GameUI(
     {
-        game: core,
-        width: 480,
-        height: 640
+        game: core
     }
 );
 
