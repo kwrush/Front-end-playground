@@ -91,6 +91,7 @@ class GameUI {
     }
 
     _play(evt) {
+        this._stop();
         this.playTimer = setInterval(() => {
             this.game.populate();
             this._drawCells();

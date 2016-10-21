@@ -3,7 +3,7 @@ import GameCore from './game.js';
 
 let core = new GameCore({
     row: 50,
-    col: 60
+    col: 70
 });
 let ui = new GameUI(
     {
