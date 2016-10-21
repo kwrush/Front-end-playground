@@ -6,6 +6,8 @@ const CELL_SIZE    = 12,       // tile size, in 'px'
 class GameUI {
     constructor(options) {
         this.game = options.game;
+        this.speed = options.speed || 100;
+
         this.rowNum = this.game.row || 40;
         this.colNum = this.game.col || 60;
 
@@ -22,21 +24,16 @@ class GameUI {
         this.canvas.height = this.rowNum * CELL_SIZE + 1;
     }
 
-    // init game setup, such as initial pattern
-    initSetup() {
-        this.game.randomPattern();
-        this._drawCells();
-    }
-
     // listen to DOM events
     listen () {
         this.randBtn  = document.getElementById('rand-pattern-btn');
         this.startBtn = document.getElementById('start-btn');
         this.stopBtn  = document.getElementById('stop-btn');
 
-        this.canvas.addEventListener('click', evt => this._makeCellAlive(evt), false);
+        this.canvas.addEventListener('click', evt => this._handleClick(evt), false);
         this.randBtn.addEventListener('click', evt => this._prepare(evt), false);
         this.startBtn.addEventListener('click', evt => this._play(evt), false);
+        this.stopBtn.addEventListener('click', evt => this._stop(evt), false);
     }
 
     // Make grid
@@ -61,7 +58,8 @@ class GameUI {
         this.ctx.closePath();
     }
 
-    _makeCellAlive(evt) {
+    // Click in cell rectangle to toggle cell's status
+    _handleClick(evt) {
         evt = evt || window.event;
 
         evt.preventDefault();
@@ -77,14 +75,14 @@ class GameUI {
         let offsetY = pageY - recDim.top;
 
         // Get row and column number of the tile
-        let x = Math.floor(offsetX / CELL_SIZE);
-        let y = Math.floor(offsetY / CELL_SIZE);
+        let c = Math.floor(offsetX / CELL_SIZE);
+        let r = Math.floor(offsetY / CELL_SIZE);
 
-        let tile = this.game.cells[y * this.colNum + x];
+        let tile = this.game.getCellAt(r, c);
         tile.alive = !tile.alive;
-        this._fillCell(x, y, tile.alive);
-
-        console.log('x:' + x + '; y:' + y + '; alive: ' + tile.alive + '; index:' + (y * this.colNum + x));
+        this._fillCell(c, r, tile.alive);
+        // debug
+        console.log('r:' + r + '; c:' + c + '; alive: ' + tile.alive + '; index:' + (r * this.colNum + c));
     }
 
     _prepare(evt) {
@@ -93,7 +91,14 @@ class GameUI {
     }
 
     _play(evt) {
-        this.initSetup();
+        this.playTimer = setInterval(() => {
+            this.game.populate();
+            this._drawCells();
+        }, this.speed);
+    }
+
+    _stop(evt) {
+        clearInterval(this.playTimer);
     }
 
     // Fill color in grid cells based on the pattern
@@ -101,9 +106,14 @@ class GameUI {
         this.ctx.strokeStyle = '#333';
         this.ctx.lineWidth = 1;
 
-        for (let i = 0; i < this.game.cells.length; i++) {
-            let tile = this.game.cells[i];
-            this._fillCell(tile.col, tile.row, tile.alive);
+        for (let r = 0; r < this.rowNum; r++) {
+            for (let c = 0; c < this.colNum; c++) {
+                let tile = this.game.getCellAt(r, c);
+
+                // row: top to bottom, col: left to right
+                // so x is col and y is row in canvas
+                this._fillCell(tile.col, tile.row, tile.alive);
+            }
         }
     }
 
