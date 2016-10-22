@@ -5,21 +5,24 @@ class GameCore {
         this.cells = initCells(this.row, this.col);
     }
 
+    // Return a cell object at the row and column
     getCellAt (r, c) {
         return this.cells[r * this.col + c];
     }
 
+    // Give each cell a random living status
     randomPattern () {
         for (let r = 0; r < this.row; r++) {
             for (let c = 0; c < this.col; c++) {
                 let tile = this.getCellAt(r, c);
                 tile.alive = randomStatus();
+                tile.next = tile.alive;
             }
         }
     }
 
+    // Loop throughs all cells to generate next status
     populate () {
-        // Loop throughs all cells to generate next status
         for (let r = 0; r < this.row; r++) {
             for (let c = 0; c < this.col; c++) {
                 let cell = this.getCellAt(r, c);
@@ -28,19 +31,17 @@ class GameCore {
                 }
             }
         }
-
-        // loop again to switch to next status
-        for (let r = 0; r < this.row; r++) {
-            for (let c = 0; c < this.col; c++) {
-                let cell = this.getCellAt(r, c);
-                if (cell) {
-                    cell.alive = cell.next;
-                    cell.next = false;
-                }
-            }
-        }
     }
 
+    // switch cell's living status to next generation
+    nextGen (cell) {
+        if (cell && cell.hasOwnProperty('alive') && cell.hasOwnProperty('next')) {
+            cell.alive = cell.next;
+        }
+        return cell;
+    }
+
+    // generate next living status for the given cell based on game rules
     _nextStatus(cell) {
         let next = false;
         // Count alive neighbors
@@ -60,6 +61,7 @@ class GameCore {
         return next;
     }
 
+    // Return true if the cell at the given row and column is alive
     _isCellAlive(r, c) {
         let cell = this.getCellAt(r, c);
         if (cell) {

@@ -65,7 +65,7 @@ class GameUI {
         evt.preventDefault();
         evt.stopPropagation();
 
-        // Calculate the position of the tile being clicked
+        // Calculate the position of the cell being clicked
         let pageX = evt.pageX;
         let pageY = evt.pageY;
 
@@ -78,28 +78,43 @@ class GameUI {
         let c = Math.floor(offsetX / CELL_SIZE);
         let r = Math.floor(offsetY / CELL_SIZE);
 
-        let tile = this.game.getCellAt(r, c);
-        tile.alive = !tile.alive;
-        this._fillCell(c, r, tile.alive);
+        let cell = this.game.getCellAt(r, c);
+        cell.alive = !cell.alive;
+        this._fillCell(c, r, cell.alive);
         // debug
-        console.log('r:' + r + '; c:' + c + '; alive: ' + tile.alive + '; index:' + (r * this.colNum + c));
+        console.log('r:' + r + '; c:' + c + '; alive: ' + cell.alive + '; index:' + (r * this.colNum + c));
     }
 
+    // random pattern button callback
     _prepare(evt) {
         this.game.randomPattern();
         this._drawCells();
     }
 
+    // stop button callback
+    _stop(evt) {
+        clearInterval(this.playTimer);
+    }
+
+    // start button callback
     _play(evt) {
         this._stop();
         this.playTimer = setInterval(() => {
+            // populate next generation
             this.game.populate();
-            this._drawCells();
+            this._transition();
         }, this.speed);
     }
 
-    _stop(evt) {
-        clearInterval(this.playTimer);
+    // Show next generation of cells
+    _transition () {
+        for (let r = 0; r < this.rowNum; r++) {
+            for (let c = 0; c < this.colNum; c++) {
+                let cell = this.game.getCellAt(r, c);
+                cell = this.game.nextGen(cell);
+                this._fillCell(c, r, cell.next);
+            }
+        }
     }
 
     // Fill color in grid cells based on the pattern
