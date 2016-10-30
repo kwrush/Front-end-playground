@@ -9,6 +9,7 @@ const KEY_DOWN = 40;
 
 let _gameLoop = null;
 let _moving = false;
+let _score = 0;
 
 export default class {
     constructor(options) {
@@ -29,6 +30,7 @@ export default class {
 
     start() {
         this.stop();
+        _score = 0;
         _gameLoop = setInterval(() => {
             this.run();
         }, this.speed);
@@ -45,12 +47,13 @@ export default class {
             this.stop();
             return;
         }
-        console.log(this.canEat());
+
         if (this.canEat()) {
             this.snake.grow();
+            _score++;
             this.food.makeFood(this.snake, this.view.width, this.view.height);
         }
-        this.view.render(this.snake, this.food);
+        this.view.render(this.snake, this.food, _score);
         _moving = false;
     }
 

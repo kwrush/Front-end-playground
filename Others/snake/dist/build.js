@@ -103,6 +103,7 @@
 	
 	var _gameLoop = null;
 	var _moving = false;
+	var _score = 0;
 	
 	var _class = function () {
 	    function _class(options) {
@@ -132,6 +133,7 @@
 	            var _this2 = this;
 	
 	            this.stop();
+	            _score = 0;
 	            _gameLoop = setInterval(function () {
 	                _this2.run();
 	            }, this.speed);
@@ -150,12 +152,13 @@
 	                this.stop();
 	                return;
 	            }
-	            console.log(this.canEat());
+	
 	            if (this.canEat()) {
 	                this.snake.grow();
+	                _score++;
 	                this.food.makeFood(this.snake, this.view.width, this.view.height);
 	            }
-	            this.view.render(this.snake, this.food);
+	            this.view.render(this.snake, this.food, _score);
 	            _moving = false;
 	        }
 	
@@ -340,7 +343,7 @@
 	        }
 	    }, {
 	        key: 'render',
-	        value: function render(snake, food) {
+	        value: function render(snake, food, score) {
 	            this.ctx.clearRect(0, 0, this.width, this.height);
 	            this.drawBackground();
 	            this.drawSnake(snake);
@@ -440,7 +443,7 @@
 	
 	            // 3 nodes long initially □□
 	            var count = 0;
-	            while (count < 10) {
+	            while (count < 3) {
 	                var node = _makeBodyNode(x - this.size * count, y);
 	                this.addNode(node);
 	                count++;
@@ -476,13 +479,6 @@
 	        value: function nextStep(dir) {
 	            this.snakeX = dir.x;
 	            this.snakeY = dir.y;
-	        }
-	    }, {
-	        key: 'eat',
-	        value: function eat() {
-	            var tail = this.getTail();
-	            var x = tail.x;
-	            var node = _makeBodyNode(x, y);
 	        }
 	
 	        // Append one node to the body

@@ -29,7 +29,7 @@ export default class {
         }, false);
     }
 
-    render(snake, food) {
+    render(snake, food, score) {
         this.ctx.clearRect(0, 0, this.width, this.height);
         this.drawBackground();
         this.drawSnake(snake);

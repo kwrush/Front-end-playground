@@ -27,7 +27,7 @@ export default class {
 
         // 3 nodes long initially □□
         let count = 0;
-        while (count < 10) {
+        while (count < 3) {
             let node = _makeBodyNode(x - this.size * count, y);
             this.addNode(node);
             count++;
@@ -59,13 +59,6 @@ export default class {
     nextStep(dir) {
         this.snakeX = dir.x;
         this.snakeY = dir.y;
-    }
-
-    eat() {
-        let tail = this.getTail();
-        let x = tail.x;
-        let node = _makeBodyNode(x, y);
-
     }
 
     // Append one node to the body
