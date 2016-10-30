@@ -22,6 +22,20 @@ export default class {
         this.canvas.height = this.height;
     }
 
+    listenKeyDown(callback) {
+        document.addEventListener('keydown', (evt) => {
+            evt = evt || window.event;
+            callback(evt.keyCode);
+        }, false);
+    }
+
+    render(snake, food) {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+        this.drawBackground();
+        this.drawSnake(snake);
+        this.drawFood(food);
+    }
+
     // Draw canvas background
     drawBackground() {
         if (!this.canvas || !this.ctx) {
@@ -39,12 +53,19 @@ export default class {
     }
 
     // Draw the snake at the given position(x, y)
-    drawSnake(snake, x, y) {
-        this.ctx.beginPath();
+    drawSnake(snake) {
+        for (let i = 0, len = snake.getLength(); i < len; i++) {
+            let node = snake.nodeAt(i);
+            if (node) {
+                this.ctx.fillStyle = node.color;
+                this.ctx.fillRect(node.x, node.y, snake.size, snake.size);
+            }
+        }
+    }
 
-        
-
-        this.ctx.stroke();
-        this.ctx.closePath();
+    drawFood(food) {
+        //let pos = makeFood(snake, this.width, this.height);
+        this.ctx.fillStyle = food.color;
+        this.ctx.fillRect(food.x, food.y, food.size, food.size);
     }
 }

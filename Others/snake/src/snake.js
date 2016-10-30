@@ -2,86 +2,106 @@ const DEF_SIZE = 10;
 const BODY_COLOR = '#333';
 const HEAD_COLOR = '#0089A7';
 
-let _length = 0;
-
-function Node(data) {
-    this.data = data;
-    this.next = null;
+function _makeBodyNode(nodeX, nodeY) {
+    return {
+        color: BODY_COLOR,
+        x: nodeX,
+        y: nodeY
+    };
 }
 
 export default class {
     constructor(options) {
         options = options || {};
-        this.size = options.size || DEF_SIZE;               // size of each body node
+        this.size = options.size || DEF_SIZE;               // node size
         this.bodyColor = options.bodyColor || BODY_COLOR;   // body color
         this.headColor = options.headColor || HEAD_COLOR;   // head color
-        this.grow();
     }
 
-    // Spontaneously moving
-    move() {
+    init(x, y) {
+        this.body = [];  // head is the last element
+        this.nextStep({
+            x: 1,
+            y: 0
+        });
 
-    }
-
-    // Eat to grow
-    eat() {
-        this.grow();
-    }
-
-    // Add a new node to the head of the body.
-    grow() {
-        let node = new Node(this.makeBodyNode());
-        let currentNode = this.head;
-        // if
-        if (!currentNode) {
-            node.color = this.headColor;
-            this.head = node;
-            _length++;
-
-            return node;
-        }
-
-        while (currentNode.next) {
-            currentNode = currentNode.next;
-        }
-        node.color = this.bodyColor;
-        currentNode.next = node;
-        _length++;
-
-        return node;
-    }
-
-    iterate(callback) {
-        let node = this.head;
-        while (node) {
-            callback(node);
-            node = node.next;
-        }
-    }
-
-    bodyNodeAt(index) {
-        let currNode = this.head;
+        // 3 nodes long initially □□
         let count = 0;
-        if (_length <= 0 || index < 0 || index >= _length) {
-            throw new Error('Non existent body node at the given index.');
-        }
-        while (count <= index) {
-            currNode = currNode.next;
+        while (count < 10) {
+            let node = _makeBodyNode(x - this.size * count, y);
+            this.addNode(node);
             count++;
         }
-
-        return currNode;
     }
 
-    makeBodyNode() {
-        return {
-            nextDir: null,
-            currDir: null,
-            color: null
-        };
+    // Snake moves in the given direction
+    move() {
+        let count = 0;
+
+        while(count < this.getLength()) {
+            let nextNode = this.body[count + 1];
+            let currNode = this.body[count];
+
+            // move current node to the position of the next node,
+            if (nextNode) {
+                currNode.x = nextNode.x;
+                currNode.y = nextNode.y;
+            } else {
+                // move head one step further in the given direction
+                currNode.x = currNode.x + this.snakeX * this.size;
+                currNode.y = currNode.y + this.snakeY * this.size;
+            }
+
+            count++;
+        }
+    }
+
+    nextStep(dir) {
+        this.snakeX = dir.x;
+        this.snakeY = dir.y;
+    }
+
+    eat() {
+        let tail = this.getTail();
+        let x = tail.x;
+        let node = _makeBodyNode(x, y);
+
+    }
+
+    // Append one node to the body
+    addNode(node) {
+        if (!node) {
+            throw new Error('node is undefined.');
+        }
+        // if length is 0, then it's the head
+        if (this.getLength() === 0) {
+            node.color = this.headColor;
+        }
+        this.body.unshift(node);
+        return this;
+    }
+
+    grow() {
+        let head = this.getHead();
+        let newHead = _makeBodyNode(head.x, head.y);
+        head.color = BODY_COLOR;
+        newHead.color = HEAD_COLOR;
+        this.body.push(newHead);
+    }
+
+    nodeAt(index) {
+        return this.body[index];
+    }
+
+    getHead() {
+        return this.body[this.body.length - 1];
+    }
+
+    getTail() {
+        return this.body[0];
     }
 
     getLength() {
-        return _length;
+        return this.body.length;
     }
 }
