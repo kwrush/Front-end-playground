@@ -1,30 +1,29 @@
 let _stack = [];
-let _top = 0;
 
 export default class Stack {
-	constructor() {
-
-	}
+	constructor() {}
 
 	push(element) {
-		_stack[_top++] = element;
+		_stack.push(element);
 	}
 
 	pop() {
-		_top--;
-		return stack.pop();
+		return _stack.pop();
 	}
 
 	peek() {
-		return _stack[--_top];
+		return _stack[_stack.length - 1];
 	}
 
 	length() {
-		return _top
+		return _stack.length;
 	}
 
 	clear() {
 		_stack = [];
-		_top = 0;
+	}
+
+	print() {
+		console.log(_stack.reverse().join(', '));
 	}
 }
