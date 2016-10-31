@@ -1,0 +1,23 @@
+{
+  "name": "data_structure",
+  "version": "0.0.0",
+  "description": "\"\"\u001b[Dsome practices about data structure",
+  "main": "index.html",
+  "scripts": {
+	"compile": "gulp compile",
+    "test": "gulp test"
+  },
+  "devDependencies": {
+	"babel-core": "^6.1.0",
+    "babel-preset-es2015": "^6.1.18",
+	"jasmine": "^2.4.1",
+    "karma": "1.x || ^0.13.0",
+    "karma-jasmine": "1.x || ^0.3.6",
+	"gulp": "^3.9.0",
+	"gulp-babel": "^6.1.0",
+	"gulp-karma": "*"
+  },
+  "keywords": "data structure",
+  "author": "",
+  "license": "MIT"
+}
