@@ -13,7 +13,8 @@ function _makeBodyNode(nodeX, nodeY) {
 export default class {
     constructor(options) {
         options = options || {};
-        this.size = options.size || DEF_SIZE;               // node size
+        this.size = DEF_SIZE;               // node size
+        this.stepSize = this.size;          // size of moving step
         this.bodyColor = options.bodyColor || BODY_COLOR;   // body color
         this.headColor = options.headColor || HEAD_COLOR;   // head color
     }
@@ -25,10 +26,10 @@ export default class {
             y: 0
         });
 
-        // 3 nodes long initially □□
+        // 3 nodes long initially □□□
         let count = 0;
         while (count < 3) {
-            let node = _makeBodyNode(x - this.size * count, y);
+            let node = _makeBodyNode(x - this.stepSize * count, y);
             this.addNode(node);
             count++;
         }
@@ -48,8 +49,8 @@ export default class {
                 currNode.y = nextNode.y;
             } else {
                 // move head one step further in the given direction
-                currNode.x = currNode.x + this.snakeX * this.size;
-                currNode.y = currNode.y + this.snakeY * this.size;
+                currNode.x = currNode.x + this.snakeX * this.stepSize;
+                currNode.y = currNode.y + this.snakeY * this.stepSize;
             }
 
             count++;
@@ -74,11 +75,16 @@ export default class {
         return this;
     }
 
+    // Make snake one node longer
     grow() {
         let head = this.getHead();
         let newHead = _makeBodyNode(head.x, head.y);
         head.color = BODY_COLOR;
         newHead.color = HEAD_COLOR;
+        // pop the old head and add it to tail
+        this.body.pop();
+        this.body.unshift(head);
+        // push the new head
         this.body.push(newHead);
     }
 

@@ -5,16 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Snake game</title>
+    <style>
+        #restart {
+            position: absolute;
+            background: rgba(0, 0, 0, .3);
+            display: none;
+        }
+
+        #restart div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 30px;
+            display: inline-block;
+        }
+
+        #restart-btn {
+            padding: 10px 15px;
+            outline: none;
+            background: #0089A7;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div id="game">
-        <div id="score">
-            <p></p>
+        <div id="score=board">
+            <p>Score: <span id="score"></span></p>
         </div>
         <canvas id="canvas" width="640" height="480"></canvas>
         <div id="restart" style="display:none">
-            <p>You died.</p>
-            <button id="restart-btn">Restart</button>
+            <div>
+                <p>You are died.</p>
+                <button id="restart-btn">Restart</button>
+            </div>
         </div>
     </div>
     <script src="dist/build.js" charset="utf-8"></script>

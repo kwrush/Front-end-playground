@@ -20,17 +20,33 @@ export default class {
     }
 
     init() {
+        // bind listeners
         this.view.listenKeyDown((keyCode) => {
             this.handleKeyDown(keyCode);
         });
+        this.view.listenButtonDown(() => {
+            this.prepare();
+            this.start();
+        });
+
+        this.prepare();
+    }
+
+    prepare() {
+        _score = 0;
+        this.view.toggleRestartDialog(false);
+        this.view.updateScore(_score);
+
         // Give snake an initial position
-        this.snake.init(Math.floor(this.view.width / 2), Math.floor(this.view.height / 2));
+        let x = Math.floor(this.view.width / 2);
+        let y = Math.floor(this.view.height / 2);
+        this.snake.init(x, y);
+
         this.food.makeFood(this.snake, this.view.width, this.view.height);
     }
 
     start() {
         this.stop();
-        _score = 0;
         _gameLoop = setInterval(() => {
             this.run();
         }, this.speed);
@@ -41,16 +57,18 @@ export default class {
         _gameLoop = null;
     }
 
+    // game loop here
     run() {
         this.snake.move();
         if (this.collisionCheck()) {
             this.stop();
+            this.view.toggleRestartDialog(true);
             return;
         }
-
         if (this.canEat()) {
             this.snake.grow();
             _score++;
+            this.view.updateScore(_score);
             this.food.makeFood(this.snake, this.view.width, this.view.height);
         }
         this.view.render(this.snake, this.food, _score);

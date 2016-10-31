@@ -60,15 +60,13 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var snake = new _snake2.default({
-	    size: 10
-	});
-	
+	var snake = new _snake2.default();
 	var view = new _view2.default();
 	
 	var gameCtrl = new _game2.default({
 	    snake: snake,
-	    view: view
+	    view: view,
+	    speed: 150
 	});
 	
 	gameCtrl.init();
@@ -120,11 +118,29 @@
 	        value: function init() {
 	            var _this = this;
 	
+	            // bind listeners
 	            this.view.listenKeyDown(function (keyCode) {
 	                _this.handleKeyDown(keyCode);
 	            });
+	            this.view.listenButtonDown(function () {
+	                _this.prepare();
+	                _this.start();
+	            });
+	
+	            this.prepare();
+	        }
+	    }, {
+	        key: 'prepare',
+	        value: function prepare() {
+	            _score = 0;
+	            this.view.toggleRestartDialog(false);
+	            this.view.updateScore(_score);
+	
 	            // Give snake an initial position
-	            this.snake.init(Math.floor(this.view.width / 2), Math.floor(this.view.height / 2));
+	            var x = Math.floor(this.view.width / 2);
+	            var y = Math.floor(this.view.height / 2);
+	            this.snake.init(x, y);
+	
 	            this.food.makeFood(this.snake, this.view.width, this.view.height);
 	        }
 	    }, {
@@ -133,7 +149,6 @@
 	            var _this2 = this;
 	
 	            this.stop();
-	            _score = 0;
 	            _gameLoop = setInterval(function () {
 	                _this2.run();
 	            }, this.speed);
@@ -144,18 +159,22 @@
 	            clearInterval(_gameLoop);
 	            _gameLoop = null;
 	        }
+	
+	        // game loop here
+	
 	    }, {
 	        key: 'run',
 	        value: function run() {
 	            this.snake.move();
 	            if (this.collisionCheck()) {
 	                this.stop();
+	                this.view.toggleRestartDialog(true);
 	                return;
 	            }
-	
 	            if (this.canEat()) {
 	                this.snake.grow();
 	                _score++;
+	                this.view.updateScore(_score);
 	                this.food.makeFood(this.snake, this.view.width, this.view.height);
 	            }
 	            this.view.render(this.snake, this.food, _score);
@@ -307,7 +326,7 @@
 	var DEF_WIDTH = 640; // default canvas dimension, unit in px
 	var DEF_HEIGHT = 480;
 	var DEF_BORDER_COLOR = '#333';
-	var DEF_BG_COLOR = '#eee';
+	var DEF_BG_COLOR = '#fcfcfc';
 	
 	var _class = function () {
 	    function _class(options) {
@@ -318,20 +337,35 @@
 	        this.height = options.height || DEF_HEIGHT;
 	        this.borderColor = options.borderCOlor || DEF_BORDER_COLOR;
 	        this.bgColor = options.bgColor || DEF_BG_COLOR;
-	        this.initCanvas();
+	        this.scoreView = document.getElementById('score');
+	
+	        this._initCanvas();
+	        this._initDialog();
 	    }
 	
 	    // Make canvas instance
 	
 	
 	    _createClass(_class, [{
-	        key: 'initCanvas',
-	        value: function initCanvas() {
+	        key: '_initCanvas',
+	        value: function _initCanvas() {
 	            this.canvas = document.getElementById('canvas');
 	            this.ctx = this.canvas.getContext('2d');
 	
 	            this.canvas.width = this.width;
 	            this.canvas.height = this.height;
+	        }
+	    }, {
+	        key: '_initDialog',
+	        value: function _initDialog() {
+	            var canvasDim = this.canvas.getBoundingClientRect();
+	            this.dialogView = document.getElementById('restart');
+	            this.restartBtn = document.getElementById('restart-btn');
+	
+	            this.dialogView.style.top = canvasDim.top + 'px';
+	            this.dialogView.style.left = canvasDim.left + 'px';
+	            this.dialogView.style.width = canvasDim.width + 'px';
+	            this.dialogView.style.height = canvasDim.height + 'px';
 	        }
 	    }, {
 	        key: 'listenKeyDown',
@@ -342,12 +376,37 @@
 	            }, false);
 	        }
 	    }, {
+	        key: 'listenButtonDown',
+	        value: function listenButtonDown(callback) {
+	            var _this = this;
+	
+	            document.addEventListener('click', function (evt) {
+	                evt = evt || window.event;
+	                evt.stopPropagation();
+	                var target = evt.target;
+	                if (target === _this.restartBtn) {
+	                    callback();
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'updateScore',
+	        value: function updateScore(score) {
+	            this.scoreView.innerHTML = '' + score;
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render(snake, food, score) {
 	            this.ctx.clearRect(0, 0, this.width, this.height);
 	            this.drawBackground();
 	            this.drawSnake(snake);
 	            this.drawFood(food);
+	        }
+	    }, {
+	        key: 'toggleRestartDialog',
+	        value: function toggleRestartDialog(show) {
+	            var display = show ? 'block' : 'none';
+	            this.dialogView.style.display = display;
 	        }
 	
 	        // Draw canvas background
@@ -427,7 +486,8 @@
 	        _classCallCheck(this, _class);
 	
 	        options = options || {};
-	        this.size = options.size || DEF_SIZE; // node size
+	        this.size = DEF_SIZE; // node size
+	        this.stepSize = this.size; // size of moving step
 	        this.bodyColor = options.bodyColor || BODY_COLOR; // body color
 	        this.headColor = options.headColor || HEAD_COLOR; // head color
 	    }
@@ -441,10 +501,10 @@
 	                y: 0
 	            });
 	
-	            // 3 nodes long initially □□
+	            // 3 nodes long initially □□□
 	            var count = 0;
 	            while (count < 3) {
-	                var node = _makeBodyNode(x - this.size * count, y);
+	                var node = _makeBodyNode(x - this.stepSize * count, y);
 	                this.addNode(node);
 	                count++;
 	            }
@@ -467,8 +527,8 @@
 	                    currNode.y = nextNode.y;
 	                } else {
 	                    // move head one step further in the given direction
-	                    currNode.x = currNode.x + this.snakeX * this.size;
-	                    currNode.y = currNode.y + this.snakeY * this.size;
+	                    currNode.x = currNode.x + this.snakeX * this.stepSize;
+	                    currNode.y = currNode.y + this.snakeY * this.stepSize;
 	                }
 	
 	                count++;
@@ -496,6 +556,9 @@
 	            this.body.unshift(node);
 	            return this;
 	        }
+	
+	        // Make snake one node longer
+	
 	    }, {
 	        key: 'grow',
 	        value: function grow() {
@@ -503,6 +566,10 @@
 	            var newHead = _makeBodyNode(head.x, head.y);
 	            head.color = BODY_COLOR;
 	            newHead.color = HEAD_COLOR;
+	            // pop the old head and add it to tail
+	            this.body.pop();
+	            this.body.unshift(head);
+	            // push the new head
 	            this.body.push(newHead);
 	        }
 	    }, {
