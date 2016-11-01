@@ -1,8 +1,12 @@
 import Stack from '../src/stack.js';
 
 describe('Stack', () => {
+    let stack;
+    beforeEach(() => {
+        stack = new Stack();
+    });
+
     it('should pop the last element.', () => {
-        let stack = new Stack();
         stack.push('a');
         stack.push('b');
         stack.push('c');
@@ -11,8 +15,7 @@ describe('Stack', () => {
         expect(stack.pop()).toBe('a');
     });
 
-    it('should return the last element.', () => {
-        let stack = new Stack();
+    it('should peek the last element.', () => {
         stack.push('a');
         stack.push('b');
         stack.push('c');
@@ -22,7 +25,6 @@ describe('Stack', () => {
     });
 
     it('should return the length of the stack.', () => {
-        let stack = new Stack();
         stack.push('a');
         stack.push('b');
         stack.push('c');
@@ -33,7 +35,6 @@ describe('Stack', () => {
     });
 
     it('should clear the stack.', () => {
-        let stack = new Stack();
         stack.push('a');
         stack.push('b');
         stack.push('c');
@@ -43,10 +44,11 @@ describe('Stack', () => {
     });
 
     it('should print the stack in order', () => {
-        let stack = new Stack();
+        spyOn(console, 'log');
         stack.push('a');
         stack.push('b');
         stack.push('c');
-        expect(stack.print()).toBe(['c, b, a']);
+        stack.print();
+        expect(console.log).toHaveBeenCalledWith('c, b, a');
     });
 });

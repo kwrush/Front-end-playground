@@ -1,29 +1,34 @@
-let _queue = [];
-
 export default class Queue {
-    constructor() {}
+    constructor() {
+        this.queue = [];
+    }
 
     enqueue(element) {
-        _queue.push(element);
+        this.queue.push(element);
     }
 
     dequeue() {
-        return _queue.shift();
+        return this.queue.shift();
     }
 
-    peek() {
-        return _queue[0];
+    front() {
+        return this.queue[0];
+    }
+
+    back() {
+        return this.queue[this.queue.length - 1];
     }
 
     length() {
-        return _queue.length;
+        return this.queue.length;
     }
 
     clear() {
-        _queue = [];
+        this.queue = [];
     }
 
     print() {
-        console.log(_queue.join(', '));
+        console.log(this.queue.join(', '));
+
     }
 }

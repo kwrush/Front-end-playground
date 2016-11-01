@@ -1,8 +1,12 @@
 import Queue from '../src/queue.js';
 
 describe('Queue', () => {
+    let queue;
+    beforeEach(() => {
+        queue = new Queue();
+    });
+
     it('should dequeue the first element.', () => {
-        let queue = new Queue();
         queue.enqueue('a');
         queue.enqueue('b');
         queue.enqueue('c');
@@ -12,18 +16,26 @@ describe('Queue', () => {
     });
 
     it('should return the first element.', () => {
-        let queue = new Queue();
         queue.enqueue('a');
         queue.enqueue('b');
         queue.enqueue('c');
-        expect(queue.peek()).toBe('a');
+        expect(queue.front()).toBe('a');
 
         queue.dequeue();
-        expect(queue.peek()).toBe('a');
+        expect(queue.front()).toBe('b');
+    });
+
+    it('should return the last element.', () => {
+        queue.enqueue('a');
+        queue.enqueue('b');
+        queue.enqueue('c');
+        expect(queue.back()).toBe('c');
+
+        queue.dequeue();
+        expect(queue.back()).toBe('c');
     });
 
     it('should return the queue\'s length.', () => {
-        let queue = new Queue();
         queue.enqueue('a');
         queue.enqueue('b');
         queue.enqueue('c');
@@ -34,7 +46,6 @@ describe('Queue', () => {
     });
 
     it('should clear the queue', () => {
-        let queue = new Queue();
         queue.enqueue('a');
         queue.enqueue('b');
         queue.clear();
@@ -42,10 +53,11 @@ describe('Queue', () => {
     });
 
     it('should print the queue in order', () => {
-        let queue = new Queue();
+        spyOn(console, 'log');
         queue.enqueue('a');
         queue.enqueue('b');
         queue.enqueue('c');
-        expect(queue.print()).toBe(['a, b, c']);
+        queue.print();
+        expect(console.log).toHaveBeenCalledWith('a, b, c');
     });
 });

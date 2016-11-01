@@ -1,29 +1,30 @@
-let _stack = [];
 
 export default class Stack {
-	constructor() {}
+	constructor() {
+		this.stack = [];
+	}
 
 	push(element) {
-		_stack.push(element);
+		this.stack.push(element);
 	}
 
 	pop() {
-		return _stack.pop();
+		return this.stack.pop();
 	}
 
 	peek() {
-		return _stack[_stack.length - 1];
+		return this.stack[this.stack.length - 1];
 	}
 
 	length() {
-		return _stack.length;
+		return this.stack.length;
 	}
 
 	clear() {
-		_stack = [];
+		this.stack = [];
 	}
 
 	print() {
-		console.log(_stack.reverse().join(', '));
+		console.log(this.stack.reverse().join(', '));
 	}
 }
