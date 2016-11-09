@@ -130,6 +130,7 @@ class DoublyList {
 		let node = this.findNodeAt(index);
 
 		newNode.next = node.next;
+		newNode.next.previous = newNode;
 		node.next = newNode;
 		newNode.previous = node;
 
@@ -178,7 +179,7 @@ class DoublyList {
 		}
 
 		// if index is bigger than the half length of the list, start searching from tail
-		return index > (this._length - 1) / 2 ? findNodeFromTail(index) : findNodeFromHead(index);
+		return index > (this._length - 1) / 2 ? this.findNodeAtFromTail(index) : this.findNodeAtFromHead(index);
 	}
 
 	findNodeAtFromHead(index) {
