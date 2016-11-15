@@ -1,0 +1,56 @@
+.profile {
+    color: $primaryColor;
+    padding: 0 20px;
+}
+
+.user-avatar {
+    text-align: center;
+
+    & .inner {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    & .username {
+        text-transform: uppercase;
+        font-size: $fontSizeLarge;
+    }
+
+    & .avatar-border {
+        @include size(70px);
+        @include rounded(100%);
+        margin-right: 10px;
+        padding: 5px;
+        border: 2px solid $milk;
+        overflow: hidden;
+    }
+
+    & .avatar {
+        @include size(56px);
+        @include rounded(100%);
+    }
+}
+
+
+.user-stat {
+    margin-top: 15px;
+    padding: 0 20px;
+
+    & .user-stat-count {
+        text-align: center;
+
+        &:first-child {
+            border-right: 1px solid $lightGrey;
+        }
+
+        & span {
+            display: block;
+            line-height: 1.25;
+        }
+
+        & .user-stat-text {
+            color: $lightGrey;
+        }
+    }
+
+}

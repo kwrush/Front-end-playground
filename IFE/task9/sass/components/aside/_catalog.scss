@@ -1,0 +1,23 @@
+.catalog {
+    color: $lightGrey;
+    font-size: $fontSizeLarge;
+
+    & .catalog-nav {
+    }
+}
+
+.catalog-list {
+    & .catalog-item {
+        padding: 10px 35px;
+
+        &:first-child {
+            padding-top: 0;
+        }
+    }
+
+    & .nav-list-title {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

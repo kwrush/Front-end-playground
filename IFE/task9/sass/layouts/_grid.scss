@@ -1,0 +1,22 @@
+.row {
+    @extend %clearfix;
+    overflow: hidden;
+}
+
+[class*='col-'] {
+    float: left;
+    min-height: 1px;
+    width: 100%;
+}
+
+@for $i from 1 through $gridColumns {
+    .col-#{$i}-#{$gridColumns} {
+        width: calcPercent($i, $gridColumns);
+    }
+}
+
+@for $i from 1 through $gridColumnsL {
+    .col-#{$i}-#{$gridColumnsL} {
+        width: calcPercent($i, $gridColumnsL);
+    }
+}

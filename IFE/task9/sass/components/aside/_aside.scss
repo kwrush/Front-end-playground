@@ -1,0 +1,14 @@
+.aside {
+    max-width: 360px;
+    min-width: 240px;
+    height: 100%;
+    background-color: $darkGrey;
+
+    & .sidebar {
+        position: relative;
+        padding: 20px 0;
+    }
+}
+
+@import '_profile.scss';
+@import '_catalog.scss';

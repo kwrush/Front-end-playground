@@ -1,0 +1,10 @@
+@import '_logo.scss';
+@import '_search.scss';
+@import '_login.scss';
+
+#site-header {
+    position: relative;
+    width: 100%;
+    min-height: $headerHeight;
+    background-color: $headerColor;
+}
