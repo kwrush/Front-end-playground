@@ -1,23 +1,19 @@
 .catalog {
     color: $lightGrey;
-    font-size: $fontSizeLarge;
+    font-size: $fontSize;
+    @include prefix(user-select, none, webkit moz ms);
 
     & .catalog-nav {
     }
 }
 
 .catalog-list {
-    & .catalog-item {
-        padding: 10px 35px;
 
-        &:first-child {
-            padding-top: 0;
-        }
-    }
+    & .catalog-list-item {
+        padding-left: 30px !important;
 
-    & .nav-list-title {
         &:hover {
-            cursor: pointer;
+            background-color: $highlight;
         }
     }
 }

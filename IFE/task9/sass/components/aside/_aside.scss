@@ -3,10 +3,11 @@
     min-width: 240px;
     height: 100%;
     background-color: $darkGrey;
+    overflow: auto;
 
     & .sidebar {
         position: relative;
-        padding: 20px 0;
+        margin-bottom: 20px;
     }
 }
 

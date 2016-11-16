@@ -23,6 +23,8 @@ $lightGrey: #D3D3D3;
 $white: #FFF;
 $milk: #FCFCFC;
 
+$highlight: rgba(0, 0, 0, .2);
+
 
 // Components size
 $headerHeight: 50px;
@@ -30,5 +32,11 @@ $headerHeight: 50px;
 // Layout
 $minWidth: 640px;
 
+$gridColumnsS: 3;
 $gridColumns: 4;
 $gridColumnsL: 5;
+
+$listItemGap: 10px;
+$listItemIndent: 16px;
+
+$topNavHeight: 33px;

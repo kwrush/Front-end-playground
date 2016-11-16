@@ -2,9 +2,12 @@
 @import '_search.scss';
 @import '_login.scss';
 
-#site-header {
-    position: relative;
+.site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     min-height: $headerHeight;
     background-color: $headerColor;
+    z-index: 9999;
 }

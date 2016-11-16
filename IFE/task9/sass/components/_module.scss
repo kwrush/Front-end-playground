@@ -13,17 +13,20 @@ body,
     @include borderBox;
 }
 
+// global
 .clearfix {
     @extend %clearfix;
 }
 
 .wrap {
     position: relative;
+    padding-top: 50px;
     width: 100%;
+    min-width: 1200px;
     height: 100%;
 }
 
-
+@import 'global/_global.scss';
 @import 'header/_header.scss';
 @import 'aside/_aside.scss';
 @import 'dashboard/_dashboard.scss';

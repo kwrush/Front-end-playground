@@ -1,0 +1,15 @@
+.select-wrap {
+    padding: 4px 8px;
+    display: block;
+
+    & > label {
+        padding: 0 8px;
+        line-height: 1.25;
+        display: inline-block;
+        min-width: 80px;
+        text-align: right;
+    }
+
+    & > .select {
+    }
+}

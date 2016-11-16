@@ -9,6 +9,12 @@
     width: 100%;
 }
 
+@for $i from 1 through $gridColumnsS {
+    .col-#{$i}-#{$gridColumnsS} {
+        width: calcPercent($i, $gridColumnsS);
+    }
+}
+
 @for $i from 1 through $gridColumns {
     .col-#{$i}-#{$gridColumns} {
         width: calcPercent($i, $gridColumns);
