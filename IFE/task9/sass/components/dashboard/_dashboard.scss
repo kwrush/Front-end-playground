@@ -9,7 +9,7 @@
 .db-main {
     position: relative;
     margin-top: $topNavHeight;
-    padding: 20px 5%;
+    padding: 20px 4%;
     @include size(100%);
 
     & > section {

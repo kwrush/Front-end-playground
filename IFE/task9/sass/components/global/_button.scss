@@ -1,0 +1,14 @@
+.button {
+    background-color: $white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: $fontSize;
+}
+
+.search-button {
+    padding: 6px 12px;
+    background: $headerColor;
+    color: $white;
+    @include rounded(4px);
+}

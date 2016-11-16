@@ -43,29 +43,19 @@
 }
 
 .nav-list {
-
-    & .nav-list-item {
-        padding-top: $listItemGap;
-        padding-bottom: $listItemGap;
-
-        &:last-child {
-            padding-bottom: 0;
-        }
-    }
-}
-
-.nav-sub-list {
     & .nav-list-item {
         padding-left: $listItemIndent;
     }
 
+    & .item-title:hover {
+        color: $white;
+    }
+}
+
+.nav-folder-list {
     & .item-title-peer[type=checkbox] {
         &:checked ~ .item-title .item-title-icon:before {
             content: '\f07c';
         }
-    }
-
-    & .item-title:hover {
-        color: $white;
     }
 }

@@ -5,7 +5,7 @@
 }
 
 .db-query-form {
-
+    border-top: 4px solid $headerColor;
 }
 
 .db-query-history {
@@ -13,7 +13,7 @@
 }
 
 .query-form-board {
-    width: 88%;
+    margin-right: 20px;
     height: 100%;
     display: inline-block;
     vertical-align: middle;
@@ -21,5 +21,47 @@
 
 .query-item {
     position: relative;
-    padding: 15px 10px;
+    padding: 16px 8px;
+
+    & .select-group {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    & .exchange-button {
+        display: inline-block;
+        vertical-align: middle;
+        @include prefix(transform, rotate(90deg), webkit moz);
+        font-size: $fontSizeLarge;
+        color: $lightGrey;
+        background: none;
+
+        &:hover {
+            color: $darkGrey;
+        }
+
+        &:hover + .tooltips {
+            display: inline-block;
+        }
+    }
+
+    & .tooltips {
+        position: absolute;
+        top: 10px;
+        right: 0;
+        @include rounded(2px);
+        padding: 5px;
+        background: $darkGrey;
+        color: $white;
+        vertical-align: middle;
+        display: none;
+        font-size: $fontSizeSmall;
+    }
+}
+
+label[for="input-date"],
+label[for="select-duration"],
+label[for="select-people"],
+label[for="select-sold"] {
+    min-width: 90px;
 }

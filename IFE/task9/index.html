@@ -57,7 +57,7 @@
                                 <i class="item-title-icon fa fa-archive"></i>
                                 Personal Reports
                             </label>
-                            <ul class="archive-list nav-list nav-sub-list">
+                            <ul class="archive-list nav-list nav-folder-list">
                                 <li class="archive-list-item nav-list-item">
                                     <input type="checkbox" id="archive-1" class="item-title-peer">
                                     <label for="archive-1" class="item-title">
@@ -65,7 +65,7 @@
                                         <i class="item-title-icon fa fa-folder"></i>
                                         Folder-1
                                     </label>
-                                    <ul class="archive-doc-list nav-list nav-sub-list">
+                                    <ul class="archive-doc-list nav-list nav-folder-list">
                                         <li class="nav-list-item">
                                             <a href="#" class="item-title">
                                                 <i class="item-title-icon fa fa-file-text"></i>
@@ -81,7 +81,7 @@
                                         <i class="item-title-icon fa fa-folder"></i>
                                         Folder-2
                                     </label>
-                                    <ul class="archive-doc-list nav-list nav-sub-list">
+                                    <ul class="archive-doc-list nav-list nav-folder-list">
                                         <li class="nav-list-item">
                                             <a href="#" class="item-title">
                                                 <i class="item-title-icon fa fa-file-text"></i>
@@ -103,7 +103,7 @@
                                         <i class="item-title-icon fa fa-folder"></i>
                                         Folder-3
                                     </label>
-                                    <ul class="archive-doc-list nav-list nav-sub-list">
+                                    <ul class="archive-doc-list nav-list nav-folder-list">
                                         <li class="nav-list-item">
                                             <a href="#" class="item-title">
                                                 <i class="item-title-icon fa fa-file-text"></i>
@@ -230,9 +230,9 @@
                     <div class="db-query-form db-item">
                         <form action="" class="query-form" method="GET">
                             <div class="query-form-board row">
-                                <div class="query-item col-1-4">
+                                <div class="query-item col">
                                     <div class="select-wrap">
-                                        <label for="select-query-item">Query Item</label>
+                                        <label for="select-query-item">Item</label>
                                         <select id="select-query-item" class="select">
                                             <option value="value1" selected>Value 1</option>
                                             <option value="value2">Value 2</option>
@@ -242,35 +242,85 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="query-item col-2-5">
-                                    <div class="select-wrap">
-                                        <label for="select-buyer">Buyer</label>
-                                        <select id="select-buyer" class="select">
-                                            <option value="buyer1" selected>Buyer 1</option>
-                                            <option value="buyer2">Buyer 2</option>
-                                            <option value="buyer3">Buyer 3</option>
-                                            <option value="buyer4">Buyer 4</option>
-                                            <option value="buyer5">Buyer 5</option>
-                                            <option value="buyer6">Buyer 6</option>
-                                        </select>
+                                <div class="query-item col">
+                                    <div class="select-group">
+                                        <div class="select-wrap">
+                                            <label for="select-buyer">Buyer</label>
+                                            <select id="select-buyer" class="select">
+                                                <option value="buyer1" selected>Buyer 1</option>
+                                                <option value="buyer2">Buyer 2</option>
+                                                <option value="buyer3">Buyer 3</option>
+                                                <option value="buyer4">Buyer 4</option>
+                                                <option value="buyer5">Buyer 5</option>
+                                                <option value="buyer6">Buyer 6</option>
+                                            </select>
+                                        </div>
+                                        <div class="select-wrap">
+                                            <label for="select-vendor">Vendor</label>
+                                            <select id="select-vendor" class="select">
+                                                <option value="vendor1" selected>Vendor 1</option>
+                                                <option value="vendor2">Vendor 2</option>
+                                                <option value="vendor3">Vendor 3</option>
+                                                <option value="vendor4">Vendor 4</option>
+                                                <option value="vendor5">Vendor 5</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="select-wrap">
-                                        <label for="select-vendor">Vendor</label>
-                                        <select id="select-vendor" class="select">
-                                            <option value="vendor1" selected>Vendor 1</option>
-                                            <option value="vendor2">Vendor 2</option>
-                                            <option value="vendor3">Vendor 3</option>
-                                            <option value="vendor4">Vendor 4</option>
-                                            <option value="vendor5">Vendor 5</option>
-                                        </select>
-                                    </div>
-                                    <span class="button switch-button"></span>
+                                    <button class="button exchange-button">
+                                        <i class="fa fa-exchange" aria-hidden="true"></i>
+                                    </button>
+                                    <span class="tooltips">Reverse buyer and vendor</span>
                                 </div>
-                                <div class="query-item col-3-5">
-
+                                <div class="query-item col">
+                                    <div class="select-wrap">
+                                        <label for="input-date">Date</label>
+                                        <input type="text" id="input-date" class="select" value="11-16-2016">
+                                    </div>
+                                    <div class="select-wrap">
+                                        <label for="select-people">Candidates</label>
+                                        <select id="select-people" class="select">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="query-item col">
+                                    <div class="select-wrap">
+                                        <label for="select-duration">Duration</label>
+                                        <select id="select-duration" class="select">
+                                            <option>2 days</option>
+                                            <option>3 days</option>
+                                            <option>4 days</option>
+                                            <option selected>5 days</option>
+                                            <option>6 days</option>
+                                            <option>7 days</option>
+                                            <option>8 days</option>
+                                            <option>9 days</option>
+                                            <option >10 days</option>
+                                        </select>
+                                    </div>
+                                    <div class="select-wrap">
+                                        <label for="select-sold">Sold Items</label>
+                                        <select id="select-sold" class="select">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <button class="button query-button">Search</button>
+                            <button class="button search-button">Search</button>
                         </form>
                     </div>
                     <div class="db-query-history db-item">

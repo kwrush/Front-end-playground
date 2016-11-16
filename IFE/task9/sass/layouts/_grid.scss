@@ -3,6 +3,11 @@
     overflow: hidden;
 }
 
+.col {
+    float: left;
+    min-height: 1px;
+}
+
 [class*='col-'] {
     float: left;
     min-height: 1px;
