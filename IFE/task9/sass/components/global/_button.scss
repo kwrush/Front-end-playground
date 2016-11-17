@@ -12,3 +12,33 @@
     color: $white;
     @include rounded(4px);
 }
+
+.angle-button {
+    position: relative;
+    padding: 0 8px;
+    height: 100%;
+    display: block;
+    font-size: 2.5em;
+    line-height: 1.9;
+    color: $lightGrey;
+    vertical-align: middle;
+    text-align: center;
+
+    &:before {
+        height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &:hover {
+        color: $darkGrey;
+    }
+
+    &.fa-angle-left {
+        float: left;
+    }
+
+    &.fa-angle-right {
+        float: right;
+    }
+}

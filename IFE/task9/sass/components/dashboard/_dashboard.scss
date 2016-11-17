@@ -2,7 +2,7 @@
     position: relative;
     margin: 0 auto;
     height: 100%;
-    min-width: 960px;
+    min-width: 1024px;
     background-color: $lightGrey;
 }
 
@@ -18,11 +18,11 @@
 }
 
 .db-section {
-    margin-bottom: 20px !important;
+    margin-bottom: 28px !important;
 }
 
 .db-item {
-    margin-bottom: 10px !important;
+    margin-bottom: 14px !important;
 }
 
 @import '_topnav.scss';
