@@ -1,0 +1,22 @@
+.table {
+    table-layout: fixed;
+    @include size(100%);
+
+    &,
+    & .table-row,
+    & .table-header,
+    & .table-cell {
+        border: 1px solid $lightGrey;
+        text-align: center;
+    }
+
+    & .table-header {
+        font-weight: bold;
+    }
+
+    & .table-header,
+    & .table-cell {
+        line-height: 2;
+        word-wrap: break-word;
+    }
+}

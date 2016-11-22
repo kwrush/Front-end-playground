@@ -18,12 +18,16 @@ $activeColor: #fff;
 $inactiveColor: #eee;
 
 $darkGrey: #2B2E3D;
-$grey: #373D4D;
-$lightGrey: #D3D3D3;
-
+$grey: #7e7e7e;
+$lightGrey: #DCDCDC;
+$whiteGrey: #E9E9E9;
 $white: #FFF;
 $milk: #FCFCFC;
+$blue: $headerColor;
 $orange: #FF4500;
+$green: #27D088;
+$red: #DB5D6A;
+$yellow: #FFC300;
 
 $highlight: rgba(0, 0, 0, .2);
 
@@ -32,7 +36,8 @@ $highlight: rgba(0, 0, 0, .2);
 $headerHeight: 50px;
 
 // Layout
-$minWidth: 640px;
+$minViewWidth: 1366px;
+$sidebarWidth: 280px;
 
 $gridColumnsS: 3;
 $gridColumns: 4;

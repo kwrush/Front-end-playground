@@ -20,6 +20,15 @@
     @include prefix(box-sizing, border-box, webkit moz);
 }
 
+@mixin bar($max: 100, $min: 10, $step: 5, $padding: 32px) {
+    @for $i from $min through $max {
+        .w-#{$i}:after {
+            width: calc(#{$i}% - #{$padding});
+        }
+        $i: $i + $step;
+    }
+}
+
 %clearfix {
   *zoom: 1;
   &:before, &:after {
@@ -40,9 +49,25 @@
 }
 
 %blue-top-border {
-    @include prefix(box-shadow, inset 0 3px 0 0 $headerColor, webkit moz);
+    @include prefix(box-shadow, inset 0 3px 0 0 $blue, webkit moz);
 }
 
 %blue-border {
-    @include prefix(box-shadow, inset 0 0 0 2px $headerColor, webkit moz);
+    @include prefix(box-shadow, inset 0 0 0 2px $blue, webkit moz);
+}
+
+%blue-left-border {
+    @include prefix(box-shadow, inset 3px 0 0 0 $headerColor, webkit moz);
+}
+
+%green-left-border {
+    @include prefix(box-shadow, inset 3px 0 0 0 $green, webkit moz);
+}
+
+%red-left-border {
+    @include prefix(box-shadow, inset 3px 0 0 0 $red, webkit moz);
+}
+
+%yellow-left-border {
+    @include prefix(box-shadow, inset 3px 0 0 0 $yellow, webkit moz);
 }

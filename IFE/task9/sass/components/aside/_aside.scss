@@ -1,7 +1,5 @@
 .aside {
-    max-width: 360px;
-    min-width: 240px;
-    height: 100%;
+    @include size($sidebarWidth, 100%);
     background-color: $darkGrey;
     overflow: auto;
 
