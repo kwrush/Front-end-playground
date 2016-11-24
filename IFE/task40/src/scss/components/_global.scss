@@ -1,0 +1,26 @@
+// Reset
+.calendar {
+    margin: 0 auto;
+    position: relative;
+    max-width: 768px;
+    font-size: $fontSizeSmall;
+    font-family: $openSans;
+    font-weight: normal;
+    box-sizing: border-box;
+    opacity: 1;
+
+    * {
+        @include prefix(user-select, none, webkit moz ms);
+        box-sizing: border-box;
+        font-size: $fontSizeSmall;
+    }
+
+    ul, ol, dl {
+        list-style: none;
+    }
+
+    h1, h2, h3 {
+        margin: 0;
+        font-size: $fontSize;
+    }
+}

@@ -1,0 +1,41 @@
+%clearfix {
+  *zoom: 1;
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+%center {
+    @include prefix(transform, translate(-50%, -50%), webkit moz);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+%ripple {
+    @include prefix(transition-duration, 0.3s, webkit moz);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:after {
+        @extend %center;
+        @include size(100%);
+        @include prefix(transition,  #{width 0.3s, height 0.3s, opacity 0.8s ease}, webkit moz);
+        content: "";
+        position: absolute;
+        background: $rippleColor;
+        display: block;
+        opacity: 0;
+    }
+
+    &:active:after {
+        @include size(0);
+        @include prefix(transition, 0s, webkit moz);
+        opacity: 1;
+    }
+}

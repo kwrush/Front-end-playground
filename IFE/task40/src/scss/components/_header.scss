@@ -1,0 +1,67 @@
+.calendar {
+    .calendar-header {
+        position: relative;
+        padding: 0 $wrapPadding;
+        background: $blueGreen;
+        color: $white;
+        text-align: center;
+    }
+
+    .calendar-nav {
+        position: absolute;
+        top: 0;
+        text-align: center;
+        background: inherit;
+    }
+
+    .calendar-nav-prev {
+        left: 0;
+    }
+
+    .calendar-nav-next {
+        right: 0;
+    }
+
+    .calendar-nav-button {
+        @extend %ripple;
+        @include size($navSize);
+        @include rounded(100%);
+        padding: $navSize / 4;
+        vertical-align: middle;
+        background: inherit;
+        display: inline-block;
+
+        &:after {
+            @include rounded(100%);
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .calendar-nav-icon {
+        @include size($navSize / 2);
+        color: $white;
+        fill: currentColor;
+        display: inline-block;
+    }
+
+    .calendar-nav-prev-button {
+        left: 0;
+    }
+
+    .calendar-nav-next-button {
+        right: 0;
+    }
+
+    .calendar-title {
+        @extend %ripple;
+        @include size(100%, $navSize);
+        line-height: $navSize;
+
+        &:hover {
+            cursor: default;
+        }
+    }
+}
