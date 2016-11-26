@@ -17,18 +17,17 @@
 }
 
 %ripple {
-    @include prefix(transition-duration, 0.3s, webkit moz);
     position: relative;
     overflow: hidden;
     cursor: pointer;
 
     &:after {
         @extend %center;
-        @include size(100%);
-        @include prefix(transition,  #{width 0.3s, height 0.3s, opacity 0.8s ease}, webkit moz);
+        @include size(320px);
+        @include prefix(transition, #{width 1s, height 1s, opacity 0.8s ease}, webkit moz);
+        @include rounded(100%);
         content: "";
-        position: absolute;
-        background: $rippleColor;
+        background: $black;
         display: block;
         opacity: 0;
     }
@@ -36,6 +35,6 @@
     &:active:after {
         @include size(0);
         @include prefix(transition, 0s, webkit moz);
-        opacity: 1;
+        opacity: .3;
     }
 }

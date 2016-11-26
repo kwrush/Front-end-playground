@@ -1,0 +1,19 @@
+.calendar {
+    .calendar-weekday-header {
+        @extend %clearfix;
+        text-align: center;
+        text-transform: uppercase;
+        opacity: .8;
+
+        & > li {
+            @include size(1 / 7 * 100%, 28px);
+            line-height: 28px;
+            float: left;
+        }
+    }
+
+    .calendar-weekday-view {
+        text-align: center;
+
+    }
+}

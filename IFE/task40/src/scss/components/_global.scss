@@ -17,10 +17,17 @@
 
     ul, ol, dl {
         list-style: none;
+        padding: 0;
+        margin: 0 auto;
     }
 
     h1, h2, h3 {
         margin: 0;
         font-size: $fontSize;
+    }
+
+    .calendar-pane {
+        position: relative;
+        padding: 0 $wrapPadding;
     }
 }

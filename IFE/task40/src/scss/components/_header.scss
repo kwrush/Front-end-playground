@@ -7,44 +7,19 @@
         text-align: center;
     }
 
-    .calendar-nav {
-        position: absolute;
-        top: 0;
-        text-align: center;
-        background: inherit;
-    }
-
-    .calendar-nav-prev {
-        left: 0;
-    }
-
-    .calendar-nav-next {
-        right: 0;
-    }
-
     .calendar-nav-button {
         @extend %ripple;
         @include size($navSize);
-        @include rounded(100%);
+        position: absolute;
+        top: 0;
         padding: $navSize / 4;
         vertical-align: middle;
         background: inherit;
         display: inline-block;
 
-        &:after {
-            @include rounded(100%);
-        }
-
         &:hover {
             cursor: pointer;
         }
-    }
-
-    .calendar-nav-icon {
-        @include size($navSize / 2);
-        color: $white;
-        fill: currentColor;
-        display: inline-block;
     }
 
     .calendar-nav-prev-button {
@@ -55,13 +30,25 @@
         right: 0;
     }
 
+    .calendar-nav-icon {
+        @include size($navSize / 2);
+        color: $white;
+        fill: currentColor;
+        display: inline-block;
+    }
+
     .calendar-title {
         @extend %ripple;
         @include size(100%, $navSize);
         line-height: $navSize;
+        letter-spacing: 0.1em;
 
         &:hover {
             cursor: default;
+        }
+
+        &:after {
+            @include rounded(10%);
         }
     }
 }
