@@ -20,21 +20,23 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    z-index: 1;
 
     &:after {
         @extend %center;
-        @include size(320px);
-        @include prefix(transition, #{width 1s, height 1s, opacity 0.8s ease}, webkit moz);
+        @include size(200%);
+        @include prefix(transition, #{width 1s, height 1s, opacity 1.3s $cubic}, webkit moz);
         @include rounded(100%);
         content: "";
         background: $black;
         display: block;
         opacity: 0;
+        z-index: -1;
     }
 
     &:active:after {
         @include size(0);
         @include prefix(transition, 0s, webkit moz);
-        opacity: .3;
+        opacity: .4;
     }
 }

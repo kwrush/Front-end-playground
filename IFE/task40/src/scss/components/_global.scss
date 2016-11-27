@@ -30,4 +30,28 @@
         position: relative;
         padding: 0 $wrapPadding;
     }
+
+    .calendar-view-wrap {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .calendar-prev-view,
+    .calendar-curr-view,
+    .calendar-next-view {
+        @include size(100%);
+        @include prefix(transition, #{transform, .4s $cubic}, webkit moz);
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+    }
+
+    .calendar-prev-view {
+        @include prefix(transform, translateX(-100%), webkit moz);
+    }
+
+    .calendar-next-view {
+        @include prefix(transform, translateX(100%), webkit moz);
+    }
 }

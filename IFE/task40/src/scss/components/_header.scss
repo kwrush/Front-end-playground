@@ -10,12 +10,13 @@
     .calendar-nav-button {
         @extend %ripple;
         @include size($navSize);
+        @include rounded(100%);
+        padding: $navSize / 4;
         position: absolute;
         top: 0;
-        padding: $navSize / 4;
         vertical-align: middle;
-        background: inherit;
-        display: inline-block;
+        background: none;
+        display: block;
 
         &:hover {
             cursor: pointer;
@@ -48,7 +49,7 @@
         }
 
         &:after {
-            @include rounded(10%);
+            @include size(320px);
         }
     }
 }

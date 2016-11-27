@@ -3,6 +3,7 @@ $white: #FFFFFF;
 $blueGreen: rgb(0, 151, 167);
 $lightBlueGreen: rgba(0, 151, 167, .5);
 $black: rgba(0, 0, 0, 0.8);
+$grey: rgba(0, 0, 0, 0.5);
 
 $highlightColor: $blueGreen;
 $hoverColor: $lightBlueGreen;
@@ -23,3 +24,5 @@ $fontSizeXLarge: 20px;
 // padding, width values etc.
 $wrapPadding: 8px;
 $navSize: 48px;
+
+$cubic: cubic-bezier(0.23, 1, 0.32, 1);
