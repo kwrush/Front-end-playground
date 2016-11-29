@@ -45,13 +45,20 @@
         top: 0;
         left: 0;
         display: inline-block;
+        background: $white;
+    }
+
+    .calendar-curr-view {
+        z-index: 99;
     }
 
     .calendar-prev-view {
         @include prefix(transform, translateX(-100%), webkit moz);
+        z-index: 10;
     }
 
     .calendar-next-view {
         @include prefix(transform, translateX(100%), webkit moz);
+        z-index: 10;
     }
 }

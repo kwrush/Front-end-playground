@@ -128,8 +128,13 @@ Calendar.prototype = {
     },
 
     _initCalendarHeader: function () {
-        var date = new Date();
-        this.calendarTitle.innerText = this._getMonthText(date.getMonth()) + ' ' + date.getFullYear();
+        var date = new Date(),
+            year = date.getFullYear(),
+            month = date.getMonth();
+
+        this.calendarTitle.setAttribute('data-year', year);
+        this.calendarTitle.setAttribute('data-month', month);
+        this.calendarTitle.innerText = this._getMonthText(month) + ' ' + year;
         this.prevNavButton.innerHTML = this._getPrevIcon();
         this.nextNavButton.innerHTML = this._getNextIcon();
     },
@@ -145,14 +150,14 @@ Calendar.prototype = {
         this.dateWrap.style.width = '100%';
         this.dateWrap.style.height = this.dateView.clientHeight - this.weekdayHead.clientHeight + 'px';
 
-        this.currDateView = this.dateWrap.querySelector('.calendar-curr-view');
-        this.prevDateView = this.dateWrap.querySelector('.calendar-prev-view');
-        this.nextDateView = this.dateWrap.querySelector('.calendar-next-view');
+        var currView = this.dateWrap.querySelector('.calendar-curr-view');
+        var prevView = this.dateWrap.querySelector('.calendar-prev-view');
+        var nextView = this.dateWrap.querySelector('.calendar-next-view');
 
         this.weekdayHead.innerHTML = this._getWeekdayHeader();
-        this.currDateView.innerHTML = this._getDateViewsOfMonth(year, month);
-        this.prevDateView.innerHTML = this._getDateViewsOfMonth(year, month - 1);
-        this.nextDateView.innerHTML = this._getDateViewsOfMonth(year, month + 1);
+        currView.innerHTML = this._getDateViewOfMonth(year, month);
+        prevView.innerHTML = this._getDateViewOfMonth(year, month - 1);
+        nextView.innerHTML = this._getDateViewOfMonth(year, month + 1);
     },
 
     _initMonthView: function () {
@@ -175,7 +180,7 @@ Calendar.prototype = {
         return lis.join('');
     },
 
-    _getDateViewsOfMonth: function (year, month) {
+    _getDateViewOfMonth: function (year, month) {
         var date  = new Date(year, month),
             rows  = 6,
             cols  = this._defaults.weekday.length;
@@ -211,9 +216,10 @@ Calendar.prototype = {
                         classNames.push('calendar-next-month-day');
                     } else {
                         dayTime = new Date(year, month, dayNumber).getTime();
-                        if (dayTime === today) classNames.push('calendar-today selected');
                     }
                 }
+
+                if (dayTime === today) classNames.push('calendar-today selected');
 
                 var d = new Date(dayTime);
                 var dateView = this._getDateView(d, classNames, dayTileWidth, dayTileHeight);
@@ -224,8 +230,8 @@ Calendar.prototype = {
         return dayView.join('');
     },
 
-    _monthView: function (date) {
-
+    _monthView: function (year) {
+        var date = new Date();
     },
 
     _getDateView: function (date, classNames, width, height) {
@@ -258,12 +264,20 @@ Calendar.prototype = {
     },
 
     _getMonthText: function (month) {
-        var m = month || new Date().getMonth();
+        var m;
+        if (this._isa(month, 'Number')) {
+            m = month;
+        } else if (this._isDate(month)) {
+            m = month.getMonth();
+        } else {
+            m = new Date().getMonth();
+        }
+
         return this._defaults.month[m];
     },
 
     _firstDayOfMonth: function (year, month) {
-        return new Date(year, month).getDay();
+        return new Date(year, month).getDay() || 7;
     },
 
     _getPrevIcon: function () {
@@ -323,19 +337,41 @@ Calendar.prototype = {
             target = target.parentElement;
         }
 
+        var currView = this.dateWrap.querySelector('.calendar-curr-view');
+        var prevView = this.dateWrap.querySelector('.calendar-prev-view');
+        var nextView = this.dateWrap.querySelector('.calendar-next-view');
+        var currYear = parseInt(this.calendarTitle.getAttribute('data-year'), 10);
+        var currMonth = parseInt(this.calendarTitle.getAttribute('data-month'), 10);
+        var date, newYear, newMonth;
+
         if (target === this.nextNavButton) {
-            this.nextDateView.style.transform = 'translateX(0)';
-            this.currDateView.style.transform = 'translateX(-100%)';
-            this.prevDateView.style.transform = 'translateX(-200%)';
+            currView.className = 'calendar-prev-view';
+            nextView.className = 'calendar-curr-view';
+            prevView.className = 'calendar-next-view';
+
+            date = new Date(currYear, currMonth + 1);
+            newYear = date.getFullYear();
+            newMonth = date.getMonth();
+            prevView.innerHTML = this._getDateViewOfMonth(newYear, newMonth + 1);
+
         } else if (target === this.prevNavButton) {
-            this.nextDateView.style.transform = 'translateX(200%)';
-            this.currDateView.style.transform = 'translateX(100%)';
-            this.prevDateView.style.transform = 'translateX(0)';
+            currView.className = 'calendar-next-view';
+            prevView.className = 'calendar-curr-view';
+            nextView.className = 'calendar-prev-view';
+
+            date = new Date(currYear, currMonth - 1);
+            newYear = date.getFullYear();
+            newMonth = date.getMonth();
+            nextView.innerHTML = this._getDateViewOfMonth(newYear, newMonth - 1);
         }
+
+        this.calendarTitle.innerText = this._getMonthText(newMonth) + ' ' + newYear;
+        this.calendarTitle.setAttribute('data-year', newYear);
+        this.calendarTitle.setAttribute('data-month', newMonth);
     },
 
     _handleSelectDate: function (event) {
-        
+
     },
 
     _isDate: function (date) {

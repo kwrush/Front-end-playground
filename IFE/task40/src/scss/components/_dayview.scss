@@ -21,7 +21,7 @@
         span {
             @extend %center;
             @include rounded(100%);
-            @include prefix(transition, #{color 0.3s $cubic}, webkit moz);
+            @include prefix(transition, #{color 0.2s $cubic}, webkit moz);
             margin: 0 auto;
             z-index: 10;
         }
@@ -43,7 +43,7 @@
 
         &.selected span,
         &:hover span {
-            color: $white
+            color: $white;
         }
 
         &.selected span:before {
