@@ -17,6 +17,8 @@
     .calendar-day {
         position: relative;
         text-align: center;
+        float: left;
+        display: block;
 
         span {
             @extend %center;

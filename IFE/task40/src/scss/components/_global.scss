@@ -39,6 +39,7 @@
     .calendar-prev-view,
     .calendar-curr-view,
     .calendar-next-view {
+        @extend %clearfix;
         @include size(100%);
         @include prefix(transition, #{transform, .4s $cubic}, webkit moz);
         position: absolute;

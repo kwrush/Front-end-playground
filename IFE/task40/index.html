@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="src/css/main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" charset="utf-8"></script>
-    <script src="build/calendar.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="build/calendar.min.css">
+    <script src="build/calendar.min.js" charset="utf-8"></script>
     <style>
         .calendar {
             width: 320px !important;
@@ -24,100 +23,7 @@
     </style>
 </head>
 <body>
-    <div class="calendar">
-        <div class="calendar-header">
-            <h2 class="calendar-title">Novemeber 2016</h2>
-            <div class="calendar-nav calendar-nav-prev">
-                <span class="calendar-nav-button calendar-nav-prev-button">
-                    <svg class="calendar-nav-icon" viewBox="0 0 24 24">
-                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
-                    </svg>
-                </span>
-            </div>
-            <div class="calendar-nav calendar-nav-next">
-                <span class="calendar-nav-button calendar-nav-next-button">
-                    <svg class="calendar-nav-icon" viewBox="0 0 24 24">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-                    </svg>
-                </span>
-            </div>
-        </div>
-        <div class="calendar-pane">
-            <div class="calendar-view calendar-weekday-view show">
-                <ul class="calendar-weekday-header">
-                    <li>SUN</li>
-                    <li>MON</li>
-                    <li>TUE</li>
-                    <li>WED</li>
-                    <li>TUR</li>
-                    <li>FRI</li>
-                    <li>SAT</li>
-                </ul>
-                <div class="calendar-view-wrap">
-                    <div class="calendar-prev-view"></div>
-                    <div class="calendar-curr-view">
-                        <span>31</span>
-                        <span>1</span>
-                        <span>2</span>
-                        <span>3</span>
-                        <span>4</span>
-                        <span>5</span>
-                        <span>6</span>
-                        <span>7</span>
-                        <span>8</span>
-                        <span>9</span>
-                        <span>10</span>
-                        <span>11</span>
-                        <span>12</span>
-                        <span>13</span>
-                        <span>14</span>
-                        <span>15</span>
-                        <span>16</span>
-                        <span>17</span>
-                        <span>18</span>
-                        <span>19</span>
-                        <span>20</span>
-                        <span>21</span>
-                        <span>22</span>
-                        <span>23</span>
-                        <span>24</span>
-                        <span>25</span>
-                        <span>26</span>
-                        <span>27</span>
-                        <span>28</span>
-                        <span>29</span>
-                        <span>30</span>
-                        <span>1</span>
-                        <span>2</span>
-                        <span>3</span>
-                        <span>4</span>
-                        <span>5</span>
-                        <span>6</span>
-                        <span>7</span>
-                        <span>8</span>
-                        <span>9</span>
-                        <span>10</span>
-                        <span>11</span>
-                    </div>
-                    <div class="calendar-next-view"></div>
-                </div>
-            </div>
-            <div class="calendar-view calendar-month-view">
-                <div class="calendar-view-wrap">
-                    <div class="calendar-prev-view"></div>
-                    <div class="calendar-curr-view"></div>
-                    <div class="calendar-next-view"></div>
-                </div>
-            </div>
-            <div class="calendar-view calendar-year-view">
-                <div class="calendar-view-wrap">
-                    <div class="calendar-prev-view"></div>
-                    <div class="calendar-curr-view"></div>
-                    <div class="calendar-next-view"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="calendar"></div>
     <script type="text/javascript">
         var calendar = new Calendar();
     </script>

@@ -1,10 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
-.calendar .calendar-weekday-header {
+.calendar .calendar-prev-view,
+.calendar .calendar-curr-view,
+.calendar .calendar-next-view, .calendar .calendar-weekday-header {
   *zoom: 1; }
-  .calendar .calendar-weekday-header:before, .calendar .calendar-weekday-header:after {
+  .calendar .calendar-prev-view:before,
+  .calendar .calendar-curr-view:before,
+  .calendar .calendar-next-view:before, .calendar .calendar-weekday-header:before, .calendar .calendar-prev-view:after,
+  .calendar .calendar-curr-view:after,
+  .calendar .calendar-next-view:after, .calendar .calendar-weekday-header:after {
     content: " ";
     display: table; }
-  .calendar .calendar-weekday-header:after {
+  .calendar .calendar-prev-view:after,
+  .calendar .calendar-curr-view:after,
+  .calendar .calendar-next-view:after, .calendar .calendar-weekday-header:after {
     clear: both; }
 
 .calendar .calendar-nav-button:after, .calendar .calendar-title:after, .calendar .calendar-day span, .calendar .calendar-day span:before {
@@ -156,7 +164,9 @@
 
 .calendar .calendar-day {
   position: relative;
-  text-align: center; }
+  text-align: center;
+  float: left;
+  display: block; }
   .calendar .calendar-day span {
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
