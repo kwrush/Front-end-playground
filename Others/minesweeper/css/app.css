@@ -292,7 +292,6 @@ div.game-container.block:before {
 }
 
 .tile-bomb:after {
-    margin-top: 4px;
     content: "\1F4A3";
     font-size: 1.2em;
     color: #080808;
