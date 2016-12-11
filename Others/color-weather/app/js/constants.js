@@ -70,22 +70,7 @@ var constants = (function (key) {
         },
 
         colors: function () {
-            var colorSets = [
-                '#7C4DFF', '#C62828',
-                '#5C6BC0', '#304FFE',
-                '#F50057', '#0091EA',
-                '#EF6C00', '#43A047',
-                '#AB47BC', '#6A1B9A',
-                '#7E57C2', '#BA68C8',
-                '#EF5350', '#E53935',
-                '#283593', '#2962FF',
-                '#0097A7', '#00796B',
-                '#E65100', '#C51162',
-                '#F4511E', '#0097A7',
-                '#FF5252', '#607D8B',
-                '#A1887F', '#AD1457',
-            ];
-            return colorSets[Math.floor(Math.random() * colorSets.length)];
+            return randomColor();
         }
     };
 })(apiKey);

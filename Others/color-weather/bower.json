@@ -17,6 +17,7 @@
   ],
   "dependencies": {
       "jquery": "^1.8.0",
-      "underscore": "^1.0.0"
+      "underscore": "^1.0.0",
+      "randomcolor": "^0.4.4"
   }
 }
