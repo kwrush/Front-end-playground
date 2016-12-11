@@ -46,7 +46,7 @@ class Game extends React.Component {
         this.state = {
             history: [{
                 squares: Array(9).fill(null),
-                colors: Array(9).fill('#333'),
+                colors: Array(9).fill(null),
                 position: null,
             }],
             stepNumber: 0,
@@ -58,12 +58,14 @@ class Game extends React.Component {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
+        const colors  = current.colors.slice();
         
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
 
         squares[i] = this.state.xIsNext ? 'X' : 'O';
+        colors[i] = this.state.xIsNext ? 'red' : 'blue';
         const position = {
             x: i % 3,
             y: Math.round(i / 3)
@@ -72,7 +74,7 @@ class Game extends React.Component {
         this.setState({
             history: history.concat([{
                 squares: squares,
-                colors: Array(9).fill('#333'),
+                colors: colors,
                 position: position
             }]),
             stepNumber: history.length,
@@ -110,7 +112,7 @@ class Game extends React.Component {
         if (winner) {
             status = 'Winner: ' + winner.winner;
             winner.indices.map((index) => {
-                current.colors[index] = 'red';
+                current.colors[index] = 'green';
             });
         } else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
