@@ -1,4 +1,8 @@
 ### Colorful weather
 A simple weather web app with colorful design.
-![Image of Screenshot](https://raw.githubusercontent.com/strivk/Front-end-playground/simple-weather/Others/simple-weather/colorful-weather.png)
-You can get an API key from [WeatherUnderground](https://www.wunderground.com/weather/api/d/docs) 
+![Image of Screenshot](https://github.com/strivk/Front-end-playground/blob/master/Others/color-weather/colorful-weather.png?raw=true)
+
+To use the app, you have to acquire an API key from [WeatherUnderground](https://www.wunderground.com/weather/api/d/docs) and create a file named apiKey.js including the following codes
+```javascript
+window.aipKey='Your api key';
+```
