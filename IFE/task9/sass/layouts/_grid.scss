@@ -1,0 +1,33 @@
+.row {
+    @extend %clearfix;
+    overflow: hidden;
+}
+
+.col {
+    float: left;
+    min-height: 1px;
+}
+
+[class*='col-'] {
+    float: left;
+    min-height: 1px;
+    width: 100%;
+}
+
+@for $i from 1 through $gridColumnsS {
+    .col-#{$i}-#{$gridColumnsS} {
+        width: calcPercent($i, $gridColumnsS);
+    }
+}
+
+@for $i from 1 through $gridColumns {
+    .col-#{$i}-#{$gridColumns} {
+        width: calcPercent($i, $gridColumns);
+    }
+}
+
+@for $i from 1 through $gridColumnsL {
+    .col-#{$i}-#{$gridColumnsL} {
+        width: calcPercent($i, $gridColumnsL);
+    }
+}

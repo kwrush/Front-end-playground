@@ -1,0 +1,14 @@
+@import '_logo.scss';
+@import '_search.scss';
+@import '_login.scss';
+
+.site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-width: $minViewWidth;
+    min-height: $headerHeight;
+    background-color: $headerColor;
+    z-index: 9999;
+}

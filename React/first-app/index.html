@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>First React SPA</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://npmcdn.com/react-router@2.4.0/umd/ReactRouter.min.js"></script>
+</head>
+<body>
+    <div id="container">
+
+    </div>
+
+    <script type="text/babel">
+        var { Router,
+              Route,
+              IndexRoute,
+              IndexLink,
+              Link } = ReactRouter;
+
+        var destination = document.querySelector('#container');
+
+        var App = React.createClass({
+            render: function () {
+                return (
+                    <div>
+                        <h1>Simple SPA</h1>
+                        <ul className="header">
+                            <li>
+                                <IndexLink to="/" activeClassName="active">Home</IndexLink>
+                            </li>
+                            <li>
+                                <Link to="/stuff" activeClassName="active">Stuff</Link>
+                            </li>
+                            <li>
+                                <Link to="/contact" activeClassName="active">Contact</Link>
+                            </li>
+                        </ul>
+                        <div className="content">
+                            {this.props.children}
+                        </div>
+                    </div>
+                );
+            }
+        });
+
+        var Home = React.createClass({
+            render: function () {
+                return (
+                    <div>
+                        <h2>Hello</h2>
+                        <p>Cras facilisis urna ornare ex volutpat, et
+                        convallis erat elementum. Ut aliquam, ipsum vita gravida suscipit,
+                        metus dui bibendum est, eget rhoncus nibh
+                        metus nec massa. Maecenas hendrerit laoreet augue
+                        nec molestie. Cum sociis natoque penatibus et magnis
+                        dis parturient montes, nascetur ridiculus mus.</p>
+
+                        <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
+                    </div>
+                );
+            }
+        });
+
+        var Contact = React.createClass({
+            render: function () {
+                return (
+                    <div>
+                        <h2>Got questions?</h2>
+                        <p>The easiest thing to do is post on our <a href="#">forums</a></p>
+                    </div>
+                );
+            }
+        });
+
+        var Stuff = React.createClass({
+            render: function () {
+                return (
+                    <div>
+                        <h2>STUFF</h2>
+                        <p>Mauris sem velit, vehicula eget sodales vitae, rhoncus eget sapien:</p>
+                        <ol>
+                            <li>Nulla pulvinar diam</li>
+                            <li>Facilisis bibendum</li>
+                            <li>Vestibulum vulputate</li>
+                            <li>Eget erat</li>
+                            <li>Id porttitor</li>
+                        </ol>
+                    </div>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            <Router>
+                <Route path="/" component={App}>
+                    <IndexRoute component={Home}></IndexRoute>
+                    <Route path="stuff" component={Stuff}></Route>
+                    <Route path="contact" component={Contact}></Route>
+                </Route>
+            </Router>,
+            destination
+        );
+    </script>
+</body>
+</html>

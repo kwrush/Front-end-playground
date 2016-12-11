@@ -1,0 +1,201 @@
+.stats-header {
+    padding-bottom: 12px;
+    font-size: $fontSizeLarge;
+    font-weight: bold;
+}
+
+.stats-item {
+    margin-bottom: 12px;
+}
+
+.stats-turnover-list {
+    @include size(100%, 72px);
+}
+
+.stats-turnover-item {
+    margin-right: 5%;
+    @include size(21.25%, 100%);
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.turnover-data {
+    height: 100%;
+    padding: 12px;
+    background-color: $milk;
+    display: block;
+
+    &.blue {
+        @extend %blue-left-border;
+
+        & .graph {
+            background: $blue;
+        }
+    }
+
+    &.red {
+        @extend %red-left-border;
+
+        & .graph {
+            background: $red;
+        }
+    }
+
+    &.green {
+        @extend %green-left-border;
+
+        & .graph {
+            background: $green;
+        }
+    }
+
+    &.yellow {
+        @extend %yellow-left-border;
+
+        & .graph {
+            background: $yellow;
+        }
+    }
+}
+
+.turnover-value {
+    height: 100%;
+
+    & span[class*="turnover-value-"] {
+        display: block;
+        @include size(100%, 50%);
+        line-height: 2em;
+    }
+}
+
+.turnover-graph {
+    height: 100%;
+    padding-left: 24px;
+
+    & .graph {
+        @include size(100%);
+    }
+}
+
+.stats-table-item {
+    height: 360px;
+
+    .tab-wrap {
+        @include size(100%);
+    }
+}
+
+.tab-pane {
+    overflow: auto;
+    padding: 24px 32px 0 32px !important;
+}
+
+.search-report-form {
+
+    & .search-button {
+        position: relative;
+        float: right;
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            @include size(100%);
+            display: block;
+        }
+    }
+}
+
+.search-input-field {
+    margin-bottom: 8px;
+    padding: 4px 16px 0 16px;
+}
+
+.input-row {
+    width: 100%;
+    margin-bottom: 16px;
+
+    & label {
+        padding-left: 8px;
+        color: $grey;
+    }
+
+    & input,
+    & textarea {
+        padding: 8px 8px 4px 8px;
+        width: 100%;
+        font-size: $fontSize;
+        color: $darkGrey;
+        background: none;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid $lightGrey;
+        display: block;
+    }
+
+    & textarea {
+        line-height: 1.5;
+        height: 6em;
+        resize: none;
+    }
+}
+
+.input-price-field {
+    position: relative;
+    padding-right: 4px;
+
+    & .icon-cny {
+        position: absolute;
+        left: 8px;
+        bottom: 4px;
+        color: $grey;
+    }
+}
+
+.input-people-field {
+    padding-left: 4px;
+}
+
+#input-price {
+    padding-left: 22px;
+}
+
+
+.search-action-field {
+    width: 100%;
+    padding: 0 8px;
+    font-size: $fontSizeSmall;
+    color: $grey;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#agree-checkbox {
+    vertical-align: middle;
+    display: inline-block;
+
+    & ~ .search-button {
+        cursor: not-allowed;
+
+        &:before {
+            background: rgba(0, 0, 0, .3);
+        }
+    }
+
+    & + label {
+        height: 28px;
+        line-height: 28px;
+        display: inline-block;
+    }
+
+    &:checked ~ .search-button {
+        cursor: pointer;
+
+        &:before {
+            background: none;
+        }
+    }
+}

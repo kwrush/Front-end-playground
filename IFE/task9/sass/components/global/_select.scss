@@ -1,0 +1,16 @@
+.select-wrap {
+    padding: 4px 0;
+    display: block;
+
+    & > label {
+        padding: 0 8px;
+        height: 100%;
+        width: 70px;
+        display: inline-block;
+        text-align: right;
+    }
+
+    & > .select {
+        @include size(100px, 100%);
+    }
+}

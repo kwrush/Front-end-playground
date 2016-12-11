@@ -1,0 +1,28 @@
+// color
+$white: #FFFFFF;
+$blueGreen: rgb(0, 151, 167);
+$lightBlueGreen: rgba(0, 151, 167, .5);
+$black: rgba(0, 0, 0, 0.8);
+$grey: rgba(0, 0, 0, 0.5);
+
+$highlightColor: $blueGreen;
+$hoverColor: $lightBlueGreen;
+$bgColor: $white;
+$fontColor: $black;
+$fontColorAlt: $white;
+$rippleColor: rgba(0, 0, 0, .13);
+
+// Font families
+$openSans: 'Open Sans', Helvetica, Arial, sans-serif;
+
+// Font size
+$fontSizeSmall: 13px;
+$fontSize: 15px;
+$fontSizeLarge: 18px;
+$fontSizeXLarge: 20px;
+
+// padding, width values etc.
+$wrapPadding: 8px;
+$navSize: 48px;
+
+$cubic: cubic-bezier(0.23, 1, 0.32, 1);

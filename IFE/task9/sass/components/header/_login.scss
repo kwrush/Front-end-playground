@@ -1,0 +1,15 @@
+.login {
+    float: right;
+    margin-left: 1%;
+    margin-right: 8%;
+    line-height: $headerHeight;
+    color: $primaryColor;
+
+    & a {
+        vertical-align: middle;
+    }
+
+    & .fa {
+        margin-right: 4px;
+    }
+}

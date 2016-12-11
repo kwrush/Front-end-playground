@@ -1,0 +1,62 @@
+.dashboard {
+    position: relative;
+    margin: 0 auto;
+    @include size(calc(100% - #{$sidebarWidth}), 100%);
+    min-width: calc($minViewWidth - $sibarWidth);
+    background-color: $lightGrey;
+    overflow: auto;
+}
+
+.db-main {
+    position: relative;
+    margin-top: $topNavHeight;
+    padding: 20px 6%;
+    @include size(100%);
+
+    & > section {
+        width: 100%;
+    }
+}
+
+.db-section {
+    margin-bottom: 28px !important;
+}
+
+.db-item {
+    margin-bottom: 14px !important;
+}
+
+.stats-pane {
+    padding-right: 8px;
+
+    &:last-child {
+        padding-right: 0;
+    }
+}
+
+.rounded-wrap {
+    position: relative;
+    @include size(100%);
+    @include rounded(8px);
+    background: $milk;
+    border: 1px solid rgba(0, 0, 0, .2);
+    overflow: hidden;
+
+    & .inner-wrap {
+        padding: 12px 20px;
+        font-size: $fontSize;
+        @include size(100%, calc(100% - 24px - #{$fontSize}));
+    }
+
+    & .wrap-header {
+        padding: 12px;
+        background: $whiteGrey;
+        color: $grey;
+        font-weight: bold;
+    }
+}
+
+@import '_topnav.scss';
+@import '_dbsearch.scss';
+@import '_dbstats.scss';
+@import '_dbrank.scss';

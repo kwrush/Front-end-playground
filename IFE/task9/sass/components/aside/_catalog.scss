@@ -1,0 +1,19 @@
+.catalog {
+    color: $lightGrey;
+    font-size: $fontSize;
+    @include prefix(user-select, none, webkit moz ms);
+
+    & .catalog-nav {
+    }
+}
+
+.catalog-list {
+
+    & .catalog-list-item {
+        padding-left: 30px !important;
+
+        &:hover {
+            background-color: $highlight;
+        }
+    }
+}

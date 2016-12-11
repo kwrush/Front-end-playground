@@ -1,0 +1,19 @@
+{
+  "name": "task9",
+  "version": "1.0.0",
+  "description": "IFE task 9",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "IFE",
+    "task9"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+      "gulp": "*",
+      "gulp-sass": "*"
+  }
+}

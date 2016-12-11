@@ -1,0 +1,17 @@
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin prefix($prop, $val, $vendors: webkit moz ms o) {
+    @if $vendors {
+        @each $vendor in $vendors {
+            #{'-' + $vendor + '-' + $prop}: #{$val};
+        }
+    }
+    #{$prop}: #{$val};
+}
+
+@mixin rounded($radius: .5em) {
+    @include prefix(border-radius, $radius, webkit moz);
+}

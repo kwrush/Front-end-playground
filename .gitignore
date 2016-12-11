@@ -48,6 +48,9 @@ Temporary Items
 **/node_modules/
 **/bower_components/
 
+# vscode config
+**/.vscode/
+
 # api key
 **/apiKey.js
 **/apiKey.txt

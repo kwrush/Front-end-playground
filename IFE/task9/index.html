@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task Nine</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header" class="clearfix">
+        <div class="logo">
+            <a href="#" class="fa fa-archive"></a>
+        </div>
+        <section class="login">
+            <a href="#">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                <span>Login</span>
+            </a>
+        </section>
+        <section class="search">
+            <form class="search-form" action="" method="GET">
+                <label for="search-input">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </label>
+                <input type="text" id="search-input">
+            </form>
+        </section>
+    </header>
+    <div class="wrap row">
+        <div class="aside col">
+            <section class="profile sidebar">
+                <div class="user-avatar">
+                    <div class="avatar-border inner">
+                        <img src="images/avatar.jpg" alt="Avatar" class="avatar">
+                    </div>
+                    <a href="#" class="username inner">Strivk</a>
+                </div>
+                <div class="user-stat row">
+                    <div class="user-collects user-stat-count col-2-4">
+                        <span class="collects-count">110</span>
+                        <span class="user-stat-text">Collections</span>
+                    </div>
+                    <div class="user-fans user-stat-count col-2-4">
+                        <span class="fas-count">313</span>
+                        <span class="user-stat-text">Followers</span>
+                    </div>
+                </div>
+            </section>
+            <section class="catalog sidebar">
+                <nav class="catalog-nav">
+                    <ul class="catalog-list nav-list">
+                        <li class="catalog-list-item nav-list-item">
+                            <input type="checkbox" id="catalog-archive" class="item-title-peer">
+                            <label for="catalog-archive" class="item-title">
+                                <i class="item-title-icon fa fa-archive"></i>
+                                Personal Reports
+                            </label>
+                            <ul class="archive-list nav-list nav-folder-list">
+                                <li class="archive-list-item nav-list-item">
+                                    <input type="checkbox" id="archive-1" class="item-title-peer">
+                                    <label for="archive-1" class="item-title">
+                                        <i class="item-title-arrow fa fa-angle-right"></i>
+                                        <i class="item-title-icon fa fa-folder"></i>
+                                        Folder-1
+                                    </label>
+                                    <ul class="archive-doc-list nav-list nav-folder-list">
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-1
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="archive-list-item nav-list-item">
+                                    <input type="checkbox" id="archive-2" class="item-title-peer">
+                                    <label for="archive-2" class="item-title">
+                                        <i class="item-title-arrow fa fa-angle-right"></i>
+                                        <i class="item-title-icon fa fa-folder"></i>
+                                        Folder-2
+                                    </label>
+                                    <ul class="archive-doc-list nav-list nav-folder-list">
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-1
+                                            </a>
+                                        </li>
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-2
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="archive-list-item nav-list-item">
+                                    <input type="checkbox" id="archive-3" class="item-title-peer">
+                                    <label for="archive-3" class="item-title">
+                                        <i class="item-title-arrow fa fa-angle-right"></i>
+                                        <i class="item-title-icon fa fa-folder"></i>
+                                        Folder-3
+                                    </label>
+                                    <ul class="archive-doc-list nav-list nav-folder-list">
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-1
+                                            </a>
+                                        </li>
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-2
+                                            </a>
+                                        </li>
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-2
+                                            </a>
+                                        </li>
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-2
+                                            </a>
+                                        </li>
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-2
+                                            </a>
+                                        </li>
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-2
+                                            </a>
+                                        </li>
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-2
+                                            </a>
+                                        </li>
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-2
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-2
+                                            </a>
+                                        </li>
+                                        <li class="nav-list-item">
+                                            <a href="#" class="item-title">
+                                                <i class="item-title-icon fa fa-file-text"></i>
+                                                Document-2
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="catalog-list-item nav-list-item">
+                            <input type="checkbox" id="catalog-collect" class="item-title-peer">
+                            <label for="catalog-collect" class="item-title">
+                                <i class="item-title-icon fa fa-star"></i>
+                                Collections
+                            </label>
+                        </li>
+                        <li class="catalog-list-item nav-list-item">
+                            <input type="checkbox" id="catalog-share" class="item-title-peer">
+                            <label for="catalog-share" class="item-title">
+                                <i class="item-title-icon fa fa-share-alt-square"></i>
+                                Share
+                            </label>
+                        </li>
+                        <li class="catalog-list-item nav-list-item">
+                            <input type="checkbox" id="catalog-library" class="item-title-peer">
+                            <label for="catalog-library" class="item-title">
+                                <i class="item-title-icon fa fa-picture-o"></i>
+                                Image Library
+                            </label>
+                        </li>
+                        <li class="catalog-list-item nav-list-item">
+                            <input type="checkbox" id="catalog-record" class="item-title-peer">
+                            <label for="catalog-record" class="item-title">
+                                <i class="item-title-icon fa fa-pencil-square"></i>
+                                Records
+                            </label>
+                        </li>
+                        <li class="catalog-list-item nav-list-item">
+                            <input type="checkbox" id="catalog-account" class="item-title-peer">
+                            <label for="catalog-account" class="item-title">
+                                <i class="item-title-icon fa fa-user-circle"></i>
+                                Account
+                            </label>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+        </div>
+        <div class="dashboard col">
+            <nav class="top-catalog-directory-nav">
+                <ul class="clearfix">
+                    <li class="directory-link">
+                        <a href="#">Home</a>
+                    </li>
+                    <li class="directory-link">
+                        <a href="#">Personal Report</a>
+                    </li>
+                    <li class="directory-link">
+                        <a href="#">Folder-2</a>
+                    </li>
+                    <li class="directory-link">
+                        <a href="#">Document-1</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="db-main">
+                <section class="db-query db-section">
+                    <div class="db-query-form db-item">
+                        <form action="" class="query-form" method="GET">
+                            <div class="query-form-board row">
+                                <div class="query-item col">
+                                    <div class="select-wrap">
+                                        <label for="select-query-item">Item</label>
+                                        <select id="select-query-item" class="select">
+                                            <option value="value1" selected>Value 1</option>
+                                            <option value="value2">Value 2</option>
+                                            <option value="value3">Value 3</option>
+                                            <option value="value3">Value 3</option>
+                                            <option value="value3">Value 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="query-item col">
+                                    <div class="select-group">
+                                        <div class="select-wrap">
+                                            <label for="select-buyer">Buyer</label>
+                                            <select id="select-buyer" class="select">
+                                                <option value="buyer1" selected>Buyer 1</option>
+                                                <option value="buyer2">Buyer 2</option>
+                                                <option value="buyer3">Buyer 3</option>
+                                                <option value="buyer4">Buyer 4</option>
+                                                <option value="buyer5">Buyer 5</option>
+                                                <option value="buyer6">Buyer 6</option>
+                                            </select>
+                                        </div>
+                                        <div class="select-wrap">
+                                            <label for="select-vendor">Vendor</label>
+                                            <select id="select-vendor" class="select">
+                                                <option value="vendor1" selected>Vendor 1</option>
+                                                <option value="vendor2">Vendor 2</option>
+                                                <option value="vendor3">Vendor 3</option>
+                                                <option value="vendor4">Vendor 4</option>
+                                                <option value="vendor5">Vendor 5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button class="button exchange-button">
+                                        <i class="fa fa-exchange" aria-hidden="true"></i>
+                                    </button>
+                                    <span class="tooltips">Reverse buyer and vendor</span>
+                                </div>
+                                <div class="query-item col">
+                                    <div class="select-wrap">
+                                        <label for="input-date">Date</label>
+                                        <input type="text" id="input-date" class="select" value="11-16-2016">
+                                    </div>
+                                    <div class="select-wrap">
+                                        <label for="select-people">Candidates</label>
+                                        <select id="select-people" class="select">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="query-item col">
+                                    <div class="select-wrap">
+                                        <label for="select-duration">Duration</label>
+                                        <select id="select-duration" class="select">
+                                            <option>2 days</option>
+                                            <option>3 days</option>
+                                            <option>4 days</option>
+                                            <option selected>5 days</option>
+                                            <option>6 days</option>
+                                            <option>7 days</option>
+                                            <option>8 days</option>
+                                            <option>9 days</option>
+                                            <option >10 days</option>
+                                        </select>
+                                    </div>
+                                    <div class="select-wrap">
+                                        <label for="select-sold">Sold Items</label>
+                                        <select id="select-sold" class="select">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="button search-button">Search</button>
+                        </form>
+                    </div>
+                    <div class="db-query-history db-item row">
+                        <div class="hour-history col-4-5">
+                            <span class="button angle-button fa fa-angle-left"></span>
+                            <span class="button angle-button fa fa-angle-right"></span>
+                            <ul class="hour-history-sequence row">
+                                <li class="seq-item seq-item-selected col">
+                                    <a href="#" class="seq-item-wrap">
+                                        <div class="seq-item-text seq-item-time">
+                                            <span class="seq-item-time-value time-am">10:00</span>
+                                        </div>
+                                        <div class="seq-item-text seq-item-value">
+                                            <span class="seq-item-price">
+                                                <i class="seq-item-price-icon icon-cny"></i>
+                                                <i class="seq-item-price-value">1300</i>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="seq-item seq-item-selected col">
+                                    <a href="#" class="seq-item-wrap seq-item-selected">
+                                        <div class="seq-item-text seq-item-time">
+                                            <span class="seq-item-time-value time-am">11:00</span>
+                                        </div>
+                                        <div class="seq-item-text seq-item-value">
+                                            <span class="seq-item-price">
+                                                <i class="seq-item-price-icon icon-cny"></i>
+                                                <i class="seq-item-price-value">1200</i>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="seq-item seq-item-selected col">
+                                    <a href="#" class="seq-item-wrap">
+                                        <div class="seq-item-text seq-item-time">
+                                            <span class="seq-item-time-value time-am">12:00</span>
+                                        </div>
+                                        <div class="seq-item-text seq-item-value">
+                                            <span class="seq-item-price">
+                                                <i class="seq-item-price-icon icon-cny"></i>
+                                                <i class="seq-item-price-value">1300</i>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="seq-item seq-item-selected col">
+                                    <a href="#" class="seq-item-wrap">
+                                        <div class="seq-item-text seq-item-time">
+                                            <span class="seq-item-time-value time-pm">01:00</span>
+                                        </div>
+                                        <div class="seq-item-text seq-item-value">
+                                            <span class="seq-item-price">
+                                                <i class="seq-item-price-icon icon-cny"></i>
+                                                <i class="seq-item-price-value">1500</i>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="seq-item seq-item-selected col">
+                                    <a href="#" class="seq-item-wrap">
+                                        <div class="seq-item-text seq-item-time">
+                                            <span class="seq-item-time-value time-pm">02:00</span>
+                                        </div>
+                                        <div class="seq-item-text seq-item-value">
+                                            <span class="seq-item-price">
+                                                <i class="seq-item-price-icon icon-cny"></i>
+                                                <i class="seq-item-price-value">1400</i>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="seq-item seq-item-selected col">
+                                    <a href="#" class="seq-item-wrap">
+                                        <div class="seq-item-text seq-item-time">
+                                            <span class="seq-item-time-value time-pm">03:00</span>
+                                        </div>
+                                        <div class="seq-item-text seq-item-value">
+                                            <span class="seq-item-price">
+                                                <i class="seq-item-price-icon icon-cny"></i>
+                                                <i class="seq-item-price-value">1200</i>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="history-query col-1-5">
+                            <a href="#" class="search-history">
+                                <i class="fa fa-calendar"></i>Search History
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <section class="db-stats db-section">
+                    <header class="stats-header">
+                        <h2>Statistics of April, 2016</h2>
+                    </header>
+                    <div class="stats-item stats-turnover">
+                        <ul class="stats-turnover-list row">
+                            <li class="stats-turnover-item col">
+                                <a href="#" class="turnover-data green row">
+                                    <div class="turnover-value col-2-4">
+                                        <span class="turnover-value-number">133311</span>
+                                        <span class="turnover-value-text">Turnover</span>
+                                    </div>
+                                    <div class="turnover-graph col-2-4">
+                                        <div class="graph"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="stats-turnover-item col">
+                                <a href="#" class="turnover-data yellow row">
+                                    <div class="turnover-value col-2-4">
+                                        <span class="turnover-value-number">133311</span>
+                                        <span class="turnover-value-text">Turnover</span>
+                                    </div>
+                                    <div class="turnover-graph col-2-4">
+                                        <div class="graph"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="stats-turnover-item col">
+                                <a href="#" class="turnover-data blue row">
+                                    <div class="turnover-value col-2-4">
+                                        <span class="turnover-value-number">133311</span>
+                                        <span class="turnover-value-text">Turnover</span>
+                                    </div>
+                                    <div class="turnover-graph col-2-4">
+                                        <div class="graph"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="stats-turnover-item col">
+                                <a href="#" class="turnover-data red row">
+                                    <div class="turnover-value col-2-4">
+                                        <span class="turnover-value-number">133311</span>
+                                        <span class="turnover-value-text">Turnover</span>
+                                    </div>
+                                    <div class="turnover-graph col-2-4">
+                                        <div class="graph"></div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="stats-item stats-table row">
+                        <div class="stats-pane stats-table-item col-3-5">
+                            <div class="rounded-wrap">
+                                <header class="wrap-header">
+                                    <h3>Projects</h3>
+                                </header>
+                                <div class="inner-wrap">
+                                    <ul class="tab-wrap">
+                                        <li class="tab">
+                                            <input id="tab-nav-1" type="radio" name="tab-nav" value="" checked>
+                                            <label for="tab-nav-1">Project1</label>
+                                            <div class="tab-pane">
+                                                <table class="report-table table">
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                        <td class="table-cell">Material-1</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </li>
+                                        <li class="tab">
+                                            <input id="tab-nav-2" type="radio" name="tab-nav" value="">
+                                            <label for="tab-nav-2">Project2</label>
+                                            <div class="tab-pane">
+                                                <table class="report-table table">
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                        <td class="table-cell">Material-2</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </li>
+                                        <li class="tab">
+                                            <input id="tab-nav-3" type="radio" name="tab-nav" value="">
+                                            <label for="tab-nav-3">Project3</label>
+                                            <div class="tab-pane">
+                                                <table class="report-table table">
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                        <td class="table-cell">Material-3</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </li>
+                                        <li class="tab">
+                                            <input id="tab-nav-4" type="radio" name="tab-nav" value="">
+                                            <label for="tab-nav-4">Project4</label>
+                                            <div class="tab-pane">
+                                                <table class="report-table table">
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                        <td class="table-cell">Material-4</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </li>
+                                        <li class="tab">
+                                            <input id="tab-nav-5" type="radio" name="tab-nav" value="">
+                                            <label for="tab-nav-5">Project5</label>
+                                            <div class="tab-pane">
+                                                <table class="report-table table">
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                    </tr>
+                                                    <tr class="table-row">
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                        <td class="table-cell">Material-5</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stats-pane stats-table-item col-2-5 rounded">
+                            <div class="rounded-wrap">
+                                <header class="wrap-header">
+                                    <h3>Project One</h3>
+                                </header>
+                                <div class="inner-wrap">
+                                    <form action="" class="search-report-form">
+                                        <div class="search-input-field">
+                                            <div class="input-row">
+                                                <label for="search-input-title">Title</label>
+                                                <input type="text" id="input-report-title" placeholder="Enter report title">
+                                            </div>
+                                            <div class="input-row row">
+                                                <div class="input-price-field col-2-5">
+                                                    <label for="" class="search-input-title">Price</label>
+                                                    <i class="icon-cny"></i>
+                                                    <input type="text" id="input-price">
+                                                </div>
+                                                <div class="input-people-field col-3-5">
+                                                    <label for="" class="search-input-title">People in charge</label>
+                                                    <input type="text" id="input-people">
+                                                </div>
+                                            </div>
+                                            <div class="input-row">
+                                                <label for="#input-remark">Remarks</label>
+                                                <textarea name="name" id="input-remark"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="search-action-field">
+                                            <input type="checkbox" id="agree-checkbox">
+                                            <label for="agree-checkbox">Abide by the confidentiality agreement</label>
+                                            <button class="button search-button">Search</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-item stats-rank row">
+                        <div class="stats-pane calendar-pane col-2-5">
+                            <div class="rounded-wrap">
+                                <header class="wrap-header">
+                                    <h3>Calendar</h3>
+                                </header>
+                            </div>
+                        </div>
+                        <div class="stats-pane rank-pane col-3-5">
+                            <div class="rounded-wrap">
+                                <header class="wrap-header">
+                                    <h3>Brand Ranking</h3>
+                                </header>
+                                <div class="inner-wrap">
+                                    <table class="rank-table table">
+                                        <tr class="table-row header-row">
+                                            <th class="table-header">Rank</th>
+                                            <th class="table-header">Brand</th>
+                                            <th class="table-header">Search Trends</th>
+                                        </tr>
+                                        <tr class="table-row content-row">
+                                            <td class="table-cell">1</td>
+                                            <td class="table-cell">Volkswagen</td>
+                                            <td class="table-cell row">
+                                                <span class="trend-index col">48912001</span>
+                                                <span class="trend-bar col w-85"></span>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row content-row">
+                                            <td class="table-cell">2</td>
+                                            <td class="table-cell">Toyota</td>
+                                            <td class="table-cell row">
+                                                <span class="trend-index col">29317001</span>
+                                                <span class="trend-bar col w-75"></span>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row content-row">
+                                            <td class="table-cell">3</td>
+                                            <td class="table-cell">Audi</td>
+                                            <td class="table-cell row">
+                                                <span class="trend-index col">23112001</span>
+                                                <div class="trend-bar col w-70"></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row content-row">
+                                            <td class="table-cell">4</td>
+                                            <td class="table-cell">Honda</td>
+                                            <td class="table-cell row">
+                                                <span class="trend-index col">22912001</span>
+                                                <span class="trend-bar col w-68"></span>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row content-row">
+                                            <td class="table-cell">5</td>
+                                            <td class="table-cell">Ford</td>
+                                            <td class="table-cell row">
+                                                <span class="trend-index col">22312001</span>
+                                                <span class="trend-bar col w-65"></span>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row content-row">
+                                            <td class="table-cell">6</td>
+                                            <td class="table-cell">BMW</td>
+                                            <td class="table-cell row">
+                                                <span class="trend-index col">21442001</span>
+                                                <span class="trend-bar col w-60"></span>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row content-row">
+                                            <td class="table-cell">7</td>
+                                            <td class="table-cell">Hyundai</td>
+                                            <td class="table-cell row">
+                                                <span class="trend-index col">20114969</span>
+                                                <span class="trend-bar col w-55"></span>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row content-row">
+                                            <td class="table-cell">8</td>
+                                            <td class="table-cell">KIA</td>
+                                            <td class="table-cell row">
+                                                <span class="trend-index col">19251680</span>
+                                                <span class="trend-bar col w-50"></span>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row content-row">
+                                            <td class="table-cell">9</td>
+                                            <td class="table-cell">Mercedes</td>
+                                            <td class="table-cell row">
+                                                <span class="trend-index col">19172837</span>
+                                                <span class="trend-bar col w-40"></span>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row content-row">
+                                            <td class="table-cell">10</td>
+                                            <td class="table-cell">Buick</td>
+                                            <td class="table-cell row">
+                                                <span class="trend-index col">18544027</span>
+                                                <span class="trend-bar w-30 col"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+</body>
+</html>
