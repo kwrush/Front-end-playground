@@ -2,17 +2,17 @@
   "name": "colorful-weather",
   "description": "a simple weather web app with colorful design",
   "version": "0.0.1",
-  "main": "index.html",
+  "main": "app.js",
   "private": "true",
   "license": "MIT",
   "scripts": {
-      "postinstall": "bower install",
-      "start": "http-server -a localhost -p 8080 -c-1"
+    "postinstall": "bower install",
+    "start": "http-server -a localhost -p 8000 -c-1"
   },
   "devDependencies": {
-    "bower": "^1.3.1",
-    "http-server": "^0.9.0",
+    "bower": "^1.8.0",
     "chai": "*",
+    "http-server": "^0.9.0",
     "mocha": "*"
   }
 }
