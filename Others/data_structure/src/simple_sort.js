@@ -84,8 +84,12 @@ export function mergeSort(array) {
     return merge(left, right);
 }
 
-
-export function quickSort(array, left, right) {
+/*
+ * Sort the given array in ascend order by quick sort algorithm 
+ * @param{number} Numeric array
+ * @return{number} Sorted array
+ */
+export function quickSort(array) {
     doQuickSort(array, 0, array.length - 1);
     return array;
 }
