@@ -4,5 +4,5 @@ A simple weather web app with colorful design.
 
 To use the app, you have to acquire an API key from [WeatherUnderground](https://www.wunderground.com/weather/api/d/docs) and create a file named apiKey.js including the following codes
 ```javascript
-window.aipKey='Your api key';
+window.apiKey='Your api key';
 ```
