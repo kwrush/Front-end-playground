@@ -1,0 +1,22 @@
+{
+  "name": "minesweeper",
+  "version": "0.0.0",
+  "description": "Mine sweeper",
+  "main": "game.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec -r jsdom-global/register"
+  },
+  "keywords": [
+    "MineSweeper",
+    "JavaScript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.0.1",
+    "gulp": "^3.9.1",
+    "jsdom": "11.0.0",
+    "jsdom-global": "3.0.2",
+    "mocha": "^3.4.2"
+  }
+}
