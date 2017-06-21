@@ -1,8 +1,5 @@
-import {base} from '../const'
-import {
-    listenTo,
-    fire
-} from '../util'
+import { base } from '../const'
+import { listenTo, fire } from '../util'
 
 import Grid from './grid'
 import View from './view'
