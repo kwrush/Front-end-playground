@@ -4,6 +4,7 @@ export {
     hasClass,
     removeClass,
     addClass,
+    clearClass,
     on,
     delegate,
     listenTo,
@@ -23,27 +24,32 @@ function hasClass (element, className) {
 }
 
 function addClass (element, className) {
-    element && element.classList.add(className);
+    const names = className.trim().split(/\s+/);
+    element && element.classList.add(...names);
 }
 
 function removeClass (element, className) {
     element && element.classList.remove(className);
 }
 
+function clearClass (element) {
+    element && (element.className = '');
+}
+
 function on (target, event, callback, useCapture) {
-    target.addEventListener(target, event, _callback(callback, target), !!!useCapture);
+    target.addEventListener(event, _callback(callback, target), !!!useCapture);
 }
 
 function delegate (delegator, selector, eventName, callback) {
-    let useCapture = type === 'blur' || type === 'focus';
+    let useCapture = eventName === 'blur' || eventName === 'focus';
 
     on(delegator, eventName, (event) => {
         let target = event.target;
         let potentialTargets = qsa(selector, delegator);
-        let hasMatch = Array.prototype.indexOf(potentialTargets, target) >= 0
+        let hasMatch = Array.prototype.indexOf.call(potentialTargets, target) >= 0
 
         if (hasMatch) {
-            _callback(target, callback)(event);
+            _callback(callback, target)(event);
         }
 
     }, useCapture);
@@ -77,9 +83,9 @@ function fire (obj, eventName, eventData) {
 }
 
 function _callback(callback, context) {
-    return function (args) {
+    return function (...params) {
         if (typeof callback === 'function') {
-            callback.call(context, args);
+            callback.apply(context, params);
         }
     }
 }

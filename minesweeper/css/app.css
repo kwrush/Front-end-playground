@@ -138,13 +138,13 @@ div.reset {
 }
 
 /* Game container */
-div.game-container {
+div.grid-container {
     position: relative;
     width: 100%;
     margin-top: 20px;
 }
 
-div.game-container.block:before {
+div.grid-container.block:before {
     content: "";
     position: absolute;
     top: 0;
@@ -156,15 +156,15 @@ div.game-container.block:before {
 }
 
 /* Tiles styles */
-.band {
+/*.band {
     width: 100%;
     height: 37px;
     margin-bottom: 4px;
-}
+}*/
 
 .tile {
     position: relative;
-    margin: 0 2px;
+    margin: 2px 2px;
     width: 35px;
     height: 35px;
     background: #BDC0BA;
@@ -222,7 +222,7 @@ div.game-container.block:before {
 }
 
 .tile-2 {
-    background: #F6C555;
+    background: #F7C242;
 }
 
 .tile-2:after {
@@ -230,7 +230,7 @@ div.game-container.block:before {
 }
 
 .tile-3 {
-    background: #F7C242;
+    background: #FFB11B;
 }
 
 .tile-3:after {
@@ -238,7 +238,7 @@ div.game-container.block:before {
 }
 
 .tile-4 {
-    background: #FFB11B;
+    background: #FC9F4D;
 }
 
 .tile-4:after {
@@ -246,7 +246,7 @@ div.game-container.block:before {
 }
 
 .tile-5 {
-    background: #FC9F4D;
+    background: #ED784A;
 }
 
 .tile-5:after {
@@ -254,7 +254,7 @@ div.game-container.block:before {
 }
 
 .tile-6 {
-    background: #ED784A;
+    background: #F05E1C;
 }
 
 .tile-6:after {
@@ -262,7 +262,7 @@ div.game-container.block:before {
 }
 
 .tile-7 {
-    background: #F05E1C;
+    background: #E83015;
 }
 
 .tile-7:after {

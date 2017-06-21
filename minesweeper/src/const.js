@@ -8,7 +8,7 @@ const _EASY = {
 
 const _MEDIUM = {
     INDEX: 1,
-    NANE: 'Medium',
+    NAME: 'Medium',
     BOMB_NUM: 40,
     GRID_ROW: 16,
     GRID_COL: 16
@@ -32,9 +32,5 @@ export const base = {
         RIGHT_CLICK: 3
     },
 
-    LEVELS: {
-        EASY: _EASY,
-        MEDIUM: _MEDIUM,
-        HARD: _HARD
-    }
+    LEVELS: [_EASY, _MEDIUM, _HARD]
 };
