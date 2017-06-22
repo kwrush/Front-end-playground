@@ -35,16 +35,20 @@ export default class Controller {
             this._tileClickHandler(eventData.tile);
         }, this);
 
+        listenTo(this.view, 'toggleFlag', (eventData) => {
+            this._toggleFlag(eventData.tile);
+        }, this);
+
         listenTo(this.view, 'reset', () => {
             this.reset(this.currentLevel).start();
         }, this);
 
         listenTo(this, 'over', () => {
-
+            this.gameOver(false);
         });
 
         listenTo(this, 'won', () => {
-
+            this.gameOver(true);
         });
 
         return this;
@@ -52,6 +56,14 @@ export default class Controller {
 
     start () {
         this.render().startTimer();
+    }
+
+    gameOver (won) {
+        this.won = won;
+        this.over = !this.won;
+        let cmd = this.won ? 'won' : 'over';
+        this.stopTimer();
+        this.view.resetIcon(cmd).toggleGrid(true);
     }
 
     /**
@@ -92,14 +104,16 @@ export default class Controller {
                  .render(this.grid);
         
         let cmd = '';
+        let block = false;
         if (this.isGameRunning()) {
             cmd += 'running';
+            block = false;
         } else if (this.won) {
             cmd += 'won';
         } else if (this.over) {
             cmd += 'over';
         }
-        this.view.resetIcon(cmd);
+        this.view.resetIcon(cmd).toggleGrid(block);
 
         return this;
     }
@@ -142,15 +156,47 @@ export default class Controller {
         }
     }
 
+    _toggleFlag(tile) {
+        if (!this.isGameRunning()) return;
+
+        const pos = this._tileCoordinate(tile);
+        if (pos.row >= 0 && pos.col >= 0) {
+            if (this.grid.isExposed(pos.row, pos.col)) return;
+
+            this.grid.toggleMark(pos.row, pos.col);
+            this.view.toggleFlag(
+                tile, this.grid.isMarked(pos.row, pos.col));
+
+            if (this.grid.isMarked(pos.row, pos.col)) {
+                this.bombsLeft > 0 && this.bombsLeft--;
+            } else {
+                this.bombsLeft < this.levels[this.currentLevel].BOMB_NUM && 
+                this.bombsLeft++;
+            }
+
+            this.view.setBombsLeft(this.bombsLeft);
+        }
+
+        if (this._canWin()) {
+            fire(this, 'won');
+        }
+    }
+
     _clearTile (r, c) {
         if (this.grid.hasBomb(r, c)) {
             fire(this, 'over');
+            // show the mistake and reveal other bombs
+            this._revealBombs();
+            return;
         } else if (this.grid.isExposed(r, c) || this.grid.isMarked(r, c)) {
             // do nothing
         } else {
             this._clearAdjacentTiles(r, c);
         }
 
+        if (this._canWin()) {
+            fire(this, 'won');
+        }
     }
 
     _tileCoordinate(tile) {
@@ -165,6 +211,20 @@ export default class Controller {
         }
 
         return {};
+    }
+
+    _revealBombs () {
+        this.grid.eachCell((cell, r, c) => {
+            // show bombs
+            if (this.grid.hasBomb(r, c)) {
+                let tile = this.view.getTileAt(r, c);
+                this.view.revealBomb(tile);
+            // mark the incorrect flag
+            } else if (this.grid.isMarked(r, c) && !this.grid.hasBomb(r, c)) {
+                let tile = this.view.getTileAt(r, c);
+                this.view.revealMistake(tile);
+            }
+        });
     }
 
     _clearAdjacentTiles (r, c) {
@@ -189,5 +249,19 @@ export default class Controller {
         }
 
         return this;
+    }
+
+    _canWin () {
+        if (this.bombsLeft > 0) return false;
+        let can = true;
+        this.grid.eachCell(cell => {
+            if((!cell.exposed && !cell.hasBomb) || 
+                (cell.marked !== cell.hasBomb)) {
+                can = false;
+                return;
+            }
+        });
+
+        return can;
     }
 }

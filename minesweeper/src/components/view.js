@@ -32,19 +32,26 @@ export default class View {
         return this;
     }
 
-    resetIcon(cmd) {
+    resetIcon (cmd) {
         cmd = typeof cmd === 'string' ? cmd : 'running';
         clearClass(this.$resetButton);
 
         let name = '';
         if (cmd === 'running') {
             name += 'running';
-        } else if (cmd === 'win') {
+        } else if (cmd === 'won') {
             name += 'won';
         } else if (cmd === 'over') {
             name += 'over';
         }
         addClass(this.$resetButton, name);
+
+        return this;
+    }
+
+    toggleGrid (block) {
+       block ? addClass(this.$grid, 'block') : 
+               removeClass(this.$grid, 'block'); 
     }
 
     buildGridView(row, col) {
@@ -90,12 +97,29 @@ export default class View {
         return this;
     }
 
+    revealBomb (tile) {
+        addClass(tile, 'tile-bomb');
+    }
+
+    revealMistake (tile) {
+        removeClass(tile, 'tile-flag');
+        addClass(tile, 'tile-wrong');
+    }
+
     revealTile (tile, bombsNum) {
         addClass(tile, 'tile-' + bombsNum + ' cleared');
     }
 
     getTileAt (r, c) {
         return qs('.cell-' + r + '-' + c);
+    }
+
+    toggleFlag(tile, flag) {
+        if (flag) {
+            addClass(tile, 'tile-flag');
+        } else {
+            removeClass(tile, 'tile-flag');
+        }
     }
 
     _adjustContainerWidth (col) {
@@ -110,6 +134,13 @@ export default class View {
         delegate(this.$grid, '.tile', 'click', (event) => {
             event.preventDefault();
             fire(this, 'tileClicked', {
+                tile: event.target
+            });
+        });
+
+        delegate(this.$grid, '.tile', 'contextmenu', (event) => {
+            event.preventDefault();
+            fire(this, 'toggleFlag', {
                 tile: event.target
             });
         });

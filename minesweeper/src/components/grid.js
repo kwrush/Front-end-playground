@@ -99,6 +99,17 @@ export default class Grid {
         return  r >= 0 && c >= 0 && r < this.row && c < this.col;
     }
 
+    /**
+     * Run the given callback for each cell and 
+     */
+    eachCell (callback) {
+        this.grid.map((row, r) => {
+            return row.map((cell, c) => {
+                return callback.call(this, cell, r, c);
+            });
+        });
+    }
+
     _createTile () {
         return {
             hasBomb: false,
