@@ -1,0 +1,90 @@
+*,
+html,
+body {
+    box-sizing: border-box;
+}
+
+.row:before,
+.row:after {
+    content: "";
+    display: table;
+}
+
+.row:after {
+    clear: both;
+}
+
+.col {
+    float: left;
+}
+
+.tile {
+    margin: 2px;
+    width: 30px;
+    height: 30px;
+    outline: none;
+    background: #BDC0BA;
+    border: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    transition: background .2s ease-out;
+    cursor: pointer;
+}
+
+.tile:active,
+.tile-0,
+.tile-1,
+.tile-2,
+.tile-3,
+.tile-4,
+.tile-5,
+.tile-6,
+.tile-7,
+.tile-8 {
+    transform: translateY(2px);
+    width: 30px;
+    height: 28px;
+    border: none;
+    cursor: default;
+}
+
+.tile-mine {
+    background: #E83015;    
+}
+
+.tile-0 {
+    background: #A8D8B9;
+}
+
+.tile-1 {
+    background: #FAD689;
+}
+
+.tile-2 {
+    background: #F7C242;
+}
+
+.tile-3 {
+    background: #FFB11B;
+}
+
+.tile-4 {
+    background: #FC9F4D;
+}
+
+.tile-5 {
+    background: #ED784A;
+}
+
+.tile-6 {
+    background: #F05E1C;
+}
+
+.tile-7 {
+    background: #E83015;
+}
+
+.tile-8 {
+    background: #E83015;
+}
