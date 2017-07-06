@@ -19,9 +19,12 @@ body {
 }
 
 .tile {
-    margin: 2px;
+    margin: 1px;
     width: 30px;
     height: 30px;
+    font-size: 1.1em;
+    text-align: center;
+    line-height: 30px;
     outline: none;
     background: #BDC0BA;
     border: none;
@@ -42,9 +45,10 @@ body {
 .tile-6,
 .tile-7,
 .tile-8 {
-    transform: translateY(2px);
+    transform: translateY(1px);
     width: 30px;
-    height: 28px;
+    height: 29px;
+    line-height: 28px;
     border: none;
     cursor: default;
 }
