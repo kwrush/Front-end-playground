@@ -39,7 +39,7 @@ function isAdjacentTilesCleared(grid, r, c) {
 
     for (let i = 0; i < offsets.length; i++) {
         const nr = r + offsets[i][0];
-        const nc = c + offset[i][1];
+        const nc = c + offsets[i][1];
         if (within2dArray(grid, nr, nc) && !grid[nr][nc].hasMine && 
             !grid[nr][nc].exposed)  {
             return false;
@@ -102,21 +102,23 @@ export default class Grid extends React.Component {
         }
     }
 
-    componentWillUpdate (nextProps, nextState) {
-        if (nextState.status === 'playing' && this.checkCanWin(nextState.grid)) {
-            this.props.win();
-        }
-    }
-
     exposeTile (r, c) {
+        if (this.props.status !== 'playing') return;
+
         let _grid = this.state.grid;
+
         if (_grid[r][c].hasMine) {
             this.props.gameOver();
         } else {
             this.exposeAround(_grid, r, c);
-            this.setState({
-                grid: _grid
-            });
+
+            if (this.checkCanWin(_grid)) {
+                this.props.win();
+            } else {
+                this.setState({
+                    grid: _grid
+                });
+            }
         }
     }
 
@@ -146,14 +148,20 @@ export default class Grid extends React.Component {
     }
 
     markTile (r, c) {
+        if (this.props.status !== 'playing') return;
+        
         let _grid = this.state.grid;
         if (within2dArray(_grid, r, c)) {
             _grid[r][c].marked = !_grid[r][c].marked;
             this.props.toggleFlag(_grid[r][c].marked);
 
-            this.setState({
-                grid: _grid
-            });
+            if (this.checkCanWin(_grid)) {
+                this.props.win();
+            } else {
+                this.setState({
+                    grid: _grid
+                });
+            }
         }
     }
 
@@ -162,12 +170,8 @@ export default class Grid extends React.Component {
             let row = grid[i];
             for (let j = 0; j < row.length; j++) {
                 let tile = row[j];
-                if (tile.hasMine) {
-                    if (!isAdjacentTilesCleared(grid, i, j)) {
-                        return false;
-                    } else if (!tile.marked) {
-                        return false;
-                    }
+                if (tile.hasMine && !isAdjacentTilesCleared(grid, i, j) && !tile.marked) {
+                    return false;
                 }
             }
         }
