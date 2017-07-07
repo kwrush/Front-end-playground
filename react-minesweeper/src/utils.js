@@ -1,4 +1,4 @@
-export function within2DArray (arr, r, c) {
+export function within2dArray (arr, r, c) {
     if (r < 0 || c < 0) return false;
 
     if (typeof arr === undefined || 

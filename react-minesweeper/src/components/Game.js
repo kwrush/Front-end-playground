@@ -1,15 +1,24 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {levels, emoji} from '../constants';
+import {within2dArray} from '../utils';
 import Levels from './Levels';
 import Grid from './Grid';
 //import Board from './Board.jsx';
+
+function Timer (props) {
+    return <div className="timer">{props.timePassed}</div>;
+}
+
+function MineCounter (props) {
+    return <div className="counter">{props.counter}</div>
+}
 
 const defaultProps = {
     levels: levels,
     initialLevel: Object.keys(levels)[0]
 }
 
-export default class Game extends Component {
+export default class Game extends React.Component {
     constructor (props) {
         super(props);
 
@@ -18,13 +27,16 @@ export default class Game extends Component {
             timePassed: 0,
             current: this.props.initialLevel,
             flags: 0,
-            minesLeft: inLevel.mines,
             status: 'playing'
         }
 
         this.levelChangeHandler = this.levelChangeHandler.bind(this);
+        this.toggleFlag = this.toggleFlag.bind(this);
         this.startTimer = this.startTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
+        this.gameOver = this.gameOver.bind(this);
+        this.win = this.win.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     componentDidMount () {
@@ -38,6 +50,10 @@ export default class Game extends Component {
     componentDidUpdate (prevProps, prevState) {
         if (this.state.status === 'playing' && this.timer === null) {
             this.startTimer();
+        } else if (this.state.status === 'reset') {
+            this.setState({
+                status: 'playing'
+            });
         }
     }
 
@@ -45,7 +61,8 @@ export default class Game extends Component {
         this.stopTimer();
         this.setState({
             timePassed: 0,
-            current: this.props.levels[value]
+            status: 'playing',
+            current: value
         });
     }
 
@@ -76,35 +93,46 @@ export default class Game extends Component {
         });
     }
 
+    reset () {
+        this.stopTimer();
+        this.setState({
+            timePassed: 0,
+            status: 'reset',
+            flags: 0
+        });
+    }
+
     toggleFlag (enable) {
         const update = enable ? 1 : -1
         this.setState({
-            flag: update
+            flags: this.state.flags + update
         });
     }
 
     render () {
 
         const inLevel = this.props.levels[this.state.current];
-        const row = inLevel.gridRow;
-        const col = inLevel.gridCol;
+        const row = inLevel.row;
+        const col = inLevel.col;
         const mines = inLevel.mines;
+        const left = mines - this.state.flags;
 
         return (
             <div className="game">
                 <Levels levels={this.props.levels} value={this.state.current} onChange={this.levelChangeHandler}/>
                 <div className="game-board">
                     <div className="ctrl-bar">
-                        <div className="timer">{this.state.timePassed}</div>
+                        <Timer timePassed={this.state.timePassed} />
                         <div className="reset">
-                            <button id="reset-button">{emoji[this.state.status]}</button>
+                            <button id="reset-button" onClick={this.reset}>{emoji[this.state.status]}</button>
                         </div>
-                        <div className="counter"></div>
+                        <MineCounter counter={left >= 0 ? left : 0}/>
                     </div>
                     <Grid 
                         row={row}
                         col={col}
                         mines={mines}
+                        status={this.state.status}
                         gameOver={this.gameOver}
                         win={this.win}
                         toggleFlag={this.toggleFlag}

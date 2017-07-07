@@ -16,8 +16,8 @@ export const levels = {
     expert: {
         name: 'Expert',
         mines: 99,
-        gridRow: 16,
-        gridCol: 30
+        row: 16,
+        col: 30
     }
 };
 
