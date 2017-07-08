@@ -1,29 +1,6 @@
 import React from 'react';
-import {within2dArray} from '../utils';
+import {within2dArray, newGrid} from '../utils';
 import Tile from './Tile';
-
-function newTile (r, c) {
-    return {
-        row: r,
-        col: c,
-        hasMine: false,
-        marked: false,
-        exposed: false,
-        minesAround: 0
-    };
-}
-
-function newGrid (r, c) {
-    let grid = [];
-    for (let i = 0; i < r; i++) {
-        grid.push([]);
-        for (let j = 0; j < c; j++) {
-            grid[i].push(newTile());
-        }
-    }
-
-    return grid;
-}
 
 function isAdjacentTilesCleared(grid, r, c) {
     const offsets = [
@@ -181,10 +158,12 @@ export default class Grid extends React.Component {
 
     randomMines (grid, mines) {
         let counter = mines;
+        const row = grid.length;
+        const col = grid[0].length;
 
         while (counter > 0) {
-            const r = Math.floor(Math.random() * this.props.row);
-            const c = Math.floor(Math.random() * this.props.col);
+            const r = Math.floor(Math.random() * row);
+            const c = Math.floor(Math.random() * col);
 
             if (within2dArray(grid, r, c) && !grid[r][c].hasMine) {
                 grid[r][c].hasMine = true;
@@ -214,7 +193,7 @@ export default class Grid extends React.Component {
 
     renderRow (row, index) {
         return (
-            <div className="row" key={index}>
+            <div className="row tiles-row" key={index}>
                 {
                     row.map((tile, c) => {
                         const key = index * this.props.col + c;
@@ -240,7 +219,7 @@ export default class Grid extends React.Component {
     
     render () {
         return (
-            <div className="grid">
+            <div className="grid horiz-center">
                 {
                     this.state.grid.map((row, r) => {
                         return this.renderRow(row, r);

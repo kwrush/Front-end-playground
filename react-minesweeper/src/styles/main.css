@@ -4,6 +4,9 @@ body {
     box-sizing: border-box;
 }
 
+/**
+ * Common
+ */
 .row:before,
 .row:after {
     content: "";
@@ -18,10 +21,85 @@ body {
     float: left;
 }
 
+.horiz-center {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+}
+
+.game-container {
+    position: relative;
+}
+
+/**
+ * Level
+ */
+#levels {
+    margin: 10px auto;
+    width: 200px;
+}
+
+.game-board {
+    padding: 10px;
+}
+
+/**
+ * Control bar
+ */
+.ctrl-bar {
+    margin-bottom: 10px;
+    min-width: 280px;
+}
+
+.info {
+    width: 33.33333%;
+    height: 27px;
+    text-align: center;
+}
+
+.clock {
+    left: 10px;
+}
+
+.flags {
+    right: 10px;
+}
+
+.info-icon {
+    margin-right: 3px;
+}
+
+.display {
+    background: #333;
+    color: #fff;
+    height: 27px;
+    width: 60px;
+    line-height: 27px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 3px;
+}
+
+#reset-btn {
+    padding: 0;
+    width: 27px;
+    height: 27px;
+    font-size: 1em;
+}
+
+/**
+ * Grid and tiles
+ */
+
+.tiles-row {
+    height: 28px;
+}
+
 .tile {
-    margin: 1px;
+    margin: 0 1px;
     width: 25px;
-    height: 25px;
+    height: 26px;
     font-size: 0.9em;
     text-align: center;
     line-height: 25px;
@@ -48,10 +126,10 @@ body {
 .tile-6,
 .tile-7,
 .tile-8 {
-    transform: translateY(1px);
     width: 25px;
-    height: 24px;
-    line-height: 24px;
+    height: 25px;
+    line-height: 25px;
+    transform: translateY(1px);
     border: none;
     cursor: default;
 }
@@ -95,4 +173,12 @@ body {
 .tile-mine,
 .tile-wrong {
     background: #E83015;    
+}
+
+#footer {
+    text-align: center;
+}
+
+#footer span {
+    font-weight: bold;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {emoji} from '../constants';
+import {emoji, keyCodes} from '../constants';
 
 export default class Tile extends React.Component {
     constructor (props) {
@@ -11,8 +11,13 @@ export default class Tile extends React.Component {
 
     expose (event) {
         event.preventDefault();
-        if (!this.props.tile.exposed)
+        if (this.props.tile.exposed) return;
+
+        if (event.altKey && event.button === keyCodes.CLICK) {
+            this.mark(event);
+        } else {
             this.props.exposeTile(this.props.row, this.props.col);
+        }
     } 
 
     mark (event) {

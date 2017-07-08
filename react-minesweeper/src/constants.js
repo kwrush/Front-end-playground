@@ -30,7 +30,9 @@ export const emoji = (() => {
         gameOver: emojify(':boom:', opt),
         win: emojify(':sunglasses:', opt),
         flag: emojify(':triangular_flag_on_post:', opt),
-        mine: emojify(':bomb:', opt)
+        mine: emojify(':bomb:', opt),
+        clock: emojify(':clock3:', opt),
+        cross: emojify(':x:', opt)
     };
 })();
 

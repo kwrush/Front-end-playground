@@ -3,14 +3,13 @@ import {levels, emoji} from '../constants';
 import {within2dArray} from '../utils';
 import Levels from './Levels';
 import Grid from './Grid';
-//import Board from './Board.jsx';
 
 function Timer (props) {
-    return <div className="timer">{props.timePassed}</div>;
+    return <div className="display">{props.timePassed}</div>;
 }
 
 function MineCounter (props) {
-    return <div className="counter">{props.counter}</div>
+    return <div className="display">{props.counter}</div>
 }
 
 const defaultProps = {
@@ -118,15 +117,21 @@ export default class Game extends React.Component {
         const left = mines - this.state.flags;
 
         return (
-            <div className="game">
+            <div className="game-container">
                 <Levels levels={this.props.levels} value={this.state.current} onChange={this.levelChangeHandler}/>
-                <div className="game-board">
-                    <div className="ctrl-bar">
-                        <Timer timePassed={this.state.timePassed} />
-                        <div className="reset">
-                            <button id="reset-button" onClick={this.reset}>{emoji[this.state.status]}</button>
+                <div className="horiz-center game-board">
+                    <div className="ctrl-bar row">
+                        <div className="col info">
+                            <span className="info-icon">{emoji['clock']}</span>
+                            <Timer timePassed={this.state.timePassed} />
                         </div>
-                        <MineCounter counter={left >= 0 ? left : 0}/>
+                        <div className="col info">
+                            <button id="reset-btn" className="tile" onClick={this.reset}>{emoji[this.state.status]}</button>
+                        </div>
+                        <div className="col info">
+                            <span className="info-icon">{emoji['flag']}</span>
+                            <MineCounter counter={left >= 0 ? left : 0}/>
+                        </div>
                     </div>
                     <Grid 
                         row={row}
@@ -138,6 +143,10 @@ export default class Game extends React.Component {
                         toggleFlag={this.toggleFlag}
                     />
                 </div>
+                <footer id="footer">
+                    <p>Click tile to expose its content, right click or <span>alt+left</span> click to mark the mine</p>
+                    <p>Click emoji button {emoji['win']} to restart the game.</p>
+                </footer>
             </div>
         );
     }

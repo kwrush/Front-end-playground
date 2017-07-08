@@ -9,14 +9,29 @@ export function within2dArray (arr, r, c) {
 
     if (r >= arr.length || c >= arr[0].length) return false;   
 
-    return  true;
+    return true;
 }
 
-export function plainArray (r, c) {
-    let counter = 0;
-    return Array(r * c).fill(0).map(n => n + counter++);
+export function newTile (r, c) {
+    return {
+        row: r,
+        col: c,
+        hasMine: false,
+        marked: false,
+        exposed: false,
+        minesAround: 0
+    };
 }
 
-export function clone (obj) {
-    return JSON.parse(JSON.stringify(obj));
+export function newGrid (r, c) {
+    let grid = [];
+    for (let i = 0; i < r; i++) {
+        grid.push([]);
+        for (let j = 0; j < c; j++) {
+            grid[i].push(newTile());
+        }
+    }
+
+    return grid;
 }
+
