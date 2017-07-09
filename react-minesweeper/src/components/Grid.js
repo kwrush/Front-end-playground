@@ -2,6 +2,13 @@ import React from 'react';
 import {within2dArray, newGrid} from '../utils';
 import Tile from './Tile';
 
+/**
+ * Check if the tiles around the given location have been cleared
+ * @param {Array} grid grid array
+ * @param {Number} r row of location
+ * @param {Number} c column of location
+ * @return true if all tiles are cleared
+ */
 function isAdjacentTilesCleared(grid, r, c) {
     const offsets = [
         [0, -1] , 
@@ -26,6 +33,10 @@ function isAdjacentTilesCleared(grid, r, c) {
     return true;
 }
 
+/**
+ * Expose tiles in the specific array
+ * @param {Array} grid 
+ */
 function exposeAll (grid) {
     return grid.map(row => {
         return row.map(tile => {
@@ -35,7 +46,6 @@ function exposeAll (grid) {
         });
     });
 }
-
 
 export default class Grid extends React.Component {
     constructor (props) {
@@ -64,7 +74,8 @@ export default class Grid extends React.Component {
         if (this.props.row != nextProps.row || 
             this.props.col != nextProps.col || 
             nextProps.status === 'reset')  {
-            
+            // Recreate the grid entirely either the dimension changes or
+            // the game status is reset
             const r = nextProps.row;
             const c = nextProps.col;
             const _grid = this.randomMines(newGrid(r, c), nextProps.mines);
@@ -72,6 +83,7 @@ export default class Grid extends React.Component {
                 grid: _grid
             });
         } else if (nextProps.status === 'gameOver') {
+            // Otherwise we epose the mines under the hood
             let _exposedGrid = exposeAll(this.state.grid);
             this.setState({
                 grid: _exposedGrid
@@ -79,11 +91,17 @@ export default class Grid extends React.Component {
         }
     }
 
+    /**
+     * Tile click handler
+     * @param {Number} r 
+     * @param {Number} c 
+     */
     exposeTile (r, c) {
         if (this.props.status !== 'playing') return;
 
         let _grid = this.state.grid;
 
+        // Game over if clicking on a mine
         if (_grid[r][c].hasMine) {
             this.props.gameOver();
         } else {
@@ -99,6 +117,13 @@ export default class Grid extends React.Component {
         }
     }
 
+    /**
+     * Expose the tiles with no mines around the give location
+     * @param {Array} grid 
+     * @param {Number} r 
+     * @param {Number} c 
+     * @return this Grid object
+     */
     exposeAround (grid, r, c) {
         if (!within2dArray(grid, r, c)) return this;
         const tile = grid[r][c];
@@ -124,6 +149,11 @@ export default class Grid extends React.Component {
         return this;
     }
 
+    /**
+     * Mark the given location in the grid
+     * @param {Number} r 
+     * @param {Number} c 
+     */
     markTile (r, c) {
         if (this.props.status !== 'playing') return;
         
@@ -142,6 +172,11 @@ export default class Grid extends React.Component {
         }
     }
 
+    /**
+     * Check if we have marked all mines
+     * @param {Array} grid 
+     * @return true if we can win the game
+     */
     checkCanWin (grid) {
         for (let i = 0; i < grid.length; i++) {
             let row = grid[i];
@@ -156,6 +191,11 @@ export default class Grid extends React.Component {
         return true;
     }
 
+    /**
+     * Put mines in the random location 
+     * @param {Array} grid 
+     * @param {Numbers} mines 
+     */
     randomMines (grid, mines) {
         let counter = mines;
         const row = grid.length;
@@ -183,6 +223,12 @@ export default class Grid extends React.Component {
         return grid;
     }
 
+    /**
+     * Increase the minesAround property
+     * @param {Array} grid 
+     * @param {Number} r 
+     * @param {Number} c 
+     */
     calcMinesInAdjacentTiles (grid, r, c) {
         if (within2dArray(grid, r, c)) {
             grid[r][c].minesAround += 1;

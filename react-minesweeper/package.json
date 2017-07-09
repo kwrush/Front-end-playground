@@ -4,7 +4,7 @@
   "description": "minesweeper game based on React",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --compilers js:babel-register --require ./test/helpers.js --require ./test/dom.js --recursive",
     "build": "webpack",
     "start": "webpack-dev-server"
   },
@@ -15,6 +15,10 @@
   ],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-loader": "^7.1.0",
@@ -23,13 +27,9 @@
     "css-loader": "^0.28.4",
     "extract-text-webpack-plugin": "^2.1.2",
     "html-webpack-plugin": "^2.28.0",
-    "immutable": "^3.8.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
     "react-emojione": "^3.1.10",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0"
-  },
-  "dependencies": {}
+  }
 }

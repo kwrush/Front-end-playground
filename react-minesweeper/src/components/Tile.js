@@ -11,8 +11,10 @@ export default class Tile extends React.Component {
 
     expose (event) {
         event.preventDefault();
+        // Do nothing with the tile has been exposed
         if (this.props.tile.exposed) return;
 
+        // Alt+click to mark the mine
         if (event.altKey && event.button === keyCodes.CLICK) {
             this.mark(event);
         } else {
