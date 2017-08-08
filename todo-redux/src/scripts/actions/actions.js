@@ -4,19 +4,23 @@ import {
     SET_VISIBILITY_FILTER
 } from './actionTypes';
 
-export function addTodo (text) {
+let nextTodoId = 0;
+
+export const addTodo = (text) => {
     return {
-        type: ADD_TODO, text
+        type: ADD_TODO,
+        id: nextTodoId++,
+        text
     }
 }
 
-export function toggleTodo (index) {
+export const toggleTodo = (id) => {
     return {
-        type: TOGGLE_TODO, index
+        type: TOGGLE_TODO, id
     }
 }
 
-export function setVisibilityFilter (filter) {
+export const setVisibilityFilter = (filter) => {
     return {
         type: SET_VISIBILITY_FILTER, filter
     }
